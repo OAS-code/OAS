@@ -19,13 +19,13 @@
                 <form name="form1" method="post" action="AddProcess.jsp">
                     <table>
                         <tr>
-                            <td style="text-align: right">UserName:</td>
+                            <td style="text-align: right">Username:</td>
                             <td>
                                 <input type="text" name="username" id="username">
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">FullName:</td>
+                            <td style="text-align: right">Fullname:</td>
                             <td>
                                 <input type="text" name="fullname" id="fullname" >
                             </td>
