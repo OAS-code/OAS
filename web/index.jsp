@@ -9,14 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Admin Control Panel</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
     </head>
     <body>  
     <center>
         <br><br><br><br><br>
         <div class="box" style="width: 500px">
-            <div class="heading-pro"><h2>Management<h2></div>
+            <div class="heading-pro"><h2>Admin Control Panel<h2></div>
             <div class="box-content">
                 <div class="box-category">
                     <div id="register">
