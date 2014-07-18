@@ -60,7 +60,7 @@
                                 <p>
                                     <label>
                                         <input name="Status" type="radio" id="active" value="active" checked="checked">
-                                        Active</label>
+                                        Activated</label>
                                     <br>
                                     <label>
                                         <input type="radio" name="Status" value="deactive" id="deactive">
