@@ -64,7 +64,7 @@
                                     <br>
                                     <label>
                                         <input type="radio" name="Status" value="deactive" id="deactive">
-                                        Deactive</label>
+                                        De-activated</label>
                                     <br>
                                 </p></td>
                         </tr>
