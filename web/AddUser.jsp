@@ -37,7 +37,7 @@
                                 <input type="text" name="password" id="password"></td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">PhoneNumber:</td>
+                            <td style="text-align: right">Phone number:</td>
                             <td><label for="phonenumber"></label>
 
                                 <input type="text" name="phonenumber" id="phonenumber"></td>

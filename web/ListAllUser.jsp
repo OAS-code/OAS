@@ -38,8 +38,8 @@
                 <table width="90%" border="1px">
                     <tr>
                         <th>No.</th>
-                        <th>FullName</th>
-                        <th>UserName </th>
+                        <th>Fullname</th>
+                        <th>Username </th>
                         <th>Status</th>
                     </tr>              
                     <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">

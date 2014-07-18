@@ -50,15 +50,15 @@
                 %>     
                 <input type="hidden" id="no" value="<%=user.getId()%>" readonly></td>
                 <tr>
-                    <td style="text-align: right">UserName:</td>
+                    <td style="text-align: right">Username:</td>
                     <td><input type="text" value="<%=user.getUsername()%>" readonly></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">FullName:</td>
+                    <td style="text-align: right">Fullname:</td>
                     <td><input type="text" value="<%=user.getFullname()%>" readonly></td>
                 </tr>                
                 <tr>
-                    <td style="text-align: right">PhoneNumber:</td>
+                    <td style="text-align: right">Phone number:</td>
                     <td><input type="text" value="<%=user.getPhonenumber()%>" readonly></td>
                 </tr>
                 <tr>
