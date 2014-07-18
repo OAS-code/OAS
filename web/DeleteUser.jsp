@@ -1,5 +1,5 @@
 <%-- 
-    Document   : DeleteUser
+    Document   : DeleteUser1
     Created on : Jul 11, 2014, 11:34:52 PM
     Author     : MrTu
 --%>
