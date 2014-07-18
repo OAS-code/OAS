@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin Control Panel</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>  
     <center>
