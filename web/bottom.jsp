@@ -9,9 +9,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Bottom</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <div class="footer_down">
+            <div class="footer_down_inner">
+             <p class="copyright">Copyright © 2014 | Online Auction System | Version 1.0. All rights reserved .</p>
+            </div>
+          </div>
     </body>
 </html>

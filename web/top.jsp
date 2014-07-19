@@ -116,14 +116,14 @@
                                           </div>
                                   </span></li>
 
-                <li id="home_menu"> <a href="http://www.unieauction.com/buy-sell-demo/" title="Home"> Home</a></li>
-                <li id="live_menu"><a href="http://www.unieauction.com/buy-sell-demo/auctions/live" title="Live Auctions"> Live Auctions</a></li>
-                <li id="future_menu"><a href="http://www.unieauction.com/buy-sell-demo/auctions/future" title="Future Auctions"> Future Auctions </a></li>
-                <li id="closed_menu"><a href="http://www.unieauction.com/buy-sell-demo/auctions/closed" title="Closed Auctions"> Closed Auctions</a></li>
-                 <li id="buynow_menu"><a href="http://www.unieauction.com/buy-sell-demo/auctions/buynow" title="BuyNow"> BuyNow</a></li>          
-                <li id="winner_menu"><a href="http://www.unieauction.com/buy-sell-demo/auctions/winners" title="Winners"> Winners</a></li>
-                <li id="news_menu"><a href="http://www.unieauction.com/buy-sell-demo/news/news_details" title="News"> News</a></li>
-                <li id="packages_menu"><a href="http://www.unieauction.com/buy-sell-demo/packages/" title="Buy Packages"> Buy Packages</a></li>
+                <li id="home_menu"> <a href="" title="Home" target="mid"> Home</a></li>
+                <li id="live_menu"><a href="" title="Live Auctions" target="mid"> Live Auctions</a></li>
+                <li id="future_menu"><a href="" title="Future Auctions" target="mid"> Future Auctions </a></li>
+                <li id="closed_menu"><a href="" title="Closed Auctions" target="mid"> Closed Auctions</a></li>
+                 <li id="buynow_menu"><a href="" title="BuyNow" target="mid"> BuyNow</a></li>          
+                <li id="winner_menu"><a href="" title="Winners" target="mid"> Winners</a></li>
+                <li id="news_menu"><a href="" title="News" target="mid"> News</a></li>
+                <li id="packages_menu"><a href="" title="Buy Packages" target="mid"> Buy Packages</a></li>
               </ul>
                 </div>
           </div>
