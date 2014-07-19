@@ -116,14 +116,9 @@
                                           </div>
                                   </span></li>
 
-                <li id="home_menu"> <a href="" title="Home" target="mid"> Home</a></li>
-                <li id="live_menu"><a href="" title="Live Auctions" target="mid"> Live Auctions</a></li>
-                <li id="future_menu"><a href="" title="Future Auctions" target="mid"> Future Auctions </a></li>
-                <li id="closed_menu"><a href="" title="Closed Auctions" target="mid"> Closed Auctions</a></li>
-                 <li id="buynow_menu"><a href="" title="BuyNow" target="mid"> BuyNow</a></li>          
-                <li id="winner_menu"><a href="" title="Winners" target="mid"> Winners</a></li>
-                <li id="news_menu"><a href="" title="News" target="mid"> News</a></li>
-                <li id="packages_menu"><a href="" title="Buy Packages" target="mid"> Buy Packages</a></li>
+                <li id="home_menu"> <a href="home.jsp" title="Home" target="mid"> Home</a></li>
+                <li id="home_menu"><a href="acp.jsp" title="ACP" target="mid"> ACP</a></li>
+                
               </ul>
                 </div>
           </div>

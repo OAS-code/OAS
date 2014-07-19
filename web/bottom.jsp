@@ -16,8 +16,8 @@
     <body>
         <div class="footer_down">
             <div class="footer_down_inner">
-             <p class="copyright">Copyright © 2014 | Online Auction System | Version 1.0. All rights reserved .</p>
+                <p class="copyright">Copyright © 2014 | Online Auction System | Version 1.0. All rights reserved .</p>
             </div>
-          </div>
+        </div>
     </body>
 </html>
