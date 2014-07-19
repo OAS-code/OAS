@@ -29,8 +29,8 @@
                 <div class="header_right">
                                         <ul>
 
-                                <li><a href="mid.jsp" title="Sign in" target="mid">Sign in</a></li>
-                                <li class="active"><a href="mid.jsp" title="Register" target="mid">Register</a></li>
+                                <li><a href="home.jsp" title="Sign in" target="mid">Sign in</a></li>
+                                <li class="active"><a href="home.jsp" title="Register" target="mid">Register</a></li>
 
                         </ul>
                                           </div>
