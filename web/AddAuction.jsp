@@ -1,7 +1,7 @@
 <%-- 
     Document   : AddAuction
     Created on : Jul 17, 2014, 9:11:06 PM
-    Author     : MrTu
+    Author     : MrTu 2
 --%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
