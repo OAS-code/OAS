@@ -41,7 +41,7 @@
         <div class="header2">
             <div class="header2_lft">
                                                 <h1 title="Online Auction System">
-                                <a href="mid.jsp" title="Online Auction System" class="fl" target="mid">
+                                <a href="home.jsp" title="Online Auction System" class="fl" target="mid">
                                 <img src="images/action-logo.png" alt="Online Auction System" title="Online Auction System" border="0" width="145" height="29"> 
                                  </a>
                         </h1>	
