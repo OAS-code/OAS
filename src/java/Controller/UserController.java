@@ -41,26 +41,29 @@ public class UserController extends HttpServlet {
         String service = request.getParameter("service");
         final String ListAllUser = "ListAllUser.jsp";
         final String ViewDetail = "ViewDetail.jsp";
-        
+        RequestDispatcher rd;
         if (service.equalsIgnoreCase("listall")) {         
-                ArrayList<User> arr = dao.view();              
-                request.setAttribute("arr", arr);              
-                RequestDispatcher rd = request.getRequestDispatcher(ListAllUser);
-                rd.forward(request, response);           
+            ArrayList<User> arr = dao.view();              
+            request.setAttribute("arr", arr);              
+            rd = request.getRequestDispatcher(ListAllUser);
+            rd.forward(request, response);           
         }
         if(service.equalsIgnoreCase("viewdetail")){
-            String id = request.getParameter("id");
+            String id = request.getParameter("userid");
             ResultSet rs = dao.search(Integer.parseInt(id));
             request.setAttribute("rs", rs);
-            RequestDispatcher rd = request.getRequestDispatcher(ViewDetail);
+            rd = request.getRequestDispatcher(ViewDetail);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
-            search = search.trim();
-            ArrayList<User> arr = dao.searchUser(search);
+            String role = request.getParameter("user_type");
+            String status = request.getParameter("status");
+            ArrayList<User> arr = dao.searchUser(search, role, status);
+            int count = dao.searchcount(search);
+            request.setAttribute("count", count);
             request.setAttribute("arr", arr);
-            RequestDispatcher rd = request.getRequestDispatcher(ListAllUser);
+            rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
         }
     }

@@ -18,49 +18,30 @@ public class User {
     String phonenumber;
     String email;
     String address;
-    boolean status;
-
+    String status;
+    String role;
     public User() {
     }
 
-    public User(int id, String fullname, String username, boolean status) {
+    public User(int id, String fullname, String password, String phonenumber, String email, String address, String status, String role) {
         this.id = id;
         this.fullname = fullname;
-        this.username = username;
-        this.status = status;
-    }
-
-    public User(String fullname, String username, String password, String phonenumber, String email, String address, boolean status) {
-        this.fullname = fullname;
-        this.username = username;
         this.password = password;
         this.phonenumber = phonenumber;
         this.email = email;
         this.address = address;
         this.status = status;
+        this.role = role;
+    }
+
+    public User(int id, String fullname, String username, String status, String role) {
+        this.id = id;
+        this.fullname = fullname;
+        this.username = username;
+        this.status = status;
+        this.role = role;
     }
     
-    public User(int id, String fullname, String username, String password, String phonenumber, String email, String address, boolean status) {
-        this.id = id;
-        this.fullname = fullname;
-        this.username = username;
-        this.password = password;
-        this.phonenumber = phonenumber;
-        this.email = email;
-        this.address = address;
-        this.status = status;
-    }
-
-    public User(int id, String fullname, String username, String phonenumber, String email, String address, boolean status) {
-        this.id = id;
-        this.fullname = fullname;
-        this.username = username;
-        this.phonenumber = phonenumber;
-        this.email = email;
-        this.address = address;
-        this.status = status;
-    }
-
     public int getId() {
         return id;
     }
@@ -89,8 +70,12 @@ public class User {
         return address;
     }
 
-    public boolean getStatus() {
+    public String getStatus() {
         return status;
+    }
+
+    public String getRole() {
+        return role;
     }
 
     public void setId(int id) {
@@ -121,15 +106,11 @@ public class User {
         this.address = address;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
-    public String StatusToString() {
-        if (this.status) {
-            return "Active";
-        } else {
-            return "Deactive";
-        }
-    }
+    public void setRole(String role) {
+        this.role = role;
+    }   
 }

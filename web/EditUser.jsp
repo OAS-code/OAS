@@ -7,7 +7,8 @@
 <%@page import="Entity.User"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="DAO.UserDAO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" language="java" import="java.sql.*"%>
+<%response.setContentType("text/html; charset=UTF-8");%> 
 <!DOCTYPE html>
 <html>
     <head>
