@@ -19,7 +19,7 @@
         <div style="width: 500px;margin: auto;">
         <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
           <h2 style="margin: auto;margin-left: 10px">View detail user</h2>  
-        <form name="form1" method="post" action="DeleteUser.jsp" style="width: 350px;margin: auto;margin-top: 10px;margin-bottom: 20px;">
+        <form name="form1" method="post" action="UserController" style="width: 350px;margin: auto;margin-top: 10px;margin-bottom: 20px;">
          
             <%
                 ResultSet rs = (ResultSet)request.getAttribute("rs");
@@ -32,27 +32,12 @@
                     user.setPhonenumber(rs.getString(5));
                     user.setEmail(rs.getString(6));
                     user.setAddress(rs.getString(7));
-                    user.setStatus(rs.getBoolean(8));
+                    user.setRole(rs.getString(8));
+                    user.setStatus(rs.getString(9));
                 }
             %>
-            <table>
-                <% String action = "";%>
-                <% String action1 = "";%>               
-                <%
-
-                    if (user.getStatus() == true) {
-                        action = "Active";
-                        action1 = "Deactive";
-                    } else {
-                        action = "Deactive";
-                        action1 = "Active";
-                    }
-                %>     
-                <input type="hidden" id="no" value="<%=user.getId()%>" readonly></td>
-                <tr>
-                    <td style="text-align: right">Username:</td>
-                    <td><input type="text" value="<%=user.getUsername()%>" readonly></td>
-                </tr>
+            <table>    
+                <input type="hidden" name="no" id="no" value="<%=user.getId()%>" readonly></td>               
                 <tr>
                     <td style="text-align: right">Fullname:</td>
                     <td><input type="text" value="<%=user.getFullname()%>" readonly></td>
@@ -70,14 +55,23 @@
                     <td><textarea name="text" readonly><%=user.getAddress()%></textarea></td>
                 </tr>
                 <tr>
+                    <td style="text-align: right">Username:</td>
+                    <td><input type="text" value="<%=user.getUsername()%>" readonly></td>
+                </tr>
+                <tr>
+                    <td style="text-align: right">Role:</td>
+                    <td><input type="text" value="<%=user.getRole()%>" readonly></td>
+                </tr>
+                <tr>
                     <td style="text-align: right">Status:</td>
-                    <td><input type="text" value="<%=action%>" readonly></td>
+                    <td><input type="text" value="<%=user.getStatus()%>" readonly></td>
                 </tr>
                 <tr>
                     <td></td>
                     <td>
                         <input type="button" name="Edit" id="Edit" value="Edit" onclick="window.location='EditUser.jsp?id=<%=user.getId()%>';">
-                        <input type="submit" name="delete" id="delete" value="Delete" onclick="return confirm('Are you sure?')">     
+                        <input type="submit" name="delete" id="delete" value="Delete" onclick="return confirm('Are you sure?')">
+                        <input type="hidden" name="service" id="service" value="deleteuser">
                     </td>
                 </tr>
             </table>

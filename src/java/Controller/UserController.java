@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,15 +26,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    final private String errorPage = "fail.jsp";
+    final private String homePage = "index.jsp";
+    final private String welcomePage = "welcome.jsp";
+    final private String registerPage = "register.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,28 +38,89 @@ public class UserController extends HttpServlet {
         String service = request.getParameter("service");
         final String ListAllUser = "ListAllUser.jsp";
         final String ViewDetail = "ViewDetail.jsp";
-        
-        if (service.equalsIgnoreCase("listall")) {         
-                ArrayList<User> arr = dao.view();              
-                request.setAttribute("arr", arr);              
-                RequestDispatcher rd = request.getRequestDispatcher(ListAllUser);
-                rd.forward(request, response);           
+        RequestDispatcher rd;
+        if (service.equalsIgnoreCase("adduser")) {
+            String fullname = request.getParameter("fullname");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String role = request.getParameter("cb1");
+            String status = request.getParameter("cb2");
+            User user = new User(fullname, username, password, phonenumber, email, address, role, status);
+            int n = dao.add(user);
+            if (n > 0) {
+                response.sendRedirect(ListAllUser);
+            }else{
+                response.sendRedirect(ListAllUser);
+            }
         }
-        if(service.equalsIgnoreCase("viewdetail")){
-            String id = request.getParameter("id");
+        if (service.equalsIgnoreCase("deleteuser")) {
+            String id = request.getParameter("no");
+            int n = dao.delete(Integer.parseInt(id));
+            if (n > 0) {
+                rd = request.getRequestDispatcher(ListAllUser);
+                rd.forward(request, response);
+            }
+        }
+        if (service.equalsIgnoreCase("edituser")) {
+            String id1 = request.getParameter("no");
+            int id = Integer.parseInt(id1);
+            String fullname = request.getParameter("fullname");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String status = request.getParameter("cb2");
+            String role = request.getParameter("cb1");
+            User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
+            int n = dao.update(user);
+            if (n > 0) {
+                response.sendRedirect(ListAllUser);
+            }
+        }
+        if (service.equalsIgnoreCase("listall")) {
+            ArrayList<User> arr = dao.view();
+            request.setAttribute("arr", arr);
+            rd = request.getRequestDispatcher(ListAllUser);
+            rd.forward(request, response);
+        }
+        if (service.equalsIgnoreCase("viewdetail")) {
+            String id = request.getParameter("userid");
             ResultSet rs = dao.search(Integer.parseInt(id));
             request.setAttribute("rs", rs);
-            RequestDispatcher rd = request.getRequestDispatcher(ViewDetail);
+            rd = request.getRequestDispatcher(ViewDetail);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
-            search = search.trim();
-            ArrayList<User> arr = dao.searchUser(search);
+            String role = request.getParameter("user_type");
+            String status = request.getParameter("status");
+            ArrayList<User> arr = dao.searchUser(search, role, status);
             request.setAttribute("arr", arr);
-            RequestDispatcher rd = request.getRequestDispatcher(ListAllUser);
+            rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
-        }
+        }else if (service.equals("Login")) {
+                String username = request.getParameter("txtUsername");
+                String password = request.getParameter("txtPass");
+                UserDAO login = new UserDAO();
+                boolean result = login.checkLogin(username, password);
+                String url = errorPage;
+                if (result) {
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("USER", username);
+                    url = welcomePage;
+                }
+                RequestDispatcher rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else if (action.equals("tryAgain")) {
+                RequestDispatcher rd = request.getRequestDispatcher(homePage);
+                rd.forward(request, response);
+            } else if (action.equals("register")) {
+                RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+                rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

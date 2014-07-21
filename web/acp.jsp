@@ -69,7 +69,7 @@
                         <div id="register">
                                 <div>
                                     <form>
-                                        <button type="button" onclick="window.location = 'UserController?service=listall'">Manage User</button>
+                                        <button type="button" onclick="window.location = 'ListAllUser.jsp'">Manage User</button>
                                         <br>
                                         <button type="button" onclick="window.location = 'AuctionController?service=listall'">Manage Auction</button>
                                     </form>
