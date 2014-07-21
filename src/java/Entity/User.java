@@ -18,8 +18,8 @@ public class User {
     String phonenumber;
     String email;
     String address;
-    String status;
     String role;
+    String status;    
     public User() {
     }
 
@@ -35,7 +35,7 @@ public class User {
         this.role = role;
     }
 
-    public User(String fullname, String username, String password, String phonenumber, String email, String address, String status, String role) {
+    public User(String fullname, String username, String password, String phonenumber, String email, String address, String role, String status) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
@@ -46,7 +46,7 @@ public class User {
         this.role = role;
     }
 
-    public User(int id, String fullname, String username, String status, String role) {
+    public User(int id, String fullname, String username, String role, String status) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;

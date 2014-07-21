@@ -42,29 +42,30 @@ public class UserController extends HttpServlet {
         final String ListAllUser = "ListAllUser.jsp";
         final String ViewDetail = "ViewDetail.jsp";
         RequestDispatcher rd;
-        if(service.equalsIgnoreCase("adduser")){
+        if (service.equalsIgnoreCase("adduser")) {
             String fullname = request.getParameter("fullname");
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String status = request.getParameter("cb2");
             String role = request.getParameter("cb1");
-            User user = new User(fullname,username,password,phonenumber,email,address,role,status);
-                int n = dao.add(user);
-                if(n>0){
-                    response.sendRedirect(ListAllUser);
-                    return;
-                }
+            String status = request.getParameter("cb2");
+            User user = new User(fullname, username, password, phonenumber, email, address, role, status);
+            int n = dao.add(user);
+            if (n > 0) {
+                response.sendRedirect(ListAllUser);
+            }else{
+                response.sendRedirect(ListAllUser);
+            }
         }
-        if(service.equalsIgnoreCase("deleteuser")){
+        if (service.equalsIgnoreCase("deleteuser")) {
             String id = request.getParameter("no");
             int n = dao.delete(Integer.parseInt(id));
-            if (n > 0) {               
+            if (n > 0) {
                 rd = request.getRequestDispatcher(ListAllUser);
                 rd.forward(request, response);
-            }            
+            }
         }
         if (service.equalsIgnoreCase("edituser")) {
             String id1 = request.getParameter("no");

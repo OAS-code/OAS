@@ -17,7 +17,13 @@
                 <h2 style="margin: auto;margin-left: 10px">Add new user</h2> 
                 <br>
                 <form name="form1" method="post" action="UserController">
-                    <table>
+                    <table>           
+                        <tr>
+                            <td style="text-align: right">Fullname:</td>
+                            <td>
+                                <input type="text" name="fullname" id="fullname" >
+                            </td>
+                        </tr>   
                         <tr>
                             <td style="text-align: right">Username:</td>
                             <td>
@@ -25,16 +31,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Fullname:</td>
-                            <td>
-                                <input type="text" name="fullname" id="fullname" >
-                            </td>
-                        </tr>              
-                        <tr>
                             <td style="text-align: right">Password:</td>
                             <td><label for="password"></label>
-
-                                <input type="text" name="password" id="password"></td>
+                                <input type="text" name="password" id="password">
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: right">Phone number:</td>
