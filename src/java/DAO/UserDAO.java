@@ -78,14 +78,6 @@ public class UserDAO {
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        } finally {
-            try {
-                state.close();
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return n;
     }
@@ -183,22 +175,6 @@ public class UserDAO {
         return arr;
     }
 
-    public int searchcount(String search) {
-        String sql = "SELECT * FROM user WHERE username LIKE '%" + search + "%'";
-        int n = 0;
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = state.executeQuery(sql);
-            while (rs.next()) {
-                n++;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        }
-        return n;
-    }
-
     public ResultSet search(int id) {
         String sql = "SELECT * FROM user WHERE id = ?";
         try {
@@ -222,21 +198,13 @@ public class UserDAO {
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
-        } finally {
-            try {
-                state.close();
-                conn.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            }
         }
         return n;
     }
 
     public int update(User user) {
         int n = 0;
-        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, status = ? WHERE id = ?";
+        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ? WHERE id = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
@@ -244,8 +212,9 @@ public class UserDAO {
             pre.setString(3, user.getPhonenumber());
             pre.setString(4, user.getEmail());
             pre.setString(5, user.getAddress());
-            pre.setString(6, user.getStatus());
-            pre.setInt(7, user.getId());
+            pre.setString(6, user.getRole());
+            pre.setString(7, user.getStatus());
+            pre.setInt(8, user.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);

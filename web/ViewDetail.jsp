@@ -19,7 +19,7 @@
         <div style="width: 500px;margin: auto;">
         <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
           <h2 style="margin: auto;margin-left: 10px">View detail user</h2>  
-        <form name="form1" method="post" action="DeleteUser.jsp" style="width: 350px;margin: auto;margin-top: 10px;margin-bottom: 20px;">
+        <form name="form1" method="post" action="UserController" style="width: 350px;margin: auto;margin-top: 10px;margin-bottom: 20px;">
          
             <%
                 ResultSet rs = (ResultSet)request.getAttribute("rs");
@@ -37,7 +37,7 @@
                 }
             %>
             <table>    
-                <input type="hidden" id="no" value="<%=user.getId()%>" readonly></td>               
+                <input type="hidden" name="no" id="no" value="<%=user.getId()%>" readonly></td>               
                 <tr>
                     <td style="text-align: right">Fullname:</td>
                     <td><input type="text" value="<%=user.getFullname()%>" readonly></td>
@@ -70,7 +70,8 @@
                     <td></td>
                     <td>
                         <input type="button" name="Edit" id="Edit" value="Edit" onclick="window.location='EditUser.jsp?id=<%=user.getId()%>';">
-                        <input type="submit" name="delete" id="delete" value="Delete" onclick="return confirm('Are you sure?')">     
+                        <input type="submit" name="delete" id="delete" value="Delete" onclick="return confirm('Are you sure?')">
+                        <input type="hidden" name="service" id="service" value="deleteuser">
                     </td>
                 </tr>
             </table>
