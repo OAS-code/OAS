@@ -18,8 +18,8 @@
 
     <frameset rows="160,*,30" border="0">
         <frame src="top.jsp" name="top" scrolling="no">
-        <frame src="home.jsp" name="mid" scrolling="no">
-        <frame src="bottom.jsp" name="bottom" scrolling="yes">
+        <frame src="home.jsp" name="mid">
+        <frame src="bottom.jsp" name="bottom" scrolling="no">
     </frameset>
     
 </html>
