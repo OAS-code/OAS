@@ -221,6 +221,26 @@ public class UserDAO {
         return n;
     }
 
+     public boolean checkLogin(String username, String password) {
+        try {
+            String sql = "Select * From user Where username = ? and password = ?";
+            
+            pre.setString(1, username);
+            pre.setString(2, password);
+            rs = pre.executeQuery();
+            boolean result = rs.next();
+            rs.close();
+            pre.close();
+            conn.close();
+            if (result) {
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+
+    }
     public static void main(String[] args) {
         UserDAO dao = new UserDAO();
     }
