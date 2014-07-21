@@ -30,7 +30,7 @@ public class UserController extends HttpServlet {
     final private String homePage = "index.jsp";
     final private String welcomePage = "welcome.jsp";
     final private String registerPage = "register.jsp";
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -52,7 +52,7 @@ public class UserController extends HttpServlet {
             int n = dao.add(user);
             if (n > 0) {
                 response.sendRedirect(ListAllUser);
-            }else{
+            } else {
                 response.sendRedirect(ListAllUser);
             }
         }
@@ -102,25 +102,27 @@ public class UserController extends HttpServlet {
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
-        }else if (service.equals("Login")) {
-                String username = request.getParameter("txtUsername");
-                String password = request.getParameter("txtPass");
-                UserDAO login = new UserDAO();
-                boolean result = login.checkLogin(username, password);
-                String url = errorPage;
-                if (result) {
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("USER", username);
-                    url = welcomePage;
-                }
-                RequestDispatcher rd = request.getRequestDispatcher(url);
-                rd.forward(request, response);
-            } else if (action.equals("tryAgain")) {
-                RequestDispatcher rd = request.getRequestDispatcher(homePage);
-                rd.forward(request, response);
-            } else if (action.equals("register")) {
-                RequestDispatcher rd = request.getRequestDispatcher(registerPage);
-                rd.forward(request, response);
+        } 
+        /*else if (service.equals("Login")) {
+            String username = request.getParameter("txtUsername");
+            String password = request.getParameter("txtPass");
+            UserDAO login = new UserDAO();
+            boolean result = login.checkLogin(username, password);
+            String url = errorPage;
+            if (result) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("USER", username);
+                url = welcomePage;
+            }
+            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd.forward(request, response);
+        } else if (action.equals("tryAgain")) {
+            RequestDispatcher rd = request.getRequestDispatcher(homePage);
+            rd.forward(request, response);
+        } else if (action.equals("register")) {
+            RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+            rd.forward(request, response);
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
