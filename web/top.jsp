@@ -29,8 +29,8 @@
                 <div class="header_right">
                                         <ul>
 
-                                <li><a href="mid.jsp" title="Sign in" target="mid">Sign in</a></li>
-                                <li class="active"><a href="mid.jsp" title="Register" target="mid">Register</a></li>
+                                <li><a href="home.jsp" title="Sign in" target="mid">Sign in</a></li>
+                                <li class="active"><a href="home.jsp" title="Register" target="mid">Register</a></li>
 
                         </ul>
                                           </div>
@@ -41,7 +41,7 @@
         <div class="header2">
             <div class="header2_lft">
                                                 <h1 title="Online Auction System">
-                                <a href="mid.jsp" title="Online Auction System" class="fl" target="mid">
+                                <a href="home.jsp" title="Online Auction System" class="fl" target="mid">
                                 <img src="images/action-logo.png" alt="Online Auction System" title="Online Auction System" border="0" width="145" height="29"> 
                                  </a>
                         </h1>	
@@ -116,14 +116,9 @@
                                           </div>
                                   </span></li>
 
-                <li id="home_menu"> <a href="" title="Home" target="mid"> Home</a></li>
-                <li id="live_menu"><a href="" title="Live Auctions" target="mid"> Live Auctions</a></li>
-                <li id="future_menu"><a href="" title="Future Auctions" target="mid"> Future Auctions </a></li>
-                <li id="closed_menu"><a href="" title="Closed Auctions" target="mid"> Closed Auctions</a></li>
-                 <li id="buynow_menu"><a href="" title="BuyNow" target="mid"> BuyNow</a></li>          
-                <li id="winner_menu"><a href="" title="Winners" target="mid"> Winners</a></li>
-                <li id="news_menu"><a href="" title="News" target="mid"> News</a></li>
-                <li id="packages_menu"><a href="" title="Buy Packages" target="mid"> Buy Packages</a></li>
+                <li id="home_menu"> <a href="home.jsp" title="Home" target="mid"> Home</a></li>
+                <li id="home_menu"><a href="acp.jsp" title="ACP" target="mid"> ACP</a></li>
+                
               </ul>
                 </div>
           </div>

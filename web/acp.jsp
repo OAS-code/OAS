@@ -33,6 +33,7 @@
                         </div>
                     </div>
                 </div>
+                            <a href="mid.jsp"></a>
             </div>
         <center>
     
