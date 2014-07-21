@@ -14,28 +14,24 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
      
-    <body>
-        <center>
-            <br><br><br><br><br>
-            <div class="box" style="width: 500px">
-                <div class="heading-pro"><h2>Admin Control Panel<h2></div>
-                <div class="box-content">
-                    <div class="box-category">
-                        <div id="register">
-                                <div>
-                                    <form>
-                                        <button type="button" onclick="window.location = 'ListAllUser.jsp'">Manage User</button>
-                                        <br>
-                                        <button type="button" onclick="window.location = 'AuctionController?service=listall'">Manage Auction</button>
-                                    </form>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        <center>
-    
-    </body>
+    <div class="banner_inner">
+        <div class="login-part">
+            <h2 title="ACP"></h2>
+        </div>
+    <div>
+            
+    <div class="banner_left">
+        <div class="dash_tops">Admin Control Panel</div>
+        <div class="dash_lsd user_panel_list">
+          <ul>
+            <li class="act_class" id="dashboard_active"><a href="ListAllUser.jsp" title="Manage User">Manage User</a></li>
+            <li class="" id="edit_profile_active"><a href="AuctionController?service=listall" title="Manage Auction">Manage Auction</a></li>
+          </ul>
+        </div>
+      </div>
+            
+            
+         
+ 
     
 </html>
