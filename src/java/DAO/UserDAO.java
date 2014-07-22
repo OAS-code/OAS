@@ -124,7 +124,6 @@ public class UserDAO {
                 role = rs.getString("role");
                 User user = new User(id, fullname, username, status, role);
                 arr.add(user);
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
