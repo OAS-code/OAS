@@ -81,52 +81,7 @@ public class UserDAO {
         }
         return n;
     }
-public int addUser(User user) {
-        int n = 0;
-        try {
-            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
 
-            pre = conn.prepareStatement(sql);
-           
-            pre.setString(1, user.getUsername());
-            pre.setString(2, user.getPassword());
-            pre.setString(3, user.getFullname());
-            pre.setString(4, user.getPhonenumber());
-            pre.setString(5, user.getEmail());
-            pre.setString(6, user.getAddress());
-           
-            n = pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
-    /* public ArrayList<User> list(String sql) {
-     ArrayList<User> arr = new ArrayList<User>();
-
-     try {
-     state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-     rs = state.executeQuery(sql);
-     String fullname = null, username = null, password = null, phonenumber = null, email = null, address = null;
-     boolean status = true;
-     int id = 0;
-     while (rs.next()) {
-     id = rs.getInt("id");
-     fullname = rs.getString("fullname");
-     username = rs.getString("username");
-     password = rs.getString("password");
-     phonenumber = rs.getString("phonenumber");
-     email = rs.getString("email");
-     address = rs.getString("address");
-     status = rs.getBoolean("status");
-     User user = new User(id, fullname, username, password, phonenumber, email, address, status);
-     arr.add(user);
-     }
-     } catch (SQLException ex) {
-     Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     return arr;
-     }*/
     public ArrayList<User> view() throws SQLException {
         String sql = "SELECT * FROM user";
         ArrayList<User> arr = new ArrayList<User>();
@@ -143,7 +98,6 @@ public int addUser(User user) {
                 role = rs.getString("role");
                 User user = new User(id, fullname, username, status, role);
                 arr.add(user);
-
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,10 +198,9 @@ public int addUser(User user) {
      public boolean checkLogin(String username, String password) {
         try {
             String sql = "Select * From user Where username = ? and password = ?";
-            pre = conn.prepareStatement(sql);
+            
             pre.setString(1, username);
             pre.setString(2, password);
-            
             rs = pre.executeQuery();
             boolean result = rs.next();
             rs.close();

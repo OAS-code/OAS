@@ -18,7 +18,6 @@
         <form action="UserController" method="POST">
             Username <input type="text" name="txtUsername" value=""/><br/>
             Password <input type="password" name="txtPass" value=""/><br/>
-           
             <input type="submit" value="Login" name="service"/>
             <input type="reset" value="Reset"/>
         </form>
