@@ -52,6 +52,6 @@
     <env-entry>
         <env-entry-name>db-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>1234</env-entry-value>
+        <env-entry-value>123456</env-entry-value>
     </env-entry>
 </web-app>

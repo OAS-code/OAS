@@ -6,7 +6,6 @@
 package Controller;
 
 import DAO.AuctionDAO;
-import DAO.CategoryDAO;
 import Entity.Auction;
 import Entity.Category;
 import java.io.IOException;
@@ -45,7 +44,6 @@ public class AuctionController extends HttpServlet {
             throws ServletException, IOException, SQLException, ParseException {
         response.setContentType("text/html;charset=UTF-8");
         AuctionDAO dao = new AuctionDAO();
-        CategoryDAO cdao = new CategoryDAO();
         String service = request.getParameter("service");
         final String ListAllAuction = "ListAllAuction.jsp";
         final String AddAuction = "AddAuction.jsp";
@@ -60,7 +58,7 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("addauction")) {
-            ArrayList<Category> array = cdao.select();
+            ArrayList<Category> array = dao.select();
             request.setAttribute("array", array);
             rd = request.getRequestDispatcher(AddAuction);
             rd.forward(request, response);
@@ -69,7 +67,6 @@ public class AuctionController extends HttpServlet {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
             rs = dao.search(Integer.parseInt(auctionid));
-            rss = cdao.searchCategory(Integer.parseInt(categoryid));
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
             rd = request.getRequestDispatcher(ViewDetailAuction);

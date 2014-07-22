@@ -22,6 +22,7 @@ public class Auction {
     int sellerid;
     String title;
     String description;
+    String image;
     Date start_date;
     Date end_date;
     double starting_price;
@@ -30,10 +31,9 @@ public class Auction {
     String status; 
 
     public Auction() {
-    } 
+    }
 
-    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
-        this.auctionid = auctionid;
+    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
         this.categoryid = categoryid;
         this.sellerid = sellerid;
         this.title = title;
@@ -44,7 +44,36 @@ public class Auction {
         this.reserve_price = reserve_price;
         this.buy_now_price = buy_now_price;
         this.status = status;
-    }  
+    }
+
+    public Auction(int categoryid, int sellerid, String title, String description, String image, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
+        this.categoryid = categoryid;
+        this.sellerid = sellerid;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.starting_price = starting_price;
+        this.reserve_price = reserve_price;
+        this.buy_now_price = buy_now_price;
+        this.status = status;
+    }
+    
+    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, String image, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
+        this.auctionid = auctionid;
+        this.categoryid = categoryid;
+        this.sellerid = sellerid;
+        this.title = title;
+        this.description = description;
+        this.image = image;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.starting_price = starting_price;
+        this.reserve_price = reserve_price;
+        this.buy_now_price = buy_now_price;
+        this.status = status;
+    }
 
     public void setAuctionid(int auctionid) {
         this.auctionid = auctionid;
@@ -64,6 +93,10 @@ public class Auction {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public void setStart_date(Date start_date) {
@@ -108,6 +141,10 @@ public class Auction {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public Date getStart_date() {

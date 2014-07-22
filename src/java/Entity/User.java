@@ -20,6 +20,20 @@ public class User {
     String address;
     String role;
     String status;    
+
+    public User(String fullname, String username, String password, String phonenumber, String email, String address) {
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.address = address;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
     public User() {
     }
 

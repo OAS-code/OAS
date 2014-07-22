@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 public class UserController extends HttpServlet {
 
     final private String errorPage = "fail.jsp";
-    final private String homePage = "index.jsp";
+    final private String loginPage = "login.jsp";
     final private String welcomePage = "welcome.jsp";
     final private String registerPage = "register.jsp";
 
@@ -102,32 +102,73 @@ public class UserController extends HttpServlet {
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
-        } 
-        /*else if (service.equals("Login")) {
+
+        }
+        if (service.equals("Login")) {
             String username = request.getParameter("txtUsername");
             String password = request.getParameter("txtPass");
-            UserDAO login = new UserDAO();
-            boolean result = login.checkLogin(username, password);
+            
+            boolean result = dao.checkLogin(username, password);
             String url = errorPage;
             if (result) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("USER", username);
                 url = welcomePage;
             }
-            RequestDispatcher rd = request.getRequestDispatcher(url);
+            rd = request.getRequestDispatcher(url);
             rd.forward(request, response);
-        } else if (action.equals("tryAgain")) {
-            RequestDispatcher rd = request.getRequestDispatcher(homePage);
+        }
+        if (service.equals("tryAgain")) {
+            rd = request.getRequestDispatcher(loginPage);
             rd.forward(request, response);
-        } else if (action.equals("register")) {
-            RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+        }
+        if (service.equals("register")) {
+            rd = request.getRequestDispatcher(registerPage);
             rd.forward(request, response);
-        }*/
+        }
+        if (service.equals("registerUser")) {
+           
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+           
+            User user = new User(fullname, username, password, phonenumber, email, address);
+            int n = dao.addUser(user);
+            if (n > 0) {
+                rd = request.getRequestDispatcher(loginPage);
+                rd.forward(request, response);
+            }
+        }
+
     }
+    /*else if (service.equals("Login")) {
+     String username = request.getParameter("txtUsername");
+     String password = request.getParameter("txtPass");
+     UserDAO login = new UserDAO();
+     boolean result = login.checkLogin(username, password);
+     String url = errorPage;
+     if (result) {
+     HttpSession session = request.getSession(true);
+     session.setAttribute("USER", username);
+     url = welcomePage;
+     }
+     RequestDispatcher rd = request.getRequestDispatcher(url);
+     rd.forward(request, response);
+     } else if (action.equals("tryAgain")) {
+     RequestDispatcher rd = request.getRequestDispatcher(homePage);
+     rd.forward(request, response);
+     } else if (action.equals("register")) {
+     RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+     rd.forward(request, response);
+     }*/
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Handles the HTTP
+     * <code>GET</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -145,7 +186,8 @@ public class UserController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Handles the HTTP
+     * <code>POST</code> method.
      *
      * @param request servlet request
      * @param response servlet response
@@ -171,5 +213,4 @@ public class UserController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }

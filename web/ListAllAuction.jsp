@@ -35,6 +35,7 @@
                             <tr>
                                 <th>No.</th>
                                 <th>Title</th>
+                                <th>Image</th>
                                 <th>Status</th>
                             </tr>      
                             <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
@@ -42,7 +43,8 @@
                             <c:forEach var="auction" items="${arr}" varStatus="status"> 
                             <tr> 
                                 <td>${status.count}</td> 
-                                <td><a href="AuctionController?service=viewdetail&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
+                                <td><a href="AuctionController?service=viewdetail&auctionid=${auction.auctionid}">${auction.title}</a></td>
+                                <td><image src="${auction.image}" alt="img" width="50" height="50"/></td>
                                 <td>${auction.status}</td>
                             </tr
                             </c:forEach>
