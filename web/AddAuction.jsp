@@ -20,7 +20,7 @@
             <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
                 <h2 style="margin: auto;margin-left: 10px">Add new auction</h2> 
                 <br>
-                <form name="form1" method="post" action="AddAuctionProcess.jsp">
+                <form name="form1" method="post" action="AuctionController">
                     <table>
                         <tr>
                             <td style="text-align: right">Title:</td>
@@ -47,23 +47,53 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Image:</td>
+                            <td style="text-align: right">Image:</td>  
                             <td>
-                                <input type="text" name="image" id="image" placeholder="Enter url image...">
+                                <input type="text" name="image1" id="image1" placeholder="Enter url image...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td> 
+                            <td>
+                                <input type="text" name="image2" id="image2" placeholder="Enter url image...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <input type="text" name="image3" id="image3" placeholder="Enter url image...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>  
+                            <td>
+                                <input type="text" name="image4" id="image4" placeholder="Enter url image...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>  
+                            <td>
+                                <input type="text" name="image5" id="image5" placeholder="Enter url image...">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Video:</td>
+                            <td>
+                                <input type="text" name="video" id="video" placeholder="Enter url video...">
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: right">Start date:</td>
-                        <td>
-                            <input type="date" name="startdate" id="startdate">
-                        </td>
+                            <td>
+                                <input type="date" name="startdate" id="startdate">
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: right">End date:</td>
-                        <td>                    
-                            <input type="date" name="enddate" id="enddate">
-                        </td>
-                        </td>
+                            <td>                    
+                                <input type="date" name="enddate" id="enddate">
+                            </td>
+                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: right">Starting price:</td>
@@ -98,7 +128,8 @@
                             <td></td>
                             <td>
                                 <input type="submit" name="add" id="add" value="Add">
-                                <input type="hidden" name="service" id="service" value="addanewauction">
+                                <input type="hidden" name="service" id="service" value="addnewauction">
+                                <input type="reset" name="reset" id="reset" value="Clear">
                                 <input type="button" name="reset" id="reset" value="Cancel" onclick="window.location = 'AuctionController?service=listall';">
                             </td>
                         </tr>
