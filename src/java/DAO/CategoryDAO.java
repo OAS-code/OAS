@@ -29,7 +29,7 @@ public class CategoryDAO {
     private PreparedStatement pre = null;
 
     public CategoryDAO() {
-        /*try {
+        try {
          System.out.println("Connecting to DB using the following details:");
          javax.naming.Context ctx = new javax.naming.InitialContext();
          String host = (String) ctx.lookup("java:comp/env/db-host"); System.out.println(host);
@@ -40,8 +40,8 @@ public class CategoryDAO {
          connection("jdbc:mysql://" + host + ":" + port + "/" + database,username,password);       
          } catch (NamingException ex) {
           Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
-        connection("jdbc:mysql://127.0.0.1:3306/auction?useUnicode=true&characterEncoding=UTF-8", "root", "1234");
+         }
+        //connection("jdbc:mysql://127.0.0.1:3306/auction?useUnicode=true&characterEncoding=UTF-8", "root", "1234");
     }
 
     private void connection(String ulr, String username, String password) {
