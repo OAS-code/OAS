@@ -16,10 +16,10 @@
        
     </head>
 
-    <frameset rows="160,*,30" border="0">
+    <frameset rows="160,*" border="0">
         <frame src="top.jsp" name="top" scrolling="no">
-        <frame src="home.jsp" name="mid">
-        <frame src="bottom.jsp" name="bottom" scrolling="no">
+        <frame src="home.jsp" name="mid"> 
+        <!--<frame src="bottom.jsp" name="bottom" scrolling="no">-->
     </frameset>
     
 </html>

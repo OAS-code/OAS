@@ -625,21 +625,21 @@
 .dash_lsd ul li.act_class a{background:url("../images/over_arr.png") left center no-repeat;padding-left:10px;float:left;text-decoration:none;color:#2F9DCF;}
 .dash_rsd {float:left;width:695px;border:1px solid #dedede; padding:10px;}
 /*dasbord muniraj*/
-.dasbord_common{width:650px;float: left;padding: 0px 24px;}
-.das_inner{float:left; width:650px; }
-.das_inner_text{float:left; width:650px; }
+.dasbord_common{/*width:650px;*/float: left;padding: 0px 24px;}
+.das_inner{float:left; /*width:650px;*/ }
+.das_inner_text{float:left; /*width:650px;*/ }
 .das_inner_text h3{float:left; width:100%; text-align:center;font:normal 18px helveticaneuemediumCond;color:#333; margin: 18px 0 0;}
-.roled_images{float:left; width:650px; }
+.roled_images{float:left; /*width:650px;*/ }
 .inner_rol_img{ float:left; width:197px;  margin:10px 9px 9px 10px;}
 .box_top{ float:left; width:196px; height:12px;background:url("../images/box_top.png")  no-repeat;}
 .box_mid{ float:left; width:196px; background:url("../images/box_mid.png")  repeat-y;}
 .box_bot{ float:left; width:196px; height:12px;background:url("../images/box_bot.png")  no-repeat;}
 .bot_img p{ float:left; width:106px;margin: 10px 0 0 76px;}
 .bot_img h4{ float:left; width:194px; font: bold 12px/22px arial; color:#333; text-align:center; padding-bottom: 5px;}
-.bot_com{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/bot.png") center center no-repeat; }
+.bot_com{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/manage_user.png") center center no-repeat; }
 .bot_com1{ float:left; width:100%;margin: 10px 0 0 0;  height:21px;background:url("../images/sut.png") center center no-repeat; }
-.bot_com2{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/book.png") center center no-repeat; }
-.bot_com3{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/round.png") center center  no-repeat; }
+.bot_com2{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/manage_cat.png") center center no-repeat; }
+.bot_com3{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/manage_cat.png") center center  no-repeat; }
 .common_bounce{ float:left; width:631px; padding-bottom: 6px;}
 .common_bounce_text{ float:left; width:631px; margin: 6px 0 0;}
 .common_bounce_text h2{ float:left; width:631px;  font:bold 12px/23px arial;color:#2f9dd0; text-align:center;padding-bottom: 10px;}
