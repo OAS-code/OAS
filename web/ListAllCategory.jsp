@@ -32,7 +32,7 @@
                     <td>                      
                         <input type="submit" name="search" id="search" value="Search">
                         <input type="hidden" name="service" id="service" value="search">
-                        <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'CategoryController?service=listall'">
+                        <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'CategoryController?service=listall';">
                     </td>
                         <label>Result</label>
                         <input type="text" id="result" readonly>
