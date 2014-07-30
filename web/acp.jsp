@@ -26,7 +26,7 @@
           <ul>
             <li class="act_class" id="dashboard_active"><a href="ListAllUser.jsp" title="Manage User">Manage User</a></li>
             <li><a href="ListAllCategory.jsp" title="Manage Category">Manage Category</a></li>
-            <li class="" id="edit_profile_active"><a href="AuctionController?service=listall" title="Manage Auction">Manage Auction</a></li>
+            <li class="" id="edit_profile_active"><a href="ListAllAuction.jsp" title="Manage Auction">Manage Auction</a></li>
           </ul>
         </div>
       </div>

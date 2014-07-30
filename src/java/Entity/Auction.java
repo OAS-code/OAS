@@ -32,6 +32,20 @@ public class Auction {
     public Auction() {
     } 
 
+    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
+        this.categoryid = categoryid;
+        this.sellerid = sellerid;
+        this.title = title;
+        this.description = description;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.starting_price = starting_price;
+        this.reserve_price = reserve_price;
+        this.buy_now_price = buy_now_price;
+        this.status = status;
+    }
+
+    
     public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
         this.auctionid = auctionid;
         this.categoryid = categoryid;

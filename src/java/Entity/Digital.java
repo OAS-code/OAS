@@ -11,7 +11,7 @@ package Entity;
  * @author MrTu
  */
 public class Digital {
-    String id;
+    int id;
     String image1;
     String image2;
     String image3;
@@ -21,7 +21,7 @@ public class Digital {
 
     public Digital() {
     }
-
+    
     public Digital(String image1, String image2, String image3, String image4, String image5, String video) {
         this.image1 = image1;
         this.image2 = image2;
@@ -31,7 +31,17 @@ public class Digital {
         this.video = video;
     }
 
-    public void setId(String id) {
+    public Digital(int id, String image1, String image2, String image3, String image4, String image5, String video) {
+        this.id = id;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.image4 = image4;
+        this.image5 = image5;
+        this.video = video;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -59,7 +69,7 @@ public class Digital {
         this.video = video;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 

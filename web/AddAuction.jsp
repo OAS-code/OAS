@@ -93,7 +93,6 @@
                             <td>                    
                                 <input type="date" name="enddate" id="enddate">
                             </td>
-                            </td>
                         </tr>
                         <tr>
                             <td style="text-align: right">Starting price:</td>
@@ -133,7 +132,7 @@
                                 <input type="button" name="reset" id="reset" value="Cancel" onclick="window.location = 'AuctionController?service=listall';">
                             </td>
                         </tr>
-                    </table>
+                    </table>                
                 </form>
             </div>
         </div>

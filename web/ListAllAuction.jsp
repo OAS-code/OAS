@@ -25,8 +25,19 @@
                     <td>
                         <label>Keyword</label>
                         <input type="text" name="txtsearch" id="txtsearch">
+                        <label>Auction type:</label>
+                        <select name="status_au" id="status_au">
+                            <option value="" selected="selected">Select</option>
+                            <option value="Active">Active</option>
+                            <option value="Deactive">Deactive</option>
+                            <option value="Future">Future</option>
+                            <option value="Closed">Closed</option>
+                        </select> 
                         <input type="submit" name="search" id="search" value="Search">
                         <input type="hidden" name="service" id="service" value="search">
+                    </td>
+                    <td>
+                        <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'AuctionController?service=listall';">
                     </td>
                     <p>
                     <td> 

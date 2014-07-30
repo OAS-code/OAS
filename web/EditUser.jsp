@@ -44,12 +44,7 @@
                             <td><label for="fullname"></label>
 
                                 <input type="text" name="fullname" id="fullname" value="<%=user.getFullname()%>"></td>
-                        </tr>       
-                        <tr>
-                            <td style="text-align: right">Username:</td>
-                            <td>
-                                <input type="text" name="username" id="username" value="<%=user.getUsername()%>" readonly></td>
-                        </tr>
+                        </tr>                               
                         <tr>
                             <td style="text-align: right">Phone number:</td>
                             <td><label for="phonenumber"></label>
@@ -66,6 +61,11 @@
                             <td style="text-align: right">Address:</td>
                             <td><label for="address"></label>                     
                                 <textarea name="address" id="address" ><%=user.getAddress()%></textarea></td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">Username:</td>
+                            <td>
+                                <input type="text" name="username" id="username" value="<%=user.getUsername()%>" readonly></td>
                         </tr>
                         <tr>
                             <td style="text-align: right">Role:</td>                          

@@ -13,12 +13,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View detail user</title>
+        <title>User information</title>
     </head>
     <body>
         <div style="width: 500px;margin: auto;">
         <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-          <h2 style="margin: auto;margin-left: 10px">View detail user</h2>  
+          <h2 style="margin: auto;margin-left: 10px">User information</h2>  
         <form name="form1" method="post" action="UserController" style="width: 350px;margin: auto;margin-top: 10px;margin-bottom: 20px;">
          
             <%
@@ -39,32 +39,32 @@
             <table>    
                 <input type="hidden" name="no" id="no" value="<%=user.getId()%>" readonly></td>               
                 <tr>
-                    <td style="text-align: right">Fullname:</td>
-                    <td><input type="text" value="<%=user.getFullname()%>" readonly></td>
+                    <td style="text-align: right">Full name: </td>
+                    <td><%=user.getFullname()%></td>
                 </tr>                
                 <tr>
-                    <td style="text-align: right">Phone number:</td>
-                    <td><input type="text" value="<%=user.getPhonenumber()%>" readonly></td>
+                    <td style="text-align: right">Phone number: </td>
+                    <td><%=user.getPhonenumber()%></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">Email:</td>
-                    <td><input type="text" value="<%=user.getEmail()%>" readonly></td>
+                    <td style="text-align: right">Email: </td>
+                    <td><%=user.getEmail()%></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">Address:</td>
-                    <td><textarea name="text" readonly><%=user.getAddress()%></textarea></td>
+                    <td style="text-align: right">Address: </td>
+                    <td><%=user.getAddress()%></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">Username:</td>
-                    <td><input type="text" value="<%=user.getUsername()%>" readonly></td>
+                    <td style="text-align: right">Username: </td>
+                    <td><%=user.getUsername()%></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">Role:</td>
-                    <td><input type="text" value="<%=user.getRole()%>" readonly></td>
+                    <td style="text-align: right">Role: </td>
+                    <td><%=user.getRole()%></td>
                 </tr>
                 <tr>
-                    <td style="text-align: right">Status:</td>
-                    <td><input type="text" value="<%=user.getStatus()%>" readonly></td>
+                    <td style="text-align: right">Status: </td>
+                    <td><%=user.getStatus()%></td>
                 </tr>
                 <tr>
                     <td></td>
