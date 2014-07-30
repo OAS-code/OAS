@@ -31,7 +31,7 @@ public class AuctionDAO {
     private PreparedStatement pre = null;
 
     public AuctionDAO() {
-        /*try{
+        try {
          System.out.println("Connecting to DB using the following details:");
          javax.naming.Context ctx = new javax.naming.InitialContext();
          String host = (String) ctx.lookup("java:comp/env/db-host"); System.out.println(host);
@@ -39,12 +39,11 @@ public class AuctionDAO {
          String database = (String) ctx.lookup("java:comp/env/db-database"); System.out.println(database);
          String username = (String) ctx.lookup("java:comp/env/db-username"); System.out.println(username);
          String password = (String) ctx.lookup("java:comp/env/db-password"); System.out.println(password);
-         connection("jdbc:mysql://" + host + ":" + port + "/" + database,username,password);
-            
+         connection("jdbc:mysql://" + host + ":" + port + "/" + database +"?useUnicode=true&characterEncoding=UTF-8",username,password);       
          } catch (NamingException ex) {
-         Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
-        connection("jdbc:mysql://127.0.0.1:3306/auction", "root", "1234");
+          Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        //connection("jdbc:mysql://127.0.0.1:3306/auction?useUnicode=true&characterEncoding=UTF-8", "root", "1234");
     }
 
     private void connection(String ulr, String username, String password) {
