@@ -37,7 +37,7 @@
             <div class="message_common_border">
                     <h1 title="mydashboard">Admin Control Panel</h1>
                     <p>&nbsp;</p>
-                    </div>
+            </div>
             <div class="message_common">
                     <div class="dasbord_common">
                     <div class="das_inner">
