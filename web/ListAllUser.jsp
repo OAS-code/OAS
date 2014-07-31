@@ -82,7 +82,7 @@
     </head>
     <body>
         <div style="width: 500px;margin: auto;">
-            <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
+            <div style="width: 700px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
                 <h2 style="margin: auto;margin-left: 10px">Manage user</h2> 
                 <form name="form1" method="post" action="UserController">
                     <br>
@@ -118,7 +118,7 @@
                     <p>
                     <td> 
 
-                        <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="0" width="700">
+                        <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width="700">
                             <thead>
                                 <tr>
                                     <th>No.</th>

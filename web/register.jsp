@@ -38,7 +38,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Fullname:</td>
+                            <td style="text-align: right">Full name:</td>
                             <td>
                                 <input type="text" name="fullname" id="fullname" >
                             </td>
