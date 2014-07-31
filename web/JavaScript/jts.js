@@ -11,8 +11,8 @@
         $.fn.jTPS = function ( opt ) {
 
                 $(this).data('tableSettings', $.extend({
-                        perPages:                       [5, 6, 10, 20, 50, 'Tất cả'],                              // the "show per page" selection
-                        perPageText:            'Hiển thị:',                                               // text that appears before perPages links
+                        perPages:                       [5, 6, 10, 20, 50, 'All'],                              // the "show per page" selection
+                        perPageText:            'Display: ',                                               // text that appears before perPages links
                         perPageDelim:           '<span style="color:#ccc;">|</span>',   // text or dom node that deliminates each perPage link 
                         perPageSeperator:       '..',                                                                   // text or dom node that deliminates split in select page links
                         scrollDelay:            30,                                                                             // delay (in ms) between steps in anim. - IE has trouble showing animation with < 30ms delay
@@ -148,7 +148,7 @@
                                                 // update status bar
                                                 var cPos = $('>tbody>tr:not(.hideTR):first', pT).prevAll().length,
                                                         ePos = $('>tbody>tr:not(.hideTR):not(.stubCell)', pT).length;
-                                                $('>.nav .status', pT).html( 'Số trang ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' của ' + rowCount + '' );
+                                                $('>.nav .status', pT).html( 'Page ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' of ' + rowCount + '' );
                                                 clearSelection();
                                                 // callback function after pagination renderd
                                                 $(pT).data('tableSettings').clickCallback();
@@ -160,7 +160,7 @@
                 // show the correct paging status
                 var cPos = $('>tbody>tr:not(.hideTR):first', this).prevAll().length, 
                         ePos = $('>tbody>tr:not(.hideTR):not(.stubCell)', this).length;
-                $('>.nav .status', this).html( 'Số trang ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' của ' + rowCount );
+                $('>.nav .status', this).html( 'Page ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' of ' + rowCount );
 
                 // clear selected text function
                 function clearSelection () {
@@ -214,7 +214,7 @@
                                                                         // update status bar
                                                                         var cPos = $('>tbody>tr:not(.hideTR):first', pT).prevAll().length,
                                                                                 ePos = $('>tbody>tr:not(.hideTR):not(.stubCell)', pT).length;
-                                                                        $('>.nav .status', pT).html( 'Số Trang ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' của ' + rowCount + '' );
+                                                                        $('>.nav .status', pT).html( 'Page ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' of ' + rowCount + '' );
                                                                 }
                                                                 clearSelection();
                                                                 return false;
@@ -261,7 +261,7 @@
                                                                                 // update status bar
                                                                                 var cPos = $('>tbody>tr:not(.hideTR):first', pT).prevAll().length,
                                                                                         ePos = $('>tbody>tr:not(.hideTR):not(.stubCell)', pT).length;
-                                                                                $('>.nav .status', pT).html( 'Số Trang ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' của ' + rowCount + '' );
+                                                                                $('>.nav .status', pT).html( 'Page ' + ( cPos + 1 ) + ' - ' + ( cPos + ePos ) + ' of ' + rowCount + '' );
                                                                         }
                                                                 );
                                                         }

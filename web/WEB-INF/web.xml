@@ -7,6 +7,11 @@
     <servlet>
         <servlet-name>AuctionController</servlet-name>
         <servlet-class>Controller.AuctionController</servlet-class>
+        
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>Controller.CategoryController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
@@ -15,6 +20,10 @@
     <servlet-mapping>
         <servlet-name>AuctionController</servlet-name>
         <url-pattern>/AuctionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/CategoryController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
