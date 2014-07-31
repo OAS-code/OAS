@@ -101,7 +101,11 @@ public class UserController extends HttpServlet {
             rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
         } 
-        /*else if (service.equals("Login")) {
+        if(service.equalsIgnoreCase("login")){
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+        }
+        /*if (service.equals("Login")) {
             String username = request.getParameter("txtUsername");
             String password = request.getParameter("txtPass");
             UserDAO login = new UserDAO();

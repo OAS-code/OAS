@@ -20,17 +20,21 @@
             </div>
             <div class="login_middle">
                 <div class="login_lft">
-                    <form accept-charset="utf-8" method="post" action="">					
+                    <form accept-charset="utf-8" method="post" action="UserController">					
                         <div class="login_form">
                             <div class="log_fields">
                                 <p>User Name <span class="red">*</span>:</p>
-                                <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value==='Enter username...') this.value='';" onblur="if (this.value==='') this.value='Enter username...'">						
+                                <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
+                                            this.value = '';" onblur="if (this.value === '')
+                                                        this.value = 'Enter username...'">						
                             </div>
                             <span class="red fl"></span>
 
                             <div class="log_fields">
                                 <p>Password <span class="red">*</span>:</p>
-                                <input type="password" id="password" name="password" id="password" value="********" class="fl" onfocus="if (this.value==='********') this.value='';" onblur="if (this.value==='') this.value='********'">    
+                                <input type="password" id="password" name="password" id="password" value="********" class="fl" onfocus="if (this.value === '********')
+                                            this.value = '';" onblur="if (this.value === '')
+                                                        this.value = '********'">    
                             </div>
 
                         </div>		<span class="red fl"></span>
@@ -39,7 +43,10 @@
                         </div>
                         <div class="login_button fl clr">
                             <div class="login_button_lft"></div>
-                            <div class="login_button_midd"><input type="submit" title="SIGNIN" value="Signin" name="login" id="login"></div>
+                            <div class="login_button_midd">
+                                <input type="submit" title="SIGNIN" value="Signin" name="login" id="login">
+                                <input type="hidden" name="service" id="service" value="login">
+                            </div>
                             <div class="login_button_rgt"></div>
                         </div>
 
