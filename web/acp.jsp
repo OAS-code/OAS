@@ -14,65 +14,11 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
-        <jsp:include page="top.jsp" />
-        <br>
         <div class="header2">
-            <!--<div class="my_message_right">-->
-            <div class="message_common_border">
-                <h1 title="mydashboard">Admin Control Panel</h1>
-                <p>&nbsp;</p>
-            </div>
-            <div class="message_common">
-                <div class="dasbord_common">
-                    <div class="das_inner">
-                        <div class="das_inner_text">
-                            <h3>Things to do :</h3>
-                        </div>
-                        <div class="roled_images">
-                            <div class="inner_rol_img">
-                                <div class="box_top"></div>
-                                <div class="box_mid">
-                                    <div class="bot_img">
-                                        <div class="bot_com">&nbsp;</div>
-                                        <a href="ListAllUser.jsp" title="Manage Users"><h4>Manage Users</h4></a>
-                                    </div>
-                                </div>
-                                <div class="box_bot"></div>
-                            </div>
-                            <div class="inner_rol_img">
-                                <div class="box_top"></div>
-                                <div class="box_mid">
-                                    <div class="bot_img">
-                                        <div class="bot_com1">&nbsp;</div>
-                                        <a href="ListAllAuction.jsp" title="Manage Auction"><h4>Manage Auction</h4></a>
-                                    </div>
-                                </div>
-                                <div class="box_bot"></div>
-                            </div>
-
-                            <div class="inner_rol_img">
-                                <div class="box_top"></div>
-                                <div class="box_mid">
-                                    <div class="bot_img">
-                                        <div class="bot_com2">&nbsp;</div>
-                                        <a href="ListAllCategory.jsp" title="View My Watchlist"><h4>Manage Category</h4></a>
-                                    </div>
-                                </div>
-                                <div class="box_bot"></div>
-                            </div>
-
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!--</div>-->
+            <jsp:include page="top.jsp" />
+            <jsp:include page="acp_cols.jsp" />
+            <jsp:include page="acp_home.jsp" />  
         </div>
-
-
     </body> 
 
 </html>
