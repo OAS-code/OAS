@@ -8,6 +8,7 @@ package Controller;
 import DAO.UserDAO;
 import Entity.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -100,31 +102,45 @@ public class UserController extends HttpServlet {
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(ListAllUser);
             rd.forward(request, response);
-        } 
-        if(service.equalsIgnoreCase("login")){
+        }
+        if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-        }
-        /*if (service.equals("Login")) {
-            String username = request.getParameter("txtUsername");
-            String password = request.getParameter("txtPass");
-            UserDAO login = new UserDAO();
-            boolean result = login.checkLogin(username, password);
-            String url = errorPage;
+            boolean result = dao.checkLogin(username, password);
             if (result) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute("USER", username);
-                url = welcomePage;
+                session.setAttribute("user", username);
+                session.setMaxInactiveInterval(2 * 60);
+                Cookie userName = new Cookie("user", username);
+                userName.setMaxAge(2 * 60);
+                response.addCookie(userName);
+                rd = request.getRequestDispatcher("welcome.jsp");
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
             }
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        } else if (action.equals("tryAgain")) {
-            RequestDispatcher rd = request.getRequestDispatcher(homePage);
-            rd.forward(request, response);
-        } else if (action.equals("register")) {
-            RequestDispatcher rd = request.getRequestDispatcher(registerPage);
-            rd.forward(request, response);
-        }*/
+        }
+        /*if (service.equals("Login")) {
+         String username = request.getParameter("txtUsername");
+         String password = request.getParameter("txtPass");
+         UserDAO login = new UserDAO();
+         boolean result = login.checkLogin(username, password);
+         String url = errorPage;
+         if (result) {
+         HttpSession session = request.getSession(true);
+         session.setAttribute("USER", username);
+         url = welcomePage;
+         }
+         RequestDispatcher rd = request.getRequestDispatcher(url);
+         rd.forward(request, response);
+         } else if (action.equals("tryAgain")) {
+         RequestDispatcher rd = request.getRequestDispatcher(homePage);
+         rd.forward(request, response);
+         } else if (action.equals("register")) {
+         RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+         rd.forward(request, response);
+         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
