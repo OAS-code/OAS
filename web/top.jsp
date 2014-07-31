@@ -29,8 +29,8 @@
                 <div class="header_right">
                                         <ul>
 
-                                <li><a href="login.jsp" title="Sign in" target="mid">Sign in</a></li>
-                                <li class="active"><a href="register.jsp" title="Register" target="mid">Register</a></li>
+                                <li><a href="login.jsp" title="Sign in">Sign in</a></li>
+                                <li class="active"><a href="home.jsp" title="Register">Register</a></li>
 
                         </ul>
                                           </div>
@@ -116,8 +116,8 @@
                                           </div>
                                   </span></li>
 
-                <li id="home_menu"> <a href="home.jsp" title="Home" target="mid"> Home</a></li>
-                <li id="home_menu"><a href="acp.jsp" title="ACP" target="mid"> ACP</a></li>
+                <li id="home_menu"> <a href="home.jsp" title="Home"> Home</a></li>
+                <li id="home_menu"><a href="acp.jsp" title="ACP"> ACP</a></li>
                 
               </ul>
                 </div>

@@ -37,7 +37,7 @@
             <div class="message_common_border">
                     <h1 title="mydashboard">Admin Control Panel</h1>
                     <p>&nbsp;</p>
-                    </div>
+            </div>
             <div class="message_common">
                     <div class="dasbord_common">
                     <div class="das_inner">
@@ -60,7 +60,7 @@
                                     <div class="box_mid">
                                             <div class="bot_img">
                                                     <div class="bot_com1">&nbsp;</div>
-                                                            <a href="AuctionController?service=listall" title="Manage Auction"><h4>Manage Auction</h4></a>
+                                                            <a href="ListAllAuction.jsp" title="Manage Auction"><h4>Manage Auction</h4></a>
                                                     </div>
                                             </div>
                                     <div class="box_bot"></div>
