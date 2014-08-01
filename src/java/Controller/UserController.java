@@ -38,13 +38,12 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO dao = new UserDAO();
         String service = request.getParameter("service");
-        final String ListAllUser = "ListAllUser.jsp";
+        final String userManager = "cp_user_manager.jsp?current_page=user_manager";
         final String ViewDetail = "ViewDetail.jsp";
         final String TableUser = "table_user.jsp";
         RequestDispatcher rd;
-        if (service.equalsIgnoreCase("open")) {
-            
-            rd = request.getRequestDispatcher(ListAllUser);
+        if (service.equalsIgnoreCase("user_manager")) {
+            rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("adduser")) {
@@ -59,14 +58,14 @@ public class UserController extends HttpServlet {
             User user = new User(fullname, username, password, phonenumber, email, address, role, status);
             int n = dao.add(user);
             if (n > 0) {
-                response.sendRedirect(ListAllUser);
+                response.sendRedirect(userManager);
             }
         }
         if (service.equalsIgnoreCase("deleteuser")) {
             String id = request.getParameter("no");
             int n = dao.delete(Integer.parseInt(id));
             if (n > 0) {
-                rd = request.getRequestDispatcher(ListAllUser);
+                rd = request.getRequestDispatcher(userManager);
                 rd.forward(request, response);
             }
         }
@@ -84,7 +83,7 @@ public class UserController extends HttpServlet {
             User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
             int n = dao.update(user);
             if (n > 0) {
-                response.sendRedirect(ListAllUser);
+                response.sendRedirect(userManager);
             }
         }
         if (service.equalsIgnoreCase("listall")) {

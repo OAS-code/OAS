@@ -32,11 +32,12 @@
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com">&nbsp;</div>
-                                        <a href="ListAllUser.jsp" title="Manage Users"><h4>Manage Users</h4></a>
+                                        <a href="cp_user_manager.jsp" title="Manage Users"><h4>Manage Users</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
+                            <!--
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -47,7 +48,7 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-
+                            -->
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
