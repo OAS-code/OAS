@@ -40,7 +40,13 @@ public class UserController extends HttpServlet {
         String service = request.getParameter("service");
         final String ListAllUser = "ListAllUser.jsp";
         final String ViewDetail = "ViewDetail.jsp";
+        final String TableUser = "table_user.jsp";
         RequestDispatcher rd;
+        if (service.equalsIgnoreCase("open")) {
+            
+            rd = request.getRequestDispatcher(ListAllUser);
+            rd.forward(request, response);
+        }
         if (service.equalsIgnoreCase("adduser")) {
             String fullname = request.getParameter("fullname");
             String username = request.getParameter("username");
@@ -84,7 +90,7 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllUser);
+            rd = request.getRequestDispatcher(TableUser);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("viewdetail")) {
@@ -100,7 +106,7 @@ public class UserController extends HttpServlet {
             String status = request.getParameter("status");
             ArrayList<User> arr = dao.searchUser(search, role, status);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllUser);
+            rd = request.getRequestDispatcher(TableUser);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("login")) {
@@ -110,10 +116,6 @@ public class UserController extends HttpServlet {
             if (result) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", username);
-                session.setMaxInactiveInterval(2 * 60);
-                Cookie userName = new Cookie("user", username);
-                userName.setMaxAge(2 * 60);
-                response.addCookie(userName);
                 rd = request.getRequestDispatcher("welcome.jsp");
                 rd.forward(request, response);
             } else {

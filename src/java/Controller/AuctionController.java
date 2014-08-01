@@ -51,13 +51,18 @@ public class AuctionController extends HttpServlet {
         final String AddAuction = "AddAuction.jsp";
         final String ViewDetailAuction = "ViewDetailAuction.jsp";
         final String EditAuction = "EditAuction.jsp";
+        final String TableAuction = "table_auction.jsp";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
+        if (service.equalsIgnoreCase("open")) {
+            rd = request.getRequestDispatcher(ListAllAuction);
+            rd.forward(request, response);
+        }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<Auction> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllAuction);
+            rd = request.getRequestDispatcher(TableAuction);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("deleteauction")) {
@@ -105,7 +110,7 @@ public class AuctionController extends HttpServlet {
             String stt = request.getParameter("status_au");
             ArrayList<Auction> arr = dao.searchAuction(search, stt);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllAuction);
+            rd = request.getRequestDispatcher(TableAuction);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("updateauction")) {

@@ -41,11 +41,12 @@ public class CategoryController extends HttpServlet {
         CategoryDAO dao = new CategoryDAO();
         String service = request.getParameter("service");
         final String ListAllCategory = "ListAllCategory.jsp";
+        final String TableCategory = "table_category.jsp";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllCategory);
+            rd = request.getRequestDispatcher(TableCategory);
             rd.forward(request, response);
         }
         if(service.equalsIgnoreCase("addcategory")){
@@ -78,7 +79,7 @@ public class CategoryController extends HttpServlet {
             String search = request.getParameter("txtsearch");
             ArrayList<Category> arr = dao.searchUser(search);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(ListAllCategory);
+            rd = request.getRequestDispatcher(TableCategory);
             rd.forward(request, response);
         } 
     }
