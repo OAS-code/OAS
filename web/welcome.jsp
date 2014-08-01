@@ -13,27 +13,16 @@
     </head>
     <body>
         <%
-//allow access only if session exists
-            String user = null;
-            if (session.getAttribute("user") == null) {
-                response.sendRedirect("login.html");
-            } else {
-                user = (String) session.getAttribute("user");
-            }
-            String userName = null;
-            String sessionID = null;
-            Cookie[] cookies = request.getCookies();
-            if (cookies != null) {
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("user")) {
-                        userName = cookie.getValue();
-                    }
-                    if (cookie.getName().equals("JSESSIONID")) {
-                        sessionID = cookie.getValue();
-                    }
-                }
-            }
+            String userName = (String) session.getAttribute("user");
         %>
-        <h3>Hi <%=userName %>, Login successful.</h3>
+        <%
+            if (userName == null) {
+                response.sendRedirect("login.jsp");
+            } else {
+
+                response.sendRedirect("acp_cols.jsp");
+        %>
+        <h3>Hi <%=userName%>, Login successful.</h3>
+        <%}%>
     </body>
 </html>
