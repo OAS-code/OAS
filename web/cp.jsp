@@ -16,8 +16,8 @@
     <body>
         <div class="header2">
             <jsp:include page="top.jsp" />
-            <jsp:include page="acp_cols.jsp" />
-            <jsp:include page="acp_home.jsp" />  
+            <jsp:include page="cp_cols.jsp" />
+            <jsp:include page="cp_home.jsp" />  
         </div>
     </body> 
 
