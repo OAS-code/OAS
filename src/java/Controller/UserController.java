@@ -89,7 +89,7 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableUser);
+            rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("viewdetail")) {
@@ -105,7 +105,7 @@ public class UserController extends HttpServlet {
             String status = request.getParameter("status");
             ArrayList<User> arr = dao.searchUser(search, role, status);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableUser);
+            rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("login")) {
