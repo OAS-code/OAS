@@ -676,7 +676,7 @@
 .res_left{ float:left; width:4px; height:27px; background:url("../images/res_left.png")  no-repeat;}
 .res_mid{ float:left; height:27px; background:url("../images/res_mid.png")  repeat-x;}
 .res_right{ float:left; width:4px; height:27px; background:url("../images/res_right.png")  no-repeat;}
-.res_mid  input[type="submit"],input[type="button"]{ width:110px; float:left;  border:none; background:none; font: bold 12px arial; padding: 0 6px 0px 6px; color:#fff; height:27px; text-transform: uppercase;}
+.res_mid  input[type="submit"],input[type="button"],input[type="reset"]{ width:110px; float:left;  border:none; background:none; font: bold 12px arial; padding: 0 6px 0px 6px; color:#fff; height:27px; text-transform: uppercase;}
 .save_left{ float:left; width:3px; height:27px; background:url("../images/save_left.png")  no-repeat;}
 .save_mid{ float:left; height:27px; background:url("../images/save_mid.png")  repeat-x; padding:0 1px;}
 .save_right{ float:left; width:3px; height:27px; background:url("../images/save_right.png")  no-repeat;}

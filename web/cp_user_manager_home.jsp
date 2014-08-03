@@ -38,11 +38,11 @@
                             <p>User type</p>
                             <div class="text_feeld">
                                 <h2>
-                                    <select name="user_type" class=" text_bg select" id="user_type" >	
+                                    <select name="cb1" class=" text_bg select" id="cb1" >	
                                         <option value="" selected="selected">Select User Type</option>
-                                        <option value="Admin"  >Admin</option>
                                         <option value="Customer"  >Customer</option>
                                         <option value="Staff"  >Auction staff</option>
+                                        <option value="Admin"  >Administrator</option>
                                     </select>
                                 </h2>
                             </div>	
@@ -50,7 +50,7 @@
                             <p>Status</p>
                             <div class="text_feeld">
                                 <h2>
-                                    <select name="status" class=" text_bg select" id="status" >	
+                                    <select name="cb2" class=" text_bg select" id="cb2" >	
                                         <option value="" selected="selected">Select User Status</option>
                                         <option value="Active">Activated</option>
                                         <option value="Deactive">Deactivated</option>
@@ -67,7 +67,7 @@
                                             <div class="res_left"></div>
                                             <div class="res_mid" style="width:auto;">
                                                 <a style="width:auto;">
-                                                    <input type="submit" name="search" value="SEARCH" title="SEARCH">
+                                                    <input type="submit" name="search" id="search" value="SEARCH" title="SEARCH">
                                                     <input type="hidden" name="service" id="service" value="search" >
                                                 </a>
                                             </div>
@@ -90,7 +90,7 @@
                                             <div class="res_left"></div>
                                             <div class="res_mid" style="width:auto;">
                                                 <a style="width:auto;">
-                                                    <input type="button" name="add" id="add" value="Add new user" onclick="window.location = 'AddUser.jsp';">    
+                                                    <input type="button" name="add" id="add" value="Add new user" onclick="window.location = 'cp_user_add.jsp?current_page=user_manager';">    
                                                 </a>
                                             </div>
                                             <div class="res_right"></div>
@@ -105,39 +105,5 @@
             <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
             <jsp:include page="table_user.jsp" />   
         </div>
-        <!--
-                <h2 style="margin: auto;margin-left: 10px">Manage user</h2> 
-                <form name="form1" method="post" action="UserController">
-                    <br>
-    
-                    <input type="button" name="add" id="add" value="Add new user" onclick="window.location = 'AddUser.jsp';">
-    
-                    <p>
-    
-                        <label>Keyword:</label>
-                        <input type="text" name="txtsearch" id="txtsearch">
-                        <label>User type:</label>
-                        <select name="user_type" id="user_type">
-                            <option value="" selected="selected">Select</option>
-                            <option value="Admin"  >Admin</option>
-                            <option value="Customer"  >Customer</option>
-                            <option value="Staff"  >Auction staff</option>
-                        </select>                       
-    
-                        <label>Status:</label>
-                        <select name="status" id="status">
-                            <option value="" selected="selected">Select</option>
-                            <option value="Active">Active</option>
-                            <option value="Deactive">Deactive</option>
-                        </select> 
-                        <input type="submit" name="search" id="search" value="Search">
-                        <input type="hidden" name="service" id="service" value="search">
-                        <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'UserController?service=listall'">
-    
-                        <label>Result</label>
-                        <input type="text" id="result" readonly>
-    
-                </form> 
-        -->
     </body>
 </html>

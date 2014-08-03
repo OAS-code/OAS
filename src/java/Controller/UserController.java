@@ -101,8 +101,8 @@ public class UserController extends HttpServlet {
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
-            String role = request.getParameter("user_type");
-            String status = request.getParameter("status");
+            String role = request.getParameter("cb1");
+            String status = request.getParameter("cb2");
             ArrayList<User> arr = dao.searchUser(search, role, status);
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(userManager);
