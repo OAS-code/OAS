@@ -19,10 +19,8 @@
             if (userName == null) {
                 response.sendRedirect("login.jsp");
             } else {
-
-                response.sendRedirect("acp_cols.jsp");
+                response.sendRedirect("cp.jsp");
         %>
-        <h3>Hi <%=userName%>, Login successful.</h3>
         <%}%>
     </body>
 </html>

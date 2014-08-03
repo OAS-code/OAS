@@ -111,16 +111,26 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            boolean result = dao.checkLogin(username, password);
-            if (result) {
-                HttpSession session = request.getSession(true);
-                session.setAttribute("user", username);
-                rd = request.getRequestDispatcher("welcome.jsp");
-                rd.forward(request, response);
-            } else {
-                rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
-            }
+            //boolean result = dao.checkLogin(username, password);
+           // if (result) {
+                String role = dao.checkRole(username, password);
+                switch (role) {
+                    case "Admin":
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("user", username);
+                        session.setAttribute("role", role);
+                        rd = request.getRequestDispatcher("welcome.jsp");
+                        rd.forward(request, response);
+                        break;
+                    case "Staff":
+                        break;
+                    default:
+                        break;
+                }
+            //} else {
+              //  rd = request.getRequestDispatcher("login.jsp");
+               // rd.forward(request, response);
+            //}
         }
         /*if (service.equals("Login")) {
          String username = request.getParameter("txtUsername");

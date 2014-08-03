@@ -22,7 +22,6 @@ import javax.naming.NamingException;
  *
  * @author MrTu
  */
-
 public class UserDAO {
 
     private Connection conn = null;
@@ -32,22 +31,22 @@ public class UserDAO {
 
     public UserDAO() {
         /*try {
-            System.out.println("Connecting to DB using the following details:");
-            javax.naming.Context ctx = new javax.naming.InitialContext();
-            String host = (String) ctx.lookup("java:comp/env/db-host");
-            System.out.println(host);
-            String port = (String) ctx.lookup("java:comp/env/db-port");
-            System.out.println(port);
-            String database = (String) ctx.lookup("java:comp/env/db-database");
-            System.out.println(database);
-            String username = (String) ctx.lookup("java:comp/env/db-username");
-            System.out.println(username);
-            String password = (String) ctx.lookup("java:comp/env/db-password");
-            System.out.println(password);
-            connection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF-8", username, password);
-        } catch (NamingException ex) {
-            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+         System.out.println("Connecting to DB using the following details:");
+         javax.naming.Context ctx = new javax.naming.InitialContext();
+         String host = (String) ctx.lookup("java:comp/env/db-host");
+         System.out.println(host);
+         String port = (String) ctx.lookup("java:comp/env/db-port");
+         System.out.println(port);
+         String database = (String) ctx.lookup("java:comp/env/db-database");
+         System.out.println(database);
+         String username = (String) ctx.lookup("java:comp/env/db-username");
+         System.out.println(username);
+         String password = (String) ctx.lookup("java:comp/env/db-password");
+         System.out.println(password);
+         connection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF-8", username, password);
+         } catch (NamingException ex) {
+         Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
         connection("jdbc:mysql://127.0.0.1:3306/auction?useUnicode=true&characterEncoding=UTF-8", "root", "1234");
     }
 
@@ -219,6 +218,21 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public String checkRole(String username, String password) throws SQLException {
+        String role = null;
+        String sql = "select role from user where username = '" + username + "' and password = '" + password + "'";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = state.executeQuery(sql);
+            while (rs.next()) {
+                role = rs.getString("role");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return role;
     }
 
     public static void main(String[] args) throws SQLException {
