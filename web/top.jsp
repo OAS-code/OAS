@@ -30,7 +30,7 @@
                         <ul>
 
                             <li><a href="login.jsp" title="Sign in">Sign in</a></li>
-                            <li class="active"><a href="index.jsp" title="Register">Register</a></li>
+                            <li class="active"><a href="register.jsp" title="Register">Register</a></li>
 
                         </ul>
                     </div>
