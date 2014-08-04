@@ -40,13 +40,19 @@ public class CategoryController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         CategoryDAO dao = new CategoryDAO();
         String service = request.getParameter("service");
-        final String ListAllCategory = "ListAllCategory.jsp";
+        final String category_manager = "cp_category_manager.jsp?current_page=category_manager";
         final String TableCategory = "table_category.jsp";
         RequestDispatcher rd;
+        if (service.equalsIgnoreCase("category_manager")) {
+            ArrayList<Category> arr = dao.view();
+            request.setAttribute("arr", arr);
+            rd = request.getRequestDispatcher(category_manager);
+            rd.forward(request, response);
+        }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableCategory);
+            rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
         }
         if(service.equalsIgnoreCase("addcategory")){
@@ -54,14 +60,14 @@ public class CategoryController extends HttpServlet {
             Category category = new Category(name);
             int n = dao.add(category);
             if(n>0){
-               response.sendRedirect(ListAllCategory);
+               response.sendRedirect(category_manager);
             }
         }
         if(service.equalsIgnoreCase("delete")){
             String id = request.getParameter("categoryid");
             int n = dao.delete(Integer.parseInt(id));
             if (n > 0) {
-                rd = request.getRequestDispatcher(ListAllCategory);
+                rd = request.getRequestDispatcher(category_manager);
                 rd.forward(request, response);
             }
         }
@@ -72,14 +78,14 @@ public class CategoryController extends HttpServlet {
             Category category = new Category(categoryid, name);
             int n = dao.update(category);
             if(n>0){
-                response.sendRedirect(ListAllCategory);
+                response.sendRedirect(category_manager);
             }
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             ArrayList<Category> arr = dao.searchUser(search);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableCategory);
+            rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
         } 
     }
