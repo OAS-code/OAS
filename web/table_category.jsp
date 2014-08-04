@@ -80,47 +80,50 @@
         </style>
     </head>
     <body>
-        <div style="width: 500px;margin: auto;">
-            <div style="width: 700px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">                
-                <form name="form1" method="post" action="">
-                    <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width="700">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Name</th>
-                                <th>Edit</th>
-                                <th>Delete</th>
-                            </tr>  
-                        </thead>
-                        <tbody>
-                            <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
-                            </jsp:useBean>
-                            <c:forEach var="category" items="${arr}" varStatus="status"> 
-                                <tr> 
-                            <script type="text/javascript">
-                                var elem = document.getElementById("result");
-                                elem.value = "${status.count}";
-                            </script>
-                            <td>${status.count}</td> 
-                            <td>${category.name}</td>  
-                            <td><a href="EditCategory.jsp?categoryid=${category.categoryid}">Edit</a></td>
-                            <td><a href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')">Delete</a></td>
-                            </tr>
-                        </c:forEach>
-                        </tbody>
-                        <tfoot class="nav">
-                            <tr>
-                                <td colspan=5>
-                                    <div class="pagination"></div>
-                                    <div class="paginationTitle">Page</div>
-                                    <div class="selectPerPage"></div>
-                                    <div class="status"></div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </form> 
-            </div>
-        </div>
+        <%
+            ArrayList<Category> ar=(ArrayList<Category>)request.getAttribute("arr");
+            if(ar==null){
+                
+            }else{
+        %>
+        <form name="form1" method="post" action="">
+            <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width=99.5%>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Name</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
+                    </jsp:useBean>
+                    <c:forEach var="category" items="${arr}" varStatus="status"> 
+                        <tr> 
+                    <script type="text/javascript">
+                        var elem = document.getElementById("result");
+                        elem.value = "${status.count}";
+                    </script>
+                    <td>${status.count}</td> 
+                    <td>${category.name}</td>  
+                    <td><a href="EditCategory.jsp?categoryid=${category.categoryid}">Edit</a></td>
+                    <td><a href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+                <tfoot class="nav">
+                    <tr>
+                        <td colspan=5>
+                            <div class="pagination"></div>
+                            <div class="paginationTitle">Page</div>
+                            <div class="selectPerPage"></div>
+                            <div class="status"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form> 
+        <% } %>
     </body>
 </html>

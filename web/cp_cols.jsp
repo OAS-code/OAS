@@ -37,9 +37,9 @@
                     
                     <%
                         if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=listall" title="Manage Category">Manage Category</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="CategoryController?service=listall" title="Manage Category">Manage Category</a></li>
+                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
                         <% }%>
                     
                     
