@@ -135,8 +135,8 @@ public class UserController extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-
-            User user = new User(fullname, username, password, phonenumber, email, address);
+            String salt = 
+            User user = new User(fullname, username, password, phonenumber, email, address, salt);
             int n = dao.addUser(user);
             if (n > 0) {
                 rd = request.getRequestDispatcher(loginPage);

@@ -44,7 +44,7 @@
                                     <div class="res_left"></div>
                                     <div class="res_mid" style="width:auto;">
                                         <a style="width:auto;">
-                                            <input type="hidden" name="service" id="service" value="adduser" >
+                                            <input type="hidden" name="service" id="service" value="addcategory" >
                                             <input type="submit" name="add" value="Add">
                                         </a>
                                     </div>

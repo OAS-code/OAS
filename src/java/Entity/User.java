@@ -19,8 +19,19 @@ public class User {
     String email;
     String address;
     String role;
-    String status;    
+    String status; 
+    String salt;
     public User() {
+    }
+
+    public User(String fullname, String username, String password, String phonenumber, String email, String address, String salt) {
+        this.fullname = fullname;
+        this.username = username;
+        this.password = password;
+        this.phonenumber = phonenumber;
+        this.email = email;
+        this.address = address;
+        this.salt = salt;
     }
 
     public User(String fullname, String username, String password, String phonenumber, String email, String address) {
@@ -61,6 +72,14 @@ public class User {
         this.username = username;
         this.status = status;
         this.role = role;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
     
     public int getId() {
