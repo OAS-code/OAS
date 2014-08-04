@@ -107,6 +107,27 @@ public class UserDAO {
         return n;
     }
 
+    public int addUser(User user) {
+        int n = 0;
+        try {
+            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
+
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1, user.getUsername());
+            pre.setString(2, user.getPassword());
+            pre.setString(3, user.getFullname());
+            pre.setString(4, user.getPhonenumber());
+            pre.setString(5, user.getEmail());
+            pre.setString(6, user.getAddress());
+
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+
     public ArrayList<User> view() throws SQLException {
         String sql = "SELECT * FROM user";
         ArrayList<User> arr = new ArrayList<User>();
