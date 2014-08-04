@@ -23,9 +23,9 @@
                 <ul>
                     <%
                         if ((current_page != null) && current_page.equalsIgnoreCase("dashboard")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="cp.jsp" title="Manage User">Dashboard</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="cp.jsp?current_page=dashboard" title="Manage User">Dashboard</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="cp.jsp" title="Manage User">Dashboard</a></li>
+                    <li class="" id="edit_profile_active"><a href="cp.jsp?current_page=dashboard" title="Manage User">Dashboard</a></li>
                         <% }%>
                     
                     <%
@@ -36,10 +36,10 @@
                         <% }%>
                     
                     <%
-                        if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=open" title="Manage Auction">Manage Auction</a></li>
+                        if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=listall" title="Manage Category">Manage Category</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="AuctionController?service=open" title="Manage Auction">Manage Auction</a></li>
+                    <li class="" id="edit_profile_active"><a href="CategoryController?service=listall" title="Manage Category">Manage Category</a></li>
                         <% }%>
                     
                     

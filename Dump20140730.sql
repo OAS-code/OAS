@@ -51,12 +51,6 @@ CREATE TABLE `auction` (
 -- Dumping data for table `auction`
 --
 
-LOCK TABLES `auction` WRITE;
-/*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (2,1,1,'Camera canon','Like new','2014-07-21 17:00:00','2014-07-22 17:00:00',100,400,500,'Future'),(3,2,1,'Laptop ','used 2 year','2014-07-29 17:00:00','2014-07-30 17:00:00',100,400,500,'Active');
-/*!40000 ALTER TABLE `auction` ENABLE KEYS */;
-UNLOCK TABLES;
-
 --
 -- Table structure for table `category`
 --
@@ -76,11 +70,6 @@ CREATE TABLE `category` (
 -- Dumping data for table `category`
 --
 
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (4,'Camera'),(3,'Computer'),(5,'Headphone'),(2,'Laptop'),(1,'Mobile');
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `digital`
@@ -105,12 +94,6 @@ CREATE TABLE `digital` (
 --
 -- Dumping data for table `digital`
 --
-
-LOCK TABLES `digital` WRITE;
-/*!40000 ALTER TABLE `digital` DISABLE KEYS */;
-INSERT INTO `digital` VALUES (2,'http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg','http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg','http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg','http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg','http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg','http://upload.wikimedia.org/wikipedia/commons/0/0d/Canon_EOS_5D_Mark_III.jpg'),(3,'http://4.bp.blogspot.com/-OBLot1xL88o/UYyWbs57aoI/AAAAAAAAAZQ/EJE4oLi1bZg/s1600/laptop.png','http://www.idc.com.vn/img/idc/news/100_425.jpg','http://tanthaibinh.vn/media/category/cat_c70f072f9a6954ac74491a15149c06ec.jpg','http://4.bp.blogspot.com/-OBLot1xL88o/UYyWbs57aoI/AAAAAAAAAZQ/EJE4oLi1bZg/s1600/laptop.png','','http://www.youtube.com/watch?v=c8J2C27qO7I');
-/*!40000 ALTER TABLE `digital` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
@@ -140,13 +123,6 @@ CREATE TABLE `user` (
 --
 -- Dumping data for table `user`
 --
-
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Nguyen Van Nam','nguyennam','123','09867','namnv@fpt.vn','Ha Noi','Customer','Deactive'),(2,'Pham Van Tu','phamtu','123','09867','tupvse02404@fpt.vn','Hai Duong','Customer','Active'),(3,'Chu Nhu Duc','chuduc','123','09867','chuduc@fpt.vn','Ha Noi','Admin','Active'),(4,'Nguyen Dinh Hieu','nguyenhieu','123','09867','hieund@fpt.vn','Bac Ninh','Customer','Deactive');
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
