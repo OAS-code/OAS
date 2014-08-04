@@ -44,8 +44,6 @@ public class CategoryController extends HttpServlet {
         final String TableCategory = "table_category.jsp";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("category_manager")) {
-            ArrayList<Category> arr = dao.view();
-            request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
         }

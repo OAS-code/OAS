@@ -68,7 +68,7 @@ public class UserDAO {
     public int add(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (fullname,username,password,phonenumber,email,address,role,status) VALUES (?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO user (fullname,username,password,phonenumber,email,address,role,status,salt) VALUES (?,?,?,?,?,?,?,?,?)";
 
             pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
@@ -79,6 +79,7 @@ public class UserDAO {
             pre.setString(6, user.getAddress());
             pre.setString(7, user.getRole());
             pre.setString(8, user.getStatus());
+            pre.setString(9, user.getSalt());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,7 +90,7 @@ public class UserDAO {
     public int addUser(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
+            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address,salt) VALUES (?,?,?,?,?,?,?)";
 
             pre = conn.prepareStatement(sql);
 
@@ -99,6 +100,7 @@ public class UserDAO {
             pre.setString(4, user.getPhonenumber());
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
+            pre.setString(7, user.getSalt());
 
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -222,7 +224,7 @@ public class UserDAO {
         return n;
     }
 
-    public String checkRole(String username, String password) throws SQLException {
+    public String loginAuthenticate(String username, String password, String salt) throws SQLException {
         String role = null;
         String sql = "select role from user where username = '" + username + "' and password = '" + password + "'";
         try {
@@ -233,8 +235,23 @@ public class UserDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
         return role;
+    }
+    public String getSalt(String username) throws SQLException {
+        String salt = null;
+        String sql = "SELECT salt FROM user WHERE username = '" + username + "'";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = state.executeQuery(sql);
+            while (rs.next()) {
+                salt = rs.getString("salt");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return salt;
     }
 
     public static void main(String[] args) throws SQLException {

@@ -12,7 +12,10 @@
         <title>Login</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
     </head>
-    <body>      
+    <body>   
+        <%
+            String errorCode = request.getParameter("errorCode");
+        %>
         <jsp:include page="top.jsp" />
         <div class="header2">            
             <div class="login-part">
@@ -23,7 +26,7 @@
                     <form accept-charset="utf-8" method="post" action="UserController">					
                         <div class="login_form">
                             <div class="log_fields">
-                                <p>User Name <span class="red">*</span>:</p>
+                                <p>User Name <span class="red"><%if(errorCode != null && errorCode.equals("1")){%>(Username or password does not exist)<%}else{%>*<%}%></span>:</p>
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                             this.value = '';" onblur="if (this.value === '')
                                                         this.value = 'Enter username...'">						
