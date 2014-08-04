@@ -112,8 +112,6 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            //boolean result = dao.checkLogin(username, password);
-            // if (result) {
             String role = dao.checkRole(username, password);
             switch (role) {
                 case "Admin":
@@ -128,10 +126,6 @@ public class UserController extends HttpServlet {
                 default:
                     break;
             }
-            //} else {
-            //  rd = request.getRequestDispatcher("login.jsp");
-            // rd.forward(request, response);
-            //}
         }
         if (service.equals("registerUser")) {
 

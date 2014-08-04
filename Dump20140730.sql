@@ -35,6 +35,7 @@ CREATE TABLE `auction` (
   `starting_price` double NOT NULL,
   `reserve_price` double NOT NULL,
   `buy_now_price` double NOT NULL,
+  `balance` double default 0,
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`auctionid`),
   KEY `category_id` (`category_id`),
@@ -134,6 +135,7 @@ CREATE TABLE `user` (
   FULLTEXT KEY `fullname_2` (`fullname`,`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `user`

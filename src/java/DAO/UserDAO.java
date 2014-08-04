@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -80,6 +79,27 @@ public class UserDAO {
             pre.setString(6, user.getAddress());
             pre.setString(7, user.getRole());
             pre.setString(8, user.getStatus());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+
+    public int addUser(User user) {
+        int n = 0;
+        try {
+            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
+
+            pre = conn.prepareStatement(sql);
+
+            pre.setString(1, user.getUsername());
+            pre.setString(2, user.getPassword());
+            pre.setString(3, user.getFullname());
+            pre.setString(4, user.getPhonenumber());
+            pre.setString(5, user.getEmail());
+            pre.setString(6, user.getAddress());
+
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,26 +239,6 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
-    }
-
-    public boolean checkLogin(String username, String password) {
-        String sql = "select * from user where username = ? and password = ?";
-        try {
-            pre = conn.prepareStatement(sql);
-            pre.setString(1, username);
-            pre.setString(2, password);
-            rs = pre.executeQuery();
-            boolean result = rs.next();
-            rs.close();
-            pre.close();
-            conn.close();
-            if (result) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public String checkRole(String username, String password) throws SQLException {
