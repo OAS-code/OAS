@@ -13,7 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -198,26 +197,6 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
-    }
-
-    public boolean checkLogin(String username, String password) {
-        String sql = "select * from user where username = ? and password = ?";
-        try {
-            pre = conn.prepareStatement(sql);
-            pre.setString(1, username);
-            pre.setString(2, password);
-            rs = pre.executeQuery();
-            boolean result = rs.next();
-            rs.close();
-            pre.close();
-            conn.close();
-            if (result) {
-                return true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 
     public String checkRole(String username, String password) throws SQLException {

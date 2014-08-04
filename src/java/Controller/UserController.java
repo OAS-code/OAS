@@ -111,47 +111,21 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            //boolean result = dao.checkLogin(username, password);
-           // if (result) {
-                String role = dao.checkRole(username, password);
-                switch (role) {
-                    case "Admin":
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("user", username);
-                        session.setAttribute("role", role);
-                        rd = request.getRequestDispatcher("welcome.jsp");
-                        rd.forward(request, response);
-                        break;
-                    case "Staff":
-                        break;
-                    default:
-                        break;
-                }
-            //} else {
-              //  rd = request.getRequestDispatcher("login.jsp");
-               // rd.forward(request, response);
-            //}
+            String role = dao.checkRole(username, password);
+            switch (role) {
+                case "Admin":
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", username);
+                    session.setAttribute("role", role);
+                    rd = request.getRequestDispatcher("welcome.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "Staff":
+                    break;
+                default:
+                    break;
+            }
         }
-        /*if (service.equals("Login")) {
-         String username = request.getParameter("txtUsername");
-         String password = request.getParameter("txtPass");
-         UserDAO login = new UserDAO();
-         boolean result = login.checkLogin(username, password);
-         String url = errorPage;
-         if (result) {
-         HttpSession session = request.getSession(true);
-         session.setAttribute("USER", username);
-         url = welcomePage;
-         }
-         RequestDispatcher rd = request.getRequestDispatcher(url);
-         rd.forward(request, response);
-         } else if (action.equals("tryAgain")) {
-         RequestDispatcher rd = request.getRequestDispatcher(homePage);
-         rd.forward(request, response);
-         } else if (action.equals("register")) {
-         RequestDispatcher rd = request.getRequestDispatcher(registerPage);
-         rd.forward(request, response);
-         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
