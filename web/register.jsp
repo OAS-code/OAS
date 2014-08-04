@@ -32,7 +32,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="text-align: right">Confirm Password:</td>
+                            <td style="text-align: right">Retype Password:</td>
                             <td><label for="password"></label>
                                 <input type="password" name="cpassword" id="password">
                             </td>

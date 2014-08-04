@@ -79,50 +79,53 @@
         </style>
     </head>
     <body>
-        <div style="width: 500px;margin: auto;">
-        <div style="width: 700px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-            <form name="form1" method="post" action="">
-                <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width="700">
-                    <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Full name</th>
-                            <th>Username</th>
-                            <th>User type</th>
-                            <th>Status</th>
+        <%
+            ArrayList<User> ar=(ArrayList<User>)request.getAttribute("arr");
+            if(ar==null){
+                
+            }else{
+        %>
+        <form name="form1" method="post" action="">
+            <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width=99.5%>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Full name</th>
+                        <th>Username</th>
+                        <th>User type</th>
+                        <th>Status</th>
 
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
-                        </jsp:useBean>
-                        <c:forEach var="user" items="${arr}" varStatus="status"> 
-                            <tr> 
-                        <script type="text/javascript">
-                            var elem = document.getElementById("result");
-                            elem.value = "${status.count}";
-                        </script>
-                        <td>${status.count}</td> 
-                        <td>${user.fullname}</td>
-                        <td><a href="UserController?service=viewdetail&userid=${user.id}">${user.username}</a></td>
-                        <td>${user.role}</td>
-                        <td>${user.status}</td>                         
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                    <tfoot class="nav">
-                        <tr>
-                            <td colspan=5>
-                                <div class="pagination"></div>
-                                <div class="paginationTitle">Page</div>
-                                <div class="selectPerPage"></div>
-                                <div class="status"></div>
-                            </td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </form> 
-        </div>
-    </div>
-</body>
+                    </tr>
+                </thead>
+                <tbody>
+                    <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
+                    </jsp:useBean>
+                    <c:forEach var="user" items="${arr}" varStatus="status"> 
+                        <tr> 
+                    <script type="text/javascript">
+                        var elem = document.getElementById("result");
+                        elem.value = "${status.count}";
+                    </script>
+                    <td>${status.count}</td> 
+                    <td>${user.fullname}</td>
+                    <td><a href="UserController?service=viewdetail&userid=${user.id}">${user.username}</a></td>
+                    <td>${user.role}</td>
+                    <td>${user.status}</td>                         
+                    </tr>
+                </c:forEach>
+                </tbody>
+                <tfoot class="nav">
+                    <tr>
+                        <td colspan=5>
+                            <div class="pagination"></div>
+                            <div class="paginationTitle">Page</div>
+                            <div class="selectPerPage"></div>
+                            <div class="status"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form> 
+        <%}%>
+    </body>
 </html>

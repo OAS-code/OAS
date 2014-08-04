@@ -18,7 +18,7 @@
         <div class="header2">
             <jsp:include page="top.jsp" />
             <jsp:include page="cp_cols.jsp" />
-            <jsp:include page="cp_user_manager_home.jsp" />             
+            <jsp:include page="cp_user_add_home.jsp" />             
         </div>
     </body> 
 

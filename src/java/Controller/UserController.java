@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserController extends HttpServlet {
 
+    final private String loginPage = "login.jsp";
     final private String errorPage = "fail.jsp";
     final private String homePage = "index.jsp";
     final private String welcomePage = "welcome.jsp";
@@ -89,7 +90,7 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableUser);
+            rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("viewdetail")) {
@@ -101,11 +102,11 @@ public class UserController extends HttpServlet {
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
-            String role = request.getParameter("user_type");
-            String status = request.getParameter("status");
+            String role = request.getParameter("cb1");
+            String status = request.getParameter("cb2");
             ArrayList<User> arr = dao.searchUser(search, role, status);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableUser);
+            rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("login")) {
@@ -126,6 +127,43 @@ public class UserController extends HttpServlet {
                     break;
             }
         }
+        if (service.equals("registerUser")) {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+
+            User user = new User(fullname, username, password, phonenumber, email, address);
+            int n = dao.addUser(user);
+            if (n > 0) {
+                rd = request.getRequestDispatcher(loginPage);
+                rd.forward(request, response);
+            }
+        }
+
+        /*if (service.equals("Login")) {
+         String username = request.getParameter("txtUsername");
+         String password = request.getParameter("txtPass");
+         UserDAO login = new UserDAO();
+         boolean result = login.checkLogin(username, password);
+         String url = errorPage;
+         if (result) {
+         HttpSession session = request.getSession(true);
+         session.setAttribute("USER", username);
+         url = welcomePage;
+         }
+         RequestDispatcher rd = request.getRequestDispatcher(url);
+         rd.forward(request, response);
+         } else if (action.equals("tryAgain")) {
+         RequestDispatcher rd = request.getRequestDispatcher(homePage);
+         rd.forward(request, response);
+         } else if (action.equals("register")) {
+         RequestDispatcher rd = request.getRequestDispatcher(registerPage);
+         rd.forward(request, response);
+         }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
