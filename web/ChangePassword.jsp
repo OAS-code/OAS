@@ -36,6 +36,11 @@
                     document.ChangePasswordForm.conpassword.focus();
                     return false;
                 }
+                 if(document.ChangePasswordForm.OldPassword.value == document.ChangePasswordForm.newpassword.value){
+                    alert('New Password and old password can not be the same.');
+                    document.ChangePasswordForm.conpassword.focus();
+                    return false;
+                }
 
                 if (document.ChangePasswordForm.newpassword.value != document.ChangePasswordForm.conpassword.value)
                 {
@@ -45,7 +50,9 @@
                 }
 
                 document.ChangePasswordForm.submit();
+               
             }
+            
         </script>
         <form name="ChangePasswordForm" method="post" action="ChangePasswordProcess.jsp" OnSubmit="return fncSubmit();">
 

@@ -19,6 +19,7 @@ ResultSet rs = st.executeQuery("select * from user where password= '"+ OldPasswo
 if (rs.next()) { 
 pass = rs.getString("password");
 } 
+
 if(Newpass.equals(conpass))
 {
 if (pass.equals(OldPassword)) {
