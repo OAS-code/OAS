@@ -28,6 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserController extends HttpServlet {
 
+    final private String loginPage = "login.jsp";
     final private String errorPage = "fail.jsp";
     final private String homePage = "index.jsp";
     final private String welcomePage = "welcome.jsp";
@@ -112,26 +113,43 @@ public class UserController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             //boolean result = dao.checkLogin(username, password);
-           // if (result) {
-                String role = dao.checkRole(username, password);
-                switch (role) {
-                    case "Admin":
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("user", username);
-                        session.setAttribute("role", role);
-                        rd = request.getRequestDispatcher("welcome.jsp");
-                        rd.forward(request, response);
-                        break;
-                    case "Staff":
-                        break;
-                    default:
-                        break;
-                }
+            // if (result) {
+            String role = dao.checkRole(username, password);
+            switch (role) {
+                case "Admin":
+                    HttpSession session = request.getSession(true);
+                    session.setAttribute("user", username);
+                    session.setAttribute("role", role);
+                    rd = request.getRequestDispatcher("welcome.jsp");
+                    rd.forward(request, response);
+                    break;
+                case "Staff":
+                    break;
+                default:
+                    break;
+            }
             //} else {
-              //  rd = request.getRequestDispatcher("login.jsp");
-               // rd.forward(request, response);
+            //  rd = request.getRequestDispatcher("login.jsp");
+            // rd.forward(request, response);
             //}
         }
+        if (service.equals("registerUser")) {
+
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+
+            User user = new User(fullname, username, password, phonenumber, email, address);
+            int n = dao.addUser(user);
+            if (n > 0) {
+                rd = request.getRequestDispatcher(loginPage);
+                rd.forward(request, response);
+            }
+        }
+
         /*if (service.equals("Login")) {
          String username = request.getParameter("txtUsername");
          String password = request.getParameter("txtPass");
