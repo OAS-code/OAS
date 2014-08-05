@@ -13,8 +13,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.naming.NamingException;
 
 /**
@@ -27,6 +35,8 @@ public class UserDAO {
     private Statement state = null;
     private ResultSet rs = null;
     private PreparedStatement pre = null;
+    private Session session = null;
+     Message message = null;
 
     public UserDAO() {
         try {
@@ -107,27 +117,26 @@ public class UserDAO {
         return n;
     }
 
-    public int addUser(User user) {
-        int n = 0;
-        try {
-            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
+    /*public int addUser(User user) {
+     int n = 0;
+     try {
+     String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address) VALUES (?,?,?,?,?,?)";
 
-            pre = conn.prepareStatement(sql);
+     pre = conn.prepareStatement(sql);
 
-            pre.setString(1, user.getUsername());
-            pre.setString(2, user.getPassword());
-            pre.setString(3, user.getFullname());
-            pre.setString(4, user.getPhonenumber());
-            pre.setString(5, user.getEmail());
-            pre.setString(6, user.getAddress());
+     pre.setString(1, user.getUsername());
+     pre.setString(2, user.getPassword());
+     pre.setString(3, user.getFullname());
+     pre.setString(4, user.getPhonenumber());
+     pre.setString(5, user.getEmail());
+     pre.setString(6, user.getAddress());
 
-            n = pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
-
+     n = pre.executeUpdate();
+     } catch (SQLException ex) {
+     Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return n;
+     }*/
     public ArrayList<User> view() throws SQLException {
         String sql = "SELECT * FROM user";
         ArrayList<User> arr = new ArrayList<User>();
@@ -241,6 +250,22 @@ public class UserDAO {
         return n;
     }
 
+    public int edit(User user) {
+        int n = 0;
+        String sql = "UPDATE user SET fullname = ?, phonenumber = ?, address = ? WHERE id = ?";
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, user.getFullname());
+            pre.setString(2, user.getPhonenumber());
+            pre.setString(3, user.getAddress());
+            pre.setInt(4, user.getId());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+
     public String checkRole(String username, String password) throws SQLException {
         String role = null;
         String sql = "select role from user where username = '" + username + "' and password = '" + password + "'";
@@ -256,7 +281,43 @@ public class UserDAO {
         return role;
     }
 
+    public void SentEmail(String email, String subject, String content, final String username, final String password) {
+
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+        
+        session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username,
+                                password);
+                    }
+                });
+        try {
+
+            message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(email));
+            message.setSubject(subject);
+            message.setText(content);
+
+            Transport.send(message);
+
+            System.out.println("Done");
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        } 
+
+    }
+
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
+        //dao.SentEmail("tupvse02404@fpt.edu.vn","Auction","successfully","tupvse02404@fpt.edu.vn","vantu1992");
     }
 }

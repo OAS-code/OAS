@@ -11,6 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>      
         <jsp:include page="top.jsp" />
@@ -39,7 +40,7 @@
 
                         </div>		<span class="red fl"></span>
                         <div class="login_check">
-                            <label><a title="Forgot password" href="">Forgot password?</a></label>						
+                            <label><a title="Forgot password" href="forgot_password.jsp">Forgot password?</a></label>						
                         </div>
                         <div class="login_button fl clr">
                             <div class="login_button_lft"></div>
@@ -60,7 +61,7 @@
 
                         <div class="register">
                             <div class="reg_lft"></div>
-                            <div class="reg_midd"><a title="Register" href="">Register</a></div>
+                            <div class="reg_midd"><a title="Register" href="register.jsp">Register</a></div>
                             <div class="reg_rgt"></div>
 
                         </div>
