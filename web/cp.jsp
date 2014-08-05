@@ -14,10 +14,12 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
+
+        <jsp:include page="top.jsp" />
         <div class="header2">
-            <jsp:include page="top.jsp" />
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_home.jsp" />  
+
         </div>
     </body> 
 

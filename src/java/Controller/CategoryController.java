@@ -61,6 +61,7 @@ public class CategoryController extends HttpServlet {
                response.sendRedirect(category_manager);
             }
         }
+        
         if(service.equalsIgnoreCase("delete")){
             String id = request.getParameter("categoryid");
             int n = dao.delete(Integer.parseInt(id));
