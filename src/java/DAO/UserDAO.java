@@ -298,6 +298,20 @@ public class UserDAO {
         } 
 
     }
+    public String getSalt(String username) throws SQLException {
+        String salt = null;
+        String sql = "SELECT salt FROM user WHERE username = '" + username + "'";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = state.executeQuery(sql);
+            while (rs.next()) {
+                salt = rs.getString("salt");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return salt;
+    }
 
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
