@@ -28,10 +28,30 @@
                 <div class="header_rgt">
                     <div class="header_right">
                         <ul>
+                            <%
+                                String userName = (String) session.getAttribute("user");
+                                String role = (String) session.getAttribute("role");
 
+                                if (userName == null) {
+                            %>                           
                             <li><a href="login.jsp" title="Sign in">Sign in</a></li>
                             <li class="active"><a href="register.jsp" title="Register">Register</a></li>
+                                <%} else {%>
+                                <%//if (role == "Admin") {%>
+                            <!-- <li><a href="cp.jsp?current_page=dashboard" title="Administrator">Administrator</a></li>
+                             
+                            <%//}%>
+                            <%//if (role == "Staff") {%>
+                        <li><a href="cp.jsp?current_page=dashboard" title="Staff">Hello <%=userName%></a></li>
+                       
+                            <%//}%>
+                            <%//if (role == "Customer") {%>-->
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello <%=userName%></a></li>
 
+                            <%//}%>
+
+                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
+                                <%}%>
                         </ul>
                     </div>
                 </div>

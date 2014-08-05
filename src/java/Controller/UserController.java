@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.OtherDAO;
 import DAO.UserDAO;
 import Entity.User;
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class UserController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO dao = new UserDAO();
+        OtherDAO otherDAO = new OtherDAO();
         String service = request.getParameter("service");
         final String userManager = "cp_user_manager.jsp?current_page=user_manager";
         final String ViewDetail = "ViewDetail.jsp";
@@ -56,7 +58,8 @@ public class UserController extends HttpServlet {
             String address = request.getParameter("address");
             String role = request.getParameter("cb1");
             String status = request.getParameter("cb2");
-            User user = new User(fullname, username, password, phonenumber, email, address, role, status);
+            String salt = otherDAO.makeRandomString(10, 10);
+            User user = new User(fullname, username, password, phonenumber, email, address, role, status, salt);
             int n = dao.add(user);
             if (n > 0) {
                 response.sendRedirect(userManager);
@@ -112,20 +115,35 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            String role = dao.checkRole(username, password);
-            switch (role) {
-                case "Admin":
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("user", username);
-                    session.setAttribute("role", role);
-                    rd = request.getRequestDispatcher("welcome.jsp");
-                    rd.forward(request, response);
-                    break;
-                case "Staff":
-                    break;
-                default:
-                    break;
+            String salt = dao.getSalt(username);
+            String role = dao.loginAuthenticate(username, password, salt);
+            if (role != null) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("role", role);
+                session.setAttribute("user", username);               
+                rd = request.getRequestDispatcher("index.jsp");
+                rd.forward(request, response);               
+            }else{
+                rd = request.getRequestDispatcher("login.jsp?errorCode=1");
+                rd.forward(request, response);
             }
+            /*switch (role) {
+             case "Admin":
+             HttpSession session = request.getSession(true);
+             session.setAttribute("user", username);
+             session.setAttribute("role", role);
+             rd = request.getRequestDispatcher("welcome.jsp");
+             rd.forward(request, response);
+             break;
+             case "Staff":
+             break;
+             case "Customer":
+             break;
+             default:
+             rd = request.getRequestDispatcher("login.jsp");
+             rd.forward(request, response);
+             break;
+             }*/
         }
         if (service.equals("registerUser")) {
 
@@ -135,8 +153,8 @@ public class UserController extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-
-            User user = new User(fullname, username, password, phonenumber, email, address);
+            String salt = otherDAO.makeRandomString(10, 10);
+            User user = new User(fullname, username, password, phonenumber, email, address, salt);
             int n = dao.addUser(user);
             if (n > 0) {
                 rd = request.getRequestDispatcher(loginPage);
