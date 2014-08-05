@@ -14,7 +14,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-        <link rel="stylesheet" type="text/css" href="css/4.css"/>
+        <link rel="stylesheet" type="text/css" href="css/table.css"/>
 
         <script language="JavaScript" type="text/javascript" src="JavaScript/jquery.js"></script>
         <script language="JavaScript" type="text/javascript" src="JavaScript/jts.js"></script>
@@ -64,20 +64,7 @@
 
 
         </script>
-        <style>
-            body {
-                font-family: Tahoma;
-                font-size: 9pt;
-            }
-            #demoTable thead th {
-                white-space: nowrap;
-                overflow-x:hidden;
-                padding: 3px;
-            }
-            #demoTable tbody td {
-                padding: 3px;
-            }
-        </style>
+        
     </head>
     <body>
         <%
@@ -87,7 +74,7 @@
             }else{
         %>
         <form name="form1" method="post" action="">
-            <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width=99.5%>
+            <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="0" width=99.5%>
                 <thead>
                     <tr>
                         <th>No.</th>

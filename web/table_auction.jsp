@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" type="text/css" href="css/4.css"/>
+        <link rel="stylesheet" type="text/css" href="css/table.css"/>
 
         <script language="JavaScript" type="text/javascript" src="JavaScript/jquery.js"></script>
         <script language="JavaScript" type="text/javascript" src="JavaScript/jts.js"></script>
