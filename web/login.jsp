@@ -18,7 +18,17 @@
             String errorCode = request.getParameter("errorCode");
         %>
         <jsp:include page="top.jsp" />
-        <div class="header2">            
+
+        <div class="header2">   
+            <%if (errorCode != null && errorCode.equals("1")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>User name or password does not exist.</p></li>
+            </ul>
+            <%} else if (errorCode != null && errorCode.equals("2")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Please login to access!</p></li>
+            </ul>
+            <%}%>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
@@ -27,7 +37,7 @@
                     <form accept-charset="utf-8" method="post" action="UserController">					
                         <div class="login_form">
                             <div class="log_fields">
-                                <p>User Name <span class="red"><%if(errorCode != null && errorCode.equals("1")){%>(Username or password does not exist)<%}else{%>*<%}%></span>:</p>
+                                <p>User name <span class="red">*</span>:</p>
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                             this.value = '';" onblur="if (this.value === '')
                                                         this.value = 'Enter username...'">						

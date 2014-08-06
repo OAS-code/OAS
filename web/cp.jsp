@@ -15,12 +15,11 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-        <script>
-            isUserCustomer();
-            document.write('role');
-        </script>
+
+        <%@ include file="perm_customer.jsp" %>
+        
         <jsp:include page="top.jsp" />
-        <div class="header2">
+        <div class="header2">            
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_home.jsp" />  
 
