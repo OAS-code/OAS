@@ -12,9 +12,13 @@
         <title>Admin Control Panel</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-
+        <script>
+            isUserCustomer();
+            document.write('role');
+        </script>
         <jsp:include page="top.jsp" />
         <div class="header2">
             <jsp:include page="cp_cols.jsp" />
