@@ -79,6 +79,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Name</th>
+                        <th>Description</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>  
@@ -93,7 +94,8 @@
                         elem.value = "${status.count}";
                     </script>
                     <td>${status.count}</td> 
-                    <td>${category.name}</td>  
+                    <td>${category.name}</td>
+                    <td>${category.description}</td>
                     <td><a href="EditCategory.jsp?categoryid=${category.categoryid}">Edit</a></td>
                     <td><a href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>

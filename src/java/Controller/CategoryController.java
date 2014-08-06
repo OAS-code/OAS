@@ -55,7 +55,8 @@ public class CategoryController extends HttpServlet {
         }
         if(service.equalsIgnoreCase("addcategory")){
             String name = request.getParameter("name");
-            Category category = new Category(name);
+            String description = request.getParameter("description");
+            Category category = new Category(name,description);
             int n = dao.add(category);
             if(n>0){
                response.sendRedirect(category_manager);
@@ -71,10 +72,11 @@ public class CategoryController extends HttpServlet {
             }
         }
         if(service.equalsIgnoreCase("edit")){
-            String id = request.getParameter("categoryid");
+            String id = request.getParameter("no");
             int categoryid = Integer.parseInt(id);
             String name = request.getParameter("name");
-            Category category = new Category(categoryid, name);
+            String description = request.getParameter("description");
+            Category category = new Category(categoryid, name,description);
             int n = dao.update(category);
             if(n>0){
                 response.sendRedirect(category_manager);
@@ -82,7 +84,7 @@ public class CategoryController extends HttpServlet {
         }
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
-            ArrayList<Category> arr = dao.searchUser(search);
+            ArrayList<Category> arr = dao.searchCategory(search);
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);

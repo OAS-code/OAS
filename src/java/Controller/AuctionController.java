@@ -83,7 +83,7 @@ public class AuctionController extends HttpServlet {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
             rs = dao.search(Integer.parseInt(auctionid));
-            rss = cdao.searchCategory(Integer.parseInt(categoryid));
+            rss = cdao.search(Integer.parseInt(categoryid));
             rst = dao.searchDigital(Integer.parseInt(auctionid));
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
@@ -95,7 +95,7 @@ public class AuctionController extends HttpServlet {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
             rs = dao.search(Integer.parseInt(auctionid));
-            rss = cdao.searchCategory(Integer.parseInt(categoryid));
+            rss = cdao.search(Integer.parseInt(categoryid));
             rst = dao.searchDigital(Integer.parseInt(auctionid));
             ArrayList<Category> array = cdao.select();
             request.setAttribute("array", array);

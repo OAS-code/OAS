@@ -26,12 +26,17 @@
 
                 <div class="message_common">
                     <div class="login_middle_common_profil">
+                        
                         <div class="user_name_common">
                             <p>Category name: </p>
                             <div class="text_feeld">
-
-                                <input type="text" maxlength="100" name="name" id="name" class="textbox">
-
+                                <h2><input type="text" maxlength="100" name="name" id="name" class="textbox"></h2>
+                            </div>		
+                        </div>
+                        <div class="user_name_common">
+                            <p>Description: </p>
+                            <div class="text_feeld">
+                                <h2><input type="text" maxlength="100" name="description" id="description" class="textbox"></h2>
                             </div>		
                         </div>
                     </div>
