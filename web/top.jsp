@@ -32,25 +32,21 @@
                                 String userName = (String) session.getAttribute("user");
                                 String role = (String) session.getAttribute("role");
 
-                                if (userName == null) {
+                                if (userName == null || role == null) {
                             %>                           
                             <li><a href="login.jsp" title="Sign in">Sign in</a></li>
-                            <li class="active"><a href="register.jsp" title="Register">Register</a></li>
+                            <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
-                                <%//if (role == "Admin") {%>
-                            <!-- <li><a href="cp.jsp?current_page=dashboard" title="Administrator">Administrator</a></li>
-                             
-                            <%//}%>
-                            <%//if (role == "Staff") {%>
-                        <li><a href="cp.jsp?current_page=dashboard" title="Staff">Hello <%=userName%></a></li>
-                       
-                            <%//}%>
-                            <%//if (role == "Customer") {%>-->
+                                <%if (userName != null && role.equals("Customer")){%>
                             <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello <%=userName%></a></li>
-
-                            <%//}%>
-
                             <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
+                                <%}else if(userName != null && role.equals("Admin")){%>
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello Administrator</a></li>
+                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
+                                <%}else if(userName != null && role.equals("Staff")){%>
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello Auction Staff</a></li>
+                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
+                                <%}else{}%>                            
                                 <%}%>
                         </ul>
                     </div>

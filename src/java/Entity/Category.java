@@ -13,7 +13,7 @@ package Entity;
 public class Category {
     int categoryid;
     String name;
-
+    String description;
     public Category() {
     }
 
@@ -24,6 +24,25 @@ public class Category {
     public Category(int categoryid, String name) {
         this.categoryid = categoryid;
         this.name = name;
+    }
+
+    public Category(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Category(int categoryid, String name, String description) {
+        this.categoryid = categoryid;
+        this.name = name;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getCategoryid() {

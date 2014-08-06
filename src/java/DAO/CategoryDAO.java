@@ -59,19 +59,6 @@ public class CategoryDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ResultSet searchCategory(int id) {
-        String sql = "SELECT * FROM category WHERE categoryid = ?";
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            rs = pre.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-        return rs;
-    }
     public ArrayList<Category> select() throws SQLException {
         String sql = "SELECT * FROM category";
         ArrayList<Category> arr = new ArrayList<Category>();
@@ -80,10 +67,12 @@ public class CategoryDAO {
             rs = state.executeQuery(sql);
             int categoryid;
             String name;
+            String description;
             while (rs.next()) {
                 categoryid = rs.getInt("categoryid");
                 name = rs.getString("name");
-                Category category = new Category(categoryid, name);
+                description = rs.getString("description");
+                Category category = new Category(categoryid, name, description);
                 arr.add(category);
             }
         } catch (SQLException ex) {
@@ -97,12 +86,13 @@ public class CategoryDAO {
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = state.executeQuery(sql);
-            String name;
+            String name, description;
             int id;
             while (rs.next()) {
                 id = rs.getInt("categoryid");
                 name = rs.getString("name");
-                Category category = new Category(id, name);
+                description = rs.getString("description");
+                Category category = new Category(id, name,description);
                 arr.add(category);
             }
         } catch (SQLException ex) {
@@ -130,10 +120,11 @@ public class CategoryDAO {
     public int add(Category category) {
         int n = 0;
         try {
-            String sql = "INSERT INTO category (name) VALUES (?)";
+            String sql = "INSERT INTO category (name,description) VALUES (?,?)";
 
             pre = conn.prepareStatement(sql);
             pre.setString(1, category.getName());
+            pre.setString(2, category.getDescription());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -154,33 +145,35 @@ public class CategoryDAO {
     }
     public int update(Category category) {
         int n = 0;
-        String sql = "UPDATE category SET name = ? WHERE categoryid = ?";
+        String sql = "UPDATE category SET name = ?, description= ? WHERE categoryid = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, category.getName());
-            pre.setInt(2, category.getCategoryid());          
+            pre.setString(2, category.getDescription());
+            pre.setInt(3, category.getCategoryid());          
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
     }
-    public ArrayList<Category> searchUser(String search) {
+    public ArrayList<Category> searchCategory(String search) {
         String sql = "SELECT * FROM category WHERE name LIKE '%"+search+"%'";
         ArrayList<Category> arr = new ArrayList<>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 rs = state.executeQuery(sql);
-                String name;
+                String name, description;
                 int categoryid;
                 while (rs.next()) {
                     categoryid = rs.getInt("categoryid");
                     name = rs.getString("name");
-                    Category category = new Category(categoryid, name);
+                    description = rs.getString("description");
+                    Category category = new Category(categoryid, name,description);
                     arr.add(category);
                 }          
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arr;
     }
