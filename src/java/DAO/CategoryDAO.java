@@ -143,6 +143,7 @@ public class CategoryDAO {
         }
         return rs;
     }
+    
     public int update(Category category) {
         int n = 0;
         String sql = "UPDATE category SET name = ?, description= ? WHERE categoryid = ?";

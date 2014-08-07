@@ -32,6 +32,7 @@ public class UserController extends HttpServlet {
     final private String homePage = "index.jsp";
     final private String welcomePage = "welcome.jsp";
     final private String registerPage = "register.jsp";
+    final private String cp = "cp.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
@@ -88,6 +89,18 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(userManager);
             }
         }
+        if (service.equalsIgnoreCase("edit_profile")) {
+            String id1 = request.getParameter("no");
+            int id = Integer.parseInt(id1);
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String address = request.getParameter("address");
+            User user = new User(id, fullname, phonenumber, address);
+            int n = dao.update_profile(user);
+            if (n > 0) {
+                response.sendRedirect(cp);
+            }
+        }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
             request.setAttribute("arr", arr);
@@ -116,20 +129,21 @@ public class UserController extends HttpServlet {
             String password = request.getParameter("password");
             String salt = dao.getSalt(username);
             int id = dao.getId(username);
+            String userid = Integer.toString(id);
             String role = dao.loginAuthenticate(username, password, salt);
-            if (role != null) {
+            if (role != null && userid != null) {
                 if(role.equals("Customer")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
                 session.setAttribute("user", username); 
-                session.setAttribute("id", id);
+                session.setAttribute("userid", userid);
                 rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
                 }else if(role.equals("Admin")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
-                session.setAttribute("user", username);    
-                session.setAttribute("id", id);
+                session.setAttribute("userid", userid);    
+                session.setAttribute("username", username);
                 rd = request.getRequestDispatcher("cp.jsp");
                 rd.forward(request, response);  
                 }else if(role.equals("Staff")){

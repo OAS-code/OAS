@@ -3,6 +3,7 @@
     Created on : Jul 17, 2014, 9:11:06 PM
     Author     : MrTu 2
 --%>
+<%@page import="DAO.CategoryDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
 <%@page import="Entity.Category"%>
@@ -38,7 +39,14 @@
                             <p>Category</p>
                             <div class="text_feeld">
                                 <select name="cb2" id="cb2">
-                                    
+                                <%
+                                    ArrayList<Category> ar = new ArrayList<Category>();
+                                    CategoryDAO dao = new CategoryDAO();
+                                    ar = dao.select();
+                                    for(int i=0;i<ar.size();i++){
+                                %>                                
+                                    <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
+                                <%}%>
                                 </select>
                             </div>
                         </div>

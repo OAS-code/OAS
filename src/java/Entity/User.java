@@ -75,6 +75,13 @@ public class User {
         this.status = status;        
     }
 
+    public User(int id, String fullname, String phonenumber, String address) {
+        this.id = id;
+        this.fullname = fullname;
+        this.phonenumber = phonenumber;
+        this.address = address;
+    }
+    
     public String getSalt() {
         return salt;
     }

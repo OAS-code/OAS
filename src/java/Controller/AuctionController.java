@@ -91,6 +91,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(ViewDetailAuction);
             rd.forward(request, response);
         }
+        
         if (service.equalsIgnoreCase("editauction")) {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");

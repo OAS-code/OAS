@@ -87,7 +87,7 @@
                                             <div class="res_left"></div>
                                             <div class="res_mid" style="width:auto;">
                                                 <a style="width:auto;">
-                                                    <input type="button" name="add" id="add" value="Add new auction" onclick="window.location = 'cp_auction_add.jsp?current_page=auction_manager';">    
+                                                    <input type="button" name="add" id="add" value="Add new auction" onclick="window.location = 'cp_auction_add.jsp';">    
                                                 </a>
                                             </div>
                                             <div class="res_right"></div>

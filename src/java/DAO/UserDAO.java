@@ -233,7 +233,21 @@ public class UserDAO {
         }
         return n;
     }
-
+    public int update_profile(User user) {
+        int n = 0;
+        String sql = "UPDATE user SET fullname = ?, phonenumber = ?, address = ? WHERE id = ?";
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, user.getFullname());           
+            pre.setString(2, user.getPhonenumber());            
+            pre.setString(3, user.getAddress());          
+            pre.setInt(4, user.getId());
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
     public String loginAuthenticate(String username, String password, String salt) throws SQLException {
         String role = null;
         String sql = "select role from user where username = '" + username + "' and password = '" + password + "'";

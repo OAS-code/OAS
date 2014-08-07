@@ -23,38 +23,52 @@
                 <h1 title="EDIT PROFILE">Edit profile.</h1>
                 <p>&nbsp;</p>
             </div>
-            <form name="form1" method="post" action="UserController">      
+            <form name="form1" method="post" action="UserController"> 
+                <%
+                    String userid = (String) session.getAttribute("userid");
+                    int id = Integer.parseInt(userid);
+                     UserDAO dao = new UserDAO();
+                    ResultSet rs = dao.search(id);
+                    User user = new User();
+                    if (rs.next()) {
+                        user.setFullname(rs.getString(2));
+                        user.setUsername(rs.getString(3));
+                        user.setPhonenumber(rs.getString(5));
+                        user.setEmail(rs.getString(6));
+                        user.setAddress(rs.getString(7));
+                    }
+                %>
                 <div class="message_common">
                     <div class="login_middle_common_profil">
-                        <div class="user_name_common"><input type="hidden" name="no" id="no" value="">                      
+                        <div class="user_name_common"><input type="hidden" name="no" id="no" value="<%=id%>">                      
                             <p>User name :</p>
                             <div class="text_feeld">
-                                <h2><input type="text" readonly="readonly" class="textbox" title="User Name" maxlength="20" value="" name="username"></h2>
+                                <h2><input type="text" readonly="readonly" class="textbox" title="User Name"  value="<%=user.getUsername()%>" name="username"></h2>
                             </div>
                         </div>
 
                         <div class="user_name_common">
                             <p>Email:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" readonly="readonly" class="textbox" title="Email" maxlength="50" value="" name="email"></h2>
+                                <h2><input type="text" readonly="readonly" class="textbox" title="Email"  value="<%=user.getEmail()%>" name="email"></h2>
                             </div>
                         </div>                                                
                         <div class="user_name_common">
                             <p>Full name <span class="red">*</span>:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" class="textbox" title="Full Name"  value="" name="fullname"></h2>
+                                <h2><input type="text" class="textbox" title="Full Name"  value="<%=user.getFullname()%>" name="fullname"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
-                            <p>Phone number <span class="red">*</span>:</p>
+                            <p>Phone number:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" class="textbox" title="Phone Number" maxlength="20" value="" name="phonenumber"></h2>
+                                <h2><input type="text" class="textbox" title="Phone Number" maxlength="20" value="<%=user.getPhonenumber()%>" name="phonenumber"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
-                            <p>Address <span class="red">*</span>:</p>
+                            <p>Address:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" class="textbox" title="Address"  value="" name="address"></h2>
+                                <h2><input type="text" class="textbox" title="Address"  value="<%=user.getAddress()%>" name="address"></h2>
                             </div>		
                         </div>
                         <div class="no_img">
