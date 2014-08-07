@@ -118,25 +118,12 @@ public class UserController extends HttpServlet {
             int id = dao.getId(username);
             String role = dao.loginAuthenticate(username, password, salt);
             if (role != null) {
-                if(role.equals("Customer")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
                 session.setAttribute("user", username); 
                 session.setAttribute("id", id);
-                rd = request.getRequestDispatcher("index.jsp");
+                rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
                 rd.forward(request, response);
-                }else if(role.equals("Admin")){
-                HttpSession session = request.getSession(true);
-                session.setAttribute("role", role);
-                session.setAttribute("user", username);    
-                session.setAttribute("id", id);
-                rd = request.getRequestDispatcher("cp.jsp");
-                rd.forward(request, response);  
-                }else if(role.equals("Staff")){
-                    
-                }else{
-                    
-                }
             }else{
                 rd = request.getRequestDispatcher("login.jsp?errorCode=1");
                 rd.forward(request, response);

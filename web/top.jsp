@@ -28,26 +28,23 @@
                 <div class="header_rgt">
                     <div class="header_right">
                         <ul>
+
                             <%
                                 String userName = (String) session.getAttribute("user");
                                 String role = (String) session.getAttribute("role");
 
                                 if (userName == null || role == null) {
-                            %>                           
+                            %>
+
                             <li><a href="login.jsp" title="Sign in">Sign in</a></li>
                             <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
-                                <%if (userName != null && role.equals("Customer")){%>
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello <%=userName%></a></li>
-                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
-                                <%}else if(userName != null && role.equals("Admin")){%>
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello Administrator</a></li>
-                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
-                                <%}else if(userName != null && role.equals("Staff")){%>
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Hello Auction Staff</a></li>
-                            <li class="active"><a href="logout.jsp" title="Signout">Sign Out</a></li>
-                                <%}else{}%>                            
-                                <%}%>
+
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
+                            <li class="active"><a href="logout.jsp" title="Signout">Sign out</a></li>
+
+                            <%}%>
+                            
                         </ul>
                     </div>
                 </div>
@@ -135,7 +132,7 @@
                         </span></li>
 
                     <li id="home_menu"> <a href="index.jsp" title="Home"> Home</a></li>
-                    <li id="home_menu"><a href="cp.jsp" title="CP"> Control Panel</a></li>
+                    <li id="home_menu"><a href="cp.jsp?current_page=dashboard" title="CP"> Control Panel</a></li>
 
                 </ul>
             </div>

@@ -15,7 +15,7 @@
         <%
             if(session!=null){
                 session.invalidate();
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("login.jsp?errorCode=3");
             }
         %>
     </body>
