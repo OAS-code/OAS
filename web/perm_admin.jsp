@@ -18,10 +18,10 @@
             if (role != null) {
                 if (role.equalsIgnoreCase("Admin")) {
                 } else {
-                    response.sendRedirect("index.jsp");
+                    response.sendRedirect("notification.jsp");
                 }
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("notification.jsp");
             }
 
 
