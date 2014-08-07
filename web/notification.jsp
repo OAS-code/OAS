@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Access denied!</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
@@ -25,20 +25,24 @@
                         <h1>Access denied!</h1>
 
                         <div class="ideal_middle_bottom"><h2> You have insufficient permission to perform this task</h2>
-                            
+
                         </div>
-                        <!--
+
                         <div class="ideal_timer">
 
                             <div class="idal_timer_left"> </div>
 
-                            <div class="idal_timer_middle"> <a href="http://www.unieauction.com/platinum-demo/" title="RETURN NOW"> RETURN NOW</a> </div> 
+                            <div class="idal_timer_middle"> 
+                                <script>
+                                    document.write('<a href="' + document.referrer + '">RETURN NOW</a>');
+                                </script>
+                            </div> 
 
                             <div class="idal_timer_right"> </div>
 
 
                         </div>   
-                        -->
+
 
 
 
