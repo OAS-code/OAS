@@ -131,7 +131,7 @@ CREATE TABLE `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`,`email`),
   FULLTEXT KEY `fullname` (`fullname`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,7 +140,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Admin','admin','admin',NULL,'admin@admin.admin',NULL,'Admin','Active','121313121',0),(6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong','Customer','Inactive','2122922761',0);
+INSERT INTO `user` VALUES (1,'Admin','admin','admin',NULL,'admin@admin.admin',NULL,'Admin','Active','121313121',0),(6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong','Customer','Inactive','2122922761',0),(7,'Staff','staff','staff','','ducchu@live.com','','Staff','Active','1960531220',0),(8,'Customer','customer','customer','','ducchu@live.com','','Customer','Active','1440368330',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -153,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-07 12:06:51
+-- Dump completed on 2014-08-07 16:01:48

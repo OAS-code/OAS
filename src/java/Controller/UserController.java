@@ -131,7 +131,7 @@ public class UserController extends HttpServlet {
             int id = dao.getId(username);
             String userid = Integer.toString(id);
             String role = dao.loginAuthenticate(username, password, salt);
-            if (role != null && userid !=null) {
+            if (role != null && userid != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
                 session.setAttribute("user", username); 
