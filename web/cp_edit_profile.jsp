@@ -17,10 +17,12 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
+        <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_edit_profile_home.jsp" />             
         </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

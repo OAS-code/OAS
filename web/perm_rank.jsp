@@ -13,22 +13,23 @@
     </head>
     <body>
         <%
-            //String userName = (String) session.getAttribute("user");
             String role = (String) session.getAttribute("role");
-            
-                    
-                    
-            
+            Integer rank = 0;
             if (role != null) {
                 if (role.equalsIgnoreCase("Admin")) {
-                } else {
-                    response.sendRedirect("notification.jsp");
+                    rank = 3;
                 }
-            } else {
-                response.sendRedirect("notification.jsp");
+                else if (role.equalsIgnoreCase("Staff")) {
+                    rank = 2;
+                }
+                else if (role.equalsIgnoreCase("Customer")) {
+                    rank = 1;
+                }
             }
-
-
+            else {
+                rank = 0;
+            }
+            
         %>  
 
     </body>

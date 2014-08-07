@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
     </head>
     <body>
+        <%@ include file="perm_customer.jsp" %>
         <div id="edit_profile_page" class="my_message_right">
             <div class="message_common_border">
                 <h1 title="EDIT PROFILE">Edit profile.</h1>

@@ -49,6 +49,10 @@
             <ul id="message" class="error_msg">
                 <li><p>Please login to access!</p></li>
             </ul>
+            <%} else if (errorCode != null && errorCode.equals("3")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>You have been logged out, session terminated.</p></li>
+            </ul>
             <%}%>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
@@ -104,6 +108,7 @@
                     </div>
                 </div>
             </div>  
-        </div> 
+        </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

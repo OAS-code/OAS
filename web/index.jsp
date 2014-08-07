@@ -8,22 +8,20 @@
 <!DOCTYPE html>
 <html>
     <head>
-       
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Online Auction System</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-       
+
     </head>
 
-    <!--<frameset rows="160,*" border="0">
-        <frame src="top.jsp" name="top" scrolling="no">
-        <frame src="home.jsp" name="mid">        
-    </frameset>
-    -->
     <body>
         <jsp:include page="top.jsp" />
-        <jsp:include page="home.jsp" />
+        <div class="header2">  
+            <jsp:include page="home.jsp" />
+        </div>
+        <jsp:include page="footer.jsp" />
     </body>
-    
+
 </html>
