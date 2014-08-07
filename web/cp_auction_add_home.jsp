@@ -23,7 +23,12 @@
                 <p>&nbsp;</p>
             </div>
             <form name="form1" method="post" action="AuctionController">
+                <%
+                    String userid = (String) session.getAttribute("userid");
+                    int id = Integer.parseInt(userid);
+                %>
                 <div class="message_common">
+                    <input type="text" hidden="hidden" name="no" id="no" value="<%=id%>" class="textbox">
                     <div class="login_middle_common_profil">
                         <div class="user_name_common">
                             <p>
@@ -31,22 +36,22 @@
                             </p>
                             <div class="text_feeld">
                                 <h2>
-                                    <input type="text" maxlength="100" name="title" id="title" class="textbox">
+                                    <input type="text" name="title" id="title" class="textbox">
                                 </h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p>Category</p>
                             <div class="text_feeld">
-                                <select name="cb2" id="cb2">
-                                <%
-                                    ArrayList<Category> ar = new ArrayList<Category>();
-                                    CategoryDAO dao = new CategoryDAO();
-                                    ar = dao.select();
-                                    for(int i=0;i<ar.size();i++){
-                                %>                                
+                                <select name="cb1" id="cb1">
+                                    <%
+                                        ArrayList<Category> ar = new ArrayList<Category>();
+                                        CategoryDAO dao = new CategoryDAO();
+                                        ar = dao.select();
+                                        for (int i = 0; i < ar.size(); i++) {
+                                    %>                                
                                     <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
-                                <%}%>
+                                    <%}%>
                                 </select>
                             </div>
                         </div>

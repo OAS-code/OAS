@@ -131,7 +131,9 @@ public class AuctionController extends HttpServlet {
             String image3 = request.getParameter("image3");
             String image4 = request.getParameter("image4");
             String image5 = request.getParameter("image5");
-            String video = request.getParameter("video");
+            String video1 = request.getParameter("video");
+            int start = video1.indexOf('=');
+            String video = video1.substring(start+1);
             int auctionid = Integer.parseInt(id);
             int seller_id = 1;
             int categoryid = Integer.parseInt(categoryid1);
@@ -155,8 +157,7 @@ public class AuctionController extends HttpServlet {
 
         }
 
-        if (service.equalsIgnoreCase(
-                "addnewauction")) {
+        if (service.equalsIgnoreCase("addnewauction")) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
@@ -172,8 +173,11 @@ public class AuctionController extends HttpServlet {
             String image3 = request.getParameter("image3");
             String image4 = request.getParameter("image4");
             String image5 = request.getParameter("image5");
-            String video = request.getParameter("video");
-            int seller_id = 1;
+            String video1 = request.getParameter("video");
+            int start = video1.indexOf('=');
+            String video = video1.substring(start+1);
+            String id = request.getParameter("no");
+            int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
             Date start_date = (Date) simpleDateFormat.parse(start_date1);
             Date end_date = (Date) simpleDateFormat.parse(end_date1);

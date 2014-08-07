@@ -140,9 +140,10 @@
                         <tr>
                             <td style="text-align: right">Video:</td>
                             <td>
-                                <embed width="300" height="250" 
-                                       src="<%=digital.getVideo()%>" 
-                                       type="application/x-shockwave-flash">
+                                <!-- <embed width="300" height="250" 
+                                        src="" 
+                                        type="application/x-shockwave-flash">-->
+                                <iframe width="560" height="315" src="//www.youtube.com/embed/<%=digital.getVideo()%>" frameborder="0" allowfullscreen></iframe>
                             </td>
 
                         </tr>

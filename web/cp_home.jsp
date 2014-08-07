@@ -54,7 +54,7 @@
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com2">&nbsp;</div>
-                                        <a href="ListAllCategory.jsp" title="View My Watchlist"><h4>Manage Category</h4></a>
+                                        <a href="cp_category_manager.jsp?current_page=category_manager" title="View My Watchlist"><h4>Manage Category</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
