@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `auction` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `auction`;
--- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
 --
--- Host: localhost    Database: auction
+-- Host: 127.0.0.1    Database: auction
 -- ------------------------------------------------------
 -- Server version	5.6.19
 
@@ -35,7 +35,6 @@ CREATE TABLE `auction` (
   `starting_price` double NOT NULL,
   `reserve_price` double NOT NULL,
   `buy_now_price` double NOT NULL,
-  `balance` double DEFAULT '0',
   `status` varchar(20) NOT NULL,
   PRIMARY KEY (`auctionid`),
   KEY `category_id` (`category_id`),
@@ -44,7 +43,7 @@ CREATE TABLE `auction` (
   FULLTEXT KEY `title_2` (`title`),
   CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`categoryid`),
   CONSTRAINT `auction_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,9 +65,10 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `categoryid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
+  `description` text,
   PRIMARY KEY (`categoryid`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -77,7 +77,6 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (11,'Headphone');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,14 +125,13 @@ CREATE TABLE `user` (
   `email` varchar(45) NOT NULL,
   `address` varchar(45) NOT NULL,
   `role` enum('Admin','Staff','Customer') DEFAULT 'Customer',
-  `status` enum('Active','Deactive') DEFAULT 'Deactive',
+  `status` enum('Active','Inactive') DEFAULT 'Inactive',
   `salt` varchar(10) DEFAULT NULL,
   `balance` double DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`,`email`),
-  FULLTEXT KEY `fullname` (`fullname`,`username`),
-  FULLTEXT KEY `fullname_2` (`fullname`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+  FULLTEXT KEY `fullname` (`fullname`,`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,7 +140,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (5,'12345','test','chunhuduc','12345','ducchu@liveasd.com','asdassadasdsad','Customer','Deactive','1793597278',0);
+INSERT INTO `user` VALUES (6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong','Customer','Inactive','2122922761',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -155,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-04 13:39:26
+-- Dump completed on 2014-08-07 11:33:02

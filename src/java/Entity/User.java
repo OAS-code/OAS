@@ -51,8 +51,8 @@ public class User {
         this.phonenumber = phonenumber;
         this.email = email;
         this.address = address;
-        this.status = status;
         this.role = role;
+        this.status = status;       
     }
 
     public User(String fullname, String username, String password, String phonenumber, String email, String address, String role, String status, String salt) {
@@ -71,8 +71,8 @@ public class User {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
-        this.status = status;
         this.role = role;
+        this.status = status;        
     }
 
     public String getSalt() {

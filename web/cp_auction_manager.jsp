@@ -1,7 +1,7 @@
 <%-- 
-    Document   : home
-    Created on : Jul 19, 2014, 10:37:29 PM
-    Author     : Maxime
+    Document   : cp_auction_manager
+    Created on : Aug 6, 2014, 10:33:20 PM
+    Author     : MrTu
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,11 +9,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Online Auction System</title>
+        <title>Manage action</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+
     </head>
-    <body>        
-        <h2>Home page</h2>
+    <body>
+        <jsp:include page="top.jsp" />
+        <div class="header2">
+            <jsp:include page="cp_cols.jsp" />
+            <jsp:include page="cp_auction_manager_home.jsp" />             
+        </div>
     </body>
 </html>

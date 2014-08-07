@@ -47,7 +47,7 @@ public class AuctionController extends HttpServlet {
         AuctionDAO dao = new AuctionDAO();
         CategoryDAO cdao = new CategoryDAO();
         String service = request.getParameter("service");
-        final String ListAllAuction = "ListAllAuction.jsp";
+        final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String AddAuction = "AddAuction.jsp";
         final String ViewDetailAuction = "ViewDetailAuction.jsp";
         final String EditAuction = "EditAuction.jsp";
@@ -55,21 +55,21 @@ public class AuctionController extends HttpServlet {
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
-        if (service.equalsIgnoreCase("open")) {
-            rd = request.getRequestDispatcher(ListAllAuction);
+        if (service.equalsIgnoreCase("auction_manager")) {
+            rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<Auction> arr = dao.view();
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableAuction);
+            rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("deleteauction")) {
             String id = request.getParameter("no");
             int n = dao.delete(Integer.parseInt(id));
             if (n > 0) {
-                rd = request.getRequestDispatcher(ListAllAuction);
+                rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             }
         }
@@ -110,7 +110,7 @@ public class AuctionController extends HttpServlet {
             String stt = request.getParameter("status_au");
             ArrayList<Auction> arr = dao.searchAuction(search, stt);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(TableAuction);
+            rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("updateauction")) {
@@ -147,7 +147,7 @@ public class AuctionController extends HttpServlet {
                 Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
                 int m = dao.updateDigital(digital);
                 if (m > 0) {
-                    rd = request.getRequestDispatcher(ListAllAuction);
+                    rd = request.getRequestDispatcher(auction_manager);
                     rd.forward(request, response);
                 }
             }
@@ -187,7 +187,7 @@ public class AuctionController extends HttpServlet {
                 Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
                 int m = dao.addDigital(digital);
                 if (m > 0) {
-                    rd = request.getRequestDispatcher(ListAllAuction);
+                    rd = request.getRequestDispatcher(auction_manager);
                     rd.forward(request, response);
                 }
             }

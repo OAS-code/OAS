@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>View user information</title>
+        <title>Edit user information</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
@@ -117,7 +117,7 @@
                         <div class="user_name_common">
                             <p>Full name <span class="red">*</span>:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" class="textbox" title="Full Name" maxlength="20" value="<%=user.getFullname()%>" name="fullname"></h2>
+                                <h2><input type="text" class="textbox" title="Full Name" value="<%=user.getFullname()%>" name="fullname"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
@@ -129,7 +129,7 @@
                         <div class="user_name_common">
                             <p>Address <span class="red">*</span>:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" class="textbox" title="Address" maxlength="20" value="<%=user.getAddress()%>" name="address"></h2>
+                                <h2><input type="text" class="textbox" title="Address"  value="<%=user.getAddress()%>" name="address"></h2>
                             </div>		
                         </div>
                         <div class="no_img">

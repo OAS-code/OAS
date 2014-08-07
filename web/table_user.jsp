@@ -77,7 +77,7 @@
                     <tr >
                         <th>No.</th>
                         <th>Full name</th>
-                        <th>Username</th>
+                        <th>User name</th>
                         <th>User type</th>
                         <th>Status</th>
 

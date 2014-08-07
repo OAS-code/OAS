@@ -12,8 +12,29 @@
         <title>Login</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <script src="http://wcetdesigns.com/assets/javascript/jquery.js"></script>
+        <script src="http://wcetdesigns.com/assets/javascript/jquery/cookie-plugin.js"></script>
+        <script>
+            function remember_me() {
+                var c = $("#check");
+
+                if (c.is(":checked")) {
+                    var u = $("#username").val();
+                    var p = $("#password").val();
+                    $.cookie("username", u, {expires: 365});
+                    $.cookie("password", p, {expires: 365});
+                }
+            }
+            function load_em() {
+                var u = $.cookie("username");
+                var p = $.cookie("password");
+
+                $("#username").val(u);
+                $("#password").val(p);
+            }
+        </script>
     </head>
-    <body>   
+    <body onLoad="load_em()">   
         <%
             String errorCode = request.getParameter("errorCode");
         %>
@@ -27,7 +48,7 @@
                     <form accept-charset="utf-8" method="post" action="UserController">					
                         <div class="login_form">
                             <div class="log_fields">
-                                <p>User Name <span class="red"><%if(errorCode != null && errorCode.equals("1")){%>(Username or password does not exist)<%}else{%>*<%}%></span>:</p>
+                                <p>User Name <span class="red"><%if (errorCode != null && errorCode.equals("1")) {%>(Username or password does not exist)<%} else {%>*<%}%></span>:</p>
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                             this.value = '';" onblur="if (this.value === '')
                                                         this.value = 'Enter username...'">						
@@ -43,12 +64,14 @@
 
                         </div>		<span class="red fl"></span>
                         <div class="login_check">
+                            <input type="checkbox" name="check" id="check">							
+                            <p class="remeber">Remember me</p>
                             <label><a title="Forgot password" href="forgot_password.jsp">Forgot password?</a></label>						
                         </div>
                         <div class="login_button fl clr">
                             <div class="login_button_lft"></div>
                             <div class="login_button_midd">
-                                <input type="submit" title="SIGNIN" value="Signin" name="login" id="login">
+                                <input type="submit" title="SIGNIN" value="Signin" name="login" id="login" onClick="remember_me()">
                                 <input type="hidden" name="service" id="service" value="login">
                             </div>
                             <div class="login_button_rgt"></div>

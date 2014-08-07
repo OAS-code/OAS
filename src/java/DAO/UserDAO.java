@@ -135,7 +135,7 @@ public class UserDAO {
                 username = rs.getString("username");
                 status = rs.getString("status");
                 role = rs.getString("role");
-                User user = new User(id, fullname, username, status, role);
+                User user = new User(id, fullname, username, role, status);
                 arr.add(user);
             }
         } catch (SQLException ex) {
@@ -262,6 +262,21 @@ public class UserDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return salt;
+    }
+    
+    public int getId(String username) throws SQLException {
+        int id = 0;
+        String sql = "SELECT id FROM user WHERE username = '" + username + "'";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = state.executeQuery(sql);
+            while (rs.next()) {
+                id = rs.getInt("id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return id;
     }
 
     public void SentEmail(String email, String subject, String content, final String username, final String password) {

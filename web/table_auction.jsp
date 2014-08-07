@@ -3,6 +3,8 @@
     Created on : Jul 31, 2014, 10:24:46 PM
     Author     : MrTu
 --%>
+<%@page import="Entity.Auction"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -75,41 +77,44 @@
         </style>
     </head>
     <body>
-        <div style="width: 500px;margin: auto;">
-            <div style="width: 700px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-                <form name="form1" method="post" action="">
-                    <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="2" width="700">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Title</th>
-                                <th>Status</th>
-                            </tr>  
-                        </thead>
-                        <tbody>
-                            <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
-                            </jsp:useBean>
-                            <c:forEach var="auction" items="${arr}" varStatus="status"> 
-                                <tr> 
-                                    <td>${status.count}</td> 
-                                    <td><a href="AuctionController?service=viewdetail&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
-                                    <td>${auction.status}</td>
-                                </tr
-                            </c:forEach>
-                        </tbody>
-                        <tfoot class="nav">
-                            <tr>
-                                <td colspan=5>
-                                    <div class="pagination"></div>
-                                    <div class="paginationTitle">Page</div>
-                                    <div class="selectPerPage"></div>
-                                    <div class="status"></div>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </form> 
-            </div>
-        </div>  
+        <%
+            ArrayList<Auction> ar = (ArrayList<Auction>) request.getAttribute("arr");
+            if (ar == null) {
+
+            } else {
+        %>
+        <form name="form1" method="post" action="">
+            <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="0" width=99.5%>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Title</th>
+                        <th>Status</th>
+                    </tr>  
+                </thead>
+                <tbody>
+                    <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
+                    </jsp:useBean>
+                    <c:forEach var="auction" items="${arr}" varStatus="status"> 
+                        <tr> 
+                            <td>${status.count}</td> 
+                            <td><a href="AuctionController?service=viewdetail&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
+                            <td>${auction.status}</td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+                <tfoot class="nav">
+                    <tr>
+                        <td colspan=5>
+                            <div class="pagination"></div>
+                            <div class="paginationTitle">Page</div>
+                            <div class="selectPerPage"></div>
+                            <div class="status"></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </form> 
+        <% }%>
     </body>
 </html>

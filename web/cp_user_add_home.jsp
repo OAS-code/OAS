@@ -29,7 +29,7 @@
                         <div class="user_name_common">
                             <p>Username <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <h2><input type="text" maxlength="100" name="username" id="username" class="textbox"><h2>
+                                <h2><input type="text" maxlength="100" name="username" id="username" class="textbox"></h2>
                                         </div>		
                                         </div>
 
@@ -92,7 +92,7 @@
                                             <div class="text_feeld">
                                                 <select name="cb2" id="cb2">
                                                     <option value="Active" selected="selected">Active</option>
-                                                    <option value="Deactive">Deactive</option>
+                                                    <option value="Inactive">Inactive</option>
                                                     <p>&nbsp;&nbsp;&nbsp;</p>
                                                 </select>
                                             </div>

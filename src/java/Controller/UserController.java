@@ -9,7 +9,6 @@ import DAO.OtherDAO;
 import DAO.UserDAO;
 import Entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -112,22 +110,26 @@ public class UserController extends HttpServlet {
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
+   
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String salt = dao.getSalt(username);
+            int id = dao.getId(username);
             String role = dao.loginAuthenticate(username, password, salt);
             if (role != null) {
                 if(role.equals("Customer")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
-                session.setAttribute("user", username);               
+                session.setAttribute("user", username); 
+                session.setAttribute("id", id);
                 rd = request.getRequestDispatcher("index.jsp");
                 rd.forward(request, response);
                 }else if(role.equals("Admin")){
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
-                session.setAttribute("user", username);               
+                session.setAttribute("user", username);    
+                session.setAttribute("id", id);
                 rd = request.getRequestDispatcher("cp.jsp");
                 rd.forward(request, response);  
                 }else if(role.equals("Staff")){
