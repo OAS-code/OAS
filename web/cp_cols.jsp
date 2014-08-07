@@ -12,11 +12,11 @@
         <title>Admin Control Panel</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        <%
-            String current_page = request.getParameter("current_page");
+        <%            String current_page = request.getParameter("current_page");
         %>
     </head>
     <body>
+        <%@ include file="perm_rank.jsp" %>
         <div class="banner_left">
             <div class="dash_tops">Control Panel</div>
             <div class="dash_lsd user_panel_list">
@@ -28,20 +28,24 @@
                         <% }%>
 
                     <%
-                        if ((current_page != null) && current_page.equalsIgnoreCase("user_manager")) { %>
+                        if (rank >= 3) {
+                            if ((current_page != null) && current_page.equalsIgnoreCase("user_manager")) { %>
                     <li class="act_class" id="dashboard_active"><a href="UserController?service=user_manager" title="Manage User">Manage User</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="UserController?service=user_manager" title="Manage User">Manage User</a></li>
-                        <% }%>
+                        <% }
+                            }%>
 
                     <%
-                        if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
+                        if (rank >= 2) {
+                            if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
                     <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
-                        <% }%>
+                        <% }
+                            }%>
                         <%
-                        if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
+                            if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
                     <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>
                         <% } else { %>
                     <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>

@@ -15,7 +15,7 @@
 
     </head>
     <body>
-
+        <%@ include file="perm_staff.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
             <jsp:include page="cp_cols.jsp" />

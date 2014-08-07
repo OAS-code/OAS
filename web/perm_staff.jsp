@@ -13,8 +13,8 @@
     </head>
     <body>
         <%
-            //String userName = (String) session.getAttribute("user");
             String role = (String) session.getAttribute("role");
+            
             if (role != null) {
                 if (role.equalsIgnoreCase("Staff") || role.equalsIgnoreCase("Admin")) {
                 } else {
