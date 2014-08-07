@@ -21,6 +21,7 @@
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_category_add_home.jsp" />             
         </div>
+        <jsp:include page="footer.jsp" />
     </body> 
 
 </html>

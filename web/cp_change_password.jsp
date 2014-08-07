@@ -17,5 +17,6 @@
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_change_password_home.jsp" />             
         </div>
+        <jsp:include page="footer.jsp" />
     </body>
 </html>

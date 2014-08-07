@@ -1,8 +1,8 @@
 CREATE DATABASE  IF NOT EXISTS `auction` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `auction`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: auction
+-- Host: localhost    Database: auction
 -- ------------------------------------------------------
 -- Server version	5.6.19
 
@@ -121,9 +121,9 @@ CREATE TABLE `user` (
   `fullname` varchar(40) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
-  `phonenumber` varchar(12) NOT NULL,
+  `phonenumber` varchar(12) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
-  `address` varchar(45) NOT NULL,
+  `address` varchar(45) DEFAULT NULL,
   `role` enum('Admin','Staff','Customer') DEFAULT 'Customer',
   `status` enum('Active','Inactive') DEFAULT 'Inactive',
   `salt` varchar(10) DEFAULT NULL,
@@ -140,7 +140,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong','Customer','Inactive','2122922761',0);
+INSERT INTO `user` VALUES (1,'Admin','admin','admin',NULL,'admin@admin.admin',NULL,'Admin','Active','121313121',0),(6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong','Customer','Inactive','2122922761',0);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -153,4 +153,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-07 11:33:02
+-- Dump completed on 2014-08-07 12:06:51
