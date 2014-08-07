@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div style="position:absolute;
-             bottom:0;width:100%">
+       
+        <div style="align;width:100%">
+            
             <!--
             <div id="footer" >
                 <div class="footer_inner">
@@ -128,6 +129,7 @@
                 </div>
             </div>
             -->
+            
             <div class="footer_down" >
                 <div class="footer_down_inner">
                     <p class="copyright">Copyright © 2014 <a href="index.jsp" target="_blank" class="footer_link" style="color:#666666" title=" OAS ">OAS</a>  Version 1.0. All rights reserved .</p>
