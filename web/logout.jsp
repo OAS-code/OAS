@@ -13,9 +13,14 @@
     </head>
     <body>
         <%
-            if(session!=null){
+            String success_page = request.getParameter("success_page");
+            if (session != null) {
                 session.invalidate();
-                response.sendRedirect("login.jsp?errorCode=3");
+                if (success_page != null && success_page.equals("1")) {
+                    response.sendRedirect("login.jsp?errorCode=4");
+                } else if (success_page != null && success_page.equals("2")) {
+                    response.sendRedirect("login.jsp?errorCode=3");
+                }
             }
         %>
     </body>

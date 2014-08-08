@@ -41,7 +41,7 @@
                                 <%} else {%>
 
                             <li><a href="cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
-                            <li class="active"><a href="logout.jsp" title="Signout">Sign out</a></li>
+                            <li class="active"><a href="logout.jsp?success_page=2" title="Signout">Sign out</a></li>
 
                             <%}%>
                             

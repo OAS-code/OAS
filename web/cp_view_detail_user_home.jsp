@@ -42,8 +42,7 @@
                 %>
                 <div class="message_common">					 
                     <div class="login_middle_common_profil">
-                        <input type="hidden" name="no" id="no" value="<%=user.getId()%>" readonly>
-
+                        <input type="hidden" name="no" id="no" value="<%=user.getId()%>">
                         <table border="1"  cellpadding="20" id="viewInfoTable">
                             <tr>                                
                                 <td >User name:</td>
@@ -79,7 +78,7 @@
                                 <div class="profil_butoon">
                                     <div class="res_left"></div>
                                     <div class="res_mid"><a title="Edit">
-                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'EditUser.jsp?id=<%=user.getId()%>';"></a>
+                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'cp_edit_user.jsp?id=<%=user.getId()%>';"></a>
                                     </div>                  
                                     <div class="res_right"></div>
                                 </div>

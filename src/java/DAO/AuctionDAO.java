@@ -208,9 +208,22 @@ public class AuctionDAO {
         return n;
     }
 
-    public int delete(int id) {
+     public int delete(int id) {
         int n = 0;
-        String sql = "DELETE FROM auction WHERE auctionid = " + id;
+        String sql = "DELETE FROM auction WHERE id = " + id;
+        try {
+            state = (Statement) conn.createStatement();
+            n = state.executeUpdate(sql);
+            state.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+     public int deleteDigital(int id) {
+        int n = 0;
+        String sql =  "DELETE FROM digital WHERE auction_id = " + id;
         try {
             state = (Statement) conn.createStatement();
             n = state.executeUpdate(sql);

@@ -292,6 +292,20 @@ public class UserDAO {
         }
         return id;
     }
+    public int change_password(String oldpass, String newpass, int userid) throws SQLException {
+        int n = 0;
+        String sql = "UPDATE user SET password = ? WHERE id = ? AND password = ?";
+        try {
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, newpass);           
+            pre.setInt(2, userid);            
+            pre.setString(3, oldpass);          
+            n = pre.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
 
     public void SentEmail(String email, String subject, String content, final String username, final String password) {
 

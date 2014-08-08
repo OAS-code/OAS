@@ -27,13 +27,6 @@ import javax.servlet.http.HttpSession;
  */
 public class UserController extends HttpServlet {
 
-    final private String loginPage = "login.jsp";
-    final private String errorPage = "fail.jsp";
-    final private String homePage = "index.jsp";
-    final private String welcomePage = "welcome.jsp";
-    final private String registerPage = "register.jsp";
-    final private String cp = "cp.jsp";
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -41,8 +34,12 @@ public class UserController extends HttpServlet {
         OtherDAO otherDAO = new OtherDAO();
         String service = request.getParameter("service");
         final String userManager = "cp_user_manager.jsp?current_page=user_manager";
-        final String ViewDetail = "ViewDetail.jsp";
+        final String view_detail_user = "cp_view_detail_user.jsp";
         final String TableUser = "table_user.jsp";
+        final String loginPage = "login.jsp";
+        final String cp = "cp.jsp";
+        final String edit_user = "cp_edit_user.jps";
+        final String change_pass = "cp_change_password.jsp?error_code=1";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
@@ -101,6 +98,34 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(cp);
             }
         }
+        if (service.equalsIgnoreCase("change_password")) {
+            String id1 = request.getParameter("no");
+            int id = Integer.parseInt(id1);
+            String oldpass = request.getParameter("old_password");
+            String newpass = request.getParameter("new_password");
+            String confirmpass = request.getParameter("confirm_password");
+            if (oldpass == null || newpass == null || confirmpass == null) {
+                rd = request.getRequestDispatcher(change_pass);
+                rd.forward(request, response);
+            } else {
+                if (!newpass.equals(confirmpass)) {
+                    rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=2");
+                    rd.forward(request, response);
+                }else if(oldpass.equals(newpass)){
+                    rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=3");
+                    rd.forward(request, response);
+                }else{
+                    int n = dao.change_password(oldpass, newpass, id);
+                    if(n>0){
+                        rd = request.getRequestDispatcher("logout.jsp?success_page=1");
+                        rd.forward(request, response);
+                    }else{
+                        rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=5");
+                        rd.forward(request, response);
+                    }
+                }
+            }           
+        }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
             request.setAttribute("arr", arr);
@@ -111,9 +136,10 @@ public class UserController extends HttpServlet {
             String id = request.getParameter("userid");
             ResultSet rs = dao.search(Integer.parseInt(id));
             request.setAttribute("rs", rs);
-            rd = request.getRequestDispatcher(ViewDetail);
+            rd = request.getRequestDispatcher(view_detail_user);
             rd.forward(request, response);
         }
+
         if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             String role = request.getParameter("cb1");
@@ -123,7 +149,7 @@ public class UserController extends HttpServlet {
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
-   
+
         if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -134,11 +160,11 @@ public class UserController extends HttpServlet {
             if (role != null && userid != null) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", role);
-                session.setAttribute("user", username); 
+                session.setAttribute("user", username);
                 session.setAttribute("userid", userid);
                 rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
                 rd.forward(request, response);
-            }else{
+            } else {
                 rd = request.getRequestDispatcher("login.jsp?errorCode=1");
                 rd.forward(request, response);
             }

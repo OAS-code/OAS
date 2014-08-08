@@ -17,7 +17,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -49,9 +48,10 @@ public class AuctionController extends HttpServlet {
         String service = request.getParameter("service");
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String AddAuction = "AddAuction.jsp";
-        final String ViewDetailAuction = "ViewDetailAuction.jsp";
+        final String view_detail_auction = "cp_view_detail_auction.jsp";
         final String EditAuction = "EditAuction.jsp";
         final String TableAuction = "table_auction.jsp";
+        
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
@@ -65,12 +65,17 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("deleteauction")) {
-            String id = request.getParameter("no");
-            int n = dao.delete(Integer.parseInt(id));
+        if (service.equalsIgnoreCase("viewauctiondetail")) {
+            String id = request.getParameter("no");  
+            String id1 = request.getParameter("no1");
+            int n = dao.deleteDigital(Integer.parseInt(id1));
+            //System.out.println(n);
             if (n > 0) {
+                //int m = dao.delete(Integer.parseInt(id));
+                //if(m>0){
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
+                //}
             }
         }
         if (service.equalsIgnoreCase("addauction")) {
@@ -88,7 +93,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
             request.setAttribute("rst", rst);
-            rd = request.getRequestDispatcher(ViewDetailAuction);
+            rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
         }
         

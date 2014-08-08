@@ -53,6 +53,10 @@
             <ul id="message" class="success_msg">
                 <li><p>You have been logged out, session terminated.</p></li>
             </ul>
+            <%} else if (errorCode != null && errorCode.equals("4")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>Change password successful. Please to login!.</p></li>
+            </ul>
             <%}%>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>

@@ -17,8 +17,31 @@
         <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <%                String errorCode = request.getParameter("error_code");
+            %>
+            <%if (errorCode != null && errorCode.equals("1")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>Old password, new password or confirm password not blank!</p></li>
+            </ul>
+            <br>
+            <%}else if(errorCode != null && errorCode.equals("2")){%>
+                 <ul id="message" class="success_msg">
+                <li><p>New password and confirm password not match!</p></li>                
+            </ul>
+                 <br>
+            <%}else if(errorCode != null && errorCode.equals("3")){%>
+                 <ul id="message" class="success_msg">
+                <li><p>New password and old password not match!</p></li>
+            </ul>  
+                 <br>
+            <%}else if(errorCode != null && errorCode.equals("5")){%>
+                 <ul id="message" class="success_msg">
+                <li><p>Old password is wrong!</p></li>
+            </ul>
+                 <br>
+            <%}%>
             <jsp:include page="cp_cols.jsp" />
-            <jsp:include page="cp_change_password_home.jsp" />             
+            <%@ include file="cp_change_password_home.jsp" %>             
         </div>
         <jsp:include page="footer.jsp" />
     </body>

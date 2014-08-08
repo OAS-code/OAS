@@ -18,10 +18,14 @@
                 <p>&nbsp;</p>
             </div>
             <div class="message_common">
-                <form name="change_password" id="change_password" method="post" action="">			
+                <form name="change_password" id="change_password" method="post" action="UserController">
+                    <%
+                        String userid = (String) session.getAttribute("userid");
+                    %>
                     <div class="login_middle_common_profil">			
                         <div class="user_name_common">									
                             <div class="log_fields">
+                                <input type="text" hidden="hidden" name="no" id="no" value="<%=userid%>">
                                 <p>Old password <span class="red">*</span>:</p>
                                 <h2><input type="password" maxlength="20" title="Old Password" name="old_password" id="old_password"></h2>
                             </div>					
@@ -39,7 +43,7 @@
                         <div class="user_name_common">					
                             <div class="log_fields">
                                 <p>Confirm Password <span class="red">*</span>:</p>
-                                <h2><input type="password" maxlength="20" title="Confirm Password" name="confirm_password" id="new_password"></h2>
+                                <h2><input type="password" maxlength="20" title="Confirm Password" name="confirm_password" id="confirm_password"></h2>
                             </div>
                             <span class="red">
                             </span>
@@ -52,7 +56,7 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid">
                                             <a title="RESET">
-                                                <input type="submit" value="RESET" name="submit_user">
+                                                <input type="reset" value="RESET" name="submit_user">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>
