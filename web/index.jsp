@@ -4,6 +4,8 @@
     Author     : MrDuc
 --%>
 
+<%@page import="Entity.Auction"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,15 +17,19 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-
-        
-
+        <%           
+            ArrayList<Auction> ar = (ArrayList<Auction>) request.getAttribute("arr");
+            if (ar == null) {
+                response.sendRedirect("AuctionController?service=index");
+            } else {
+        %>
         <jsp:include page="top.jsp" />
         <div class="header2">  
-            <jsp:include page="home_spotlight.jsp" />
-            <jsp:include page="home.jsp"/>  
+            <%@ include file="home_spotlight.jsp" %> 
+            <%@ include file="home.jsp" %> 
         </div>
         <jsp:include page="footer.jsp" />
+        <%}%>
     </body> 
 
 </html>

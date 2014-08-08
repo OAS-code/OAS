@@ -65,6 +65,12 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
+        if (service.equalsIgnoreCase("index")) {
+            ArrayList<Auction> arr = dao.view();
+            request.setAttribute("arr", arr);
+            rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        }
         if (service.equalsIgnoreCase("viewauctiondetail")) {
             String id = request.getParameter("no");
             int auctionid = Integer.parseInt(id);
