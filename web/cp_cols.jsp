@@ -49,10 +49,23 @@
                     <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>
                         <% } else { %>
                     <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>
-                        <% }%>
-                    <li class="" id="dashboard_active"><a href="cp_change_password.jsp" title="Change password">Change password</a></li>
-                    <li class="" id="dashboard_active"><a href="cp_edit_profile.jsp" title="Edit profile">Edit profile</a></li>
-
+                        <% }
+                   
+                        if (rank >= 1) {
+                            if ((current_page != null) && current_page.equalsIgnoreCase("change_password")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>
+                        <% } else { %>
+                    <li class="" id="edit_profile_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>
+                        <% }
+                            }
+                    if (rank >= 1) {
+                            if ((current_page != null) && current_page.equalsIgnoreCase("edit_profile")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
+                        <% } else { %>
+                    <li class="" id="edit_profile_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
+                        <% }
+                            }%>
+                    
                 </ul>
             </div>
         </div>
