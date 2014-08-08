@@ -49,9 +49,9 @@ public class AuctionController extends HttpServlet {
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String AddAuction = "AddAuction.jsp";
         final String view_detail_auction = "cp_view_detail_auction.jsp";
-        final String EditAuction = "EditAuction.jsp";
+        final String edit_auction = "cp_edit_auction.jsp";
         final String TableAuction = "table_auction.jsp";
-        
+
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
@@ -66,17 +66,16 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("viewauctiondetail")) {
-            String id = request.getParameter("no");  
-            String id1 = request.getParameter("no1");
-            int n = dao.deleteDigital(Integer.parseInt(id1));
-            //System.out.println(n);
-            if (n > 0) {
-                //int m = dao.delete(Integer.parseInt(id));
-                //if(m>0){
-                rd = request.getRequestDispatcher(auction_manager);
-                rd.forward(request, response);
-                //}
-            }
+            String id = request.getParameter("no");
+            int auctionid = Integer.parseInt(id);
+            //int m = dao.delete(auctionid);
+            //if (m > 0) {  
+                    int n = dao.delete_auction(auctionid);
+                    if(n>0){
+                    rd = request.getRequestDispatcher(auction_manager);
+                    rd.forward(request, response);
+                    }
+            //}
         }
         if (service.equalsIgnoreCase("addauction")) {
             ArrayList<Category> array = cdao.select();
@@ -96,7 +95,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
         }
-        
+
         if (service.equalsIgnoreCase("editauction")) {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
@@ -108,7 +107,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
             request.setAttribute("rst", rst);
-            rd = request.getRequestDispatcher(EditAuction);
+            rd = request.getRequestDispatcher(edit_auction);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("search")) {
@@ -138,7 +137,7 @@ public class AuctionController extends HttpServlet {
             String image5 = request.getParameter("image5");
             String video1 = request.getParameter("video");
             int start = video1.indexOf('=');
-            String video = video1.substring(start+1);
+            String video = video1.substring(start + 1);
             int auctionid = Integer.parseInt(id);
             int seller_id = 1;
             int categoryid = Integer.parseInt(categoryid1);
@@ -180,7 +179,7 @@ public class AuctionController extends HttpServlet {
             String image5 = request.getParameter("image5");
             String video1 = request.getParameter("video");
             int start = video1.indexOf('=');
-            String video = video1.substring(start+1);
+            String video = video1.substring(start + 1);
             String id = request.getParameter("no");
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
