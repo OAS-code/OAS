@@ -52,6 +52,7 @@
 .pays{float:left; width:165px;}
 .pays a{width:165px;padding: 10px 0 0;text-align: center; font: bold 12px arial; color:#656565; text-decoration:underline; float:left;}
 .banner_left{float:left; width:250px; border:1px solid #DEDDDF; }
+.banner_left_spotlight{float:left; width:250px; margin: -4px 0 0 0px; border:0px solid #DEDDDF; }
 .banner_right {float: left;width: 710px;margin:0 0 0 15px;}
 .dash_tops {background: url("../images/side_pan_tit_bg.png") repeat-x scroll 0 0 transparent;color: #FFFFFF;font-weight: bold;height: 29px;line-height: 29px;padding-left: 10px;text-transform: uppercase;width: 241px;}
 .dash_lsd ul li.act_class a {background: url("../images/over_arr.png") no-repeat scroll left center transparent;color: #309ECF;float: left;padding-left: 10px;text-decoration: none;}
