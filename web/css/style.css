@@ -650,12 +650,13 @@
 .red{color:#f00;font-family:Arial, Helvetica, sans-serif;}
 /* edit profile muniraj*/
 .login_middle_common{ width:970px; float:left; margin-left:12px; border:1px solid #dedddf;}
-.login_middle_common_profil{ width:640px; float:left;  padding:13px 13px 0px 13px;}
-.user_name_common{ float:left; width:600px; margin:0 0 16px  0;}
-.user_name_common p{ float:left; width:600px; font:bold 13px arial; color:#333;padding-bottom: 6px;}
-.text_feeld{ float:left; width:600px;}
-.text_feeld h2{ float:left; width:443px;}
-.text_feeld h2 input[type="text"]{ float:left; height:19px; width:431px; border: 1px solid #dedddf; background:none; padding:5px; font: normal 11px/22px arial; color:#666; }
+.login_middle_common_profil{ width:96%; float:left;  padding:13px 13px 13px 13px;}
+.user_name_common{ float:left; margin:0 0 16px  0;}
+.user_name_common p{ float:left; font:bold 13px arial; color:#333;padding-bottom: 6px;}
+.user_name_common b{ float:left; width: 100px; font:bold 13px arial; color:#333;padding-top: 6px;}
+.text_feeld{ float:left;}
+.text_feeld h2{ float:left;}
+.text_feeld h2 input[type="text"]{ float:left; height:19px; width:319px; border: 1px solid #dedddf; background:none; padding:5px; font: normal 11px/22px arial; color:#666; }
 .map_text{ float:left; width:443px;}
 .map_text  input[type="text"]{ float:left; width:343px; height:19px; border: 1px solid #dedddf; background:none; padding:5px;font: normal 11px arial; color:#ccc; }
 .map_text p{ float:left; width:70px;}
@@ -667,10 +668,10 @@
 .text_feeld2 p{ float:left; width:443px; margin: 11px 0 0;position: relative;}
 .text_feeld2  a{ float:left; width:443px; font: normal 13px arial; color:#333; clear:both;margin: 3px 0 0 0; }
 .user_name_common2{ float:left; width:600px; margin:0 0 16px 0;}
-.text_feeld2{ float:left; width:600px;}
-.text_feeld h2 textarea { float:left; width:430px; resize:none; height:84px;border: 1px solid #dedddf;}
-.text_feeld h3 { float:left; width:400px; clear:both; font: normal 11px arial; color:#666; margin:2px 0 0 0;}
-.text_feeld .input { float:left; width:431px; padding:5px; font: normal 11px arial; color:#ccc; }
+.text_feeld2{ float:left;}
+.text_feeld h2 textarea { float:left; resize:none; height:84px;border: 1px solid #dedddf;}
+.text_feeld h3 { float:left; clear:both; font: normal 11px arial; color:#666; margin:2px 0 0 0;}
+.text_feeld .input { float:left; padding:5px; font: normal 11px arial; color:#ccc; width: 330px }
 .no_img{ float:left; width:600px;}
 .no_img_inner{ float:left; width:100px;  margin: 10px 0 0;}
 .buton_green{ float:left; width:100%;margin: 25px 0 0;}
@@ -1748,7 +1749,7 @@ Sidebar
 .save_mid input[type="reset"]{ background: none; border: none;  color: #FFFFFF;float: left;font: bold 12px arial;height: 27px;padding: 0 6px;text-transform: uppercase;}
 .boxcesss_top3{ float:left; width: 198px; border: 1px solid #ccc; height: 27px; padding: 0px;}
 .boxcesss_top3 select{ float:left; width: 192px;  background: none; border: none; margin: 3px 0 0 0;}
-.text_feeld h2 select{ border: 1px solid #ccc; width: 443px!important; padding: 4px 0 4px 0;}
+.text_feeld h2 select{ border: 1px solid #ccc; padding: 4px 0 4px 0;}
 .required{ padding: 0 0 3px 0;}
 .title_cont_watchilist table thead tr th b{ color: #fff;font: bold 12px/13px arial; white-space: nowrap;}
 .title_cont_watchilist table thead tr th{ height: 29px;}
@@ -1759,7 +1760,7 @@ Sidebar
 .cart_tit_bg table td{ font: normal 12px/19px arial; color: #333;}
 .cart_tit_bg table td{border-bottom: 1px solid #ccc;padding-bottom: 10px; padding-top: 10px;}
 .cart_tit_bg table { border: 1px solid #ccc;  border-top: none;}
-.user_name_common div select{ float:left; width:431px;  padding: 3px 3px 3px 0; font:normal 11px/22px arial; color:#666;}
+.user_name_common div select{ float:left;  padding: 3px 3px 3px 0; font:normal 11px/22px arial; color:#666; width:330px; height:31px}
 .text_feeld h2 span{ margin: 6px 0 3px; float:left;}
 #slider ul li img.sold_image{border: 0 none !important;position: absolute;right: 134px; top: 108px; width: 100px;z-index: 10;}
 /*selvam on 01-07-2013**/
@@ -1788,4 +1789,5 @@ Sidebar
 .popup_content_middle ul li{border-top:none; padding:0px; width:100%;}
 .message_common .buton_green .profil_butoon{margin-left:8px;}
 .today_head_rgt p a:hover{color:#333;}
+
 

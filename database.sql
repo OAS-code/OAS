@@ -1,10 +1,10 @@
 CREATE DATABASE  IF NOT EXISTS `auction` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `auction`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: auction
+-- Host: localhost    Database: auction
 -- ------------------------------------------------------
--- Server version	5.6.16-log
+-- Server version	5.6.19
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,9 @@ CREATE TABLE `auction` (
   `starting_price` double NOT NULL,
   `reserve_price` double NOT NULL,
   `buy_now_price` double NOT NULL,
-  `status` varchar(20) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `images` text,
+  `video` text,
   PRIMARY KEY (`auctionid`),
   KEY `category_id` (`category_id`),
   KEY `seller_id` (`seller_id`),
@@ -43,7 +45,7 @@ CREATE TABLE `auction` (
   FULLTEXT KEY `title_2` (`title`),
   CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`categoryid`),
   CONSTRAINT `auction_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -52,7 +54,6 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (1,1,1,'Samsung Focus','New and sleeky smartphone','2014-08-03 17:00:00','2014-08-20 17:00:00',56,70,100,'Active');
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -80,35 +81,6 @@ LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
 INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart.'),(2,'Real Estate','Properties, houses for sale or for lease.'),(3,'Computers','Computers and computer parts.');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `digital`
---
-
-DROP TABLE IF EXISTS `digital`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `digital` (
-  `auction_id` int(11) NOT NULL,
-  `image1` text,
-  `image2` text,
-  `image3` text,
-  `image4` text,
-  `image5` text,
-  `video` text,
-  PRIMARY KEY (`auction_id`),
-  CONSTRAINT `digital_ibfk_1` FOREIGN KEY (`auction_id`) REFERENCES `auction` (`auctionid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `digital`
---
-
-LOCK TABLES `digital` WRITE;
-/*!40000 ALTER TABLE `digital` DISABLE KEYS */;
-/*!40000 ALTER TABLE `digital` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -155,4 +127,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-08 13:13:07
+-- Dump completed on 2014-08-11 15:49:00

@@ -132,7 +132,7 @@
                         </span></li>
 
                     <li id="home_menu"> <a href="index.jsp" title="Home"> Home</a></li>
-                    <li id="home_menu"><a href="cp.jsp?current_page=dashboard" title="CP"> Control Panel</a></li>
+                    <!--<li id="home_menu"><a href="cp.jsp?current_page=dashboard" title="CP"> Control Panel</a></li>-->
 
                 </ul>
             </div>
