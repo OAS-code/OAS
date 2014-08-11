@@ -12,20 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            String role = (String) session.getAttribute("role");
-            
-            if (role != null) {
-                if (role.equalsIgnoreCase("Staff") || role.equalsIgnoreCase("Admin")) {
-                } else {
-                    response.sendRedirect("notification.jsp");
-                }
-            } else {
-                response.sendRedirect("notification.jsp");
-            }
-
-
-        %>  
+         
 
     </body>
 </html>

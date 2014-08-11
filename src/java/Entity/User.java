@@ -18,9 +18,10 @@ public class User {
     String phonenumber;
     String email;
     String address;
-    String role;
-    String status; 
+    int role;
+    int status;
     String salt;
+
     public User() {
     }
 
@@ -43,7 +44,7 @@ public class User {
         this.address = address;
     }
 
-    public User(int id, String fullname, String username, String password, String phonenumber, String email, String address, String role, String status) {
+    public User(int id, String fullname, String username, String password, String phonenumber, String email, String address, int role, int status) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
@@ -52,10 +53,10 @@ public class User {
         this.email = email;
         this.address = address;
         this.role = role;
-        this.status = status;       
+        this.status = status;
     }
 
-    public User(String fullname, String username, String password, String phonenumber, String email, String address, String role, String status, String salt) {
+    public User(String fullname, String username, String password, String phonenumber, String email, String address, int role, int status, String salt) {
         this.fullname = fullname;
         this.username = username;
         this.password = password;
@@ -64,15 +65,15 @@ public class User {
         this.address = address;
         this.status = status;
         this.role = role;
-        this.salt= salt;
+        this.salt = salt;
     }
 
-    public User(int id, String fullname, String username, String role, String status) {
+    public User(int id, String fullname, String username, int role, int status) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
         this.role = role;
-        this.status = status;        
+        this.status = status;
     }
 
     public User(int id, String fullname, String phonenumber, String address) {
@@ -81,7 +82,7 @@ public class User {
         this.phonenumber = phonenumber;
         this.address = address;
     }
-    
+
     public String getSalt() {
         return salt;
     }
@@ -89,7 +90,7 @@ public class User {
     public void setSalt(String salt) {
         this.salt = salt;
     }
-    
+
     public int getId() {
         return id;
     }
@@ -119,11 +120,25 @@ public class User {
     }
 
     public String getStatus() {
-        return status;
+        if (status == 0) {
+            return "Inactive";
+        } else if (status == 1) {
+            return "Active";
+        } else {
+            return "Inactive";
+        }
     }
 
     public String getRole() {
-        return role;
+        if (role == 2) {
+            return "Administrator";
+        } else if (role == 1) {
+            return "Auction staff";
+        } else if (role == 0) {
+            return "Customer";
+        } else {
+            return "Customer";
+        }
     }
 
     public void setId(int id) {
@@ -155,10 +170,26 @@ public class User {
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        if (status.equalsIgnoreCase("Active")) {
+            this.status = 1;
+        }
+        else {
+            this.status = 0;
+        }
     }
 
     public void setRole(String role) {
-        this.role = role;
-    }  
+        if (role.equalsIgnoreCase("Administrator")) {
+            this.role = 2;
+        }
+        else if (role.equalsIgnoreCase("Auction staff")) {
+            this.role = 1;
+        }
+        else if (role.equalsIgnoreCase("Customer")) {
+            this.role = 0;
+        }
+        else {
+            this.role = 0;
+        }
+    }
 }

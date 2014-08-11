@@ -12,20 +12,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <%
-            String role = (String) session.getAttribute("role");
-            
-            if (role != null) {
-                if (role.equalsIgnoreCase("Customer") || role.equalsIgnoreCase("Staff") || role.equalsIgnoreCase("Admin")) {
-                } else {
-                    response.sendRedirect("login.jsp?errorCode=2");
-                }
-            } else {
-                response.sendRedirect("login.jsp?errorCode=2");
-            }
-
-
-        %>  
-
+        
     </body>
 </html>

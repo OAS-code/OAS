@@ -16,7 +16,7 @@
     </head>
     <body>
 
-        <%@ include file="perm_customer.jsp" %>
+        
 
         <jsp:include page="top.jsp" />
         <div class="header2">  

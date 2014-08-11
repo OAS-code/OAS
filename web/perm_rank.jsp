@@ -14,21 +14,8 @@
     <body>
         <%
             String role = (String) session.getAttribute("role");
-            Integer rank = 0;
-            if (role != null) {
-                if (role.equalsIgnoreCase("Admin")) {
-                    rank = 3;
-                }
-                else if (role.equalsIgnoreCase("Staff")) {
-                    rank = 2;
-                }
-                else if (role.equalsIgnoreCase("Customer")) {
-                    rank = 1;
-                }
-            }
-            else {
-                rank = 0;
-            }
+            int rank = 5;
+            
             
         %>  
 
