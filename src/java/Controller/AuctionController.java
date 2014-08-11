@@ -60,6 +60,7 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("listall")) {
+            
             ArrayList<Auction> arr = dao.view();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);

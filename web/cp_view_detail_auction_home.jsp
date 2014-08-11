@@ -140,9 +140,38 @@
                             <tr>
                                 <td></td>
                                 <td>
-                                    <input type="button" value="&lt;&lt; Previous" name="previous" onClick="Backer()">
-                                    <input type="button" value="Next &gt;&gt;" name="next" onClick="Nexter()">&nbsp;<span id="sp1"></span>
+                                    <table border="0" width="100%">
+                                        <tr>
+                                            <td>
+                                                <div class="profil_butoon" style="width:auto;">
+                                                    <div class="res_left"></div>
+                                                    <div class="res_mid" style="width:auto;">
+                                                        <a style="width:auto;">
+                                                            <input type="button" value="&lt;&lt; Previous" name="previous" onClick="Backer()">
+                                                        </a>
+                                                    </div>
+                                                    <div class="res_right"></div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span id="sp1"></span>
+                                            </td>
+                                            <td>
+                                                <div class="profil_butoon" style="width:auto;">
+                                                    <div class="res_left"></div>
+                                                    <div class="res_mid" style="width:auto;">
+                                                        <a style="width:auto;">
+                                                            <input type="button" value="Next &gt;&gt;" name="next" onClick="Nexter()">
+                                                        </a>
+                                                    </div>
+                                                    <div class="res_right"></div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+
                                 </td>
+
                             </tr>
                             <tr>
                                 <td>Video:</td>
