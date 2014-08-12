@@ -6,6 +6,7 @@
 
 package Entity;
 
+import java.sql.Time;
 import java.util.Date;
 
 
@@ -24,29 +25,16 @@ public class Auction {
     String description;
     Date start_date;
     Date end_date;
+    Time start_time;
+    Time end_time;
     double starting_price;
-    double reserve_price;
     double buy_now_price;
-    String status; 
+    int status; 
 
     public Auction() {
     } 
 
-    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
-        this.categoryid = categoryid;
-        this.sellerid = sellerid;
-        this.title = title;
-        this.description = description;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.starting_price = starting_price;
-        this.reserve_price = reserve_price;
-        this.buy_now_price = buy_now_price;
-        this.status = status;
-    }
-
-    
-    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double reserve_price, double buy_now_price, String status) {
+    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, Time start_time, Time end_time, double starting_price, double buy_now_price, int status) {
         this.auctionid = auctionid;
         this.categoryid = categoryid;
         this.sellerid = sellerid;
@@ -54,11 +42,43 @@ public class Auction {
         this.description = description;
         this.start_date = start_date;
         this.end_date = end_date;
+        this.start_time = start_time;
+        this.end_time = end_time;
         this.starting_price = starting_price;
-        this.reserve_price = reserve_price;
         this.buy_now_price = buy_now_price;
         this.status = status;
-    }  
+    }
+
+    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, Time start_time, Time end_time, double starting_price, double buy_now_price, int status) {
+        this.categoryid = categoryid;
+        this.sellerid = sellerid;
+        this.title = title;
+        this.description = description;
+        this.start_date = start_date;
+        this.end_date = end_date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.starting_price = starting_price;
+        this.buy_now_price = buy_now_price;
+        this.status = status;
+    }
+
+    public Time getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Time start_time) {
+        this.start_time = start_time;
+    }
+
+    public Time getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Time end_time) {
+        this.end_time = end_time;
+    }
+ 
 
     public void setAuctionid(int auctionid) {
         this.auctionid = auctionid;
@@ -92,15 +112,11 @@ public class Auction {
         this.starting_price = starting_price;
     }
 
-    public void setReserve_price(double reserve_price) {
-        this.reserve_price = reserve_price;
-    }
-
     public void setBuy_now_price(double buy_now_price) {
         this.buy_now_price = buy_now_price;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
@@ -136,15 +152,11 @@ public class Auction {
         return starting_price;
     }
 
-    public double getReserve_price() {
-        return reserve_price;
-    }
-
     public double getBuy_now_price() {
         return buy_now_price;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
     

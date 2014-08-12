@@ -9,7 +9,6 @@ import DAO.AuctionDAO;
 import DAO.CategoryDAO;
 import Entity.Auction;
 import Entity.Category;
-import Entity.Digital;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -47,10 +46,10 @@ public class AuctionController extends HttpServlet {
         CategoryDAO cdao = new CategoryDAO();
         String service = request.getParameter("service");
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
-        final String AddAuction = "AddAuction.jsp";
+        final String add_auction = "cp_auction_add.jsp";
         final String view_detail_auction = "cp_view_detail_auction.jsp";
         final String edit_auction = "cp_edit_auction.jsp";
-        final String TableAuction = "table_auction.jsp";
+        final String add_new_auction = "cp_auction_add.jsp";
 
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
@@ -60,7 +59,6 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("listall")) {
-            
             ArrayList<Auction> arr = dao.view();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);
@@ -77,17 +75,17 @@ public class AuctionController extends HttpServlet {
             int auctionid = Integer.parseInt(id);
             //int m = dao.delete(auctionid);
             //if (m > 0) {  
-                    int n = dao.delete_auction(auctionid);
-                    if(n>0){
-                    rd = request.getRequestDispatcher(auction_manager);
-                    rd.forward(request, response);
-                    }
+            int n = dao.delete_auction(auctionid);
+            if (n > 0) {
+                rd = request.getRequestDispatcher(auction_manager);
+                rd.forward(request, response);
+            }
             //}
         }
-        if (service.equalsIgnoreCase("addauction")) {
-            ArrayList<Category> array = cdao.select();
+        if (service.equalsIgnoreCase("add_auction")) {
+            ArrayList<Category> array = (ArrayList<Category>)cdao.select();
             request.setAttribute("array", array);
-            rd = request.getRequestDispatcher(AddAuction);
+            rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
         }
         if (service.equals("viewdetail")) {
@@ -172,10 +170,13 @@ public class AuctionController extends HttpServlet {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
-            String status = request.getParameter("cb2");
+            String sta = request.getParameter("cb2");
+            int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
+            String start_time1 = request.getParameter("starttime");
             String end_date1 = request.getParameter("enddate");
+            String end_time1 = request.getParameter("endtime");
             String starting_price1 = request.getParameter("startingprice");
             String reserve_price1 = request.getParameter("reserveprice");
             String buy_now_price1 = request.getParameter("buynowprice");

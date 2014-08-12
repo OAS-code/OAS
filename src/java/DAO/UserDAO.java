@@ -127,14 +127,15 @@ public class UserDAO {
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = state.executeQuery(sql);
-            String fullname, username, role, status;
+            String fullname, username;
+            int status, role;
             int id;
             while (rs.next()) {
                 id = rs.getInt("id");
                 fullname = rs.getString("fullname");
                 username = rs.getString("username");
-                status = rs.getString("status");
-                role = rs.getString("role");
+                status = rs.getInt("status");
+                role = rs.getInt("role");
                 User user = new User(id, fullname, username, role, status);
                 arr.add(user);
             }
@@ -224,8 +225,8 @@ public class UserDAO {
             pre.setString(3, user.getPhonenumber());
             pre.setString(4, user.getEmail());
             pre.setString(5, user.getAddress());
-            pre.setString(6, user.getRole());
-            pre.setString(7, user.getStatus());
+            pre.setInt(6, user.getRole());
+            pre.setInt(7, user.getStatus());
             pre.setInt(8, user.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {

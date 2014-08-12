@@ -45,9 +45,7 @@
                             <div class="text_feeld">
                                 <select name="cb1" id="cb1">
                                     <%
-                                        ArrayList<Category> ar = new ArrayList<Category>();
-                                        CategoryDAO dao = new CategoryDAO();
-                                        ar = dao.select();
+                                        ArrayList<Category> ar = (ArrayList<Category>) request.getAttribute("array");
                                         for (int i = 0; i < ar.size(); i++) {
                                     %>                                
                                     <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
@@ -101,9 +99,15 @@
                         </div>
 
                         <div class="user_name_common">
-                            <p>Plan date  <span class="red">*</span>: </p>
+                            <p>Plan date: <span class="red">*</span>: </p>
                             <div class="text_feeld">
                                 <input type="date" name="startdate" id="startdate" >
+                            </div>		
+                        </div>
+                        <div class="user_name_common">
+                            <p>Plan time:  <span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="starttime" id="starttime" >
                             </div>		
                         </div>
                         <div class="user_name_common">
@@ -112,15 +116,21 @@
                                 <input type="date" name="enddate" id="enddate">
                             </div>		
                         </div>
+                        <div class="user_name_common">
+                            <p>Close time  <span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="endtime" id="endtime">
+                            </div>		
+                        </div>
 
                         <div class="user_name_common">
                             <p>Status  <span class="red">*</span>:</p>
                             <div class="text_feeld">
                                 <select name="cb2" id="cb2">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                    <option value="Future">Future</option>
-                                    <option value="Closed">Closed</option>
+                                    <option value="0">Inactive</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Future</option>
+                                    <option value="3">Closed</option>
                                 </select>
                             </div>
                         </div>
@@ -128,12 +138,6 @@
                             <p>Starting price  <span class="red">*</span>: </p>
                             <div class="text_feeld">
                                 <h2><input type="text" name="startingprice" id="startingprice"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Reserve price  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="reserveprice" id="reserveprice"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">

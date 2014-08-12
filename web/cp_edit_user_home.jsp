@@ -26,9 +26,7 @@
             </div>
             <form name="form1" method="post" action="UserController">
                 <%
-                    UserDAO dao = new UserDAO();
-                    String id = request.getParameter("id");
-                    ResultSet rs = dao.search(Integer.parseInt(id));
+                    ResultSet rs = (ResultSet) request.getAttribute("rs");
                     User user = new User();
                     if (rs.next()) {
                         user.setId(rs.getInt(1));
@@ -38,8 +36,8 @@
                         user.setPhonenumber(rs.getString(5));
                         user.setEmail(rs.getString(6));
                         user.setAddress(rs.getString(7));
-                        user.setRole(rs.getString(8));
-                        user.setStatus(rs.getString(9));
+                        user.setRole(rs.getInt(8));
+                        user.setStatus(rs.getInt(9));
                     }
                 %>
                 <div class="message_common">
@@ -62,23 +60,23 @@
                             <div class="text_feeld">
                                 <h2>
                                     <select name="cb1" class=" text_bg select" id="cb1" >	
-                                        <option value="Customer"  >Customer</option>
-                                        <option value="Staff"  >Auction staff</option>
-                                        <option value="Admin"  >Administrator</option>
+                                        <option value="0"  >Customer</option>
+                                        <option value="1"  >Auction staff</option>
+                                        <option value="2"  >Administrator</option>
                                     </select>
                                     <script>
                                         <%
-                                            if (user.getRole().equalsIgnoreCase("Admin")) {
-                                        %>
-                                        document.getElementById("cb1").selectedIndex = "2";
-                                        <%
-                                        } else if (user.getRole().equalsIgnoreCase("Staff")) {
+                                            if (user.getRole()==1) {
                                         %>
                                         document.getElementById("cb1").selectedIndex = "1";
                                         <%
-                                        } else if (user.getRole().equalsIgnoreCase("Customer")) {
+                                        } else if (user.getRole()==0) {
                                         %>
                                         document.getElementById("cb1").selectedIndex = "0";
+                                        <%
+                                        } else if (user.getRole()==2) {
+                                        %>
+                                        document.getElementById("cb1").selectedIndex = "2";
                                         <%                              
                                         } else {
                                         %>
@@ -95,18 +93,18 @@
                             <div class="text_feeld">
                                 <h2>
                                     <select name="cb2" class=" text_bg select" id="cb2" >	
-                                        <option value="Active">Activated</option>
-                                        <option value="Deactive">Deactivated</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">Inactive</option>
                                     </select>
                                     <script>
                                         <%
-                                            if (user.getStatus().equalsIgnoreCase("Active")) {
+                                            if (user.getStatus()==0) {
                                         %>
-                                        document.getElementById("cb2").selectedIndex = "0";
+                                        document.getElementById("cb2").selectedIndex = "1";
                                         <%
                                         } else {
                                         %>
-                                        document.getElementById("cb2").selectedIndex = "1";
+                                        document.getElementById("cb2").selectedIndex = "0";
                                         <%
                                             }
                                         %>
