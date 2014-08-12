@@ -68,67 +68,66 @@
                                     <div class="user_name_common">
                                         <b>Keyword: </b>
                                     </div>
-                                    
+
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2><input type="text" name="txtsearch" maxlength="100" id="txtsearch" class="textbox"></h2>
                                         </div>		
                                     </div>
-                                    
+
                                 </td>
                             </tr>
                         </table>
 
 
-                                 
 
-                                    <table>
-                                        <tr>
-                                            <td width="95">
-                                                
-                                            </td>
-                                            <td>
-                                                <div class="profil_butoon" style="width:auto;">
-                                                    <div class="res_left"></div>
-                                                    <div class="res_mid" style="width:auto;">
-                                                        <a style="width:auto;">
-                                                            <input type="submit" name="search" id="search" value="SEARCH" title="SEARCH">
-                                                            <input type="hidden" name="service" id="service" value="search" >
-                                                        </a>
-                                                    </div>
-                                                    <div class="res_right"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="profil_butoon" style="width:auto;">
-                                                    <div class="res_left"></div>
-                                                    <div class="res_mid" style="width:auto;">
-                                                        <a style="width:auto;">
-                                                            <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'UserController?service=listall'" >
-                                                        </a>
-                                                    </div>
-                                                    <div class="res_right"></div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="profil_butoon" style="width:auto;">
-                                                    <div class="res_left"></div>
-                                                    <div class="res_mid" style="width:auto;">
-                                                        <a style="width:auto;">
-                                                            <input type="button" name="add" id="add" value="Add new user" onclick="window.location = 'cp_user_add.jsp?current_page=user_manager';">    
-                                                        </a>
-                                                    </div>
-                                                    <div class="res_right"></div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    </table>
+
+                        <table>
+                            <tr>
+                                <td width="95">
+
+                                </td>
+                                <td>
+                                    <div class="profil_butoon" style="width:auto;">
+                                        <div class="res_left"></div>
+                                        <div class="res_mid" style="width:auto;">
+                                            <a style="width:auto;">
+                                                <input type="submit" name="search" id="search" value="SEARCH" title="SEARCH">
+                                                <input type="hidden" name="service" id="service" value="search" >
+                                            </a>
+                                        </div>
+                                        <div class="res_right"></div>
                                     </div>
+                                </td>
+                                <td>
+                                    <div class="profil_butoon" style="width:auto;">
+                                        <div class="res_left"></div>
+                                        <div class="res_mid" style="width:auto;">
+                                            <a style="width:auto;">
+                                                <input type="button" name="listall" id="listall" value="List all" onclick="window.location = 'UserController?service=listall'" >
+                                            </a>
+                                        </div>
+                                        <div class="res_right"></div>
                                     </div>
+                                </td>
+                                <td>
+                                    <div class="profil_butoon" style="width:auto;">
+                                        <div class="res_left"></div>
+                                        <div class="res_mid" style="width:auto;">
+                                            <a style="width:auto;">
+                                                <input type="button" name="add" id="add" value="Add new user" onclick="window.location = 'cp_user_add.jsp?current_page=user_manager';">    
+                                            </a>
+                                        </div>
+                                        <div class="res_right"></div>
                                     </div>
-                                    </form>
-                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
-                                    <jsp:include page="table_user.jsp" />   
-                                    </div>
-                                    </body>
-                                    </html>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </form>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+            <jsp:include page="table_user.jsp" />   
+        </div>
+    </body>
+</html>

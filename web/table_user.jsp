@@ -92,8 +92,8 @@
                             <td><%=i+1%></td> 
                             <td><%=arr.get(i).getFullname()%></td>
                             <td><a href="UserController?service=viewdetail&userid=<%=arr.get(i).getId()%>"><%=arr.get(i).getUsername()%></a></td>
-                            <td><%=arr.get(i).RoleToString()%></td>
-                            <td><%=arr.get(i).StatusToString()%></td>                         
+                            <td><%=arr.get(i).getRole()%></td>
+                            <td><%=arr.get(i).getStatus()%></td>                         
                         </tr>
                     <%}%>
                 </tbody>

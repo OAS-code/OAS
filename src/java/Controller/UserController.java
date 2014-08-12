@@ -80,10 +80,9 @@ public class UserController extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String sta = request.getParameter("cb2");
-            int status = Integer.parseInt(sta);
-            String rol = request.getParameter("cb1");
-            int role = Integer.parseInt(rol);
+            String status = request.getParameter("cb2");
+            String role = request.getParameter("cb1");
+
             User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
             int n = dao.update(user);
             if (n > 0) {

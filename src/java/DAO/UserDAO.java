@@ -87,8 +87,8 @@ public class UserDAO {
             pre.setString(4, user.getPhonenumber());
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
-            pre.setString(7, user.getRole());
-            pre.setString(8, user.getStatus());
+            pre.setString(7, Integer.toString(user.getRoleId()));
+            pre.setString(8, Integer.toString(user.getStatusId()));
             pre.setString(9, user.getSalt());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -225,8 +225,8 @@ public class UserDAO {
             pre.setString(3, user.getPhonenumber());
             pre.setString(4, user.getEmail());
             pre.setString(5, user.getAddress());
-            pre.setInt(6, user.getRole());
-            pre.setInt(7, user.getStatus());
+            pre.setInt(6, user.getRoleId());
+            pre.setInt(7, user.getStatusId());
             pre.setInt(8, user.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {

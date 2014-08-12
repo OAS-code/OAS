@@ -61,8 +61,8 @@
                                             <div class="text_feeld">
                                                 <select name="cb1" id="cb1">
                                                     <option value="Customer" selected="selected">Customer</option>
-                                                    <option value="Staff">Auction staff</option>
-                                                    <option value="Admin">Administrator</option>
+                                                    <option value="Auction staff">Auction staff</option>
+                                                    <option value="Administrator">Administrator</option>
                                                 </select>
                                             </div>
                                         </div>
