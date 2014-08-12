@@ -17,8 +17,8 @@
         <%@ include file="perm_admin.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
-            <jsp:include page="cp_cols.jsp" />
-            <jsp:include page="cp_view_detail_user_home.jsp" />             
+            <jsp:include page="cp_cols.jsp" /> 
+            <%@ include file="cp_view_detail_user_home.jsp" %>
         </div>
         <jsp:include page="footer.jsp" />
     </body>

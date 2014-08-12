@@ -36,8 +36,8 @@
                         user.setPhonenumber(rs.getString(5));
                         user.setEmail(rs.getString(6));
                         user.setAddress(rs.getString(7));
-                        user.setRole(rs.getString(8));
-                        user.setStatus(rs.getString(9));
+                        user.setRole(rs.getInt(8));
+                        user.setStatus(rs.getInt(9));
                     }
                 %>
                 <div class="message_common">					 
@@ -54,11 +54,11 @@
                             </tr>
                             <tr>
                                 <td >Role:</td>
-                                <td><%=user.getRole()%></td>
+                                <td><%=user.RoleToString()%></td>
                             </tr>
                             <tr>
                                 <td >Status:</td>
-                                <td><%=user.getStatus()%></td>
+                                <td><%=user.StatusToString()%></td>
                             </tr>
                             <tr>
                                 <td >Full name:</td>
@@ -78,7 +78,7 @@
                                 <div class="profil_butoon">
                                     <div class="res_left"></div>
                                     <div class="res_mid"><a title="Edit">
-                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'cp_edit_user.jsp?id=<%=user.getId()%>';"></a>
+                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'UserController?service=edit_user&id=<%=user.getId()%>';"></a>
                                     </div>                  
                                     <div class="res_right"></div>
                                 </div>

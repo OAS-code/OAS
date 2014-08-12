@@ -35,10 +35,10 @@
                                             <h2>
                                                 <select name="cb1" class=" text_bg select" id="cb1">	
                                                     <option value="" selected="selected">Select auction type</option>
-                                                    <option value="Active">Active</option>
-                                                    <option value="Inactive">Inactive</option>
-                                                    <option value="Future"  >Future</option>
-                                                    <option value="Closed"  >Closed</option>
+                                                    <option value="0">Inactive</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="2">Future</option>
+                                                    <option value="3">Closed</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -51,8 +51,8 @@
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2>
-                                                <select name="cb2" class=" text_bg select" id="cb2" style=">
-                                                        <option value="" selected="selected">Select category</option>
+                                                <select name="cb2" class=" text_bg select" id="cb2" style="">
+                                                    <option value="" selected="selected">Select category</option>
                                                     <option value="Active">Activated</option>
                                                     <option value="Deactive">Deactivated</option>
                                                 </select>
@@ -112,7 +112,7 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="button" name="add" id="add" value="Add new auction" onclick="window.location = 'cp_auction_add.jsp';">    
+                                                <input type="button" name="add" id="add" value="Add new auction" onclick="window.location = 'AuctionController?service=add_auction';">    
                                             </a>
                                         </div>
                                         <div class="res_right"></div>

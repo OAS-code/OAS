@@ -119,17 +119,23 @@ public class User {
         return address;
     }
 
-    public String getStatus() {
+    public int getStatus() {
+        return  status;
+    }
+    
+    public String StatusToString(){
         if (status == 0) {
             return "Inactive";
         } else if (status == 1) {
             return "Active";
         } else {
-            return "Inactive";
+            return null;
         }
     }
-
-    public String getRole() {
+    public int getRole() {
+        return role;
+    }
+    public String RoleToString(){
         if (role == 2) {
             return "Administrator";
         } else if (role == 1) {
@@ -137,10 +143,9 @@ public class User {
         } else if (role == 0) {
             return "Customer";
         } else {
-            return "Customer";
+            return null;
         }
     }
-
     public void setId(int id) {
         this.id = id;
     }
@@ -169,27 +174,11 @@ public class User {
         this.address = address;
     }
 
-    public void setStatus(String status) {
-        if (status.equalsIgnoreCase("Active")) {
-            this.status = 1;
-        }
-        else {
-            this.status = 0;
-        }
+    public void setStatus(int status) {
+        this.status = status;
     }
 
-    public void setRole(String role) {
-        if (role.equalsIgnoreCase("Administrator")) {
-            this.role = 2;
-        }
-        else if (role.equalsIgnoreCase("Auction staff")) {
-            this.role = 1;
-        }
-        else if (role.equalsIgnoreCase("Customer")) {
-            this.role = 0;
-        }
-        else {
-            this.role = 0;
-        }
+    public void setRole(int role) {
+        this.role = role;
     }
 }

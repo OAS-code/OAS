@@ -32,13 +32,14 @@ public class UserController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         UserDAO dao = new UserDAO();
         OtherDAO otherDAO = new OtherDAO();
+        ResultSet rs = null;
         String service = request.getParameter("service");
         final String userManager = "cp_user_manager.jsp?current_page=user_manager";
         final String view_detail_user = "cp_view_detail_user.jsp";
         final String TableUser = "table_user.jsp";
         final String loginPage = "login.jsp";
         final String cp = "cp.jsp";
-        final String edit_user = "cp_edit_user.jps";
+        final String edit_user = "cp_edit_user.jsp";
         final String change_pass = "cp_change_password.jsp?error_code=1";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
@@ -69,6 +70,7 @@ public class UserController extends HttpServlet {
                 rd.forward(request, response);
             }
         }
+
         if (service.equalsIgnoreCase("edituser")) {
             String id1 = request.getParameter("no");
             int id = Integer.parseInt(id1);
@@ -78,8 +80,10 @@ public class UserController extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String status = request.getParameter("cb2");
-            String role = request.getParameter("cb1");
+            String sta = request.getParameter("cb2");
+            int status = Integer.parseInt(sta);
+            String rol = request.getParameter("cb1");
+            int role = Integer.parseInt(rol);
             User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
             int n = dao.update(user);
             if (n > 0) {
@@ -98,6 +102,14 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(cp);
             }
         }
+        if (service.equalsIgnoreCase("edit_user")) {
+            String id = request.getParameter("id");
+            rs = dao.search(Integer.parseInt(id));
+            request.setAttribute("rs", rs);
+            rd = request.getRequestDispatcher(edit_user);
+            rd.forward(request, response);
+            
+        }
         if (service.equalsIgnoreCase("change_password")) {
             String id1 = request.getParameter("no");
             int id = Integer.parseInt(id1);
@@ -111,20 +123,20 @@ public class UserController extends HttpServlet {
                 if (!newpass.equals(confirmpass)) {
                     rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=2");
                     rd.forward(request, response);
-                }else if(oldpass.equals(newpass)){
+                } else if (oldpass.equals(newpass)) {
                     rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=3");
                     rd.forward(request, response);
-                }else{
+                } else {
                     int n = dao.change_password(oldpass, newpass, id);
-                    if(n>0){
+                    if (n > 0) {
                         rd = request.getRequestDispatcher("logout.jsp?success_page=1");
                         rd.forward(request, response);
-                    }else{
+                    } else {
                         rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=5");
                         rd.forward(request, response);
                     }
                 }
-            }           
+            }
         }
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.view();
@@ -134,7 +146,7 @@ public class UserController extends HttpServlet {
         }
         if (service.equalsIgnoreCase("viewdetail")) {
             String id = request.getParameter("userid");
-            ResultSet rs = dao.search(Integer.parseInt(id));
+            rs = dao.search(Integer.parseInt(id));
             request.setAttribute("rs", rs);
             rd = request.getRequestDispatcher(view_detail_user);
             rd.forward(request, response);
