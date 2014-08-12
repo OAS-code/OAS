@@ -9,11 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Access denied!</title>
+        <title>Opps! Something went wrong.</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <%
             String errorCode = request.getParameter("errorCode");
+            if (errorCode == null) {
+                errorCode = "-1";
+            }
         %>
     </head>
     <body>
@@ -32,6 +35,10 @@
                         else if (errorCode.equalsIgnoreCase("2")) { %>
                             <h1>Page not found!</h1>
                             <div class="ideal_middle_bottom"><h2> Sorry, the page you requested may have been moved or deleted.</h2>
+                        <% }
+                        else if (errorCode.equalsIgnoreCase("3")) { %>
+                            <h1>Internal Error!</h1>
+                            <div class="ideal_middle_bottom"><h2> Could not update user information.</h2>
                         <% }
                         else { %>
                             <h1>Access denied!</h1>
@@ -54,15 +61,8 @@
 
 
                         </div>   
-
-
-
-
                     </div>
                     <div class="ideal_bottom"> </div>
-
-
-
                 </div>
             </div>
         </div>

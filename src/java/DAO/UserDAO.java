@@ -75,29 +75,34 @@ public class UserDAO {
         }
     }
 
-    public int add(User user) {
+    public int addUser(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (fullname,username,password,phonenumber,email,address,role,status,salt) VALUES (?,?,?,?,?,?,?,?,?)";
-
+            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status) VALUES (?,?,?,?,?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
-            pre.setString(1, user.getFullname());
-            pre.setString(2, user.getUsername());
-            pre.setString(3, user.getPassword());
+
+            pre.setString(1, user.getUsername());
+            pre.setString(2, user.getPassword());
+            pre.setString(3, user.getFullname());
             pre.setString(4, user.getPhonenumber());
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
-            pre.setString(7, Integer.toString(user.getRoleId()));
-            pre.setString(8, Integer.toString(user.getStatusId()));
-            pre.setString(9, user.getSalt());
+            pre.setString(7, user.getSalt());
+            pre.setInt(8, user.getRoleId());
+            pre.setInt(9, user.getStatusId());
+            
+            //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return n;
+        
     }
 
-    public int addUser(User user) {
+    public int addUserFromRegister(User user) {
         int n = 0;
         try {
             String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address,salt) VALUES (?,?,?,?,?,?,?)";
@@ -111,7 +116,7 @@ public class UserDAO {
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
             pre.setString(7, user.getSalt());
-
+            
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -184,8 +189,34 @@ public class UserDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(sql);
+        }
+        return user;
+    }
+    
+    public User getUser(String username) {
+        String sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
+        User user = new User();
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, username);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                int role = rs.getInt("role");
+                user = new User(username, email, status, role);
+                user.setId(rs.getInt("id"));
+                user.setFullname(rs.getString("fullname"));
+                user.setPhonenumber(rs.getString("phonenumber"));
+                user.setAddress(rs.getString("address"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             //System.out.println(sql);
         }
+        System.out.println(sql);
         return user;
     }
 
@@ -335,4 +366,6 @@ public class UserDAO {
         UserDAO dao = new UserDAO();
         //dao.SentEmail("tupvse02404@fpt.edu.vn","Auction","successfully","tupvse02404@fpt.edu.vn","vantu1992");
     }
+
+    
 }

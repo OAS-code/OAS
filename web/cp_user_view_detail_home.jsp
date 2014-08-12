@@ -17,6 +17,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
+
     </head>
     <body>
         <%@ include file="perm_admin.jsp" %>
@@ -71,9 +72,7 @@
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
-                                            <script>
-                                                document.write('<a style="width:auto;" href="' + document.referrer + '"><input type="button" id="Back" name="Back" value="Back"></a>');
-                                            </script>
+                                            <input type="button" value="Back" name="Back" onclick="window.location = 'UserController?service=user_manager';">
                                         </div>
                                         <div class="res_right"></div>
                                     </div>
@@ -95,7 +94,7 @@
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
                                                 <input type="submit" value="Delete" name="Delete" onclick="return confirm('Are you sure?')">
-                                                <input type="hidden" id="service" name="service" value="deleteuser">
+                                                <input type="hidden" id="service" name="service" value="delete">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>

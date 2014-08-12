@@ -59,9 +59,9 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="cb1" id="cb1">
-                                                    <option value="Customer" selected="selected">Customer</option>
-                                                    <option value="Auction staff">Auction staff</option>
-                                                    <option value="Administrator">Administrator</option>
+                                                    <option value="0" selected="selected">Customer</option>
+                                                    <option value="1">Auction staff</option>
+                                                    <option value="2">Administrator</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -75,8 +75,8 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="cb2" id="cb2">
-                                                    <option value="Active" selected="selected">Active</option>
-                                                    <option value="Inactive">Inactive</option>
+                                                    <option value="1" selected="selected">Active</option>
+                                                    <option value="0">Inactive</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -129,7 +129,7 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="hidden" name="service" id="service" value="adduser" >
+                                                <input type="hidden" name="service" id="service" value="add_user" >
                                                 <input type="submit" name="add" value="Add">
                                             </a>
                                         </div>

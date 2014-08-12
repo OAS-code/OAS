@@ -5,6 +5,9 @@
  */
 package Entity;
 
+import DAO.OtherDAO;
+import java.security.NoSuchAlgorithmException;
+
 /**
  *
  * @author MrTu
@@ -93,7 +96,24 @@ public class User {
     public String getSalt() {
         return salt;
     }
+    
+    public void makeSalt() {
+        DAO.OtherDAO other = new OtherDAO();
+        this.salt = other.makeRandomString(10, 10);
+    }
 
+    public void makePassword() throws NoSuchAlgorithmException {
+        if (this.salt== null) {
+            this.makeSalt();
+        }
+        DAO.OtherDAO other = new OtherDAO();
+        String newPassword = other.makeRandomString(10, 10);
+        String step1 = other.getMd5FromString(newPassword);
+        String step2 = step1+this.salt;
+        String step3 = other.getMd5FromString(step2);
+        this.password = step3;
+    }
+    
     public void setSalt(String salt) {
         this.salt = salt;
     }
@@ -149,7 +169,7 @@ public class User {
         } else if (this.status == 1) {
             return "Active";
         } else {
-            return "Inactive";
+            return "Error";
         }
     }
 
@@ -217,4 +237,6 @@ public class User {
             this.role = 0;
         }
     }
+
+    
 }
