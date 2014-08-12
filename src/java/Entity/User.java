@@ -24,6 +24,13 @@ public class User {
 
     public User() {
     }
+    
+    public User(String username, String email, int status, int role) {
+        this.username = username;
+        this.email = email;
+        this.status = status;
+        this.role = role;
+    }
 
     public User(String fullname, String username, String password, String phonenumber, String email, String address, String salt) {
         this.fullname = fullname;
@@ -82,7 +89,7 @@ public class User {
         this.phonenumber = phonenumber;
         this.address = address;
     }
-
+    
     public String getSalt() {
         return salt;
     }
@@ -96,10 +103,14 @@ public class User {
     }
 
     public String getFullname() {
+        if (fullname == null) {
+            return "";
+        }
         return fullname;
     }
 
     public String getUsername() {
+        
         return username;
     }
 
@@ -108,14 +119,23 @@ public class User {
     }
 
     public String getPhonenumber() {
+        if (phonenumber == null) {
+            return "";
+        }
         return phonenumber;
     }
 
     public String getEmail() {
+        if (email == null) {
+            return "";
+        }
         return email;
     }
 
     public String getAddress() {
+        if (address == null) {
+            return "";
+        }
         return address;
     }
 
