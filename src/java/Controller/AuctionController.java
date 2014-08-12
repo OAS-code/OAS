@@ -12,6 +12,7 @@ import Entity.Category;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -83,7 +84,7 @@ public class AuctionController extends HttpServlet {
             //}
         }
         if (service.equalsIgnoreCase("add_auction")) {
-            ArrayList<Category> array = (ArrayList<Category>)cdao.select();
+            ArrayList<Category> array = (ArrayList<Category>) cdao.select();
             request.setAttribute("array", array);
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
@@ -152,22 +153,23 @@ public class AuctionController extends HttpServlet {
             double starting_price = Double.parseDouble(starting_price1);
             double reserve_price = Double.parseDouble(reserve_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
-            Auction auction = new Auction(auctionid, categoryid, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-            int n = dao.update(auction);
-            if (n > 0) {
+            /*Auction auction = new Auction(auctionid, categoryid, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+             int n = dao.update(auction);
+             if (n > 0) {
 
-                Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
-                int m = dao.updateDigital(digital);
-                if (m > 0) {
-                    rd = request.getRequestDispatcher(auction_manager);
-                    rd.forward(request, response);
-                }
-            }
+             Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
+             int m = dao.updateDigital(digital);
+             if (m > 0) {
+             rd = request.getRequestDispatcher(auction_manager);
+             rd.forward(request, response);
+             }
+             }*/
 
         }
 
         if (service.equalsIgnoreCase("addnewauction")) {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm a");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             String sta = request.getParameter("cb2");
@@ -192,21 +194,19 @@ public class AuctionController extends HttpServlet {
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
             Date start_date = (Date) simpleDateFormat.parse(start_date1);
+            Time start_time = (Time) simpleTimeFormat.parse(start_time1);
             Date end_date = (Date) simpleDateFormat.parse(end_date1);
-
+            Time end_time = (Time) simpleTimeFormat.parse(end_time1);
             double starting_price = Double.parseDouble(starting_price1);
-            double reserve_price = Double.parseDouble(reserve_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
-            Auction auction = new Auction(categoryid, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+            Auction auction = new Auction(categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
             int n = dao.add(auction);
             if (n > 0) {
-                int auctionid = dao.lastID();
-                Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
-                int m = dao.addDigital(digital);
-                if (m > 0) {
-                    rd = request.getRequestDispatcher(auction_manager);
-                    rd.forward(request, response);
-                }
+                rd = request.getRequestDispatcher(auction_manager);
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher(auction_manager);
+                rd.forward(request, response);
             }
         }
     }

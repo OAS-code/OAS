@@ -13,8 +13,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
@@ -84,8 +84,8 @@ public class AuctionDAO {
                 reserve_price = rs.getDouble("reserve_price");
                 buy_now_price = rs.getDouble("buy_now_price");
                 status = rs.getString("status");
-                Auction auction = new Auction(auctionid, category_id, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                arr.add(auction);
+                //Auction auction = new Auction(auctionid, category_id, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+                //arr.add(auction);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -119,8 +119,8 @@ public class AuctionDAO {
                     reserve_price = rs.getDouble("reserve_price");
                     buy_now_price = rs.getDouble("buy_now_price");
                     status = rs.getString("status");
-                    Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                    arr.add(auction);
+                    //Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+                    //arr.add(auction);
                 }
             } else {
                 rs = state.executeQuery(sql);
@@ -140,8 +140,8 @@ public class AuctionDAO {
                     reserve_price = rs.getDouble("reserve_price");
                     buy_now_price = rs.getDouble("buy_now_price");
                     status = rs.getString("status");
-                    Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                    arr.add(auction);
+                    //Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+                    //arr.add(auction);
                 }
             }
         } catch (SQLException ex) {
@@ -155,7 +155,7 @@ public class AuctionDAO {
         try {
             String sql = "INSERT INTO auction (category_id,seller_id,title,description,"
                     + "start_date,start_time,end_date,end_time,starting_price,"
-                    + "buy_now_price,status) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+                    + "buy_now_price,status,video,image1,image2,image3,image4,image5) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, auction.getCategoryid());
             pre.setInt(2, auction.getSellerid());
@@ -167,7 +167,13 @@ public class AuctionDAO {
             pre.setTime(8, new java.sql.Time(auction.getEnd_time().getTime()));
             pre.setDouble(9, auction.getStarting_price());
             pre.setDouble(10, auction.getBuy_now_price());
-            pre.setInt(11, auction.getStatus());
+            pre.setString(11, auction.getStatus());
+            pre.setString(12, auction.getVideo());
+            pre.setString(13, auction.getImage1());
+            pre.setString(14, auction.getImage2());     
+            pre.setString(15, auction.getImage3());
+            pre.setString(16, auction.getImage4());
+            pre.setString(17, auction.getImage5());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -216,9 +222,8 @@ public class AuctionDAO {
             pre.setDate(5, new java.sql.Date(auction.getStart_date().getTime()));
             pre.setDate(6, new java.sql.Date(auction.getEnd_date().getTime()));
             pre.setDouble(7, auction.getStarting_price());
-            pre.setDouble(8, auction.getReserve_price());
             pre.setDouble(9, auction.getBuy_now_price());
-            pre.setString(10, auction.getStatus());
+            //pre.setString(10, auction.getStatus());
             pre.setInt(11, auction.getAuctionid());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -257,8 +262,6 @@ public class AuctionDAO {
 
     public static void main(String[] args) {
         AuctionDAO dao = new AuctionDAO();
-        int n = dao.lastID();
-        System.out.println(n);
     }
 
 }

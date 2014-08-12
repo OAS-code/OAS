@@ -17,19 +17,12 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-        <%           
-            ArrayList<Auction> ar = (ArrayList<Auction>) request.getAttribute("arr");
-            if (ar == null) {
-                response.sendRedirect("AuctionController?service=index");
-            } else {
-        %>
         <jsp:include page="top.jsp" />
         <div class="header2">  
             <%@ include file="home_spotlight.jsp" %> 
             <%@ include file="home.jsp" %> 
         </div>
         <jsp:include page="footer.jsp" />
-        <%}%>
     </body> 
 
 </html>

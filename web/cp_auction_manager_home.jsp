@@ -53,8 +53,8 @@
                                             <h2>
                                                 <select name="cb2" class=" text_bg select" id="cb2" style="">
                                                     <option value="" selected="selected">Select category</option>
-                                                    <option value="Active">Activated</option>
-                                                    <option value="Deactive">Deactivated</option>
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive</option>
                                                 </select>
                                             </h2>
                                         </div>
