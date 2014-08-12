@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -168,19 +169,18 @@ public class AuctionController extends HttpServlet {
         }
 
         if (service.equalsIgnoreCase("addnewauction")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat simpleTimeFormat = new SimpleDateFormat("hh:mm a");
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
+            DateFormat format = new SimpleDateFormat("HH:mm");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
             String sta = request.getParameter("cb2");
             int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
-            String start_time1 = request.getParameter("starttime");
+            //String start_time1 = request.getParameter("starttime");
             String end_date1 = request.getParameter("enddate");
-            String end_time1 = request.getParameter("endtime");
+            //String end_time1 = request.getParameter("endtime");           
             String starting_price1 = request.getParameter("startingprice");
-            String reserve_price1 = request.getParameter("reserveprice");
             String buy_now_price1 = request.getParameter("buynowprice");
             String image1 = request.getParameter("image1");
             String image2 = request.getParameter("image2");
@@ -193,10 +193,12 @@ public class AuctionController extends HttpServlet {
             String id = request.getParameter("no");
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date) simpleDateFormat.parse(start_date1);
-            Time start_time = (Time) simpleTimeFormat.parse(start_time1);
-            Date end_date = (Date) simpleDateFormat.parse(end_date1);
-            Time end_time = (Time) simpleTimeFormat.parse(end_time1);
+            Date start_date = simpleDateFormat.parse(start_date1);           
+            Date start_time = format.parse(start_date1);
+            System.out.println(start_time);
+            Date end_date = simpleDateFormat.parse(end_date1);
+            Date end_time = format.parse(end_date1);
+            System.out.println(end_time);
             double starting_price = Double.parseDouble(starting_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
             Auction auction = new Auction(categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
@@ -205,8 +207,7 @@ public class AuctionController extends HttpServlet {
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             } else {
-                rd = request.getRequestDispatcher(auction_manager);
-                rd.forward(request, response);
+                
             }
         }
     }
