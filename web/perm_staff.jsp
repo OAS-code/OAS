@@ -12,7 +12,12 @@
         <title>JSP Page</title>
     </head>
     <body>
-         
+         <%
+            int role = Integer.parseInt( (String) session.getAttribute("role"));
+            if (role != 1) {
+                response.sendRedirect("notification.jsp");
+            }
+        %>
 
     </body>
 </html>

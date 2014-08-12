@@ -40,18 +40,18 @@ public class UserDAO {
 
     public UserDAO() {
         try {
-            System.out.println("Connecting to DB using the following details:");
+            //System.out.println("Connecting to DB using the following details:");
             javax.naming.Context ctx = new javax.naming.InitialContext();
             String host = (String) ctx.lookup("java:comp/env/db-host");
-            System.out.println(host);
+            //System.out.println(host);
             String port = (String) ctx.lookup("java:comp/env/db-port");
-            System.out.println(port);
+            //System.out.println(port);
             String database = (String) ctx.lookup("java:comp/env/db-database");
-            System.out.println(database);
+            //System.out.println(database);
             String username = (String) ctx.lookup("java:comp/env/db-username");
-            System.out.println(username);
+            //System.out.println(username);
             String password = (String) ctx.lookup("java:comp/env/db-password");
-            System.out.println(password);
+            //System.out.println(password);
             connection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useUnicode=true&characterEncoding=UTF-8", username, password);
         } catch (NamingException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -63,7 +63,7 @@ public class UserDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = (Connection) DriverManager.getConnection(ulr, username, password);
-            System.out.println("connected");
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -119,73 +119,48 @@ public class UserDAO {
         return n;
     }
 
-    
-
-    public ArrayList<User> view() throws SQLException {
-        String sql = "SELECT * FROM user";
-        ArrayList<User> arr = new ArrayList<User>();
+    public ArrayList<User> list(String keyword, String rol, String stt) {
+        String sql = "SELECT * FROM user WHERE 1=1 ";
+        String sqlRole = " AND role = '" + rol + "' ";
+        String sqlStatus = " AND status = '" + stt + "' ";
+        String sqlKeyword = " AND MATCH(fullname, username) AGAINST ('" + keyword + "')";
+        
+        ArrayList<User> arr = new ArrayList<>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            if (!rol.equals("")) {
+                sql = sql + sqlRole;
+            }
+            if (!stt.equals("")) {
+                sql = sql + sqlStatus;
+            }
+            if (!keyword.equals("")) {
+                sql = sql + sqlKeyword;
+            }
+            sql = sql + " ORDER BY role DESC";
+            
+            System.out.println(sql);
+            
             rs = state.executeQuery(sql);
             String fullname, username;
-            int status, role;
-            int id;
+            int id, role, status;
             while (rs.next()) {
                 id = rs.getInt("id");
                 fullname = rs.getString("fullname");
                 username = rs.getString("username");
                 status = rs.getInt("status");
                 role = rs.getInt("role");
-                User user = new User(id, fullname, username, role, status);
+                User user = new User(id, fullname, username, status, role);
                 arr.add(user);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } finally {
-            state.close();
-            conn.close();
         }
         return arr;
     }
-
-    public ArrayList<User> searchUser(String search, String rol, String stt) {
-        String sql = "SELECT * FROM user WHERE MATCH(fullname, username) AGAINST ('" + search + "') AND role LIKE '%" + rol + "%' AND status LIKE '" + stt + "%'";
-        String sql1 = "SELECT * FROM user WHERE role LIKE '%" + rol + "%' AND status LIKE '" + stt + "%'";
-        ArrayList<User> arr = new ArrayList<>();
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            if (search.equals("")) {
-                rs = state.executeQuery(sql1);
-                String fullname, username, role, status;
-                int id;
-                while (rs.next()) {
-                    id = rs.getInt("id");
-                    fullname = rs.getString("fullname");
-                    username = rs.getString("username");
-                    status = rs.getString("status");
-                    role = rs.getString("role");
-                    User user = new User(id, fullname, username, status, role);
-                    arr.add(user);
-                }
-            } else {
-                rs = state.executeQuery(sql);
-                String fullname, username, role, status;
-                int id;
-                while (rs.next()) {
-                    id = rs.getInt("id");
-                    fullname = rs.getString("fullname");
-                    username = rs.getString("username");
-                    status = rs.getString("status");
-                    role = rs.getString("role");
-                    User user = new User(id, fullname, username, status, role);
-                    arr.add(user);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return arr;
+    
+    public ArrayList<User> list() {
+        return list("", "", "");
     }
 
     public ResultSet search(int id) {

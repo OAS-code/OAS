@@ -68,7 +68,7 @@ public class User {
         this.salt = salt;
     }
 
-    public User(int id, String fullname, String username, int role, int status) {
+    public User(int id, String fullname, String username, int status, int role) {
         this.id = id;
         this.fullname = fullname;
         this.username = username;
@@ -124,9 +124,9 @@ public class User {
     }
 
     public String getStatus() {
-        if (status == 0) {
+        if (this.status == 0) {
             return "Inactive";
-        } else if (status == 1) {
+        } else if (this.status == 1) {
             return "Active";
         } else {
             return "Inactive";
@@ -138,14 +138,14 @@ public class User {
     }
 
     public String getRole() {
-        if (role == 2) {
+        if (this.role == 2) {
             return "Administrator";
-        } else if (role == 1) {
+        } else if (this.role == 1) {
             return "Auction staff";
-        } else if (role == 0) {
+        } else if (this.role == 0) {
             return "Customer";
         } else {
-            return "Customer";
+            return "Error";
         }
     }
 
