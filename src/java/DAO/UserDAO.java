@@ -139,7 +139,7 @@ public class UserDAO {
             }
             sql = sql + " ORDER BY role DESC";
             
-            System.out.println(sql);
+            //System.out.println(sql);
             
             rs = state.executeQuery(sql);
             String fullname, username;
@@ -163,17 +163,30 @@ public class UserDAO {
         return list("", "", "");
     }
 
-    public ResultSet search(int id) {
-        String sql = "SELECT * FROM user WHERE id = ?";
+    public User getUser(int userId) {
+        String sql = "SELECT * FROM user WHERE id = ? LIMIT 1";
+        User user = new User();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
+            pre.setInt(1, userId);
             rs = pre.executeQuery();
+            while (rs.next()) {
+                String username = rs.getString("username");
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                int role = rs.getInt("role");
+                user = new User(username, email, status, role);
+                user.setId(rs.getInt("id"));
+                user.setFullname(rs.getString("fullname"));
+                user.setPhonenumber(rs.getString("phonenumber"));
+                user.setAddress(rs.getString("address"));
+            }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //System.out.println(sql);
         }
-        return rs;
+        return user;
     }
 
     public int delete(int id) {

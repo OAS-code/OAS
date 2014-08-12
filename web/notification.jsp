@@ -25,10 +25,14 @@
 
                     <div class="ideal_top">  </div>
                     <div class="ideal_middle">
-                        <% if (errorCode == "1") { %>
+                        <% if (errorCode.equalsIgnoreCase("1")) { %>
                             <h1>Internal Error!</h1>
                             <div class="ideal_middle_bottom"><h2> Could not create new user.</h2>
                         <% } 
+                        else if (errorCode.equalsIgnoreCase("2")) { %>
+                            <h1>Page not found!</h1>
+                            <div class="ideal_middle_bottom"><h2> Sorry, the page you requested may have been moved or deleted.</h2>
+                        <% }
                         else { %>
                             <h1>Access denied!</h1>
                             <div class="ideal_middle_bottom"><h2> You have insufficient permission to perform this task</h2>

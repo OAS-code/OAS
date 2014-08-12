@@ -34,19 +34,22 @@ public class UserController extends HttpServlet {
         OtherDAO otherDAO = new OtherDAO();
         ResultSet rs = null;
         String service = request.getParameter("service");
+        if (service == null) {
+            service = "-1";
+        }
         final String userManager = "cp_user_manager.jsp?current_page=user_manager";
-        final String view_detail_user = "cp_view_detail_user.jsp";
+        final String view_detail_user = "cp_user_view_detail.jsp?current_page=user_manager";
         final String TableUser = "table_user.jsp";
         final String loginPage = "login.jsp";
-        final String cp = "cp.jsp";
-        final String edit_user = "cp_edit_user.jsp";
+        final String cp = "cp.jsp&current_page=dashboard";
+        final String edit_user = "cp_user_edit.jsp?current_page=user_manager";
         final String change_pass = "cp_change_password.jsp?error_code=1";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("adduser")) {
+        else if (service.equalsIgnoreCase("adduser")) {
             String fullname = request.getParameter("fullname");
             String username = request.getParameter("username");
             String password = otherDAO.makeRandomString(10, 10);
@@ -65,7 +68,7 @@ public class UserController extends HttpServlet {
                 response.sendRedirect("notification.jsp?errorCode=1");
             }
         }
-        if (service.equalsIgnoreCase("deleteuser")) {
+        else if (service.equalsIgnoreCase("deleteuser")) {
             String id = request.getParameter("no");
             int n = dao.delete(Integer.parseInt(id));
             if (n > 0) {
@@ -73,26 +76,7 @@ public class UserController extends HttpServlet {
                 rd.forward(request, response);
             }
         }
-
-        if (service.equalsIgnoreCase("edituser")) {
-            String id1 = request.getParameter("no");
-            int id = Integer.parseInt(id1);
-            String fullname = request.getParameter("fullname");
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            String phonenumber = request.getParameter("phonenumber");
-            String email = request.getParameter("email");
-            String address = request.getParameter("address");
-            String status = request.getParameter("cb2");
-            String role = request.getParameter("cb1");
-
-            User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
-            int n = dao.update(user);
-            if (n > 0) {
-                response.sendRedirect(userManager);
-            }
-        }
-        if (service.equalsIgnoreCase("edit_profile")) {
+        else if (service.equalsIgnoreCase("edit_profile")) {
             String id1 = request.getParameter("no");
             int id = Integer.parseInt(id1);
             String fullname = request.getParameter("fullname");
@@ -104,15 +88,7 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(cp);
             }
         }
-        if (service.equalsIgnoreCase("edit_user")) {
-            String id = request.getParameter("id");
-            rs = dao.search(Integer.parseInt(id));
-            request.setAttribute("rs", rs);
-            rd = request.getRequestDispatcher(edit_user);
-            rd.forward(request, response);
-            
-        }
-        if (service.equalsIgnoreCase("change_password")) {
+        else if (service.equalsIgnoreCase("change_password")) {
             String id1 = request.getParameter("no");
             int id = Integer.parseInt(id1);
             String oldpass = request.getParameter("old_password");
@@ -140,21 +116,45 @@ public class UserController extends HttpServlet {
                 }
             }
         }
-        if (service.equalsIgnoreCase("listall")) {
+        else if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("viewdetail")) {
-            String id = request.getParameter("userid");
-            rs = dao.search(Integer.parseInt(id));
-            request.setAttribute("rs", rs);
+        else if (service.equalsIgnoreCase("viewdetail")) {
+            String userId = request.getParameter("userid");
+            request.setAttribute("requestedUser", dao.getUser(Integer.parseInt(userId)) );
             rd = request.getRequestDispatcher(view_detail_user);
             rd.forward(request, response);
         }
+        else if (service.equalsIgnoreCase("edit_user")) {
+            String userId = request.getParameter("userid");
+            System.out.print(userId);
+            request.setAttribute("requestedUser", dao.getUser(Integer.parseInt(userId)) );
+            rd = request.getRequestDispatcher(edit_user);
+            rd.forward(request, response);
+        }
+        else if (service.equalsIgnoreCase("update_user")) {
+            String userId = request.getParameter("userid");
+            request.setAttribute("requestedUser", dao.getUser(Integer.parseInt(userId)) );
+            int id = Integer.parseInt(userId);
+            String fullname = request.getParameter("fullname");
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            String phonenumber = request.getParameter("phonenumber");
+            String email = request.getParameter("email");
+            String address = request.getParameter("address");
+            String status = request.getParameter("cb2");
+            String role = request.getParameter("cb1");
 
-        if (service.equalsIgnoreCase("search")) {
+            User user = new User(id, fullname, username, password, phonenumber, email, address, role, status);
+            int n = dao.update(user);
+            if (n > 0) {
+                response.sendRedirect(userManager);
+            }
+        }
+        else if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             String role = request.getParameter("cb1");
             String status = request.getParameter("cb2");
@@ -164,7 +164,7 @@ public class UserController extends HttpServlet {
             rd.forward(request, response);
         }
 
-        if (service.equalsIgnoreCase("login")) {
+        else if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String salt = dao.getSalt(username);
@@ -200,7 +200,7 @@ public class UserController extends HttpServlet {
              break;
              }*/
         }
-        if (service.equals("registerUser")) {
+        else if (service.equals("registerUser")) {
 
             String username = request.getParameter("username");
             String password = request.getParameter("password");
@@ -215,6 +215,9 @@ public class UserController extends HttpServlet {
                 rd = request.getRequestDispatcher(loginPage);
                 rd.forward(request, response);
             }
+        }
+        else {
+            response.sendRedirect("notification.jsp?errorCode=2");
         }
 
         /*if (service.equals("Login")) {

@@ -13,8 +13,7 @@
     </head>
     <body>
         <%
-            int role = Integer.parseInt( (String) session.getAttribute("role"));
-            if (role != 2) {
+            if (Integer.parseInt( (String) session.getAttribute("role")) != 2) {
                 response.sendRedirect("notification.jsp");
             }
         %>
