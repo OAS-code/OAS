@@ -14,6 +14,21 @@
 <html>
     <head>
         <title>Manage user</title>
+        <%
+            String selectedRole = request.getParameter("role");
+            String selectedStatus = request.getParameter("status");
+            String selectedKeyword = request.getParameter("keyword");
+            
+            if (selectedRole == null) {
+                selectedRole = "-1";
+            }
+            if (selectedStatus == null) {
+                selectedStatus = "-1";
+            } 
+            if (selectedKeyword == null) {
+                selectedKeyword = "";
+            } 
+        %>
     </head>
     <body>
         <%@ include file="perm_admin.jsp" %>
@@ -38,11 +53,12 @@
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2>
-                                                <select name="cb1" class=" text_bg select" id="cb1" >	
-                                                    <option value="" selected="selected">Select User Type</option>
-                                                    <option value="Customer"  >Customer</option>
-                                                    <option value="Staff"  >Auction staff</option>
-                                                    <option value="Admin"  >Administrator</option>
+                                                <select name="cb1" class=" text_bg select" id="cb1" >
+                                                    
+                                                    <option value="" <% if (selectedRole.equalsIgnoreCase("-1")) {%>selected="selected" <%}%> >Select User Type</option>
+                                                    <option value="0" <% if (selectedRole.equalsIgnoreCase("0")) {%>selected="selected" <%}%> >Customer</option>
+                                                    <option value="1" <% if (selectedRole.equalsIgnoreCase("1")) {%>selected="selected" <%}%> >Auction staff</option>
+                                                    <option value="2" <% if (selectedRole.equalsIgnoreCase("2")) {%>selected="selected" <%}%> >Administrator</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -56,9 +72,9 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="cb2" class=" text_bg select" id="cb2" >	
-                                                    <option value="" selected="selected">Select User Status</option>
-                                                    <option value="Active">Activated</option>
-                                                    <option value="Deactive">Deactivated</option>
+                                                    <option value="" <% if (selectedStatus.equalsIgnoreCase("-1")) {%>selected="selected" <%}%> >Select User Status</option>
+                                                    <option value="1" <% if (selectedStatus.equalsIgnoreCase("1")) {%>selected="selected" <%}%> >Active</option>
+                                                    <option value="0" <% if (selectedStatus.equalsIgnoreCase("0")) {%>selected="selected" <%}%>>Inactive</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -71,7 +87,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="txtsearch" maxlength="100" id="txtsearch" class="textbox"></h2>
+                                            <h2><input type="text" name="txtsearch" maxlength="100" id="txtsearch" class="textbox" value="<%=selectedKeyword%>"></h2>
                                         </div>		
                                     </div>
 
