@@ -8,10 +8,13 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%
+            String domain= getServletContext().getInitParameter("domain");
+        %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title></title>
-        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
-        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <link rel="stylesheet" href="<%=domain%>/css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="<%=domain%>/images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
         <div id="header">
@@ -19,10 +22,10 @@
                 <div class="header_lft">
                     <p>Bidding Type   :</p>
                     <ul>
-                        <li style="background:none;"><img src="images/head_top1_bg.png" width="18" height="18" alt="Beginner"><a title="Beginner">Beginner</a></li>
-                        <li><img src="images/head_top2_bg.png" width="18" height="18" alt="Penny auction"><a title="Penny Auction">Penny Auction</a></li>
-                        <li><img src="images/head_top3_bg.png" width="18" height="18" alt="Peak auction"><a title="Peak Auction">Peak Auction</a></li>
-                        <li><img src="images/reserve_icon1.png" width="17" height="17" alt="Reserve auction"><a title="Reserve auction">Reserve auction</a></li>
+                        <li style="background:none;"><img src="<%=domain%>/images/head_top1_bg.png" width="18" height="18" alt="Beginner"><a title="Beginner">Beginner</a></li>
+                        <li><img src="<%=domain%>/images/head_top2_bg.png" width="18" height="18" alt="Penny auction"><a title="Penny Auction">Penny Auction</a></li>
+                        <li><img src="<%=domain%>/images/head_top3_bg.png" width="18" height="18" alt="Peak auction"><a title="Peak Auction">Peak Auction</a></li>
+                        <li><img src="<%=domain%>/images/reserve_icon1.png" width="17" height="17" alt="Reserve auction"><a title="Reserve auction">Reserve auction</a></li>
                     </ul>
                 </div>
                 <div class="header_rgt">
@@ -36,12 +39,12 @@
                                 if (userName == null || role == null) {
                             %>
 
-                            <li><a href="login.jsp" title="Sign in">Sign in</a></li>
-                            <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
+                            <li><a href="<%=domain%>/login.jsp" title="Sign in">Sign in</a></li>
+                            <li class="active"><a href="<%=domain%>/register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
 
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
-                            <li class="active"><a href="logout.jsp?success_page=2" title="Signout">Sign out</a></li>
+                            <li><a href="<%=domain%>/cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
+                            <li class="active"><a href="<%=domain%>/logout.jsp?success_page=2" title="Signout">Sign out</a></li>
 
                             <%}%>
                             
@@ -54,8 +57,8 @@
         <div class="header2">
             <div class="header2_lft">
                 <h1 title="Online Auction System">
-                    <a href="index.jsp" title="Online Auction System" class="fl">
-                        <img src="images/action-logo.png" alt="Online Auction System" title="Online Auction System" border="0" width="145" height="29"> 
+                    <a href="<%=domain%>/index.jsp" title="Online Auction System" class="fl">
+                        <img src="<%=domain%>/images/action-logo.png" alt="Online Auction System" title="Online Auction System" border="0" width="145" height="29"> 
                     </a>
                 </h1>	
             </div>
@@ -108,7 +111,7 @@
 
                         <a style="cursor:pointer;" id="category_list" title="Select Category">Select Category				</a>
                         <span style="padding:8px 5px;">
-                            <img id="drop_down_cat" src="images/menu_select.png" align="middle" width="8" height="5" alt="" border="0" title="ALL CATEGORIES">
+                            <img id="drop_down_cat" src="<%=domain%>/images/menu_select.png" align="middle" width="8" height="5" alt="" border="0" title="ALL CATEGORIES">
 
 
                             <div id="div_category" style="display:none;">	
@@ -131,7 +134,7 @@
                             </div>
                         </span></li>
 
-                    <li id="home_menu"> <a href="index.jsp" title="Home"> Home</a></li>
+                    <li id="home_menu"> <a href="<%=domain%>/index.jsp" title="Home"> Home</a></li>
                     <!--<li id="home_menu"><a href="cp.jsp?current_page=dashboard" title="CP"> Control Panel</a></li>-->
 
                 </ul>
