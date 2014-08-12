@@ -49,7 +49,7 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("adduser")) {
             String fullname = request.getParameter("fullname");
             String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String password = otherDAO.makeRandomString(10, 10);
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
@@ -60,6 +60,9 @@ public class UserController extends HttpServlet {
             int n = dao.add(user);
             if (n > 0) {
                 response.sendRedirect(userManager);
+            }
+            else {
+                response.sendRedirect("notification.jsp?errorCode=1");
             }
         }
         if (service.equalsIgnoreCase("deleteuser")) {

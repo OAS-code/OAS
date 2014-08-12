@@ -12,6 +12,9 @@
         <title>Access denied!</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <%
+            String errorCode = request.getParameter("errorCode");
+        %>
     </head>
     <body>
         <jsp:include page="top.jsp" />
@@ -22,9 +25,14 @@
 
                     <div class="ideal_top">  </div>
                     <div class="ideal_middle">
-                        <h1>Access denied!</h1>
-
-                        <div class="ideal_middle_bottom"><h2> You have insufficient permission to perform this task</h2>
+                        <% if (errorCode == "1") { %>
+                            <h1>Internal Error!</h1>
+                            <div class="ideal_middle_bottom"><h2> Could not create new user.</h2>
+                        <% } 
+                        else { %>
+                            <h1>Access denied!</h1>
+                            <div class="ideal_middle_bottom"><h2> You have insufficient permission to perform this task</h2>
+                        <% } %>
 
                         </div>
 
