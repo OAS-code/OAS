@@ -69,7 +69,7 @@
             </ul>
             <% } else if (errorCode != null && errorCode.equals("7")) {%>
             <ul id="message" class="success_msg">
-                <li><p>Account '<%=username%>' has been created successfully, please check your email inbox for activation instructions!</p></li>
+                <li><p>Account '<%=username%>' has been created successfully, account's password has been dispatched to your email address!</p></li>
             </ul>
             <% } %>
             <div class="login-part">

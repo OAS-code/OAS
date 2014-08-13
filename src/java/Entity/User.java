@@ -106,7 +106,7 @@ public class User {
         this.salt = other.makeRandomString(10, 10);
     }
 
-    public void makePassword() throws NoSuchAlgorithmException {
+    public String makePassword() throws NoSuchAlgorithmException {
         if (this.salt == null) {
             this.makeSalt();
         }
@@ -116,6 +116,7 @@ public class User {
         String step2 = step1 + this.salt;
         String step3 = other.getMd5FromString(step2);
         this.password = step3;
+        return newPassword;
     }
 
     public void setSalt(String salt) {

@@ -210,14 +210,26 @@ public class UserController extends HttpServlet {
                 }
             }
 
-            User user = new User(username, email, 0, 0);
+            User user = new User(username, email, 1, 0);
             user.setAddress(address);
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
-            user.makePassword();
+            String madePassword = user.makePassword();
             
             int n = dao.addUser(user);
             if (n > 0) {
+                //Start sending email to user.
+                String subject = "Online Auction System - Account Information";
+                String body =   "Dear "+username+",\n" +
+                                "\n"+
+                                "Thank you for using OAS! Your account has been successfully created, you can now log into our system with the following details:\n" +
+                                "Username: "+username+"\n"+
+                                "Password: "+madePassword+"\n"+
+                                "\n" +
+                                "Happy bidding,\n" +
+                                "Your friends at OAS.";
+                dao.sendMail(email, subject, body);
+                //Finish sending email
                 rd = request.getRequestDispatcher(loginPage+"?errorCode=7&username="+username);
                 rd.forward(request, response);
             } else {
