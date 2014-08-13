@@ -152,33 +152,18 @@ public class AuctionDAO {
     }
 
     public int add(Auction auction) {
-        int n;
+        int n = 0;
         try {
-            String sql = "INSERT INTO auction (category_id,seller_id,title,description,"
-                    + "start_date,start_time,end_date,end_time,starting_price,"
-                    + "buy_now_price,status,video,image1,image2,image3,image4,image5) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO auction (category_id,seller_id,title,description,status) VALUES (?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, auction.getCategoryid());
             pre.setInt(2, auction.getSellerid());
             pre.setString(3, auction.getTitle());
-            pre.setString(4, auction.getDescription());
-            pre.setDate(5, new java.sql.Date(auction.getStart_date().getTime()));
-            pre.setTime(6, new Time(auction.getStart_time().getTime()));
-            pre.setDate(7, new java.sql.Date(auction.getEnd_date().getTime()));
-            pre.setTime(8, new Time(auction.getEnd_time().getTime()));
-            pre.setDouble(9, auction.getStarting_price());
-            pre.setDouble(10, auction.getBuy_now_price());
-            pre.setString(11, auction.getStatus());
-            pre.setString(12, auction.getVideo());
-            pre.setString(13, auction.getImage1());
-            pre.setString(14, auction.getImage2());     
-            pre.setString(15, auction.getImage3());
-            pre.setString(16, auction.getImage4());
-            pre.setString(17, auction.getImage5());
+            pre.setString(4, auction.getDescription());           
+            pre.setInt(5, auction.getStatusId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return 0;
         }
         return n;
     }
