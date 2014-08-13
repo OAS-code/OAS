@@ -48,7 +48,7 @@ public class UserController extends HttpServlet {
         final String user_view_detail = "cp_user_view_detail.jsp";
         final String controller_view_detail = "UserController?service=view_detail";
         final String user_register = "register.jsp";
-        
+
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
@@ -176,16 +176,15 @@ public class UserController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             String[] result = dao.logUserIn(username, password);
-            
+
             if (result[0].equalsIgnoreCase("ok")) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("role", result[4]);
                 session.setAttribute("username", result[2]);
                 session.setAttribute("userid", result[3]);
                 rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
-            }
-            else {
-                rd = request.getRequestDispatcher("login.jsp?errorCode="+result[1]);
+            } else {
+                rd = request.getRequestDispatcher("login.jsp?errorCode=" + result[1]);
             }
             rd.forward(request, response);
         } else if (service.equals("register")) {
@@ -194,23 +193,51 @@ public class UserController extends HttpServlet {
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            
-            String url = user_register+"?username="+username+"&fullname="+fullname+"&phonenumber="+phonenumber+"&email="+email+"&address="+address+"&errorCode=";
-            
-            if (username.isEmpty() || username.length() < 3 ) {
+            String url = user_register + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&errorCode=";
+            if (username.isEmpty() || username.length() < 3) {
                 url = url + "1";
-                rd = request.getRequestDispatcher(loginPage);
+                rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else if (email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
+                url = url + "2";
+                rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else {
+                if (dao.isUserExisted(username, email)) {
+                    url = url + "3";
+                    rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+            }
+
+            User user = new User(username, email, 1, 0);
+            user.setAddress(address);
+            user.setFullname(fullname);
+            user.setPhonenumber(phonenumber);
+            String madePassword = user.makePassword();
+            
+            int n = dao.addUser(user);
+            if (n > 0) {
+                //Start sending email to user.
+                String subject = "Online Auction System - Account Information";
+                String body =   "Dear "+username+",\n" +
+                                "\n"+
+                                "Thank you for using OAS! Your account has been successfully created, you can now log into our system with the following details:\n" +
+                                "Username: "+username+"\n"+
+                                "Password: "+madePassword+"\n"+
+                                "\n" +
+                                "Happy bidding,\n" +
+                                "Your friends at OAS.";
+                dao.sendMail(email, subject, body);
+                //Finish sending email
+                rd = request.getRequestDispatcher(loginPage+"?errorCode=7&username="+username);
+                rd.forward(request, response);
+            } else {
+                url = url + "4";
+                rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             }
-                else if (email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".") ) {
-                
-            }
-            User user = new User(fullname, username, password, phonenumber, email, address, salt);
-            int n = dao.addUserFromRegister(user);
-            if (n > 0) {
-                
-            }
-            
+
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

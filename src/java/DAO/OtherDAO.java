@@ -83,4 +83,11 @@ public class OtherDAO {
         SimpleDateFormat dt1 = new SimpleDateFormat("MMMMM dd, yyyy");
         return dt1.format(date);
     }
+    
+    public String getEncryptedPassword(String rawPassword, String salt) throws NoSuchAlgorithmException{
+        String step1 = this.getMd5FromString(rawPassword);
+        String step2 = step1 + salt;
+        String encryptedPassword = this.getMd5FromString(step2);
+        return encryptedPassword;
+    }
 }

@@ -14,7 +14,11 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <%   
             String current_page = request.getParameter("current_page");
-            int rank = Integer.parseInt( (String) session.getAttribute("role"));
+            int rank = -1; 
+            if (session.getAttribute("role")!=null) {
+                rank = Integer.parseInt( (String) session.getAttribute("role"));
+            }
+            
         %>
     </head>
     <body>
@@ -56,7 +60,7 @@
                         }
                    
                         if (rank >= 0) {
-                            if ((current_page != null) && current_page.equalsIgnoreCase("change_password")) { %>
+                            if ((current_page != null) && current_page.equalsIgnoreCase("account_settings")) { %>
                     <li class="act_class" id="dashboard_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>

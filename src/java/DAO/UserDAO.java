@@ -104,28 +104,6 @@ public class UserDAO {
 
     }
 
-    public int addUserFromRegister(User user) {
-        int n = 0;
-        try {
-            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address,salt) VALUES (?,?,?,?,?,?,?)";
-
-            pre = conn.prepareStatement(sql);
-
-            pre.setString(1, user.getUsername());
-            pre.setString(2, user.getPassword());
-            pre.setString(3, user.getFullname());
-            pre.setString(4, user.getPhonenumber());
-            pre.setString(5, user.getEmail());
-            pre.setString(6, user.getAddress());
-            pre.setString(7, user.getSalt());
-
-            n = pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
-
     public ArrayList<User> list(String keyword, String rol, String stt) {
         String sql = "SELECT * FROM user WHERE 1=1 ";
         String sqlRole = " AND role = '" + rol + "' ";
@@ -280,6 +258,7 @@ public class UserDAO {
     public String[] logUserIn(String username, String password) throws SQLException, NoSuchAlgorithmException {
         String[] result = new String[5];
         User user = getUser(username);
+        System.out.println(user.getUsername());
         if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username))) {
             result[0] = "fail";
             result[1] = "1"; //error code
@@ -357,8 +336,9 @@ public class UserDAO {
         return n;
     }
 
-    public void SentEmail(String email, String subject, String content, final String username, final String password) {
-
+    public void sendMail(String sendTo, String subject, String body) {
+        final String username = "tupvse02404@fpt.edu.vn";
+        final String password = "vantu1992";
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
@@ -378,13 +358,13 @@ public class UserDAO {
             message = new MimeMessage(session);
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(email));
+                    InternetAddress.parse(sendTo));
             message.setSubject(subject);
-            message.setText(content);
+            message.setText(body);
 
             Transport.send(message);
 
-            System.out.println("Done");
+            //System.out.println("Done");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
@@ -392,9 +372,59 @@ public class UserDAO {
 
     }
 
+    public boolean isUserExisted(String username, String email) throws SQLException {
+        String sql = "";
+        if (username.isEmpty() && email.isEmpty()) {
+            return false;
+        } else {
+            if (!username.isEmpty() && !email.isEmpty()) {
+                sql = "SELECT COUNT(*) AS count FROM user WHERE username = ? OR email = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, username);
+                pre.setString(2, email);
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } else if (username.isEmpty() && !email.isEmpty()) {
+                sql = "SELECT * FROM user WHERE email = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, email);
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } else if (!username.isEmpty() && email.isEmpty()) {
+                sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, username);
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
-        //dao.SentEmail("tupvse02404@fpt.edu.vn","Auction","successfully","tupvse02404@fpt.edu.vn","vantu1992");
+        //dao.sendMail("tupvse02404@fpt.edu.vn","Auction","successfully");
     }
 
 }
