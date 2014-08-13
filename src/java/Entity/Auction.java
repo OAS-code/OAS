@@ -3,51 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Entity;
 
+import java.sql.Time;
 import java.util.Date;
-
-
-
-
 
 /**
  *
  * @author MrTu
  */
 public class Auction {
-     int auctionid;
+
+    int auctionid;
     int categoryid;
     int sellerid;
     String title;
     String description;
     Date start_date;
     Date start_time;
-    Date end_date;    
+    Date end_date;
     Date end_time;
     double starting_price;
     double buy_now_price;
-    int status; 
+    int status;
     String video;
     String image1;
     String image2;
     String image3;
     String image4;
-    String image5;   
+    String image5;
 
     public Auction() {
-    } 
+    }
 
-    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date start_time, Date end_date, Date end_time, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
+    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
         this.categoryid = categoryid;
         this.sellerid = sellerid;
         this.title = title;
         this.description = description;
         this.start_date = start_date;
-        this.start_time = start_time;
         this.end_date = end_date;
-        this.end_time = end_time;
         this.starting_price = starting_price;
         this.buy_now_price = buy_now_price;
         this.status = status;
@@ -106,13 +101,12 @@ public class Auction {
     public void setImage5(String image5) {
         this.image5 = image5;
     }
-    
 
     public Date getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(Date start_time) {
+    public void setStart_time(Time start_time) {
         this.start_time = start_time;
     }
 
@@ -120,10 +114,9 @@ public class Auction {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(Time end_time) {
         this.end_time = end_time;
     }
- 
 
     public void setAuctionid(int auctionid) {
         this.auctionid = auctionid;
@@ -162,15 +155,15 @@ public class Auction {
     }
 
     public void setStatus(String status) {
-        if(status.equals("Inactive")){
+        if (status.equals("Inactive")) {
             this.status = 0;
-        }else if(status.equals("Active")){
+        } else if (status.equals("Active")) {
             this.status = 1;
-        }else if(status.equals("Future")){           
-           this.status = 2; 
-        }else if(status.equals("Closed")){
+        } else if (status.equals("Future")) {
+            this.status = 2;
+        } else if (status.equals("Closed")) {
             this.status = 3;
-        }else{
+        } else {
             this.status = 0;
         }
     }
@@ -212,17 +205,17 @@ public class Auction {
     }
 
     public String getStatus() {
-         if(status==0){
+        if (status == 0) {
             return "Inactive";
-        }else if(status == 1){
+        } else if (status == 1) {
             return "Active";
-        }else if(status==2){           
-           return "Future";
-        }else if(status==3){
+        } else if (status == 2) {
+            return "Future";
+        } else if (status == 3) {
             return "Closed";
-        }else{
+        } else {
             return "Inactive";
         }
     }
-    
+
 }

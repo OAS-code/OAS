@@ -101,14 +101,25 @@
                         <div class="user_name_common">
                             <p>Plan date: <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="datetime-local" name="startdate" id="startdate">
+                                <input type="date" name="startdate" id="startdate" >
                             </div>		
                         </div>
-             
+                        <div class="user_name_common">
+                            <p>Plan time:  <span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="starttime" id="starttime" >
+                            </div>		
+                        </div>
                         <div class="user_name_common">
                             <p>Close date  <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="datetime-local" name="enddate" id="enddate">
+                                <input type="date" name="enddate" id="enddate">
+                            </div>		
+                        </div>
+                        <div class="user_name_common">
+                            <p>Close time  <span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="endtime" id="endtime">
                             </div>		
                         </div>
 
