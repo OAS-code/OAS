@@ -26,6 +26,9 @@
                         <div class="das_inner_text">
                             <h3>Things to do :</h3>
                         </div>
+                        <%
+                            if (Integer.parseInt( (String) session.getAttribute("role")) == 2) {
+                        %>
                         <div class="roled_images">
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
@@ -37,7 +40,10 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                            <!--
+                        <%
+                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 1) {
+                        %>
+                            
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -48,7 +54,9 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                            -->
+                        <%
+                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 0) {
+                        %>
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -59,10 +67,9 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-
-
-
-
+                        <%
+                            }
+                        %>
                         </div>
                     </div>
                 </div>

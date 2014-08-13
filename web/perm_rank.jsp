@@ -13,7 +13,8 @@
     </head>
     <body>
         <%
-            String role = (String) session.getAttribute("role");
+            
+            
             int rank = 5;
             
             
