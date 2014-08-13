@@ -173,38 +173,19 @@ public class UserController extends HttpServlet {
         } else if (service.equalsIgnoreCase("login")) {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
-            String salt = dao.getSalt(username);
-            int id = dao.getId(username);
-            String userid = Integer.toString(id);
-            String role = dao.loginAuthenticate(username, password, salt);
-            if (role != null && userid != null) {
+            String[] result = dao.logUserIn(username, password);
+            
+            if (result[0].equalsIgnoreCase("ok")) {
                 HttpSession session = request.getSession(true);
-                session.setAttribute("role", role);
-                session.setAttribute("user", username);
-                session.setAttribute("userid", userid);
+                session.setAttribute("role", result[4]);
+                session.setAttribute("username", result[2]);
+                session.setAttribute("userid", result[3]);
                 rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
-                rd.forward(request, response);
-            } else {
-                rd = request.getRequestDispatcher("login.jsp?errorCode=1");
-                rd.forward(request, response);
             }
-            /*switch (role) {
-             case "Admin":
-             HttpSession session = request.getSession(true);
-             session.setAttribute("user", username);
-             session.setAttribute("role", role);
-             rd = request.getRequestDispatcher("welcome.jsp");
-             rd.forward(request, response);
-             break;
-             case "Staff":
-             break;
-             case "Customer":
-             break;
-             default:
-             rd = request.getRequestDispatcher("login.jsp");
-             rd.forward(request, response);
-             break;
-             }*/
+            else {
+                rd = request.getRequestDispatcher("login.jsp?errorCode="+result[1]);
+            }
+            rd.forward(request, response);
         } else if (service.equals("registerUser")) {
 
             String username = request.getParameter("username");

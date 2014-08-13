@@ -57,7 +57,15 @@
             <ul id="message" class="success_msg">
                 <li><p>Change password successful. Please to login!.</p></li>
             </ul>
-            <%}%>
+            <% } else if (errorCode != null && errorCode.equals("5")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Account is not activated. Please check your email's inbox or contact an administrator for support.</p></li>
+            </ul>
+            <% } else if (errorCode != null && errorCode.equals("6")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Incorrect username or password.</p></li>
+            </ul>
+            <% }%>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
