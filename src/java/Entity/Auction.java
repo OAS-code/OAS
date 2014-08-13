@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -19,9 +20,9 @@ public class Auction {
     String title;
     String description;
     Date start_date;
-    Date start_time;
+    Time start_time;
     Date end_date;
-    Date end_time;
+    Time end_time;
     double starting_price;
     double buy_now_price;
     int status;
@@ -35,13 +36,28 @@ public class Auction {
     public Auction() {
     }
 
-    public Auction(int categoryid, int sellerid, String title, String description, int status) {
+    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Time start_time, Date end_date, Time end_time, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
         this.categoryid = categoryid;
         this.sellerid = sellerid;
         this.title = title;
         this.description = description;
+        this.start_date = start_date;
+        this.start_time = start_time;
+        this.end_date = end_date;
+        this.end_time = end_time;
+        this.starting_price = starting_price;
+        this.buy_now_price = buy_now_price;
         this.status = status;
+        this.video = video;
+        this.image1 = image1;
+        this.image2 = image2;
+        this.image3 = image3;
+        this.image4 = image4;
+        this.image5 = image5;
     }
+    
+
+    
 
     public String getVideo() {
         return video;
@@ -93,6 +109,14 @@ public class Auction {
 
     public Date getStart_time() {
         return start_time;
+    }
+
+    public void setStart_time(Time start_time) {
+        this.start_time = start_time;
+    }
+
+    public void setEnd_time(Time end_time) {
+        this.end_time = end_time;
     }
 
     public Date getEnd_time() {
