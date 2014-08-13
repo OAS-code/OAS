@@ -180,7 +180,9 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="reset" value="Reset" name="reset">
+                                                <input type="submit" value="Save" name="save">
+                                                <input type="hidden" name="userid" id="userid" value="<%=user.getId()%>">
+                                                <input type="hidden" name="service" id="service" value="update_user">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>
@@ -191,12 +193,12 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="submit" value="Save" name="save">
-                                                <input type="hidden" name="service" id="service" value="edituser">
+                                                <input type="reset" value="Reset" name="reset">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>
                                     </div>
+                                    
                                 </td>
                             </tr>
                         </table>

@@ -8,11 +8,13 @@ package DAO;
 import Entity.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
+import java.security.NoSuchAlgorithmException;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,29 +77,34 @@ public class UserDAO {
         }
     }
 
-    public int add(User user) {
+    public int addUser(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (fullname,username,password,phonenumber,email,address,role,status,salt) VALUES (?,?,?,?,?,?,?,?,?)";
-
+            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status) VALUES (?,?,?,?,?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
-            pre.setString(1, user.getFullname());
-            pre.setString(2, user.getUsername());
-            pre.setString(3, user.getPassword());
+
+            pre.setString(1, user.getUsername());
+            pre.setString(2, user.getPassword());
+            pre.setString(3, user.getFullname());
             pre.setString(4, user.getPhonenumber());
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
-            pre.setString(7, Integer.toString(user.getRoleId()));
-            pre.setString(8, Integer.toString(user.getStatusId()));
-            pre.setString(9, user.getSalt());
+            pre.setString(7, user.getSalt());
+            pre.setInt(8, user.getRoleId());
+            pre.setInt(9, user.getStatusId());
+            
+            //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
+            
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
         return n;
+        
     }
 
-    public int addUser(User user) {
+    public int addUserFromRegister(User user) {
         int n = 0;
         try {
             String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address,salt) VALUES (?,?,?,?,?,?,?)";
@@ -111,7 +118,7 @@ public class UserDAO {
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
             pre.setString(7, user.getSalt());
-
+            
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -181,11 +188,41 @@ public class UserDAO {
                 user.setFullname(rs.getString("fullname"));
                 user.setPhonenumber(rs.getString("phonenumber"));
                 user.setAddress(rs.getString("address"));
+                user.setPassword(rs.getString("password"));
+                user.setSalt(rs.getString("salt"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             //System.out.println(sql);
         }
+        return user;
+    }
+    
+    public User getUser(String username) {
+        String sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
+        User user = new User();
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setString(1, username);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                String email = rs.getString("email");
+                int status = rs.getInt("status");
+                int role = rs.getInt("role");
+                user = new User(username, email, status, role);
+                user.setId(rs.getInt("id"));
+                user.setFullname(rs.getString("fullname"));
+                user.setPhonenumber(rs.getString("phonenumber"));
+                user.setAddress(rs.getString("address"));
+                user.setPassword(rs.getString("password"));
+                user.setSalt(rs.getString("salt"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //System.out.println(sql);
+        }
+        //System.out.println(sql);
         return user;
     }
 
@@ -237,20 +274,41 @@ public class UserDAO {
         }
         return n;
     }
-    public String loginAuthenticate(String username, String password, String salt) throws SQLException {
-        String role = null;
-        String sql = "select role from user where username = '" + username + "' and password = '" + password + "'";
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = state.executeQuery(sql);
-            while (rs.next()) {
-                role = rs.getString("role");
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+    public String[] logUserIn(String username, String password) throws SQLException, NoSuchAlgorithmException {
+        System.out.println("Logging in using: "+username+"-"+password);
+        String[] result = new String[5];
+        User user = getUser(username);
+        if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username)) ) {
+            result[0] = "fail";
+            result[1] = "1"; //error code
+            return result;
         }
-        return role;
+        else if (user.getStatusId() == 0){
+            result[0] = "fail";
+            result[1] = "5";
+            return result;
+        }
+        String dbPassword = user.getPassword(); System.out.println("dbPassword: "+dbPassword);
+        String dbSalt = user.getSalt(); System.out.println("dbSalt: "+dbSalt); System.out.println("--------");
+        
+        OtherDAO other = new OtherDAO();
+        String step1 = other.getMd5FromString(password);
+        String step2 = step1+dbSalt;
+        String encryptedPassword = other.getMd5FromString(step2);
+        
+        if (!encryptedPassword.equalsIgnoreCase(dbPassword)){
+            result[0] = "fail";
+            result[1] = "6";
+            return result;
+        }
+        
+        result[0] = "ok"; //success/fail
+        result[1] = "1"; //error code
+        result[2] = user.getUsername();
+        result[3] = Integer.toString(user.getId()); //
+        result[4] = Integer.toString(user.getRoleId());
+        
+        return result;
     }
     public String getSalt(String username) throws SQLException {
         String salt = null;
@@ -267,7 +325,7 @@ public class UserDAO {
         return salt;
     }
     
-    public int getId(String username) throws SQLException {
+    public int getIdFromUsername(String username) throws SQLException {
         int id = 0;
         String sql = "SELECT id FROM user WHERE username = '" + username + "'";
         try {
@@ -335,4 +393,6 @@ public class UserDAO {
         UserDAO dao = new UserDAO();
         //dao.SentEmail("tupvse02404@fpt.edu.vn","Auction","successfully","tupvse02404@fpt.edu.vn","vantu1992");
     }
+
+    
 }

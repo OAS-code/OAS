@@ -9,6 +9,9 @@ package DAO;
  *
  * @author ducfpt
  */
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -54,5 +57,16 @@ public class OtherDAO {
         }
 
         return String.valueOf(randomId);
+    }
+    
+    public String getMd5FromString(String input) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] messageDigest = md.digest(input.getBytes());
+        BigInteger number = new BigInteger(1, messageDigest);
+        String hashtext = number.toString(16);
+        while (hashtext.length() < 32) {
+            hashtext = "0" + hashtext;
+        }
+        return hashtext;
     }
 }
