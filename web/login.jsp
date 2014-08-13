@@ -39,6 +39,7 @@
             String errorCode = request.getParameter("errorCode");
             String username = request.getParameter("username");
         %>
+        <jsp:include page="logout.jsp" />
         <jsp:include page="top.jsp" />
 
         <div class="header2">   

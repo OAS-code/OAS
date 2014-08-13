@@ -19,11 +19,38 @@
             String fullname = request.getParameter("fullname");
             String phonenumber = request.getParameter("phonenumber");
             String address = request.getParameter("address");
+            if (errorCode == null) {
+                username = "";
+                email = "";
+                fullname = "";
+                phonenumber = "";
+                address = "";
+            }
         %>
     </head>
     <body>
+        <jsp:include page="logout.jsp" />
         <jsp:include page="top.jsp" />
-        <div class="header2">            
+        <div class="header2">   
+            <% if (errorCode != null) {
+                if (errorCode.equals("1")) {%>
+                <ul id="message" class="error_msg">
+                    <li><p>Username must contain 3 characters or longer.</p></li>
+                </ul>
+                <%} else if (errorCode.equals("2")) {%>
+                <ul id="message" class="error_msg">
+                    <li><p>Email is invalid.</p></li>
+                </ul>
+                <%} else if (errorCode.equals("3")) {%>
+                <ul id="message" class="error_msg">
+                    <li><p>Username is already taken or email is already in use.</p></li>
+                </ul>
+                <%} else if (errorCode.equals("4")) {%>
+                <ul id="message" class="success_msg">
+                    <li><p>Change password successful. Please to login!.</p></li>
+                </ul>
+                <% }
+            } %>
             <div class="login-part">
                 <h2 title="Register">Register</h2>
             </div>
@@ -33,43 +60,33 @@
                         <form accept-charset="utf-8" method="post" action="UserController">				<div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
-                                    <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = 'Enter username...'">						</div>
+                                    <input type="text"  name="username" id="username" value="<%=username%>" class="fl">						</div>
                                 <label><span class="red"></span></label>
                             </div>
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Email <span class="red">*</span>:</p></div>
-                                    <input type="text"  name="email" id="email" value="Enter email..." class="fl" onfocus="if (this.value === 'Enter email...')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = 'Enter email...'">						</div>
+                                    <input type="text"  name="email" id="email" value="<%=email%>" class="fl" >						</div>
                                 <label style="width:250px;"><span class="red"></span></label>
                             </div>
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Full name: </p></div>
-                                    <input type="text"  name="fullname" id="fullname" value="Enter fullname..." class="fl" onfocus="if (this.value === 'Enter fullname...')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = 'Enter fullname...'">	
+                                    <input type="text"  name="fullname" id="fullname" value="<%=fullname%>">	
                                 </div>
                                 <span class="red"></span>
                             </div> 
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Phone number: </p></div>
-                                    <input type="text"  name="phonenumber" id="phonenumber" value="Enter phone number..." class="fl" onfocus="if (this.value === 'Enter phone number...')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = 'Enter phone number...'">	
+                                    <input type="text"  name="phonenumber" id="phonenumber" value="<%=phonenumber%>">	
                                 </div>
                                 <span class="red"></span>
                             </div> 
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Address: </p></div>
-                                    <input type="text"  name="address" id="address" value="Enter address..." class="fl" onfocus="if (this.value === 'Enter address...')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = 'Enter address...'">	
+                                    <input type="text"  name="address" id="address" value="<%=address%>">	
                                 </div>
                                 <span class="red"></span>
                             </div> 

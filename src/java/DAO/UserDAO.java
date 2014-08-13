@@ -377,38 +377,44 @@ public class UserDAO {
             return false;
         } else {
             if (!username.isEmpty() && !email.isEmpty()) {
-                sql = "SELECT * FROM user WHERE username = ? OR email = ? LIMIT 1";
+                sql = "SELECT COUNT(*) AS count FROM user WHERE username = ? OR email = ? LIMIT 1";
                 state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 pre = conn.prepareStatement(sql);
                 pre.setString(1, username);
                 pre.setString(2, email);
-                if (pre.executeQuery() == null) {
-                    return false;
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
                 }
                 else {
-                    return true;
+                    return false;
                 }
             } else if (username.isEmpty() && !email.isEmpty()) {
                 sql = "SELECT * FROM user WHERE email = ? LIMIT 1";
                 state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 pre = conn.prepareStatement(sql);
                 pre.setString(1, email);
-                if (pre.executeQuery() == null) {
-                    return false;
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
                 }
                 else {
-                    return true;
+                    return false;
                 }
             } else if (!username.isEmpty() && email.isEmpty()) {
                 sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
                 state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 pre = conn.prepareStatement(sql);
                 pre.setString(1, username);
-                if (pre.executeQuery() == null) {
-                    return false;
+                rs = pre.executeQuery();
+                rs.next();
+                if (rs.getInt("count") > 0) {
+                    return true;
                 }
                 else {
-                    return true;
+                    return false;
                 }
             }
         }
