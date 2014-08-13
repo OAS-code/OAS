@@ -12,6 +12,14 @@
         <title>Register</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <%
+            String errorCode = request.getParameter("errorCode");
+            String username = request.getParameter("username");
+            String email = request.getParameter("email");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String address = request.getParameter("address");
+        %>
     </head>
     <body>
         <jsp:include page="top.jsp" />

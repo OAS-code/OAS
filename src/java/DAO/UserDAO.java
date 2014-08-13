@@ -104,28 +104,6 @@ public class UserDAO {
 
     }
 
-    public int addUserFromRegister(User user) {
-        int n = 0;
-        try {
-            String sql = "INSERT INTO user (username,password,fullname,phonenumber,email,address,salt) VALUES (?,?,?,?,?,?,?)";
-
-            pre = conn.prepareStatement(sql);
-
-            pre.setString(1, user.getUsername());
-            pre.setString(2, user.getPassword());
-            pre.setString(3, user.getFullname());
-            pre.setString(4, user.getPhonenumber());
-            pre.setString(5, user.getEmail());
-            pre.setString(6, user.getAddress());
-            pre.setString(7, user.getSalt());
-
-            n = pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
-
     public ArrayList<User> list(String keyword, String rol, String stt) {
         String sql = "SELECT * FROM user WHERE 1=1 ";
         String sqlRole = " AND role = '" + rol + "' ";
@@ -280,6 +258,7 @@ public class UserDAO {
     public String[] logUserIn(String username, String password) throws SQLException, NoSuchAlgorithmException {
         String[] result = new String[5];
         User user = getUser(username);
+        System.out.println(user.getUsername());
         if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username))) {
             result[0] = "fail";
             result[1] = "1"; //error code
@@ -390,6 +369,50 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public boolean isUserExisted(String username, String email) throws SQLException {
+        String sql = "";
+        if (username.isEmpty() && email.isEmpty()) {
+            return false;
+        } else {
+            if (!username.isEmpty() && !email.isEmpty()) {
+                sql = "SELECT * FROM user WHERE username = ? OR email = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, username);
+                pre.setString(2, email);
+                if (pre.executeQuery() == null) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            } else if (username.isEmpty() && !email.isEmpty()) {
+                sql = "SELECT * FROM user WHERE email = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, email);
+                if (pre.executeQuery() == null) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            } else if (!username.isEmpty() && email.isEmpty()) {
+                sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setString(1, username);
+                if (pre.executeQuery() == null) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) throws SQLException {

@@ -37,6 +37,7 @@
     <body onLoad="load_em()">   
         <%
             String errorCode = request.getParameter("errorCode");
+            String username = request.getParameter("username");
         %>
         <jsp:include page="top.jsp" />
 
@@ -65,7 +66,11 @@
             <ul id="message" class="error_msg">
                 <li><p>Incorrect username or password.</p></li>
             </ul>
-            <% }%>
+            <% } else if (errorCode != null && errorCode.equals("7")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>Account '<%=username%>' has been created successfully, please check your email inbox for activation instructions!</p></li>
+            </ul>
+            <% } %>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
