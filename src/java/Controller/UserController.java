@@ -47,6 +47,8 @@ public class UserController extends HttpServlet {
         final String change_pass = "cp_change_password.jsp?error_code=1";
         final String user_view_detail = "cp_user_view_detail.jsp";
         final String controller_view_detail = "UserController?service=view_detail";
+        final String user_register = "register.jsp";
+        
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
@@ -186,21 +188,29 @@ public class UserController extends HttpServlet {
                 rd = request.getRequestDispatcher("login.jsp?errorCode="+result[1]);
             }
             rd.forward(request, response);
-        } else if (service.equals("registerUser")) {
-
+        } else if (service.equals("register")) {
             String username = request.getParameter("username");
-            String password = request.getParameter("password");
             String fullname = request.getParameter("fullname");
             String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
             String address = request.getParameter("address");
-            String salt = otherDAO.makeRandomString(10, 10);
-            User user = new User(fullname, username, password, phonenumber, email, address, salt);
-            int n = dao.addUserFromRegister(user);
-            if (n > 0) {
+            
+            String url = user_register+"?username="+username+"&fullname="+fullname+"&phonenumber="+phonenumber+"&email="+email+"&address="+address+"&errorCode=";
+            
+            if (username.isEmpty() || username.length() < 3 ) {
+                url = url + "1";
                 rd = request.getRequestDispatcher(loginPage);
                 rd.forward(request, response);
             }
+                else if (email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".") ) {
+                
+            }
+            User user = new User(fullname, username, password, phonenumber, email, address, salt);
+            int n = dao.addUserFromRegister(user);
+            if (n > 0) {
+                
+            }
+            
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

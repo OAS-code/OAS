@@ -30,7 +30,7 @@
                         <ul>
 
                             <%
-                                String userName = (String) session.getAttribute("user");
+                                String userName = (String) session.getAttribute("username");
                                 String role = (String) session.getAttribute("role");
 
                                 if (userName == null || role == null) {

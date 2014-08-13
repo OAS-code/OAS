@@ -7,6 +7,9 @@ package Entity;
 
 import DAO.OtherDAO;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -24,10 +27,11 @@ public class User {
     int role;
     int status;
     String salt;
+    String joinDate;
 
     public User() {
     }
-    
+
     public User(String username, String email, int status, int role) {
         this.username = username;
         this.email = email;
@@ -92,28 +96,28 @@ public class User {
         this.phonenumber = phonenumber;
         this.address = address;
     }
-    
+
     public String getSalt() {
         return salt;
     }
-    
+
     public void makeSalt() {
         DAO.OtherDAO other = new OtherDAO();
         this.salt = other.makeRandomString(10, 10);
     }
 
     public void makePassword() throws NoSuchAlgorithmException {
-        if (this.salt== null) {
+        if (this.salt == null) {
             this.makeSalt();
         }
         DAO.OtherDAO other = new OtherDAO();
         String newPassword = other.makeRandomString(10, 10);
         String step1 = other.getMd5FromString(newPassword);
-        String step2 = step1+this.salt;
+        String step2 = step1 + this.salt;
         String step3 = other.getMd5FromString(step2);
         this.password = step3;
     }
-    
+
     public void setSalt(String salt) {
         this.salt = salt;
     }
@@ -130,7 +134,7 @@ public class User {
     }
 
     public String getUsername() {
-        
+
         return username;
     }
 
@@ -220,8 +224,7 @@ public class User {
     public void setStatus(String status) {
         if (status.equalsIgnoreCase("Active")) {
             this.status = 1;
-        }
-        else {
+        } else {
             this.status = 0;
         }
     }
@@ -229,14 +232,19 @@ public class User {
     public void setRole(String role) {
         if (role.equalsIgnoreCase("Administrator")) {
             this.role = 2;
-        }
-        else if (role.equalsIgnoreCase("Auction staff")){
+        } else if (role.equalsIgnoreCase("Auction staff")) {
             this.role = 1;
-        }
-        else {
+        } else {
             this.role = 0;
         }
     }
 
-    
+    public String getJoinDate() throws ParseException {
+        OtherDAO other = new OtherDAO();
+        return other.formatDate(this.joinDate);
+    }
+
+    public void setJoinDate(String joinDate) {
+        this.joinDate = joinDate;
+    }
 }

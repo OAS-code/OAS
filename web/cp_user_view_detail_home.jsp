@@ -60,7 +60,11 @@
                             <tr>
                                 <td >Address:</td>
                                 <td><%=user.getAddress()%></td>
-                            </tr>                          	
+                            </tr>
+                            <tr>
+                                <td >Join date:</td>
+                                <td><%=user.getJoinDate()%></td>
+                            </tr>                            
                         </table>	
 
                         <br>

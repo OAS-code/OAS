@@ -24,7 +24,7 @@
                     <div class="signup_form">
                         <form accept-charset="utf-8" method="post" action="UserController">				<div class="">
                                 <div class="log_fields">
-                                    <div class="colm1_width fl"><p>User name <span class="red">*</span>:</p></div>
+                                    <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
                                     <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                                 this.value = '';" onblur="if (this.value === '')
                                                             this.value = 'Enter username...'">						</div>
@@ -40,23 +40,7 @@
                             </div>
                             <div class="">
                                 <div class="log_fields">
-                                    <div class="colm1_width fl"><p>Password <span class="red">*</span>:</p></div>
-                                    <input type="password"  name="password" id="password" value="*****************" class="fl" onfocus="if (this.value === '*****************')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = '*****************'">							 </div>
-                                <label style="width:205px;"><span class="red"></span></label>
-                            </div>
-                            <div class="">
-                                <div class="log_fields">
-                                    <div class="colm1_width fl"><p>Retype password  <span class="red">*</span>:</p></div>
-                                    <input type="password"  name="cpassword" id="cpassword" value="*****************" class="fl" onfocus="if (this.value === '*****************')
-                                                this.value = '';" onblur="if (this.value === '')
-                                                            this.value = '*****************'">							</div>
-                                <span class="red"></span>
-                            </div>
-                            <div class="">
-                                <div class="log_fields">
-                                    <div class="colm1_width fl"><p>Full name  <span class="red">*</span>:</p></div>
+                                    <div class="colm1_width fl"><p>Full name: </p></div>
                                     <input type="text"  name="fullname" id="fullname" value="Enter fullname..." class="fl" onfocus="if (this.value === 'Enter fullname...')
                                                 this.value = '';" onblur="if (this.value === '')
                                                             this.value = 'Enter fullname...'">	
@@ -65,7 +49,7 @@
                             </div> 
                             <div class="">
                                 <div class="log_fields">
-                                    <div class="colm1_width fl"><p>Phone number  <span class="red">*</span>:</p></div>
+                                    <div class="colm1_width fl"><p>Phone number: </p></div>
                                     <input type="text"  name="phonenumber" id="phonenumber" value="Enter phone number..." class="fl" onfocus="if (this.value === 'Enter phone number...')
                                                 this.value = '';" onblur="if (this.value === '')
                                                             this.value = 'Enter phone number...'">	
@@ -74,7 +58,7 @@
                             </div> 
                             <div class="">
                                 <div class="log_fields">
-                                    <div class="colm1_width fl"><p>Address  <span class="red">*</span>:</p></div>
+                                    <div class="colm1_width fl"><p>Address: </p></div>
                                     <input type="text"  name="address" id="address" value="Enter address..." class="fl" onfocus="if (this.value === 'Enter address...')
                                                 this.value = '';" onblur="if (this.value === '')
                                                             this.value = 'Enter address...'">	
@@ -93,7 +77,7 @@
                                 <div class="sign_button_lft"></div>
                                 <div class="sign_button_midd">
                                     <input type="submit" title="Register" value="Register" name="Register">
-                                    <input type="hidden" id="service" name="service" value="registerUser" >
+                                    <input type="hidden" id="service" name="service" value="register" >
                                 </div>
                                 <div class="sign_button_rgt"></div>
                             </div>
@@ -105,72 +89,13 @@
                     <p>If so you may want to </p>
                     <div class="sign_register">
                         <div class="signreg_lft"></div>
-                        <div class="signreg_midd"><a title="Sign in" href="login.jsp">Sign in»</a>now </div>
+                        <div class="signreg_midd"><a title="Sign in" href="login.jsp">Sign in</a></div>
                         <div class="signreg_rgt"></div>
-
                     </div>
                 </div>
 
             </div>
-            <!--<div style="width: 500px;margin: auto;">
-                <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-                    <h2 style="margin: auto;margin-left: 10px">Register</h2> 
-                    <br>
-    
-                    <form action="UserController" method="POST">
-                        <table>
-                            <tr>
-                                <td style="text-align: right">Username:</td>
-                                <td>
-                                    <input type="text" name="username" id="username">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">Password:</td>
-                                <td><label for="password"></label>
-                                    <input type="password" name="password" id="password">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">Retype Password:</td>
-                                <td><label for="password"></label>
-                                    <input type="password" name="cpassword" id="password">
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">Full name:</td>
-                                <td>
-                                    <input type="text" name="fullname" id="fullname" >
-                                </td>
-                            </tr>   
-                            <tr>
-                                <td style="text-align: right">Phone number:</td>
-                                <td><label for="phonenumber"></label>
-    
-                                    <input type="text" name="phonenumber" id="phonenumber"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">Email:</td>
-                                <td><label for="email"></label>
-    
-                                    <input type="text" name="email" id="email"></td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right">Address:</td>
-                                <td>                    
-                                    <textarea name="address" id="address" ></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td></td>
-                                <td>
-                                    <input type="submit" name="add" id="add" value="Submit">
-                                    <input type="hidden" name="service" id="service" value="registerUser">
-                                    <input type="reset" name="reset" id="reset" value="Clear">
-    
-                                </td>
-                            </tr>
-                        </table>
-                    </form>-->
+        </div>
+
     </body>
 </html>
