@@ -38,7 +38,7 @@ public class UserDAO {
     private ResultSet rs = null;
     private PreparedStatement pre = null;
     private Session session = null;
-     Message message = null;
+    Message message = null;
 
     public UserDAO() {
         try {
@@ -65,7 +65,7 @@ public class UserDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = (Connection) DriverManager.getConnection(ulr, username, password);
-            
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -92,16 +92,16 @@ public class UserDAO {
             pre.setString(7, user.getSalt());
             pre.setInt(8, user.getRoleId());
             pre.setInt(9, user.getStatusId());
-            
+
             //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            
+
         }
         return n;
-        
+
     }
 
     public int addUserFromRegister(User user) {
@@ -118,7 +118,7 @@ public class UserDAO {
             pre.setString(5, user.getEmail());
             pre.setString(6, user.getAddress());
             pre.setString(7, user.getSalt());
-            
+
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -131,7 +131,7 @@ public class UserDAO {
         String sqlRole = " AND role = '" + rol + "' ";
         String sqlStatus = " AND status = '" + stt + "' ";
         String sqlKeyword = " AND MATCH(fullname, username) AGAINST ('" + keyword + "')";
-        
+
         ArrayList<User> arr = new ArrayList<>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -145,9 +145,8 @@ public class UserDAO {
                 sql = sql + sqlKeyword;
             }
             sql = sql + " ORDER BY role DESC";
-            
+
             //System.out.println(sql);
-            
             rs = state.executeQuery(sql);
             String fullname, username;
             int id, role, status;
@@ -165,7 +164,7 @@ public class UserDAO {
         }
         return arr;
     }
-    
+
     public ArrayList<User> list() {
         return list("", "", "");
     }
@@ -190,6 +189,7 @@ public class UserDAO {
                 user.setAddress(rs.getString("address"));
                 user.setPassword(rs.getString("password"));
                 user.setSalt(rs.getString("salt"));
+                user.setJoinDate(rs.getString("join_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +197,7 @@ public class UserDAO {
         }
         return user;
     }
-    
+
     public User getUser(String username) {
         String sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
         User user = new User();
@@ -217,6 +217,7 @@ public class UserDAO {
                 user.setAddress(rs.getString("address"));
                 user.setPassword(rs.getString("password"));
                 user.setSalt(rs.getString("salt"));
+                user.setJoinDate(rs.getString("join_date"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -259,14 +260,15 @@ public class UserDAO {
         }
         return n;
     }
+
     public int update_profile(User user) {
         int n = 0;
         String sql = "UPDATE user SET fullname = ?, phonenumber = ?, address = ? WHERE id = ?";
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1, user.getFullname());           
-            pre.setString(2, user.getPhonenumber());            
-            pre.setString(3, user.getAddress());          
+            pre.setString(1, user.getFullname());
+            pre.setString(2, user.getPhonenumber());
+            pre.setString(3, user.getAddress());
             pre.setInt(4, user.getId());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
@@ -274,42 +276,42 @@ public class UserDAO {
         }
         return n;
     }
+
     public String[] logUserIn(String username, String password) throws SQLException, NoSuchAlgorithmException {
-        System.out.println("Logging in using: "+username+"-"+password);
         String[] result = new String[5];
         User user = getUser(username);
-        if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username)) ) {
+        if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username))) {
             result[0] = "fail";
             result[1] = "1"; //error code
             return result;
-        }
-        else if (user.getStatusId() == 0){
+        } else if (user.getStatusId() == 0) {
             result[0] = "fail";
             result[1] = "5";
             return result;
         }
-        String dbPassword = user.getPassword(); System.out.println("dbPassword: "+dbPassword);
-        String dbSalt = user.getSalt(); System.out.println("dbSalt: "+dbSalt); System.out.println("--------");
-        
+        String dbPassword = user.getPassword();
+        String dbSalt = user.getSalt();
+
         OtherDAO other = new OtherDAO();
         String step1 = other.getMd5FromString(password);
-        String step2 = step1+dbSalt;
+        String step2 = step1 + dbSalt;
         String encryptedPassword = other.getMd5FromString(step2);
-        
-        if (!encryptedPassword.equalsIgnoreCase(dbPassword)){
+
+        if (!encryptedPassword.equalsIgnoreCase(dbPassword)) {
             result[0] = "fail";
             result[1] = "6";
             return result;
         }
-        
+
         result[0] = "ok"; //success/fail
         result[1] = "1"; //error code
         result[2] = user.getUsername();
         result[3] = Integer.toString(user.getId()); //
         result[4] = Integer.toString(user.getRoleId());
-        
+
         return result;
     }
+
     public String getSalt(String username) throws SQLException {
         String salt = null;
         String sql = "SELECT salt FROM user WHERE username = '" + username + "'";
@@ -324,7 +326,7 @@ public class UserDAO {
         }
         return salt;
     }
-    
+
     public int getIdFromUsername(String username) throws SQLException {
         int id = 0;
         String sql = "SELECT id FROM user WHERE username = '" + username + "'";
@@ -339,14 +341,15 @@ public class UserDAO {
         }
         return id;
     }
+
     public int change_password(String oldpass, String newpass, int userid) throws SQLException {
         int n = 0;
         String sql = "UPDATE user SET password = ? WHERE id = ? AND password = ?";
         try {
             pre = conn.prepareStatement(sql);
-            pre.setString(1, newpass);           
-            pre.setInt(2, userid);            
-            pre.setString(3, oldpass);          
+            pre.setString(1, newpass);
+            pre.setInt(2, userid);
+            pre.setString(3, oldpass);
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -361,7 +364,7 @@ public class UserDAO {
         props.put("mail.smtp.starttls.enable", "true");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
-        
+
         session = Session.getDefaultInstance(props,
                 new javax.mail.Authenticator() {
                     @Override
@@ -385,7 +388,7 @@ public class UserDAO {
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);
-        } 
+        }
 
     }
 
@@ -394,5 +397,4 @@ public class UserDAO {
         //dao.SentEmail("tupvse02404@fpt.edu.vn","Auction","successfully","tupvse02404@fpt.edu.vn","vantu1992");
     }
 
-    
 }

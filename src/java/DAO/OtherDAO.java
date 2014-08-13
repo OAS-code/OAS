@@ -12,6 +12,9 @@ package DAO;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
@@ -68,5 +71,16 @@ public class OtherDAO {
             hashtext = "0" + hashtext;
         }
         return hashtext;
+    }
+
+    public String formatDate(String datetime) throws ParseException {
+
+        // *** note that it's "yyyy-MM-dd hh:mm:ss" not "yyyy-mm-dd hh:mm:ss"  
+        SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = dt.parse(datetime);
+
+        // *** same for the format String below
+        SimpleDateFormat dt1 = new SimpleDateFormat("MMMMM dd, yyyy");
+        return dt1.format(date);
     }
 }
