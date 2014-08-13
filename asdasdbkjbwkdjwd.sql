@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `auction` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE  IF NOT EXISTS `auction` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `auction`;
--- MySQL dump 10.13  Distrib 5.6.13, for Win32 (x86)
+-- MySQL dump 10.13  Distrib 5.6.17, for Win32 (x86)
 --
--- Host: 127.0.0.1    Database: auction
+-- Host: localhost    Database: auction
 -- ------------------------------------------------------
 -- Server version	5.6.19
 
@@ -99,7 +99,7 @@ CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(40) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(32) NOT NULL,
   `phonenumber` varchar(12) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
   `address` text,
@@ -107,10 +107,14 @@ CREATE TABLE `user` (
   `status` tinyint(1) DEFAULT '0',
   `salt` varchar(10) DEFAULT NULL,
   `balance` double DEFAULT '0',
+  `join_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`,`email`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
   FULLTEXT KEY `fullname` (`fullname`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +123,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Admin','admin','admin',NULL,'admin@admin.admin',NULL,1,1,'121313121',0),(6,'Pham Van Tu','phamvantu','123','0987656323','tupvse02404@fpt.vn','Hai Duong',3,2,'2122922761',0),(7,'Staff','staff','staff','','ducchu@live.com','',2,1,'1960531220',0),(8,'Customer','customer','customer','','ducchu@live.com','',3,1,'1440368330',0);
+INSERT INTO `user` VALUES (7,'Staff','staff','staff','','1','',1,1,'1960531220',0,'2014-08-13 17:01:22'),(8,'Customer','customer','customer','','2','',0,1,'1440368330',0,'2014-08-13 17:01:22'),(14,'Admin','admin','aa958e9a88367a9e19e21247d7668095','097.847.9643','3','Hanoi HN',2,1,'1823378392',0,'2014-08-13 17:01:22'),(23,'asd','admin2','a41556524beb36633b191392f2a1bb6f','asd','4','asd',2,1,'2079216358',0,'2014-08-13 17:01:22');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +136,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-11 16:17:21
+-- Dump completed on 2014-08-13 17:58:44
