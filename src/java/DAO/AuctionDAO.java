@@ -32,13 +32,13 @@ public class AuctionDAO {
 
     public AuctionDAO() {
         try {
-         System.out.println("Connecting to DB using the following details:");
+         //System.out.println("Connecting to DB using the following details:");
          javax.naming.Context ctx = new javax.naming.InitialContext();
-         String host = (String) ctx.lookup("java:comp/env/db-host"); System.out.println(host);
-         String port = (String) ctx.lookup("java:comp/env/db-port"); System.out.println(port);
-         String database = (String) ctx.lookup("java:comp/env/db-database"); System.out.println(database);
-         String username = (String) ctx.lookup("java:comp/env/db-username"); System.out.println(username);
-         String password = (String) ctx.lookup("java:comp/env/db-password"); System.out.println(password);
+         String host = (String) ctx.lookup("java:comp/env/db-host"); //System.out.println(host);
+         String port = (String) ctx.lookup("java:comp/env/db-port"); //System.out.println(port);
+         String database = (String) ctx.lookup("java:comp/env/db-database"); //System.out.println(database);
+         String username = (String) ctx.lookup("java:comp/env/db-username"); //System.out.println(username);
+         String password = (String) ctx.lookup("java:comp/env/db-password"); //System.out.println(password);
          connection("jdbc:mysql://" + host + ":" + port + "/" + database +"?useUnicode=true&characterEncoding=UTF-8",username,password);       
          } catch (NamingException ex) {
           Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);

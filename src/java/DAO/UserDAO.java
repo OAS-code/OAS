@@ -169,19 +169,20 @@ public class UserDAO {
         return user;
     }
 
-    public User getUser(String username) {
-        String sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
+    public User getUser(String usernameEmail) {
+        String sql = "SELECT * FROM user WHERE username = ? OR email = ? LIMIT 1";
         User user = new User();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
-            pre.setString(1, username);
+            pre.setString(1, usernameEmail);
+            pre.setString(2, usernameEmail);
             rs = pre.executeQuery();
             while (rs.next()) {
                 String email = rs.getString("email");
                 int status = rs.getInt("status");
                 int role = rs.getInt("role");
-                user = new User(username, email, status, role);
+                user = new User(rs.getString("username"), email, status, role);
                 user.setId(rs.getInt("id"));
                 user.setFullname(rs.getString("fullname"));
                 user.setPhonenumber(rs.getString("phonenumber"));
@@ -212,9 +213,8 @@ public class UserDAO {
         return n;
     }
 
-    public int update(User user) {
-        int n = 0;
-        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ? WHERE id = ?";
+    public boolean update(User user) {
+        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, id = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
@@ -225,11 +225,12 @@ public class UserDAO {
             pre.setInt(6, user.getRoleId());
             pre.setInt(7, user.getStatusId());
             pre.setInt(8, user.getId());
-            n = pre.executeUpdate();
+            pre.executeUpdate();
+            return true;
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
         }
-        return n;
     }
 
     public int update_profile(User user) {
@@ -342,56 +343,27 @@ public class UserDAO {
         return "0";
     }
 
-    public boolean isUserExisted(String username, String email) throws SQLException {
-        String sql = "";
-        if (username.isEmpty() && email.isEmpty()) {
+    public boolean isUserExisted(String clue) throws SQLException {
+        if (clue == null || clue.isEmpty()) {
             return false;
-        } else {
-            if (!username.isEmpty() && !email.isEmpty()) {
-                sql = "SELECT COUNT(*) AS count FROM user WHERE username = ? OR email = ? LIMIT 1";
-                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                pre = conn.prepareStatement(sql);
-                pre.setString(1, username);
-                pre.setString(2, email);
-                rs = pre.executeQuery();
-                rs.next();
-                if (rs.getInt("count") > 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (username.isEmpty() && !email.isEmpty()) {
-                sql = "SELECT * FROM user WHERE email = ? LIMIT 1";
-                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                pre = conn.prepareStatement(sql);
-                pre.setString(1, email);
-                rs = pre.executeQuery();
-                rs.next();
-                if (rs.getInt("count") > 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else if (!username.isEmpty() && email.isEmpty()) {
-                sql = "SELECT * FROM user WHERE username = ? LIMIT 1";
-                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-                pre = conn.prepareStatement(sql);
-                pre.setString(1, username);
-                rs = pre.executeQuery();
-                rs.next();
-                if (rs.getInt("count") > 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
         }
-        return true;
+        String sql = "SELECT COUNT(*) AS count FROM user WHERE username = ? OR email = ?";
+        state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        pre = conn.prepareStatement(sql);
+        pre.setString(1, clue);
+        pre.setString(2, clue);
+        rs = pre.executeQuery();
+        rs.next();
+        return rs.getInt("count") > 0;
     }
+    
+    
 
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
         //dao.sendMail("tupvse02404@fpt.edu.vn","Auction","successfully");
     }
+    
+    
 
 }
