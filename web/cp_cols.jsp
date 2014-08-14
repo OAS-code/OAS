@@ -55,18 +55,18 @@
 
                     <%
                         if (rank == 1) {
-                            if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
-                        <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
-                        <% }
-                            }%>
-                        <%
-                            if (rank == 1) {
-                                if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
+                            if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
                     <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
                         <% } else { %>
                     <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
+                        <% }
+                            }
+
+                            if (rank == 1) {
+                                if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
+                        <% } else { %>
+                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
                         <% }
                             }
 
@@ -80,7 +80,7 @@
                 <li class="" id="edit_profile_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
                     -->
                     <% }
-                            }%>
+                        }%>
 
                 </ul>
             </div>

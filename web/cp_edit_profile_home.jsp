@@ -86,7 +86,7 @@
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
-                                            <input type="submit" value="Update" name="Update">
+                                            <input type="submit" value="Update" name="Update" style="width:65px;">
                                             <input type="hidden" name="service" id="service" value="update_profile">
                                         </div>
                                         <div class="res_right"></div>

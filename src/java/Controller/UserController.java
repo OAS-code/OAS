@@ -165,9 +165,22 @@ public class UserController extends HttpServlet {
             user.setPhonenumber(request.getParameter("phonenumber"));
             user.setAddress(request.getParameter("address"));
 
-            user.makePassword();
+            String madeRawPassword = user.makePassword();
 
             if (dao.addUser(user) > 0) {
+                //Start sending email to user.
+                String subject = "Online Auction System - Account Information";
+                String body = "Dear " + username + ",\n"
+                        + "\n"
+                        + "Thank you for using OAS! Your account has been successfully created, you can now log into our system with the following details:\n"
+                        + "Username: " + username + "\n"
+                        + "Password: " + madeRawPassword + "\n"
+                        + "\n"
+                        + "Happy bidding,\n"
+                        + "Your friends at OAS.";
+                OtherDAO other = new OtherDAO();
+                other.sendMail(email, subject, body);
+                //Finish sending email
                 response.sendRedirect(controller_view_detail + "&errorCode=2&username=" + username);
             } else {
                 response.sendRedirect("notification.jsp?errorCode=1");

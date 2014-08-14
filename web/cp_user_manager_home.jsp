@@ -34,7 +34,7 @@
         <%@ include file="perm_admin.jsp" %>
         <div class="my_message_right" id="edit_profile_page">
             <div class="message_common_border">
-                <h1 title="User Manager">Search User</h1>
+                <h1 title="User Manager">Manage user</h1>
                 <p>&nbsp;</p>
             </div>
 
