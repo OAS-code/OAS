@@ -14,7 +14,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -102,8 +101,6 @@ public class AuctionDAO {
         return arr;
     }
     
-
-
     public ArrayList<Auction> searchAuction(String search, String stt) {
         String sql = "SELECT * FROM auction WHERE MATCH(title) AGAINST ('" + search + "') AND status LIKE '" + stt + "%'";
         String sql1 = "SELECT * FROM auction WHERE status LIKE '" + stt + "%'";
@@ -187,13 +184,12 @@ public class AuctionDAO {
         }
         return n;
     }
-     public int delete_auction(int id) {
+    
+     public int delete(int id) {
         int n = 0;
         String sql = "DELETE FROM auction WHERE auctionid = " + id;
-        String sql1 = "DELETE FROM digital WHERE auction_id = " + id;
         try {
             state = (Statement) conn.createStatement();
-            state.executeUpdate(sql1);
             n = state.executeUpdate(sql);
             state.close();
             conn.close();
@@ -202,35 +198,34 @@ public class AuctionDAO {
         }
         return n;
     }
-    public int delete(int auctionid){
-        int n = 0;
-        String sql = "DELETE FROM digital WHERE auction_id = " + auctionid;
-        try{
-            state = (Statement) conn.createStatement();
-            n = state.executeUpdate(sql);
-            state.close();
-            conn.close();
-        }catch(SQLException ex){
-             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
-    }
+
     public int update(Auction auction) {
         int n = 0;
-        String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?,description = ?, start_date = ?, end_date = ?"
-                + ", starting_price = ?, reserve_price = ?, buy_now_price = ?,status = ? WHERE auctionid = ?";
+        String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?,description = ?,"
+                + " start_date = ?, start_time = ?, end_date = ?, end_time = ?"
+                + ", starting_price = ?, buy_now_price = ?,status = ?,video = ?, image1 = ?, "
+                + "image2 = ?, image3 = ?, image4 = ?, image5 = ? WHERE auctionid = ?";
         try {
             pre = conn.prepareStatement(sql);
+             pre = conn.prepareStatement(sql);
             pre.setInt(1, auction.getCategoryid());
             pre.setInt(2, auction.getSellerid());
             pre.setString(3, auction.getTitle());
-            pre.setString(4, auction.getDescription());
+            pre.setString(4, auction.getDescription());  
             pre.setDate(5, new java.sql.Date(auction.getStart_date().getTime()));
-            pre.setDate(6, new java.sql.Date(auction.getEnd_date().getTime()));
-            pre.setDouble(7, auction.getStarting_price());
-            pre.setDouble(9, auction.getBuy_now_price());
-            //pre.setString(10, auction.getStatus());
-            pre.setInt(11, auction.getAuctionid());
+            pre.setTime(6, new java.sql.Time(auction.getStart_time().getTime()));
+            pre.setDate(7, new java.sql.Date(auction.getEnd_date().getTime()));
+            pre.setTime(8, new java.sql.Time(auction.getEnd_time().getTime()));            
+            pre.setDouble(9, auction.getStarting_price());
+            pre.setDouble(10, auction.getBuy_now_price());
+            pre.setInt(11, auction.getStatusId());
+            pre.setString(12, auction.getVideo());
+            pre.setString(13, auction.getImage1());
+            pre.setString(14, auction.getImage2());
+            pre.setString(15, auction.getImage3());
+            pre.setString(16, auction.getImage4());
+            pre.setString(17, auction.getImage5());
+            pre.setInt(18, auction.getAuctionid());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -240,20 +235,6 @@ public class AuctionDAO {
 
     public ResultSet search(int id) {
         String sql = "SELECT * FROM auction WHERE auctionid = ?";
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            pre = conn.prepareStatement(sql);
-            pre.setInt(1, id);
-            rs = pre.executeQuery();
-        } catch (SQLException ex) {
-            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-        return rs;
-    }
-
-    public ResultSet searchDigital(int id) {
-        String sql = "SELECT * FROM digital WHERE auction_id = ?";
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);

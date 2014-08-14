@@ -28,7 +28,7 @@
                     int id = Integer.parseInt(userid);
                 %>
                 <div class="message_common">
-                    <input type="text" hidden="hidden" name="no" id="no" value="<%=id%>" class="textbox">
+                    <input type="text" hidden="hidden" name="userid" id="userid" value="<%=id%>" class="textbox">
                     <div class="login_middle_common_profil">
                         <div class="user_name_common">
                             <p>
@@ -101,25 +101,25 @@
                         <div class="user_name_common">
                             <p>Plan date: <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="date" name="startdate" id="startdate" >
+                                <input type="date" name="startdate" id="startdate" value="">
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p>Plan time:  <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="time" name="starttime" id="starttime" >
+                                <input type="time" name="starttime" id="starttime" value="">
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p>Close date  <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="date" name="enddate" id="enddate">
+                                <input type="date" name="enddate" id="enddate" value="">
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p>Close time  <span class="red">*</span>: </p>
                             <div class="text_feeld">
-                                <input type="time" name="endtime" id="endtime">
+                                <input type="time" name="endtime" id="endtime" value="">
                             </div>		
                         </div>
 
