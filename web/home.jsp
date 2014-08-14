@@ -28,6 +28,9 @@
             </div>
 
             <div class="feature_total">
+                <%
+                    for(int i=0;i<arr.size();i++){  
+                %>
                 <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
@@ -35,21 +38,20 @@
 
                         <div class="feature_lft">                        
                                 <a href="" title="Monitor">
-                                    <img src="http://www.unieauction.com/platinum-demo/public/uploaded_files/products/thumb/538d4b832e453viewsonic-va2231wa-led-hd-black-led-22-monitor-slim-bezel-1.jpg" width="82" title="Monitor" height="83" alt="Monitor">
+                                    <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
                             <label><a href="" title="Monitor">
-
-                                    Monitor
+                                    <%=arr.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font> 50.00</div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStarting_price()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;">50.00</div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStarting_price()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -72,7 +74,7 @@
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="javascript:;" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=bidnow" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>
@@ -82,6 +84,7 @@
                     </div>
                     <div class="notice_nsg fl clr" id="notice_msg502" style="display:none;"></div>
                 </div>
+                <%}%>
             </div>
 
 

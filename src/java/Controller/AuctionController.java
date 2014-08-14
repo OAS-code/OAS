@@ -45,7 +45,7 @@ public class AuctionController extends HttpServlet {
         AuctionDAO dao = new AuctionDAO();
         CategoryDAO cdao = new CategoryDAO();
         String service = request.getParameter("service");
-        final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
+        final String auction_manager = "cp_auction_manager.jsp";
         final String add_auction = "cp_auction_add.jsp";
         final String view_detail_auction = "cp_view_detail_auction.jsp";
         final String edit_auction = "cp_edit_auction.jsp";
