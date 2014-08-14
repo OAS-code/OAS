@@ -51,6 +51,10 @@
             <ul id="message" class="error_msg">
                 <li><p>Internal Error! Could not reset your account password, please try again later. </p></li>
             </ul><br>
+            <% } else if (errorCode == 7) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Token is hacked! But don't worry, you can request a new one here. </p></li>
+            </ul><br>
             <% } %>
             <div class="login-part">
                 <h2 title="Forgot_password">Password recovery</h2>

@@ -83,7 +83,7 @@ public class OtherDAO {
     public static void main(String[] args) {
         final int maxLength = 7;
         final int maxTry = 10;
-        OtherDAO other = new OtherDAO();
+        //OtherDAO other = new OtherDAO();
     }
 
     public String makeRandomString(final int maxLength, final int maxTry) {
@@ -194,12 +194,27 @@ public class OtherDAO {
         }
     }
     
+    public boolean cleanUserToken(int userId) {
+        try {
+            String sql = "DELETE FROM token WHERE userid = "+ userId;
+            state = (com.mysql.jdbc.Statement) conn.createStatement();
+            state.executeUpdate(sql);
+            state.close();
+            conn.close();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Token failed to clean!");
+            return false;
+        }
+    }
+    
     public String[] getTokenData(String token) {
         String[] tokenData = new String[4];
         try {
             OtherDAO other = new OtherDAO();
             other.cleanToken();
-            String sql = "SELECT * FROM token WHERE token = ?";
+            String sql = "SELECT * FROM token WHERE token = ? LIMIT 1";
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
             pre.setString(1, token);
@@ -211,7 +226,7 @@ public class OtherDAO {
             tokenData[3] = rs.getString("dateline");
             return tokenData;
         } catch (SQLException ex) {
-            //Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
             return tokenData;
         }
     }
@@ -227,9 +242,9 @@ public class OtherDAO {
     public String makeTokenForUser(int userId, int tokenLifetime) {
         try {
             OtherDAO other = new OtherDAO();
-            other.cleanToken();
+            other.cleanUserToken(userId);
             String uniqueToken = "existed";
-            while (uniqueToken=="existed") {
+            while (uniqueToken.equalsIgnoreCase("existed")) {
                 uniqueToken = other.makeUniqueToken();
             }
             String newToken = other.makeRandomString(10, 10);
@@ -250,11 +265,7 @@ public class OtherDAO {
     }
     
     public boolean isPasswordValid(String password) {
-        if (password==null || password.isEmpty() || password.length() < 6) {
-            return false;
-        } else {
-            return true;
-        }
+        return password != null && !password.isEmpty() && password.length() >= 6;
     }
     
 }
