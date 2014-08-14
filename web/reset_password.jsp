@@ -9,17 +9,17 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Password recovery</title>
+        <title>Reset your password</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <%
             String errorCodeString = request.getParameter("errorCode");
-            if (errorCodeString==null){
+            if (errorCodeString == null) {
                 errorCodeString = "-1";
             }
             int errorCode = Integer.parseInt(errorCodeString);
             String clue = request.getParameter("clue");
-            if (clue == null){
+            if (clue == null) {
                 clue = "";
             }
         %>
@@ -29,7 +29,7 @@
         <div class="header2">   
             <%if (errorCode == 0) {%>
             <ul id="message" class="success_msg">
-                <li><p>We just sent instructions for completing your password reset to the email address you used to set up your OAS account.</p></li>
+                <li><p>An email with instructions to recover your lost password has been dispatched! Please check your email inbox to complete your request.</p></li>
             </ul><br>
             <% } else if (errorCode == 1) {%>
             <ul id="message" class="error_msg">
@@ -43,21 +43,29 @@
             <ul id="message" class="error_msg">
                 <li><p>Internal error! Please try again later.</p></li>
             </ul><br>
-            <% } %>
+            <% }%>
             <div class="login-part">
-                <h2 title="Forgot_password">Password recovery</h2>
+                <h2 title="Forgot_password">Please enter your new password below.</h2>
             </div>
             <div class="login_middle">
                 <div class="login_lft">
                     <form accept-charset="utf-8" method="post" action="UserController">	
                         <div class="login_form">
                             <div class="log_fields">
-                                <p>Please enter your username or email address <span class="red">*</span>:</p>
-                                <input type="text"  name="username_email" id="username_email" value="<%=clue%>">				
+                                <p>New password <span class="red">*</span>:</p>
+                                <input type="text"  name="password1" id="password1" value="<%=clue%>">				
                             </div>
                             <span class="red fl"></span>
                         </div>
 
+                        <div class="login_form">
+                            <div class="log_fields">
+                                <p>Re-type new password <span class="red">*</span>:</p>
+                                <input type="text"  name="password2" id="password2" value="<%=clue%>">				
+                            </div>
+                            <span class="red fl"></span>
+                        </div>
+                        
                         <div class="login_button">
                             <div class="login_button_lft"></div>
                             <div class="login_button_midd">
