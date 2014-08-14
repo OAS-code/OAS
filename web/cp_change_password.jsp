@@ -16,26 +16,32 @@
     <body>
         <jsp:include page="top.jsp" />
         <div class="header2">
-            <%                String errorCode = request.getParameter("error_code");
+            <%                
+                String errorCode = request.getParameter("errorCode");
             %>
-            <%if (errorCode != null && errorCode.equals("1")) {%>
+            <% if (errorCode != null && errorCode.equals("0")) {%>
             <ul id="message" class="success_msg">
-                <li><p>Old password, new password or confirm password not blank!</p></li>
+                <li><p>Account password has been successfully changed!</p></li>
+            </ul>
+            <br>
+            <%} else if (errorCode != null && errorCode.equals("1")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Password must contains at least 6 characters.</p></li>
             </ul>
             <br>
             <%}else if(errorCode != null && errorCode.equals("2")){%>
-                 <ul id="message" class="success_msg">
-                <li><p>New password and confirm password not match!</p></li>                
+                 <ul id="message" class="error_msg">
+                <li><p>New password and re-type new password don't match.</p></li>                
             </ul>
                  <br>
             <%}else if(errorCode != null && errorCode.equals("3")){%>
-                 <ul id="message" class="success_msg">
-                <li><p>New password and old password not match!</p></li>
+                 <ul id="message" class="error_msg">
+                <li><p>New password and current password can not be the same.</p></li>
             </ul>  
                  <br>
-            <%}else if(errorCode != null && errorCode.equals("5")){%>
-                 <ul id="message" class="success_msg">
-                <li><p>Old password is wrong!</p></li>
+            <%}else if(errorCode != null && errorCode.equals("4")){%>
+                 <ul id="message" class="error_msg">
+                <li><p>Current password is incorrect.</p></li>
             </ul>
                  <br>
             <%}%>

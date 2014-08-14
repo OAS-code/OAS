@@ -39,7 +39,6 @@
             </div>
 
             <form name="form1" method="post" action="UserController">
-
                 <div class="message_common">
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="10" cellpadding="10">

@@ -14,17 +14,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.naming.NamingException;
 
 /**
@@ -321,55 +314,32 @@ public class UserDAO {
         return id;
     }
 
-    public int change_password(String oldpass, String newpass, int userid) throws SQLException {
-        int n = 0;
-        String sql = "UPDATE user SET password = ? WHERE id = ? AND password = ?";
-        try {
-            pre = conn.prepareStatement(sql);
-            pre.setString(1, newpass);
-            pre.setInt(2, userid);
-            pre.setString(3, oldpass);
-            n = pre.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+    public String changePassword(String oldpass, String newpass, int userid) throws SQLException, NoSuchAlgorithmException {
+        User user = getUser(userid);
+        OtherDAO other = new OtherDAO();
+        String salt = user.getSalt();
+        String oldPassEncrypted = other.getEncryptedPassword(oldpass, salt);
+        if (!user.getPassword().equals(oldPassEncrypted)) {
+            return "4"; // errorCode
         }
-        return n;
-    }
-
-    public void sendMail(String sendTo, String subject, String body) {
-        final String username = "tupvse02404@fpt.edu.vn";
-        final String password = "vantu1992";
-        Properties props = new Properties();
-        props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.host", "smtp.gmail.com");
-        props.put("mail.smtp.port", "587");
-
-        session = Session.getDefaultInstance(props,
-                new javax.mail.Authenticator() {
-                    @Override
-                    protected PasswordAuthentication getPasswordAuthentication() {
-                        return new PasswordAuthentication(username,
-                                password);
-                    }
-                });
-        try {
-
-            message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(username));
-            message.setRecipients(Message.RecipientType.TO,
-                    InternetAddress.parse(sendTo));
-            message.setSubject(subject);
-            message.setText(body);
-
-            Transport.send(message);
-
-            //System.out.println("Done");
-
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
+        String newPassEncrypted = other.getEncryptedPassword(newpass, salt);
+        String sql = "UPDATE user SET password = ? WHERE id = ?";
+        pre = conn.prepareStatement(sql);
+        pre.setString(1, newPassEncrypted);
+        pre.setInt(2, userid);
+        pre.executeUpdate();
+        //Start sending email to user.
+        String username = user.getUsername();
+        String subject = "Online Auction System - Account password changed";
+        String body = "Dear " + username + ",\n"
+                + "\n"
+                + "Your account password has been changed from the OAS control panel. If you didn't change the password please notify an administrator immediately!\n"
+                + "\n"
+                + "Happy bidding,\n"
+                + "Your friends at OAS.";
+        other.sendMail(user.getEmail(), subject, body);
+        //Finish sending email
+        return "0";
     }
 
     public boolean isUserExisted(String username, String email) throws SQLException {
@@ -387,8 +357,7 @@ public class UserDAO {
                 rs.next();
                 if (rs.getInt("count") > 0) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             } else if (username.isEmpty() && !email.isEmpty()) {
@@ -400,8 +369,7 @@ public class UserDAO {
                 rs.next();
                 if (rs.getInt("count") > 0) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             } else if (!username.isEmpty() && email.isEmpty()) {
@@ -413,8 +381,7 @@ public class UserDAO {
                 rs.next();
                 if (rs.getInt("count") > 0) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }

@@ -36,41 +36,51 @@
                     <%
                         if (rank == 2) {
                             if ((current_page != null) && current_page.equalsIgnoreCase("user_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="UserController?service=user_manager" title="Manage User">Manage User</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="UserController?service=user_manager" title="Manage User">Manage user</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="UserController?service=user_manager" title="Manage User">Manage User</a></li>
+                    <li class="" id="edit_profile_active"><a href="UserController?service=user_manager" title="Manage User">Manage user</a></li>
                         <% }
                             }%>
 
                     <%
                         if (rank == 1) {
                             if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage Category</a></li>
+                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
                         <% }
                             }%>
                         <%
                         if (rank == 1) {
                             if ((current_page != null) && current_page.equalsIgnoreCase("auction_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
                         <% } else { %>
-                    <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage Auction</a></li>
+                    <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
                         <% }
                         }
                    
                         if (rank >= 0) {
-                            if ((current_page != null) && current_page.equalsIgnoreCase("account_settings")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>
+                            if ((current_page != null) && current_page.equalsIgnoreCase("my_account")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="cp_my_account.jsp?current_page=my_account" title="My account">My account</a></li> 
+                    <!--
+                    <li class="act_class" id="dashboard_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li> 
+                    -->
                         <% } else { %>
+                        <!--
                     <li class="" id="edit_profile_active"><a href="cp_change_password.jsp?current_page=change_password" title="Manage Category">Change password</a></li>
+                        -->
+                        <li class="" id="edit_profile_active"><a href="cp_my_account.jsp?current_page=my_account" title="My account">My account</a></li>
                         <% }
                             }
                     if (rank >= 0) {
                             if ((current_page != null) && current_page.equalsIgnoreCase("edit_profile")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
+                    <!--
+                        <li class="act_class" id="dashboard_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
+                    -->
                         <% } else { %>
+                        <!--
                     <li class="" id="edit_profile_active"><a href="cp_edit_profile.jsp?current_page=edit_profile" title="Manage Category">Edit profile</a></li>
+                        -->
                         <% }
                             }%>
                     
