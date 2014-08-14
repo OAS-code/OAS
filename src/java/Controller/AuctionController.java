@@ -63,13 +63,13 @@ public class AuctionController extends HttpServlet {
         if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.select();
             request.setAttribute("array", array);
-            ArrayList<Auction> arr = dao.view();
+            ArrayList<Auction> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("index")) {
-            ArrayList<Auction> arr = dao.view();
+            ArrayList<Auction> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
@@ -113,9 +113,14 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("search")) {
-            String search = request.getParameter("txtsearch");
-            String stt = request.getParameter("status_au");
-            ArrayList<Auction> arr = dao.searchAuction(search, stt);
+            ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+            request.setAttribute("array", array);
+            String keyword = request.getParameter("txtsearch");
+            String status = request.getParameter("auction_status");
+            System.out.println(status);
+            String category = request.getParameter("category");
+            System.out.println(category);
+            ArrayList<Auction> arr = dao.list(keyword, status, category);
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);

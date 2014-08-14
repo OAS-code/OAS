@@ -62,11 +62,25 @@ public class AuctionDAO {
         }
     }
 
-    public ArrayList<Auction> view() throws SQLException {
-        String sql = "select * from auction";
+    public ArrayList<Auction> list(String keyword, String sta, String cat) throws SQLException {
+        String sql = "SELECT * FROM auction WHERE 1=1 ";
+        String sqlstatus = "AND status = '"+ sta +"'";
+        String sqlcategory = "AND category_id = '"+ cat +"'";
+        String sqlkeyword = "AND title LIKE '%"+ keyword+ "%'";
         ArrayList<Auction> arr = new ArrayList<Auction>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            if(!sta.equals("")){
+                sql = sql + sqlstatus;
+            }
+            if(!cat.equals("")){
+                sql = sql + sqlcategory;
+            }
+            if(!keyword.equals("")){
+                sql = sql + sqlkeyword;
+            }
+            sql = sql + " ORDER BY title DESC";           
+            
             rs = state.executeQuery(sql);
             int auctionid, category_id, seller_id, status;
             String title, description, video,image1,image2,image3,image4,image5;
@@ -100,7 +114,9 @@ public class AuctionDAO {
         }
         return arr;
     }
-    
+    public ArrayList<Auction> list() throws SQLException{
+        return list("", "", "");
+    }
     public ArrayList<Auction> searchAuction(String search, String stt) {
         String sql = "SELECT * FROM auction WHERE MATCH(title) AGAINST ('" + search + "') AND status LIKE '" + stt + "%'";
         String sql1 = "SELECT * FROM auction WHERE status LIKE '" + stt + "%'";

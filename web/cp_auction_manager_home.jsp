@@ -35,8 +35,8 @@
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2>
-                                                <select name="cb1" class=" text_bg select" id="cb1">	
-                                                    <option value="" selected="selected">Select auction type</option>
+                                                <select name="auction_status" class=" text_bg select" id="auction_status">	
+                                                    <option value="" selected="selected">Select auction status</option>
                                                     <option value="0">Inactive</option>
                                                     <option value="1">Active</option>
                                                     <option value="2">Future</option>
@@ -53,7 +53,7 @@
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2>
-                                                <select name="cb2" class=" text_bg select" id="cb2" style="">
+                                                <select name="category" class=" text_bg select" id="category" style="">
                                                     <option value="" selected="selected">Select category</option>
                                                     <%
                                                         ArrayList<Category> array = (ArrayList<Category>) request.getAttribute("array");
