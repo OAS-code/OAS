@@ -57,9 +57,7 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        <%
-                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 0) {
-                        %>
+                        
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -70,6 +68,10 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
+                        <%
+                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 0) {
+                        %>
+                            
                         <%
                                 }
                             }
