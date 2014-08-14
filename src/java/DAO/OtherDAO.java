@@ -197,6 +197,8 @@ public class OtherDAO {
     public String[] getTokenData(String token) {
         String[] tokenData = new String[4];
         try {
+            OtherDAO other = new OtherDAO();
+            other.cleanToken();
             String sql = "SELECT * FROM token WHERE token = ?";
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
@@ -244,6 +246,14 @@ public class OtherDAO {
             //Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("makeTokenForUser - Failed.");
             return "existed";
+        }
+    }
+    
+    public boolean isPasswordValid(String password) {
+        if (password==null || password.isEmpty() || password.length() < 6) {
+            return false;
+        } else {
+            return true;
         }
     }
     

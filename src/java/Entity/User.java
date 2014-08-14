@@ -240,6 +240,10 @@ public class User {
             this.status = 0;
         }
     }
+    
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public void setRole(String role) {
         if (role.equalsIgnoreCase("Administrator")) {

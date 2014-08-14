@@ -230,8 +230,35 @@ public class UserController extends HttpServlet {
             }
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("reset_password")) {
-            rd = request.getRequestDispatcher(reset_password);
-            rd.forward(request, response);
+            String token = (String) request.getParameter("token");
+            if (token == null || token.isEmpty()) {
+                rd = request.getRequestDispatcher(forgot_password + "?errorCode=5");
+                rd.forward(request, response);
+            } else {
+                OtherDAO other = new OtherDAO();
+                String[] tokenData = new String[4];
+                tokenData = other.getTokenData(token);
+                String userIdString = tokenData[2];
+                if (userIdString == null || userIdString.isEmpty()) {
+                    rd = request.getRequestDispatcher(forgot_password + "?errorCode=5");
+                    rd.forward(request, response);
+                } else {
+                    int userid = Integer.parseInt(userIdString);
+                    User user = dao.getUser(userid);
+                    //System.out.println(user.getUsername());
+                    String newPassword = user.makePassword();
+                    //System.out.println(newPassword+" - "+user.getPassword());
+                    user.setStatus(0);
+                    //System.out.println(user.getStatus());
+                    if (dao.update(user)) {
+                        rd = request.getRequestDispatcher(reset_password + "?errorCode=0");
+                        rd.forward(request, response);
+                    } else {
+                        rd = request.getRequestDispatcher(forgot_password + "?errorCode=6");
+                        rd.forward(request, response);
+                    }
+                }
+            }
         } else if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             String role = request.getParameter("cb1");
