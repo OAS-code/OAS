@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Control panel</title>
+        <title>My account</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
@@ -17,7 +17,7 @@
         <%@ include file="perm_customer.jsp" %>
         <div class="my_message_right">
             <div class="message_common_border">
-                <h1 title="mydashboard">Dashboard</h1>
+                <h1 title="mydashboard">My account</h1>
                 <p>&nbsp;</p>
             </div>
             <div class="message_common">
@@ -28,52 +28,31 @@
                             <h3>Things to do :</h3>
                         </div>
                                            -->
-                        <%
-                            if (session.getAttribute("role")!=null) {
-                                if (Integer.parseInt( (String) session.getAttribute("role")) == 2) {
-                        %>
+                        
                         <div class="roled_images">
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com">&nbsp;</div>
-                                        <a href="cp_user_manager.jsp" title="Manage Users"><h4>Manage Users</h4></a>
+                                        <a href="cp_change_password.jsp?current_page=my_account" title="Change password"><h4>Change password</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        <%
-                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 1) {
-                        %>
+                        
                             
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com1">&nbsp;</div>
-                                        <a href="ListAllAuction.jsp" title="Manage Auction"><h4>Manage Auction</h4></a>
+                                        <a href="cp_edit_profile.jsp?current_page=my_account" title="Edit profile"><h4>Edit profile</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        <%
-                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 0) {
-                        %>
-                            <div class="inner_rol_img">
-                                <div class="box_top"></div>
-                                <div class="box_mid">
-                                    <div class="bot_img">
-                                        <div class="bot_com2">&nbsp;</div>
-                                        <a href="cp_category_manager.jsp?current_page=category_manager" title="View My Watchlist"><h4>Manage Category</h4></a>
-                                    </div>
-                                </div>
-                                <div class="box_bot"></div>
-                            </div>
-                        <%
-                                }
-                            }
-                        %>
+                        
                         </div>
                     </div>
                 </div>

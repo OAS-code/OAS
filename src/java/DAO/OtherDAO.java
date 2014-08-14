@@ -16,12 +16,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class OtherDAO {
 
     private static final Set<String> generatedNumbers = new HashSet<String>();
+    private Session session;
+    private MimeMessage message;
 
     public OtherDAO() {
     }
@@ -89,5 +99,40 @@ public class OtherDAO {
         String step2 = step1 + salt;
         String encryptedPassword = this.getMd5FromString(step2);
         return encryptedPassword;
+    }
+    
+    public boolean sendMail(String sendTo, String subject, String body) {
+        final String username = "tupvse02404@fpt.edu.vn";
+        final String password = "vantu1992";
+        Properties props = new Properties();
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "587");
+
+        session = Session.getDefaultInstance(props,
+                new javax.mail.Authenticator() {
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username,
+                                password);
+                    }
+                });
+        try {
+
+            message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(username));
+            message.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(sendTo));
+            message.setSubject(subject);
+            message.setText(body);
+
+            Transport.send(message);
+
+            return true;
+        } catch (MessagingException e) {
+            //throw new RuntimeException(e);
+            return false;
+        }
     }
 }

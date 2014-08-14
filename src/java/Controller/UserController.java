@@ -44,7 +44,7 @@ public class UserController extends HttpServlet {
         final String loginPage = "login.jsp";
         final String cp = "cp.jsp&current_page=dashboard";
         final String edit_user = "cp_user_edit.jsp?current_page=user_manager";
-        final String change_pass = "cp_change_password.jsp?error_code=1";
+        final String change_pass = "cp_change_password.jsp?current_page=my_account";
         final String user_view_detail = "cp_user_view_detail.jsp";
         final String controller_view_detail = "UserController?service=view_detail";
         final String user_register = "register.jsp";
@@ -76,32 +76,25 @@ public class UserController extends HttpServlet {
                 response.sendRedirect(cp);
             }
         } else if (service.equalsIgnoreCase("change_password")) {
-            String id1 = request.getParameter("no");
-            int id = Integer.parseInt(id1);
-            String oldpass = request.getParameter("old_password");
-            String newpass = request.getParameter("new_password");
-            String confirmpass = request.getParameter("confirm_password");
-            if (oldpass == null || newpass == null || confirmpass == null) {
-                rd = request.getRequestDispatcher(change_pass);
+            int userId = Integer.parseInt(request.getParameter("userid"));
+            String oldPass = request.getParameter("old_password");
+            String newPass = request.getParameter("new_password");
+            String confirmPass = request.getParameter("confirm_password");
+            if (oldPass == null || newPass == null || confirmPass == null || oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty() || newPass.length() < 6 || confirmPass.length() < 6) {
+                rd = request.getRequestDispatcher(change_pass + "&errorCode=1");
+                rd.forward(request, response);
+            } else if (!newPass.equals(confirmPass)) {
+                rd = request.getRequestDispatcher(change_pass + "&errorCode=2");
+                rd.forward(request, response);
+            } else if (oldPass.equals(newPass)) {
+                rd = request.getRequestDispatcher(change_pass + "&errorCode=3");
                 rd.forward(request, response);
             } else {
-                if (!newpass.equals(confirmpass)) {
-                    rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=2");
-                    rd.forward(request, response);
-                } else if (oldpass.equals(newpass)) {
-                    rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=3");
-                    rd.forward(request, response);
-                } else {
-                    int n = dao.change_password(oldpass, newpass, id);
-                    if (n > 0) {
-                        rd = request.getRequestDispatcher("logout.jsp?success_page=1");
-                        rd.forward(request, response);
-                    } else {
-                        rd = request.getRequestDispatcher("cp_change_password.jsp?error_code=5");
-                        rd.forward(request, response);
-                    }
-                }
+                String errorCode = dao.changePassword(oldPass, newPass, userId);
+                rd = request.getRequestDispatcher(change_pass + "&errorCode=" + errorCode);
+                rd.forward(request, response);
             }
+
         } else if (service.equalsIgnoreCase("listall")) {
             ArrayList<User> arr = dao.list();
             request.setAttribute("arr", arr);
@@ -215,22 +208,23 @@ public class UserController extends HttpServlet {
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
             String madePassword = user.makePassword();
-            
+
             int n = dao.addUser(user);
             if (n > 0) {
                 //Start sending email to user.
                 String subject = "Online Auction System - Account Information";
-                String body =   "Dear "+username+",\n" +
-                                "\n"+
-                                "Thank you for using OAS! Your account has been successfully created, you can now log into our system with the following details:\n" +
-                                "Username: "+username+"\n"+
-                                "Password: "+madePassword+"\n"+
-                                "\n" +
-                                "Happy bidding,\n" +
-                                "Your friends at OAS.";
-                dao.sendMail(email, subject, body);
+                String body = "Dear " + username + ",\n"
+                        + "\n"
+                        + "Thank you for using OAS! Your account has been successfully created, you can now log into our system with the following details:\n"
+                        + "Username: " + username + "\n"
+                        + "Password: " + madePassword + "\n"
+                        + "\n"
+                        + "Happy bidding,\n"
+                        + "Your friends at OAS.";
+                OtherDAO other = new OtherDAO();
+                other.sendMail(email, subject, body);
                 //Finish sending email
-                rd = request.getRequestDispatcher(loginPage+"?errorCode=7&username="+username);
+                rd = request.getRequestDispatcher(loginPage + "?errorCode=7&username=" + username);
                 rd.forward(request, response);
             } else {
                 url = url + "4";
