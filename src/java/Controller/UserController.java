@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author MrTu
+ * @author Duc
  */
 public class UserController extends HttpServlet {
 
@@ -49,7 +49,7 @@ public class UserController extends HttpServlet {
         final String controller_view_detail = "UserController?service=view_detail";
         final String user_register = "register.jsp";
         final String edit_profile = "cp_edit_profile.jsp?current_page=my_account";
-
+        final String forgot_password = "forgot_password.jsp";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
@@ -82,9 +82,8 @@ public class UserController extends HttpServlet {
             user.setFullname(request.getParameter("fullname"));
             user.setPhonenumber(request.getParameter("phonenumber"));
             user.setAddress(request.getParameter("address"));
-            int n = dao.update(user);
             request.setAttribute("requestedUser", user);
-            if (n > 0) {
+            if (dao.update(user)) {
                 rd = request.getRequestDispatcher(edit_profile + "&errorCode=0");
             } else {
                 rd = request.getRequestDispatcher(edit_profile + "&errorCode=1");
@@ -145,9 +144,7 @@ public class UserController extends HttpServlet {
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
             user.setAddress(address);
-
-            int n = dao.update(user);
-            if (n > 0) {
+            if (dao.update(user)) {
                 response.sendRedirect(controller_view_detail + "&errorCode=1&username=" + username);
             } else {
                 response.sendRedirect("notification.jsp?errorCode=3");
@@ -189,8 +186,47 @@ public class UserController extends HttpServlet {
             int userid = Integer.parseInt((String)session.getAttribute("userid"));
             User user = dao.getUser(userid);
             String balance = user.getFormattedBalance();
+            //System.out.println(balance);
             request.setAttribute("balance", balance);
             rd = request.getRequestDispatcher(cp);
+            rd.forward(request, response);
+        } else if (service.equalsIgnoreCase("forgot_password")) {
+            rd = request.getRequestDispatcher(forgot_password + "?errorCode=0");
+            String usernameEmail = request.getParameter("username_email");
+            if (usernameEmail == null || usernameEmail.isEmpty()) {
+                rd = request.getRequestDispatcher(forgot_password + "?errorCode=1");
+            } else if (!dao.isUserExisted(usernameEmail)) {
+                rd = request.getRequestDispatcher(forgot_password + "?errorCode=2");
+            } else {
+                User user = dao.getUser(usernameEmail);
+                String email = user.getEmail();
+                if (email == null || email.isEmpty()) {
+                    rd = request.getRequestDispatcher(forgot_password + "?errorCode=3");
+                } else {
+                    OtherDAO other = new OtherDAO();
+                    String madeToken = other.makeTokenForUser(user.getId(), 24);
+                    if (madeToken.equalsIgnoreCase("existed")) {
+                        rd = request.getRequestDispatcher(forgot_password + "?errorCode=4");
+                    } else {
+                        //Start sending email to user.
+                        String domain = getServletContext().getInitParameter("domain");
+                        String subject = "Online Auction System - Account Password Recovery";
+                        String body = "Hi "+user.getUsername()+",\n"
+                                +"\n"
+                                +"You're receiving this email because you requested a password reset for your OAS Account. If you did not request this change, you can safely ignore this email.\n"
+                                +"\n"
+                                +"To choose a new password and complete your request, please follow the link below:\n"
+                                +domain+"UserController?service=reset_password?token="+madeToken+" \n"
+                                +"\n"
+                                +"You can change your password again at any time from within the OAS control panel by selecting My account > Change password.\n"
+                                +"\n"
+                                +"Thanks,\n"
+                                +"The OAS Team ";
+                        other.sendMail(email, subject, body);
+                        //Finish sending email
+                    }
+                }
+            }
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
@@ -231,7 +267,7 @@ public class UserController extends HttpServlet {
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
             } else {
-                if (dao.isUserExisted(username, email)) {
+                if (dao.isUserExisted(username) || dao.isUserExisted(email)) {
                     url = url + "3";
                     rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);

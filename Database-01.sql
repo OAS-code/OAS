@@ -89,6 +89,34 @@ INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart.'),(2,'R
 UNLOCK TABLES;
 
 --
+-- Table structure for table `token`
+--
+
+DROP TABLE IF EXISTS `token`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `userid` int(11) DEFAULT NULL,
+  `dateline` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `lifetime` int(5) NOT NULL DEFAULT '24' COMMENT 'How long this token will live in hours.',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `token_UNIQUE` (`token`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `token`
+--
+
+LOCK TABLES `token` WRITE;
+/*!40000 ALTER TABLE `token` DISABLE KEYS */;
+INSERT INTO `token` VALUES (2,'1540475661',14,'2014-08-14 21:00:38',24),(3,'2088939545',14,'2014-08-14 21:01:47',24),(4,'1943447677',14,'2014-08-14 21:12:48',24),(5,'1697902493',14,'2014-08-14 21:15:54',24),(6,'1914479011',14,'2014-08-14 21:17:37',24),(7,'1102641335',14,'2014-08-14 21:32:20',24),(8,'2013436401',14,'2014-08-14 21:40:48',24),(9,'1916098580',14,'2014-08-14 21:41:02',24),(10,'1109535472',14,'2014-08-14 21:41:14',24),(11,'1502431788',14,'2014-08-14 21:54:04',24),(12,'2015745609',14,'2014-08-14 22:13:51',24),(13,'1004381654',14,'2014-08-14 22:16:25',24);
+/*!40000 ALTER TABLE `token` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -97,11 +125,11 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `fullname` varchar(40) NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `phonenumber` varchar(12) DEFAULT NULL,
   `email` varchar(45) NOT NULL,
+  `fullname` varchar(40) NOT NULL,
+  `phonenumber` varchar(12) DEFAULT NULL,
   `address` text,
   `role` tinyint(1) DEFAULT '0',
   `status` tinyint(1) DEFAULT '0',
@@ -114,7 +142,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   FULLTEXT KEY `fullname` (`fullname`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +151,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (7,'Staff','staff','staff','','1','',1,1,'1960531220',0,'2014-08-13 17:01:22'),(8,'Customer','customer','customer','','2','',0,1,'1440368330',0,'2014-08-13 17:01:22'),(14,'Admin','admin','aa958e9a88367a9e19e21247d7668095','097.847.9643','3','Hanoi HN',2,1,'1823378392',0,'2014-08-13 17:01:22'),(23,'asd','admin2','a41556524beb36633b191392f2a1bb6f','asd','4','asd',2,1,'2079216358',0,'2014-08-13 17:01:22');
+INSERT INTO `user` VALUES (8,'customer','807908e8af11eb3f416ae163762d4739','duccn01663@gmail.com','Customer','','',0,1,'1823378392',0,'2014-08-13 17:01:22'),(14,'admin','807908e8af11eb3f416ae163762d4739','ducchu@live.com','Chu Nhu Duc','097.847.9643','Hanoi HN',2,1,'1823378392',0,'2014-08-13 17:01:22'),(43,'staff','1393975c84ff83deba3f7050b910cf68','duccn01663@fpt.edu.vn','','','',1,1,'1168119770',0,'2014-08-14 13:17:39');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -136,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-13 17:58:44
+-- Dump completed on 2014-08-14 22:20:26

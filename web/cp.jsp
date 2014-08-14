@@ -16,14 +16,17 @@
     </head>
     <body>
         <%@include file="perm_customer.jsp" %>
-        <%             
-        if (request.getAttribute("balance") == null) {
-                response.sendRedirect("UserController?service=dashboard");
-            } else {    
-            String balance = (String) request.getAttribute("balance");
-                    
+        <%            if (request.getAttribute("balance") == null) {
+                        response.sendRedirect("UserController?service=dashboard");
+            } else {
+                String balance = (String) request.getAttribute("balance");
+                
         %>
-        <%@ include file="top.jsp" %>
+        
+        <jsp:include page="top.jsp">
+            <jsp:param name="balance" value="<%=balance%>" />
+        </jsp:include>
+
         <div class="header2">  
             <%                String errorCode = request.getParameter("errorCode");
             %>
@@ -32,12 +35,14 @@
                 <li><p>Logged in successfully!</p></li>
             </ul>
             <br>  
-            <% } %>
-            <jsp:include page="cp_cols.jsp" />            
-            <%@ include file="cp_home.jsp" %>
+            <% }%>
+            <jsp:include page="cp_cols.jsp" />    
+            <jsp:include page="cp_home.jsp">
+                <jsp:param name="balance" value="<%=balance%>" />
+            </jsp:include>
         </div>
         <jsp:include page="footer.jsp" />
-        <% } %>
+        <% }%>
     </body> 
 
 </html>

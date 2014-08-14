@@ -12,6 +12,11 @@
         <title></title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <%
+            String userName = (String) session.getAttribute("username");
+            String role = (String) session.getAttribute("role");
+            String balance = (String) request.getAttribute("balance");
+        %>
     </head>
     <body>
         <div id="header">
@@ -30,9 +35,6 @@
                         <ul>
 
                             <%
-                                String userName = (String) session.getAttribute("username");
-                                String role = (String) session.getAttribute("role");
-
                                 if (userName == null || role == null) {
                             %>
 
