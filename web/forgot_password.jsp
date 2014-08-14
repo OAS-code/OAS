@@ -29,7 +29,7 @@
         <div class="header2">   
             <%if (errorCode == 0) {%>
             <ul id="message" class="success_msg">
-                <li><p>An email with instructions to recover your lost password has been dispatched! Please check your email inbox to complete your request.</p></li>
+                <li><p>We just sent instructions for completing your password reset to the email address you used to set up your OAS account.</p></li>
             </ul><br>
             <% } else if (errorCode == 1) {%>
             <ul id="message" class="error_msg">
@@ -42,6 +42,14 @@
             <% } else if (errorCode == 4) { %>
             <ul id="message" class="error_msg">
                 <li><p>Internal error! Please try again later.</p></li>
+            </ul><br>
+            <% } else if (errorCode == 5) { %>
+            <ul id="message" class="error_msg">
+                <li><p>It looks like that link has expired. But don't worry, you can request a new one here. </p></li>
+            </ul><br>
+            <% } else if (errorCode == 6) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Internal Error! Could not reset your account password, please try again later. </p></li>
             </ul><br>
             <% } %>
             <div class="login-part">
