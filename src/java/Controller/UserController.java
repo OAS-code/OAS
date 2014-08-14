@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author MrTu
+ * @author Duc
  */
 public class UserController extends HttpServlet {
 
@@ -186,8 +186,10 @@ public class UserController extends HttpServlet {
             int userid = Integer.parseInt((String)session.getAttribute("userid"));
             User user = dao.getUser(userid);
             String balance = user.getFormattedBalance();
+            //System.out.println(balance);
             request.setAttribute("balance", balance);
             rd = request.getRequestDispatcher(cp);
+            rd.forward(request, response);
         } else if (service.equalsIgnoreCase("forgot_password")) {
             rd = request.getRequestDispatcher(forgot_password + "?errorCode=0");
             String usernameEmail = request.getParameter("username_email");
