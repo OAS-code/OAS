@@ -24,6 +24,7 @@ public class User {
     String phonenumber;
     String email;
     String address;
+    double balance;
     int role;
     int status;
     String salt;
@@ -148,6 +149,16 @@ public class User {
             return "";
         }
         return phonenumber;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+    public String getFormattedBalance() {
+        return Double.toString(balance);
+    }
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 
     public String getEmail() {

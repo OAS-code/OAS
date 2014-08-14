@@ -117,7 +117,7 @@ public class AuctionDAO {
     public ArrayList<Auction> list() throws SQLException{
         return list("", "", "");
     }
-    public ArrayList<Auction> searchAuction(String search, String stt) {
+    /*public ArrayList<Auction> searchAuction(String search, String stt) {
         String sql = "SELECT * FROM auction WHERE MATCH(title) AGAINST ('" + search + "') AND status LIKE '" + stt + "%'";
         String sql1 = "SELECT * FROM auction WHERE status LIKE '" + stt + "%'";
         ArrayList<Auction> arr = new ArrayList<>();
@@ -170,7 +170,7 @@ public class AuctionDAO {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return arr;
-    }
+    }*/
 
     public int add(Auction auction) {
         int n = 0;

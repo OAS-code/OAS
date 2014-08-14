@@ -14,7 +14,7 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
-        <%@ include file="perm_customer.jsp" %>
+        <%@ include file="perm_customer.jsp" %>        
         <div class="my_message_right">
             <div class="message_common_border">
                 <h1 title="mydashboard">Dashboard</h1>
@@ -27,10 +27,9 @@
                         <div class="das_inner_text">
                             <h3>Things to do :</h3>
                         </div>
-                                           -->
-                        <%
-                            if (session.getAttribute("role")!=null) {
-                                if (Integer.parseInt( (String) session.getAttribute("role")) == 2) {
+                        -->
+                        <%                            if (session.getAttribute("role") != null) {
+                                if (Integer.parseInt((String) session.getAttribute("role")) == 2) {
                         %>
                         <div class="roled_images">
                             <div class="inner_rol_img">
@@ -43,10 +42,10 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        <%
-                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 1) {
-                        %>
-                            
+                            <%
+                            } else if (Integer.parseInt((String) session.getAttribute("role")) == 1) {
+                            %>
+
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -57,7 +56,7 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        
+
                             <div class="inner_rol_img">
                                 <div class="box_top"></div>
                                 <div class="box_mid">
@@ -68,14 +67,18 @@
                                 </div>
                                 <div class="box_bot"></div>
                             </div>
-                        <%
-                            } else if (Integer.parseInt( (String) session.getAttribute("role")) == 0) {
-                        %>
-                            
-                        <%
+                            <%
+                            } else if (Integer.parseInt((String) session.getAttribute("role")) == 0) {
+                            %>
+                            <div class="common_bounce">
+                                <div class="common_bounce_text">
+                                    <h2 title="My Dashboard">My Dashboard</h2>                                   
+                                    <p>You currently have<span class="red_col"> <font class="">$</font><%=balance%></span> in your account.</p>            
+                                </div>
+                            </div>
+                            <%                                    }
                                 }
-                            }
-                        %>
+                            %>
                         </div>
                     </div>
                 </div>
