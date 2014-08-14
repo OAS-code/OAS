@@ -176,9 +176,10 @@ public class AuctionController extends HttpServlet {
             int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
-            String start_time1 = request.getParameter("starttime");          
+            String start_time1 = request.getParameter("starttime");            
             String end_date1 = request.getParameter("enddate");
-            String end_time1 = request.getParameter("endtime");           
+            String end_time1 = request.getParameter("endtime");     
+            System.out.println(end_time1);
             String starting_price1 = request.getParameter("startingprice");
             String buy_now_price1 = request.getParameter("buynowprice");
             String image1 = request.getParameter("image1");
@@ -192,10 +193,10 @@ public class AuctionController extends HttpServlet {
             String id = request.getParameter("no");
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date)DateFormat.parse(start_date1);
-            Time start_time = (Time)hDateFormat.parse(start_time1);
+            Date start_date = (Date)DateFormat.parse(start_date1); 
+            Date start_time = (Date)hDateFormat.parse(start_time1);
             Date end_date = (Date) DateFormat.parse(end_date1);
-            Time end_time = (Time)hDateFormat.parse(end_time1);
+            Date end_time = (Date)hDateFormat.parse(end_time1);
             double starting_price = Double.parseDouble(starting_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
             Auction auction = new Auction(categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);

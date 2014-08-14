@@ -69,10 +69,11 @@ public class AuctionDAO {
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             rs = state.executeQuery(sql);
-            int auctionid, category_id, seller_id;
-            String title, description, status;
+            int auctionid, category_id, seller_id, status;
+            String title, description, video,image1,image2,image3,image4,image5;
             Date start_date, end_date;
-            double starting_price, reserve_price, buy_now_price;
+            Time start_time,end_time;
+            double starting_price, buy_now_price;
             while (rs.next()) {
                 auctionid = rs.getInt("auctionid");
                 category_id = rs.getInt("category_id");
@@ -80,13 +81,20 @@ public class AuctionDAO {
                 title = rs.getString("title");
                 description = rs.getString("description");
                 start_date = rs.getDate("start_date");
+                start_time = rs.getTime("start_time");
                 end_date = rs.getDate("end_date");
+                end_time = rs.getTime("end_time");
                 starting_price = rs.getDouble("starting_price");
-                reserve_price = rs.getDouble("reserve_price");
                 buy_now_price = rs.getDouble("buy_now_price");
-                status = rs.getString("status");
-                //Auction auction = new Auction(auctionid, category_id, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                //arr.add(auction);
+                status = rs.getInt("status");
+                video = rs.getString("video");
+                image1 = rs.getString("image1");
+                image2 = rs.getString("image2");
+                image3 = rs.getString("image3");
+                image4 = rs.getString("image4");
+                image5 = rs.getString("image5");
+                Auction auction = new Auction(auctionid, category_id, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status,video,image1,image2,image3,image4,image5);
+                arr.add(auction);
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -161,18 +169,18 @@ public class AuctionDAO {
             pre.setString(3, auction.getTitle());
             pre.setString(4, auction.getDescription());  
             pre.setDate(5, new java.sql.Date(auction.getStart_date().getTime()));
-            pre.setTime(7, new java.sql.Time(auction.getStart_time().getTime()));
-            pre.setDate(8, new java.sql.Date(auction.getEnd_date().getTime()));
-            pre.setTime(9, new java.sql.Time(auction.getEnd_time().getTime()));            
-            pre.setDouble(10, auction.getStarting_price());
-            pre.setDouble(11, auction.getBuy_now_price());
-            pre.setInt(12, auction.getStatusId());
-            pre.setString(13, auction.getVideo());
-            pre.setString(14, auction.getImage1());
-            pre.setString(15, auction.getImage2());
-            pre.setString(16, auction.getImage3());
-            pre.setString(17, auction.getImage4());
-            pre.setString(18, auction.getImage5());
+            pre.setTime(6, new java.sql.Time(auction.getStart_time().getTime()));
+            pre.setDate(7, new java.sql.Date(auction.getEnd_date().getTime()));
+            pre.setTime(8, new java.sql.Time(auction.getEnd_time().getTime()));            
+            pre.setDouble(9, auction.getStarting_price());
+            pre.setDouble(10, auction.getBuy_now_price());
+            pre.setInt(11, auction.getStatusId());
+            pre.setString(12, auction.getVideo());
+            pre.setString(13, auction.getImage1());
+            pre.setString(14, auction.getImage2());
+            pre.setString(15, auction.getImage3());
+            pre.setString(16, auction.getImage4());
+            pre.setString(17, auction.getImage5());
             n = pre.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
