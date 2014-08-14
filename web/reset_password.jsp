@@ -27,7 +27,7 @@
         %>
     </head>
     <body>
-        <%=token%>
+       
         <jsp:include page="top.jsp" />
         <%
             if (errorCode != null) {
