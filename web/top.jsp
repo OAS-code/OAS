@@ -62,11 +62,7 @@
 
             <div class="header2_rgt">
                 <div class="dash_rgt">
-                    <ul>
-                            <li>
-                                <p >Your Balance:</p>
-                                <span><font class="">$</font></span><span title="" class="user_balance"><%=balance%></span>
-                            </li>  
+                    <ul> 
                         <li>
 
                             <div class="search_total">

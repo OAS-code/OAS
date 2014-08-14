@@ -19,8 +19,17 @@
     <body>
         <jsp:include page="top.jsp" />
         <div class="header2">  
+            <%
+                ArrayList<Auction> arr = (ArrayList<Auction>) request.getAttribute("arr");
+                if (arr == null) {
+                    response.sendRedirect("AuctionController?service=index");
+                } else {
+            %>
             <%@ include file="home_spotlight.jsp" %> 
             <%@ include file="home.jsp" %> 
+            <%
+                }
+            %>
         </div>
         <jsp:include page="footer.jsp" />
     </body> 
