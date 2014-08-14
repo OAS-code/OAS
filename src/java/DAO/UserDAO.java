@@ -159,6 +159,7 @@ public class UserDAO {
                 user.setPhonenumber(rs.getString("phonenumber"));
                 user.setAddress(rs.getString("address"));
                 user.setPassword(rs.getString("password"));
+                user.setBalance(rs.getDouble("balance"));
                 user.setSalt(rs.getString("salt"));
                 user.setJoinDate(rs.getString("join_date"));
             }
@@ -187,6 +188,7 @@ public class UserDAO {
                 user.setPhonenumber(rs.getString("phonenumber"));
                 user.setAddress(rs.getString("address"));
                 user.setPassword(rs.getString("password"));
+                user.setBalance(rs.getDouble("balance"));
                 user.setSalt(rs.getString("salt"));
                 user.setJoinDate(rs.getString("join_date"));
             }

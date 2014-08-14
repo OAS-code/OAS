@@ -42,7 +42,7 @@ public class UserController extends HttpServlet {
         final String view_detail_user = "cp_user_view_detail.jsp?current_page=user_manager";
         final String TableUser = "table_user.jsp";
         final String loginPage = "login.jsp";
-        final String cp = "cp.jsp&current_page=dashboard";
+        final String cp = "cp.jsp?current_page=dashboard";
         final String edit_user = "cp_user_edit.jsp?current_page=user_manager";
         final String change_pass = "cp_change_password.jsp?current_page=my_account";
         final String user_view_detail = "cp_user_view_detail.jsp";
@@ -64,7 +64,6 @@ public class UserController extends HttpServlet {
                 rd = request.getRequestDispatcher(userManager + "&errorCode=2");
                 rd.forward(request, response);
             }
-
         } else if (service.equalsIgnoreCase("edit_profile")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
@@ -73,12 +72,12 @@ public class UserController extends HttpServlet {
             request.setAttribute("requestedUser", user);
             rd = request.getRequestDispatcher(edit_profile);
             rd.forward(request, response);
-            
+
         } else if (service.equalsIgnoreCase("update_profile")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
             int userId = Integer.parseInt(userIdString);
-            
+
             User user = dao.getUser(userId);
             user.setFullname(request.getParameter("fullname"));
             user.setPhonenumber(request.getParameter("phonenumber"));
@@ -185,6 +184,14 @@ public class UserController extends HttpServlet {
             } else {
                 response.sendRedirect("notification.jsp?errorCode=1");
             }
+        } else if (service.equalsIgnoreCase("dashboard")) {
+            HttpSession session = request.getSession(true);
+            int userid = Integer.parseInt((String)session.getAttribute("userid"));
+            User user = dao.getUser(userid);
+            String balance = user.getFormattedBalance();
+            request.setAttribute("balance", balance);
+            rd = request.getRequestDispatcher(cp);
+            rd.forward(request, response);
         } else if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             String role = request.getParameter("cb1");

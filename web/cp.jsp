@@ -15,10 +15,15 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-
-        
-
-        <jsp:include page="top.jsp" />
+        <%@include file="perm_customer.jsp" %>
+        <%             
+        if (request.getAttribute("balance") == null) {
+                response.sendRedirect("UserController?service=dashboard");
+            } else {    
+            String balance = (String) request.getAttribute("balance");
+                    
+        %>
+        <%@ include file="top.jsp" %>
         <div class="header2">  
             <%                String errorCode = request.getParameter("errorCode");
             %>
@@ -26,12 +31,13 @@
             <ul id="message" class="success_msg">
                 <li><p>Logged in successfully!</p></li>
             </ul>
-            <br>
-            <%}%>
-            <jsp:include page="cp_cols.jsp" />
-            <jsp:include page="cp_home.jsp" />  
+            <br>  
+            <% } %>
+            <jsp:include page="cp_cols.jsp" />            
+            <%@ include file="cp_home.jsp" %>
         </div>
         <jsp:include page="footer.jsp" />
+        <% } %>
     </body> 
 
 </html>
