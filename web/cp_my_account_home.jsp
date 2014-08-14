@@ -34,7 +34,7 @@
                                 <div class="box_top"></div>
                                 <div class="box_mid">
                                     <div class="bot_img">
-                                        <div class="bot_com">&nbsp;</div>
+                                        <div class="bot_com_change_password">&nbsp;</div>
                                         <a href="cp_change_password.jsp?current_page=my_account" title="Change password"><h4>Change password</h4></a>
                                     </div>
                                 </div>
@@ -46,8 +46,8 @@
                                 <div class="box_top"></div>
                                 <div class="box_mid">
                                     <div class="bot_img">
-                                        <div class="bot_com1">&nbsp;</div>
-                                        <a href="cp_edit_profile.jsp?current_page=my_account" title="Edit profile"><h4>Edit profile</h4></a>
+                                        <div class="bot_com_edit_profile">&nbsp;</div>
+                                        <a href="UserController?service=edit_profile" title="Edit profile"><h4>Edit profile</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>

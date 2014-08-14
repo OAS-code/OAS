@@ -48,6 +48,7 @@ public class UserController extends HttpServlet {
         final String user_view_detail = "cp_user_view_detail.jsp";
         final String controller_view_detail = "UserController?service=view_detail";
         final String user_register = "register.jsp";
+        final String edit_profile = "cp_edit_profile.jsp?current_page=my_account";
 
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
@@ -65,16 +66,31 @@ public class UserController extends HttpServlet {
             }
 
         } else if (service.equalsIgnoreCase("edit_profile")) {
-            String id1 = request.getParameter("no");
-            int id = Integer.parseInt(id1);
-            String fullname = request.getParameter("fullname");
-            String phonenumber = request.getParameter("phonenumber");
-            String address = request.getParameter("address");
-            User user = new User(id, fullname, phonenumber, address);
-            int n = dao.update_profile(user);
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int userId = Integer.parseInt(userIdString);
+            User user = dao.getUser(userId);
+            request.setAttribute("requestedUser", user);
+            rd = request.getRequestDispatcher(edit_profile);
+            rd.forward(request, response);
+            
+        } else if (service.equalsIgnoreCase("update_profile")) {
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int userId = Integer.parseInt(userIdString);
+            
+            User user = dao.getUser(userId);
+            user.setFullname(request.getParameter("fullname"));
+            user.setPhonenumber(request.getParameter("phonenumber"));
+            user.setAddress(request.getParameter("address"));
+            int n = dao.update(user);
+            request.setAttribute("requestedUser", user);
             if (n > 0) {
-                response.sendRedirect(cp);
+                rd = request.getRequestDispatcher(edit_profile + "&errorCode=0");
+            } else {
+                rd = request.getRequestDispatcher(edit_profile + "&errorCode=1");
             }
+            rd.forward(request, response);
         } else if (service.equalsIgnoreCase("change_password")) {
             int userId = Integer.parseInt(request.getParameter("userid"));
             String oldPass = request.getParameter("old_password");
@@ -112,7 +128,6 @@ public class UserController extends HttpServlet {
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("edit_user")) {
             String userId = request.getParameter("userid");
-            System.out.print(userId);
             request.setAttribute("requestedUser", dao.getUser(Integer.parseInt(userId)));
             rd = request.getRequestDispatcher(edit_user);
             rd.forward(request, response);

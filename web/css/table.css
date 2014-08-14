@@ -120,7 +120,7 @@ body {
 #viewInfoTable tbody td {
     padding: 3px;
     /*font-style: oblique;*/
-    font-size: 15px;
+    /*font-size: 15px;*/
 }
 #viewInfoTable td:nth-child(1) {  
     white-space: nowrap;

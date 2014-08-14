@@ -38,7 +38,7 @@
                                 <td><%=user.getUsername()%></td>                    
                             </tr>                            
                             <tr>
-                                <td >Email:</td>
+                                <td>Email:</td>
                                 <td><%=user.getEmail()%></td>
                             </tr>
                             <tr>
@@ -71,7 +71,7 @@
 
                         <table align="center">
                             <tr>
-                                <td width="10"></td>
+                                <td width="90"></td>
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>

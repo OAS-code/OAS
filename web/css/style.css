@@ -642,6 +642,8 @@
 .bot_com1{ float:left; width:100%;margin: 10px 0 0 0;  height:21px;background:url("../images/sut.png") center center no-repeat; }
 .bot_com2{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/manage_cat.png") center center no-repeat; }
 .bot_com3{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/manage_cat.png") center center  no-repeat; }
+.bot_com_change_password{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/bot_com_change_password.png") center center no-repeat; }
+.bot_com_edit_profile{ float:left; width:100%;margin: 10px 0 0 0; height:21px; background:url("../images/bot_com_edit_profile.png") center center no-repeat; }
 .common_bounce{ float:left; width:631px; padding-bottom: 6px;}
 .common_bounce_text{ float:left; width:631px; margin: 6px 0 0;}
 .common_bounce_text h2{ float:left; width:631px;  font:bold 12px/23px arial;color:#2f9dd0; text-align:center;padding-bottom: 10px;}
