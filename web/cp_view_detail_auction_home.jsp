@@ -4,7 +4,6 @@
     Author     : MrTu
 --%>
 
-<%@page import="Entity.Digital"%>
 <%@page import="Entity.Category"%>
 <%@page import="Entity.Auction"%>
 <%@page import="java.sql.ResultSet"%>
@@ -19,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
     </head>
     <body>
+        <%@ include file="perm_staff.jsp" %>
         <div id="edit_profile_page" class="my_message_right">
             <div class="message_common_border">
                 <h1 title="EDIT PROFILE">Auction information</h1>
@@ -35,16 +35,23 @@
                         auction.setTitle(rs.getString(4));
                         auction.setDescription(rs.getString(5));
                         auction.setStart_date(rs.getDate(6));
-                        auction.setEnd_date(rs.getDate(7));
-                        auction.setStarting_price(rs.getDouble(8));
-                        auction.setReserve_price(rs.getDouble(9));
-                        auction.setBuy_now_price(rs.getDouble(10));
-                        auction.setStatus(rs.getString(11));
+                        auction.setStart_time(rs.getTime(7));
+                        auction.setEnd_date(rs.getDate(8));
+                        auction.setEnd_time(rs.getTime(9));
+                        auction.setStarting_price(rs.getDouble(10));
+                        auction.setBuy_now_price(rs.getDouble(11));
+                        auction.setStatus(rs.getInt(12));
+                        auction.setVideo(rs.getString(13));
+                        auction.setImage1(rs.getString(14));
+                        auction.setImage2(rs.getString(15));
+                        auction.setImage3(rs.getString(16));
+                        auction.setImage4(rs.getString(17));
+                        auction.setImage5(rs.getString(18));
                     }
                 %> 
                 <div class="message_common">					 
                     <div class="login_middle_common_profil">
-                        <input type="hidden" id="no" name="no" value="<%=auction.getAuctionid()%>">
+                        <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getAuctionid()%>">
                         <table border="1"  cellpadding="20" id="viewInfoTable">                            
                             <tr>
                                 <td>Title:</td>
@@ -70,28 +77,14 @@
                                 <td >Description:</td>
                                 <td><%=auction.getDescription()%></td>
                             </tr>
-                            <%
-                                ResultSet rst = (ResultSet) request.getAttribute("rst");
-                                Digital digital = new Digital();
-                                if (rst.next()) {
-                                    digital.setId(rst.getInt(1));
-                                    digital.setImage1(rst.getString(2));
-                                    digital.setImage2(rst.getString(3));
-                                    digital.setImage3(rst.getString(4));
-                                    digital.setImage4(rst.getString(5));
-                                    digital.setImage5(rst.getString(6));
-                                    digital.setVideo(rst.getString(7));
-                                }
-                            %>
-                            <input type="hidden" id="no1" name="no1" value="<%=digital.getId()%>">
                             <script>
                                 currentIndx = 0;
                                 MyImages = new Array();
-                                MyImages[0] = "<%=digital.getImage1()%>";
-                                MyImages[1] = "<%=digital.getImage2()%>";
-                                MyImages[2] = "<%=digital.getImage3()%>";
-                                MyImages[3] = "<%=digital.getImage4()%>";
-                                MyImages[4] = "<%=digital.getImage5()%>";
+                                MyImages[0] = "<%=auction.getImage1()%>";
+                                MyImages[1] = "<%=auction.getImage2()%>";
+                                MyImages[2] = "<%=auction.getImage3()%>";
+                                MyImages[3] = "<%=auction.getImage4()%>";
+                                MyImages[4] = "<%=auction.getImage5()%>";
                                 imagesPreloaded = new Array(5);
                                 for (var i = 0; i < MyImages.length; i++)
                                 {
@@ -135,7 +128,7 @@
                             </script>
                             <tr>
                                 <td>Image:</td>
-                                <td><img SRC="<%=digital.getImage1()%>" NAME="theImage" HEIGHT="320" WIDTH="420"></td>
+                                <td><img SRC="<%=auction.getImage1()%>" NAME="theImage" HEIGHT="320" WIDTH="420"></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -176,26 +169,30 @@
                             <tr>
                                 <td>Video:</td>
                                 <td>
-                                    <iframe width="530" height="315" src="//www.youtube.com/embed/<%=digital.getVideo()%>" frameborder="0" allowfullscreen></iframe>
+                                    <iframe width="530" height="315" src="//www.youtube.com/embed/<%=auction.getVideo()%>" frameborder="0" allowfullscreen></iframe>
                                 </td>
                             </tr>
                             </tr>
                             <tr>
-                                <td >Start date:</td>
+                                <td >Plan date:</td>
                                 <td><%=auction.getStart_date()%></td>
                             </tr>
                             <tr>
-                                <td>End date:</td>
+                                <td >Plan time:</td>
+                                <td><%=auction.getStart_time()%></td>
+                            </tr>
+                            <tr>
+                                <td>Close date:</td>
                                 <td><%=auction.getEnd_date()%></td>
+                            </tr>
+                            <tr>
+                                <td >Close time:</td>
+                                <td><%=auction.getEnd_time()%></td>
                             </tr>
                             <tr>
                                 <td >Starting price:</td>
                                 <td><%=auction.getStarting_price()%></td>
-                            </tr>
-                            <tr>
-                                <td>Reserve price:</td>
-                                <td><%=auction.getReserve_price()%></td>
-                            </tr>
+                            </tr>      
                             <tr>
                                 <td>Buy now price:</td>
                                 <td><%=auction.getBuy_now_price()%></td>
@@ -224,7 +221,7 @@
                                     <div class="save_mid">
                                         <a title="Delete">
                                             <input type="submit" value="Delete" name="Delete" onclick="return confirm('Are you sure?');">  
-                                            <input type="hidden" id="service" name="service" value="viewauctiondetail">
+                                            <input type="hidden" id="service" name="service" value="deleteAuction">
                                         </a>
                                     </div>
                                     <div class="save_right"></div>

@@ -98,7 +98,7 @@
                     <c:forEach var="auction" items="${arr}" varStatus="status"> 
                         <tr> 
                             <td>${status.count}</td> 
-                            <td><a href="AuctionController?service=viewdetail&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
+                            <td><a href="AuctionController?service=viewdetailauction&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
                             <td>${auction.status}</td>
                         </tr>
                     </c:forEach>

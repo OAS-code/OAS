@@ -12,7 +12,6 @@ import Entity.Category;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,10 +55,14 @@ public class AuctionController extends HttpServlet {
         RequestDispatcher rd;
 
         if (service.equalsIgnoreCase("auction_manager")) {
+            ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+            request.setAttribute("array", array);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("listall")) {
+            ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+            request.setAttribute("array", array);
             ArrayList<Auction> arr = dao.view();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);
@@ -71,17 +74,14 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("viewauctiondetail")) {
-            String id = request.getParameter("no");
-            int auctionid = Integer.parseInt(id);
-            //int m = dao.delete(auctionid);
-            //if (m > 0) {  
-            int n = dao.delete_auction(auctionid);
+        if (service.equalsIgnoreCase("deleteAuction")) {
+            String id = request.getParameter("auctionid");
+            int auctionid = Integer.parseInt(id);  
+            int n = dao.delete(auctionid);
             if (n > 0) {
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             }
-            //}
         }
         if (service.equalsIgnoreCase("add_auction")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.select();
@@ -89,15 +89,13 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
         }
-        if (service.equals("viewdetail")) {
+        if (service.equals("viewdetailauction")) {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
             rs = dao.search(Integer.parseInt(auctionid));
             rss = cdao.search(Integer.parseInt(categoryid));
-            rst = dao.searchDigital(Integer.parseInt(auctionid));
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
-            request.setAttribute("rst", rst);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
         }
@@ -107,12 +105,10 @@ public class AuctionController extends HttpServlet {
             String categoryid = request.getParameter("categoryid");
             rs = dao.search(Integer.parseInt(auctionid));
             rss = cdao.search(Integer.parseInt(categoryid));
-            rst = dao.searchDigital(Integer.parseInt(auctionid));
             ArrayList<Category> array = cdao.select();
             request.setAttribute("array", array);
             request.setAttribute("rs", rs);
             request.setAttribute("rss", rss);
-            request.setAttribute("rst", rst);
             rd = request.getRequestDispatcher(edit_auction);
             rd.forward(request, response);
         }
@@ -125,16 +121,18 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("updateauction")) {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String id = request.getParameter("no");
+            SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat hDateFormat = new SimpleDateFormat("HH:mm");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
-            String status = request.getParameter("cb2");
+            String sta = request.getParameter("cb2");
+            int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
+            String start_time1 = request.getParameter("starttime");            
             String end_date1 = request.getParameter("enddate");
+            String end_time1 = request.getParameter("endtime");     
             String starting_price1 = request.getParameter("startingprice");
-            String reserve_price1 = request.getParameter("reserveprice");
             String buy_now_price1 = request.getParameter("buynowprice");
             String image1 = request.getParameter("image1");
             String image2 = request.getParameter("image2");
@@ -144,26 +142,23 @@ public class AuctionController extends HttpServlet {
             String video1 = request.getParameter("video");
             int start = video1.indexOf('=');
             String video = video1.substring(start + 1);
-            int auctionid = Integer.parseInt(id);
-            int seller_id = 1;
+            String userid = request.getParameter("userid");
+            int seller_id = Integer.parseInt(userid);
+            String auction_id = request.getParameter("auctionid");
+            int auctionid_= Integer.parseInt(auction_id);
             int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date) simpleDateFormat.parse(start_date1);
-            Date end_date = (Date) simpleDateFormat.parse(end_date1);
-
+            Date start_date = (Date)DateFormat.parse(start_date1); 
+            Date start_time = (Date)hDateFormat.parse(start_time1);
+            Date end_date = (Date) DateFormat.parse(end_date1);
+            Date end_time = (Date)hDateFormat.parse(end_time1);
             double starting_price = Double.parseDouble(starting_price1);
-            double reserve_price = Double.parseDouble(reserve_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
-            /*Auction auction = new Auction(auctionid, categoryid, seller_id, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
+            Auction auction = new Auction(auctionid_, categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
              int n = dao.update(auction);
              if (n > 0) {
-
-             Digital digital = new Digital(auctionid, image1, image2, image3, image4, image5, video);
-             int m = dao.updateDigital(digital);
-             if (m > 0) {
              rd = request.getRequestDispatcher(auction_manager);
              rd.forward(request, response);
              }
-             }*/
 
         }
 
@@ -190,7 +185,7 @@ public class AuctionController extends HttpServlet {
             String video1 = request.getParameter("video");
             int start = video1.indexOf('=');
             String video = video1.substring(start + 1);
-            String id = request.getParameter("no");
+            String id = request.getParameter("userid");
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
             Date start_date = (Date)DateFormat.parse(start_date1); 

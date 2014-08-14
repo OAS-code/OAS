@@ -4,7 +4,6 @@
     Author     : MrTu
 --%>
 
-<%@page import="Entity.Digital"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,8 +25,8 @@
             </div>
             <form name="form1" method="post" action="AuctionController">
                 <%
-                    String userid = (String) session.getAttribute("userid");
-                    int id = Integer.parseInt(userid);
+                    String id = (String) session.getAttribute("userid");
+                    int userid = Integer.parseInt(id);
                     ResultSet rs = (ResultSet) request.getAttribute("rs");
                     Auction auction = new Auction();
                     if (rs.next()) {
@@ -37,15 +36,22 @@
                         auction.setTitle(rs.getString(4));
                         auction.setDescription(rs.getString(5));
                         auction.setStart_date(rs.getDate(6));
-                        auction.setEnd_date(rs.getDate(7));
-                        auction.setStarting_price(rs.getDouble(8));
-                        auction.setReserve_price(rs.getDouble(9));
-                        auction.setBuy_now_price(rs.getDouble(10));
-                        auction.setStatus(rs.getString(11));
+                        auction.setStart_time(rs.getTime(7));
+                        auction.setEnd_date(rs.getDate(8));
+                        auction.setEnd_time(rs.getTime(9));
+                        auction.setStarting_price(rs.getDouble(10));
+                        auction.setBuy_now_price(rs.getDouble(11));
+                        auction.setStatus(rs.getInt(12));
+                        auction.setVideo(rs.getString(13));
+                        auction.setImage1(rs.getString(14));
+                        auction.setImage2(rs.getString(15));
+                        auction.setImage3(rs.getString(16));
+                        auction.setImage4(rs.getString(17));
+                        auction.setImage5(rs.getString(18));
                     }
                 %>  
                 <div class="message_common">
-                    <input type="text" hidden="hidden" name="no" id="no" value="<%=id%>" class="textbox">
+                    <input type="text" hidden="hidden" name="userid" id="userid" value="<%=userid%>" class="textbox">
                     <input type="text" hidden="hidden" name="auctionid" id="auctionid" value="<%=auction.getAuctionid()%>" class="textbox">                    
                     <div class="login_middle_common_profil">
                         <div class="user_name_common">
@@ -86,55 +92,41 @@
                             <div class="text_feeld">
                                 <h2><input type="text" name="description" id="description" class="textbox" value="<%=auction.getDescription()%>"></h2>
                             </div>		
-                        </div>
-                        <%
-                            ResultSet rst = (ResultSet) request.getAttribute("rst");
-                            Digital digital = new Digital();
-                            if (rst.next()) {
-                                digital.setId(rst.getInt(1));
-                                digital.setImage1(rst.getString(2));
-                                digital.setImage2(rst.getString(3));
-                                digital.setImage3(rst.getString(4));
-                                digital.setImage4(rst.getString(5));
-                                digital.setImage5(rst.getString(6));
-                                digital.setVideo(rst.getString(7));
-                            }
-                        %>
-
+                        </div>                 
                         <div class="user_name_common">
                             <p>Image <span class="red">*</span>:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="image1" id="image1" class="textbox" value="<%=digital.getImage1()%>"></h2>
+                                <h2><input type="text" name="image1" id="image1" class="textbox" value="<%=auction.getImage1()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p></p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="image2" id="image2" class="textbox" value="<%=digital.getImage2()%>"></h2>
+                                <h2><input type="text" name="image2" id="image2" class="textbox" value="<%=auction.getImage2()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p></p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="image3" id="image3" class="textbox" value="<%=digital.getImage3()%>"></h2>
+                                <h2><input type="text" name="image3" id="image3" class="textbox" value="<%=auction.getImage3()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p></p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="image4" id="image4" class="textbox" value="<%=digital.getImage4()%>"></h2>
+                                <h2><input type="text" name="image4" id="image4" class="textbox" value="<%=auction.getImage4()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p></p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="image5" id="image5" class="textbox" value="<%=digital.getImage5()%>"></h2>
+                                <h2><input type="text" name="image5" id="image5" class="textbox" value="<%=auction.getImage5()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
                             <p>Video  <span class="red">*</span>:</p>
                             <div class="text_feeld">
-                                <h2><input type="text" name="video" id="video" class="textbox" value="<%=digital.getVideo()%>"></h2>
+                                <h2><input type="text" name="video" id="video" class="textbox" value="https://www.youtube.com/watch?v=<%=auction.getVideo()%>"></h2>
                             </div>		
                         </div>
 
@@ -145,9 +137,21 @@
                             </div>		
                         </div>
                         <div class="user_name_common">
+                            <p>Plan time  <span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="starttime" id="starttime" value="<%=auction.getStart_time()%>" >
+                            </div>		
+                        </div>
+                        <div class="user_name_common">
                             <p>Close date  <span class="red">*</span>: </p>
                             <div class="text_feeld">
                                 <input type="date" name="enddate" id="enddate" value="<%=auction.getEnd_date()%>">
+                            </div>		
+                        </div>
+                        <div class="user_name_common">
+                            <p>Close time:<span class="red">*</span>: </p>
+                            <div class="text_feeld">
+                                <input type="time" name="endtime" id="endtime" value="<%=auction.getEnd_time()%>">
                             </div>		
                         </div>
 
@@ -155,13 +159,13 @@
                             <p>Status  <span class="red">*</span>:</p>
                             <div class="text_feeld">
                                 <select name="cb2" id="cb2">
-                                    <option value="Active">Active</option>
-                                    <option value="Inactive">Inactive</option>
-                                    <option value="Future">Future</option>
-                                    <option value="Closed">Closed</option>
+                                    <option value="0">Inactive</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Future</option>
+                                    <option value="3">Closed</option>
                                 </select>
                                 <script>
-                                    document.getElementById('cb2').value = '<%=auction.getStatus()%>';
+                                    document.getElementById('cb2').value = '<%=auction.getStatusId()%>';
                                 </script>
                             </div>
                         </div>
@@ -169,12 +173,6 @@
                             <p>Starting price  <span class="red">*</span>: </p>
                             <div class="text_feeld">
                                 <h2><input type="text" name="startingprice" id="startingprice" value="<%=auction.getStarting_price()%>"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Reserve price  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="reserveprice" id="reserveprice" value="<%=auction.getReserve_price()%>"></h2>
                             </div>		
                         </div>
                         <div class="user_name_common">
@@ -226,128 +224,5 @@
                 </div>
             </form>
         </div>    
-        <!--<div style="width: 500px;margin: auto;">
-            <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-                <h2 style="margin: auto;margin-left: 10px">Edit auction</h2> 
-                <br>
-                <form name="form1" method="post" action="AuctionController">
-                    <table>
-      
-        <input type="hidden" id="no" name="no" value="" readonly></td>
-        <tr>
-            <td style="text-align: right">Title:</td>
-            <td>
-                <input type="text" name="title" id="title" value="">
-            </td>
-        </tr>
-       
-        <tr>
-            <td style="text-align: right">Category:</td>
-            <td>
-                <select name="cb1" id="cb1"> 
-       
-    </select> 
-</td>                                
-</tr>                         
-<tr>
-<td style="text-align: right">Description:</td>
-<td>
-    <textarea name="description" id="description"></textarea>
-</td>
-</tr>
-        
-        <tr>
-            <td style="text-align: right">Image:</td>  
-            <td>
-                <input type="text" name="image1" id="image1" value="">
-            </td>
-        </tr>
-        <tr>
-            <td></td> 
-            <td>
-                <input type="text" name="image2" id="image2" value="">
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="text" name="image3" id="image3" value="">
-            </td>
-        </tr>
-        <tr>
-            <td></td>  
-            <td>
-                <input type="text" name="image4" id="image4" value="">
-            </td>
-        </tr>
-        <tr>
-            <td></td>  
-            <td>
-                <input type="text" name="image5" id="image5" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Video:</td>
-            <td>
-                <input type="text" name="video" id="video" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Start date:</td>
-            <td>
-                <input type="date" name="startdate" id="startdate" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">End date:</td>
-            <td>                    
-                <input type="date" name="enddate" id="enddate" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Starting price:</td>
-            <td>                    
-                <input type="text" name="startingprice" id="startingprice" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Reserve price:</td>
-            <td>                    
-                <input type="text" name="reserveprice" id="reserveprice" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Buy now price:</td>
-            <td>                    
-                <input type="text" name="buynowprice" id="buynowprice" value="">
-            </td>
-        </tr>
-        <tr>
-            <td style="text-align: right">Status:</td>
-            <td>                                 
-                <select name="cb2" id="cb2">                                   
-                    <option value="Active">Active</option>
-                    <option value="Deactive">Deactive</option>
-                    <option value="Future">Future</option>
-                    <option value="Closed">Closed</option>
-                </select> 
-                <script>
-                    document.getElementById('cb2').value = '';
-                </script>
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" name="save" id="save" value="Save">
-                <input type="hidden" name="service" id="service" value="updateauction">
-                <input type="reset" name="reset" id="reset" value="Clear">
-                <input type="button" name="reset" id="reset" value="Cancel" onclick="window.location = 'AuctionController?service=listall';">
-            </td>
-        </tr>
-    </table>                
-</form>
-</div>
-</div>-->
     </body>
 </html>

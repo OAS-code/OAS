@@ -4,6 +4,8 @@
     Author     : MrTu
 --%>
 
+<%@page import="Entity.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,8 +55,12 @@
                                             <h2>
                                                 <select name="cb2" class=" text_bg select" id="cb2" style="">
                                                     <option value="" selected="selected">Select category</option>
-                                                    <option value="1">Active</option>
-                                                    <option value="0">Inactive</option>
+                                                    <%
+                                                        ArrayList<Category> array = (ArrayList<Category>) request.getAttribute("array");
+                                                        for (int i = 0; i < array.size(); i++) {
+                                                    %>                                
+                                                    <option value="<%=array.get(i).getCategoryid()%>"><%=array.get(i).getName()%></option>                                
+                                                    <%}%>
                                                 </select>
                                             </h2>
                                         </div>
@@ -71,7 +77,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            
+
 
                         </table>
 
@@ -80,7 +86,7 @@
                         <table  cellspacing="10" cellpadding="10">
                             <tr>
                                 <td width="91">
-                                    
+
                                 </td>
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
@@ -94,7 +100,7 @@
                                         <div class="res_right"></div>
                                     </div>
                                 </td>
-                            
+
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>
@@ -106,7 +112,7 @@
                                         <div class="res_right"></div>
                                     </div>
                                 </td>
-                            
+
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>
