@@ -216,7 +216,7 @@ public class UserDAO {
     }
 
     public boolean update(User user) {
-        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, id = ?, balance = ?";
+        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, balance = ?, password = ?, salt = ?, join_date = ? WHERE id = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
@@ -226,12 +226,15 @@ public class UserDAO {
             pre.setString(5, user.getAddress());
             pre.setInt(6, user.getRoleId());
             pre.setInt(7, user.getStatusId());
-            pre.setInt(8, user.getId());
-            pre.setDouble(9, user.getBalance());
+            pre.setDouble(8, user.getBalance());
+            pre.setString(9, user.getPassword());
+            pre.setString(10, user.getSalt());
+            pre.setString(11, user.getJoinDate());
+            pre.setInt(12, user.getId());
             pre.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }

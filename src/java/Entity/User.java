@@ -255,9 +255,13 @@ public class User {
         }
     }
 
-    public String getJoinDate() throws ParseException {
+    public String getFormattedJoinDate() throws ParseException {
         OtherDAO other = new OtherDAO();
         return other.formatDate(this.joinDate);
+    }
+    
+    public String getJoinDate()  {
+        return this.joinDate;
     }
 
     public void setJoinDate(String joinDate) {
