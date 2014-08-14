@@ -52,7 +52,7 @@
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com1">&nbsp;</div>
-                                        <a href="ListAllAuction.jsp" title="Manage Auction"><h4>Manage Auction</h4></a>
+                                        <a href="AuctionController?service=auction_manager" title="Manage Auction"><h4>Manage Auction</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
@@ -63,7 +63,7 @@
                                 <div class="box_mid">
                                     <div class="bot_img">
                                         <div class="bot_com2">&nbsp;</div>
-                                        <a href="cp_category_manager.jsp?current_page=category_manager" title="View My Watchlist"><h4>Manage Category</h4></a>
+                                        <a href="CategoryController?service=category_manager" title="View My Watchlist"><h4>Manage Category</h4></a>
                                     </div>
                                 </div>
                                 <div class="box_bot"></div>
