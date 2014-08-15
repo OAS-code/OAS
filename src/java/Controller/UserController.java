@@ -145,6 +145,8 @@ public class UserController extends HttpServlet {
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
             user.setAddress(address);
+            user.setStatus(status);
+            user.setRole(role);
             if (dao.update(user)) {
                 response.sendRedirect(controller_view_detail + "&errorCode=1&username=" + username);
             } else {

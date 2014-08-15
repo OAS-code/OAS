@@ -254,6 +254,10 @@ public class User {
             this.role = 0;
         }
     }
+    
+    public void setRole(int status) {
+        this.role = role;
+    }
 
     public String getFormattedJoinDate() throws ParseException {
         OtherDAO other = new OtherDAO();
