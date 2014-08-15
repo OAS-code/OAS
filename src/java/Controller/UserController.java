@@ -288,7 +288,8 @@ public class UserController extends HttpServlet {
                         int userid = Integer.parseInt(userIdString);
                         User user = dao.getUser(userid);
                         //System.out.println(user.getUsername());
-                        String newPassword = user.makePassword();
+                        String newPassword = other.getEncryptedPassword(password1, user.getSalt());
+                        user.setPassword(newPassword);
                         //System.out.println(newPassword+" - "+user.getPassword());
                         user.setStatus(1);
                         //System.out.println(user.getStatus());
