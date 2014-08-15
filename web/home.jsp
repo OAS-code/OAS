@@ -37,7 +37,7 @@
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="Monitor">
+                                <a href="" title="<%=arr.get(i).getTitle()%>">
                                     <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>

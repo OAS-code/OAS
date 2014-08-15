@@ -84,6 +84,8 @@ public class AuctionController extends HttpServlet {
             int auctionid = Integer.parseInt(id);
             int n = dao.delete(auctionid);
             if (n > 0) {
+                ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+                request.setAttribute("array", array);
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             }
