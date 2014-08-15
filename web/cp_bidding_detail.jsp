@@ -1,6 +1,6 @@
 <%-- 
-    Document   : cp_auction_manager
-    Created on : Aug 6, 2014, 10:33:20 PM
+    Document   : cp_detail_bidding
+    Created on : Aug 15, 2014, 10:32:41 AM
     Author     : MrTu
 --%>
 
@@ -9,18 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Manage action</title>
+        <title>Bidding detail</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-
     </head>
     <body>
-        <%@ include file="perm_staff.jsp" %>
         <jsp:include page="top.jsp" />
-        <div class="header2">
-            <jsp:include page="cp_cols.jsp" />  
-            <jsp:include page="cp_auction_manager_home.jsp" />
-        </div>
+        <%@include file="cp_bidding_detail_home.jsp" %>
         <jsp:include page="footer.jsp" />
     </body>
 </html>

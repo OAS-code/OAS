@@ -77,37 +77,5 @@
                 </div>
             </form>
         </div>
-        <!--<div style="width: 500px;margin: auto;">
-            <div style="width: 500px;display: block;border: 1px solid #ccc;border-radius: 4px;margin: auto;margin-top: 50px;">
-                <h2 style="margin: auto;margin-left: 10px">Edit user</h2> 
-                <form name="form1" method="post" action="CategoryController">
-       
-            <table>
-                <input type="hidden" name="no" id="no" value="<%=category.getCategoryid()%>"></td>               
-                <tr>
-                    <td style="text-align: right">Name:</td>
-                    <td>
-                        <input type="text" name="name" id="name" value="<%=category.getName()%>">
-                    </td>
-                </tr>  
-                <tr>
-                    <td style="text-align: right">Description:</td>
-                    <td>
-                        <input type="text" name="description" id="description" value="<%=category.getDescription()%>">
-                    </td>
-                </tr> 
-                <tr>
-                    <td></td>
-                    <td>
-                        <input type="submit" name="save" id="save" value="Save">
-                        <input type="hidden" name="service" id="service" value="edit">
-                        <input type="reset" name="reset" id="reset" value="Clear" onclick='clear();'>
-                        <input type="button" name="reset" id="reset" value="Cancel" onclick="window.location = 'CategoryController?service=listall';">
-                    </td>
-                </tr>
-            </table>
-        </form>
-    </div>
-</div>-->
     </body>
 </html>

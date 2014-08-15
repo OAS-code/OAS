@@ -45,7 +45,8 @@ public class AuctionController extends HttpServlet {
         AuctionDAO dao = new AuctionDAO();
         CategoryDAO cdao = new CategoryDAO();
         String service = request.getParameter("service");
-        final String auction_manager = "cp_auction_manager.jsp";
+        final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
+        final String bidding_detail = "cp_bidding_detail.jsp";
         final String add_auction = "cp_auction_add.jsp";
         final String view_detail_auction = "cp_view_detail_auction.jsp";
         final String edit_auction = "cp_edit_auction.jsp";
@@ -58,6 +59,10 @@ public class AuctionController extends HttpServlet {
             ArrayList<Category> array = (ArrayList<Category>) cdao.select();
             request.setAttribute("array", array);
             rd = request.getRequestDispatcher(auction_manager);
+            rd.forward(request, response);
+        }
+        if (service.equalsIgnoreCase("bidnow")) {
+            rd = request.getRequestDispatcher(bidding_detail);
             rd.forward(request, response);
         }
         if (service.equalsIgnoreCase("listall")) {
@@ -76,7 +81,7 @@ public class AuctionController extends HttpServlet {
         }
         if (service.equalsIgnoreCase("deleteAuction")) {
             String id = request.getParameter("auctionid");
-            int auctionid = Integer.parseInt(id);  
+            int auctionid = Integer.parseInt(id);
             int n = dao.delete(auctionid);
             if (n > 0) {
                 rd = request.getRequestDispatcher(auction_manager);
@@ -134,9 +139,9 @@ public class AuctionController extends HttpServlet {
             int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
-            String start_time1 = request.getParameter("starttime");            
+            String start_time1 = request.getParameter("starttime");
             String end_date1 = request.getParameter("enddate");
-            String end_time1 = request.getParameter("endtime");     
+            String end_time1 = request.getParameter("endtime");
             String starting_price1 = request.getParameter("startingprice");
             String buy_now_price1 = request.getParameter("buynowprice");
             String image1 = request.getParameter("image1");
@@ -150,20 +155,23 @@ public class AuctionController extends HttpServlet {
             String userid = request.getParameter("userid");
             int seller_id = Integer.parseInt(userid);
             String auction_id = request.getParameter("auctionid");
-            int auctionid_= Integer.parseInt(auction_id);
+            int auctionid_ = Integer.parseInt(auction_id);
             int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date)DateFormat.parse(start_date1); 
-            Date start_time = (Date)hDateFormat.parse(start_time1);
+            Date start_date = (Date) DateFormat.parse(start_date1);
+            Date start_time = (Date) hDateFormat.parse(start_time1);
             Date end_date = (Date) DateFormat.parse(end_date1);
-            Date end_time = (Date)hDateFormat.parse(end_time1);
+            Date end_time = (Date) hDateFormat.parse(end_time1);
             double starting_price = Double.parseDouble(starting_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
             Auction auction = new Auction(auctionid_, categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
-             int n = dao.update(auction);
-             if (n > 0) {
-             rd = request.getRequestDispatcher(auction_manager);
-             rd.forward(request, response);
-             }
+            int n = dao.update(auction);
+            if (n > 0) {
+                ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+                request.setAttribute("array", array);
+                //response.sendRedirect(auction_manager);
+                rd = request.getRequestDispatcher(auction_manager);
+                rd.forward(request, response);
+            }
 
         }
 
@@ -176,9 +184,9 @@ public class AuctionController extends HttpServlet {
             int status = Integer.parseInt(sta);
             String categoryid1 = request.getParameter("cb1");
             String start_date1 = request.getParameter("startdate");
-            String start_time1 = request.getParameter("starttime");            
+            String start_time1 = request.getParameter("starttime");
             String end_date1 = request.getParameter("enddate");
-            String end_time1 = request.getParameter("endtime");     
+            String end_time1 = request.getParameter("endtime");
             System.out.println(end_time1);
             String starting_price1 = request.getParameter("startingprice");
             String buy_now_price1 = request.getParameter("buynowprice");
@@ -193,19 +201,22 @@ public class AuctionController extends HttpServlet {
             String id = request.getParameter("userid");
             int seller_id = Integer.parseInt(id);
             int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date)DateFormat.parse(start_date1); 
-            Date start_time = (Date)hDateFormat.parse(start_time1);
+            Date start_date = (Date) DateFormat.parse(start_date1);
+            Date start_time = (Date) hDateFormat.parse(start_time1);
             Date end_date = (Date) DateFormat.parse(end_date1);
-            Date end_time = (Date)hDateFormat.parse(end_time1);
+            Date end_time = (Date) hDateFormat.parse(end_time1);
             double starting_price = Double.parseDouble(starting_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
             Auction auction = new Auction(categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
             int n = dao.add(auction);
             if (n > 0) {
+                ArrayList<Category> array = (ArrayList<Category>) cdao.select();
+                request.setAttribute("array", array);
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
+                //response.sendRedirect(auction_manager);
             } else {
-                
+
             }
         }
     }

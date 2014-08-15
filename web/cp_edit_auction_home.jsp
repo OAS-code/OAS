@@ -18,6 +18,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%@ include file="perm_staff.jsp" %>
         <div class="my_message_right" id="edit_profile_page">
             <div class="message_common_border">
                 <h1 title="User Manager">Add new auction</h1>
