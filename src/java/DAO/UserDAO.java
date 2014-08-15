@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,6 +75,9 @@ public class UserDAO {
         int n = 0;
         try {
             String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status, balance, join_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            if (user.getJoinDate() == null) {
+                sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status, balance) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            }
             pre = conn.prepareStatement(sql);
 
             pre.setString(1, user.getUsername());
@@ -86,8 +90,10 @@ public class UserDAO {
             pre.setInt(8, user.getRoleId());
             pre.setInt(9, user.getStatusId());
             pre.setDouble(10, user.getBalance());
-            pre.setString(11, user.getJoinDate());
-
+            if (user.getJoinDate() != null) {
+                pre.setString(11, user.getJoinDate());
+            }
+ 
             //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
 
