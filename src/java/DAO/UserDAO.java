@@ -13,6 +13,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +74,10 @@ public class UserDAO {
     public int addUser(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status, balance, join_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+            if (user.getJoinDate() == null) {
+                sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status, balance) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            }
             pre = conn.prepareStatement(sql);
 
             pre.setString(1, user.getUsername());
@@ -85,7 +89,11 @@ public class UserDAO {
             pre.setString(7, user.getSalt());
             pre.setInt(8, user.getRoleId());
             pre.setInt(9, user.getStatusId());
-
+            pre.setDouble(10, user.getBalance());
+            if (user.getJoinDate() != null) {
+                pre.setString(11, user.getJoinDate());
+            }
+ 
             //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
 
@@ -216,7 +224,7 @@ public class UserDAO {
     }
 
     public boolean update(User user) {
-        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, id = ?, balance = ?";
+        String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, balance = ?, password = ?, salt = ?, join_date = ? WHERE id = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
@@ -226,12 +234,15 @@ public class UserDAO {
             pre.setString(5, user.getAddress());
             pre.setInt(6, user.getRoleId());
             pre.setInt(7, user.getStatusId());
-            pre.setInt(8, user.getId());
-            pre.setDouble(9, user.getBalance());
+            pre.setDouble(8, user.getBalance());
+            pre.setString(9, user.getPassword());
+            pre.setString(10, user.getSalt());
+            pre.setString(11, user.getJoinDate());
+            pre.setInt(12, user.getId());
             pre.executeUpdate();
             return true;
         } catch (SQLException ex) {
-            //Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
     }

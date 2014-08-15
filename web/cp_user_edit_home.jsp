@@ -83,7 +83,7 @@
                                                     <%
                                                     } else {
                                                     %>
-                                                    document.getElementById("cb1").selectedIndex = "";
+                                                    document.getElementById("cb1").selectedIndex = "0";
                                                     <%
                                                         }
                                                     %>

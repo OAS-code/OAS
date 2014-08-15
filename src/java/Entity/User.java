@@ -254,10 +254,18 @@ public class User {
             this.role = 0;
         }
     }
+    
+    public void setRole(int role) {
+        this.role = role;
+    }
 
-    public String getJoinDate() throws ParseException {
+    public String getFormattedJoinDate() throws ParseException {
         OtherDAO other = new OtherDAO();
         return other.formatDate(this.joinDate);
+    }
+    
+    public String getJoinDate()  {
+        return this.joinDate;
     }
 
     public void setJoinDate(String joinDate) {

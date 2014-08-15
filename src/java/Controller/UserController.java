@@ -140,11 +140,13 @@ public class UserController extends HttpServlet {
             int status = Integer.parseInt(request.getParameter("cb2"));
             int role = Integer.parseInt(request.getParameter("cb1"));
 
-            User user = new User(username, email, status, role);
+            User user = dao.getUser(userId);
             user.setId(userId);
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
             user.setAddress(address);
+            user.setStatus(status);
+            user.setRole(role);
             if (dao.update(user)) {
                 response.sendRedirect(controller_view_detail + "&errorCode=1&username=" + username);
             } else {
@@ -251,11 +253,68 @@ public class UserController extends HttpServlet {
                     user.setStatus(0);
                     //System.out.println(user.getStatus());
                     if (dao.update(user)) {
-                        rd = request.getRequestDispatcher(reset_password + "?errorCode=0");
+                        rd = request.getRequestDispatcher(reset_password + "?errorCode=0&token="+token);
                         rd.forward(request, response);
                     } else {
                         rd = request.getRequestDispatcher(forgot_password + "?errorCode=6");
                         rd.forward(request, response);
+                    }
+                }
+            }
+        } else if (service.equalsIgnoreCase("reset_password_finish")) {
+            String tokenFinish = (String) request.getParameter("tokenFinish");
+            
+            //Validate passwords first
+            String password1 = (String) request.getParameter("password1");
+            String password2 = (String) request.getParameter("password2");
+            //System.out.println(password1+"-"+password2);
+            OtherDAO other = new OtherDAO();
+            if (!other.isPasswordValid(password1) || !other.isPasswordValid(password2)) {
+                rd = request.getRequestDispatcher(reset_password + "?errorCode=1&token="+tokenFinish);
+                rd.forward(request, response);
+            } else if (!password1.equals(password2)) {
+                rd = request.getRequestDispatcher(reset_password + "?errorCode=2&token="+tokenFinish);
+                rd.forward(request, response);
+            } else {
+                if (tokenFinish == null || tokenFinish.isEmpty()) {
+                    rd = request.getRequestDispatcher(forgot_password + "?errorCode=7");
+                    rd.forward(request, response);
+                } else {
+                    String[] tokenData = new String[4];
+                    tokenData = other.getTokenData(tokenFinish);
+                    String userIdString = tokenData[2];
+                    if (userIdString == null || userIdString.isEmpty()) {
+                        rd = request.getRequestDispatcher(forgot_password + "?errorCode=7");
+                        rd.forward(request, response);
+                    } else {
+                        int userid = Integer.parseInt(userIdString);
+                        User user = dao.getUser(userid);
+                        //System.out.println(user.getUsername());
+                        String newPassword = other.getEncryptedPassword(password1, user.getSalt());
+                        user.setPassword(newPassword);
+                        //System.out.println(newPassword+" - "+user.getPassword());
+                        user.setStatus(1);
+                        //System.out.println(user.getStatus());
+                        if (dao.update(user) && other.cleanUserToken(userid)) { // Update everything and then clean the token.
+                            //All should be done by now, let's send some mails.
+                            String domain = getServletContext().getInitParameter("domain");
+                            String subject = "Online Auction System - Your Password has been changed successfully";
+                            String body = "Hi " + user.getUsername() + ",\n"
+                                    + "\n"
+                                    + "Your OAS password has been successfully updated\n"
+                                    + "\n"
+                                    + "If you did not request this password change or believe you're receiving this email in error, please contact OAS Administration Team for immediate assistance.\n"
+                                    + "\n"
+                                    + "Regards,\n"
+                                    + "Your friends at OAS ";
+                            other.sendMail(user.getEmail(), subject, body);
+                            //Finish sending email
+                            rd = request.getRequestDispatcher(reset_password);
+                            rd.forward(request, response);
+                        } else {
+                            rd = request.getRequestDispatcher(forgot_password + "?errorCode=6");
+                            rd.forward(request, response);
+                        }
                     }
                 }
             }

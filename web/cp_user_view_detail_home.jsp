@@ -63,7 +63,7 @@
                             </tr>
                             <tr>
                                 <td >Join date:</td>
-                                <td><%=user.getJoinDate()%></td>
+                                <td><%=user.getFormattedJoinDate()%></td>
                             </tr>                            
                         </table>	
 

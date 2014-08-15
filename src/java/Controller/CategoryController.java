@@ -72,7 +72,7 @@ public class CategoryController extends HttpServlet {
             }
         }
         if(service.equalsIgnoreCase("edit")){
-            String id = request.getParameter("no");
+            String id = request.getParameter("cateId");
             int categoryid = Integer.parseInt(id);
             String name = request.getParameter("name");
             String description = request.getParameter("description");
@@ -86,7 +86,7 @@ public class CategoryController extends HttpServlet {
             String search = request.getParameter("txtsearch");
             ArrayList<Category> arr = dao.searchCategory(search);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(category_manager);
+            rd = request.getRequestDispatcher(category_manager+"&keyword="+search);
             rd.forward(request, response);
         } 
     }

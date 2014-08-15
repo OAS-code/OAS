@@ -96,7 +96,7 @@
                     <td>${status.count}</td> 
                     <td>${category.name}</td>
                     <td>${category.description}</td>
-                    <td><a href="cp_edit_category.jsp?categoryid=${category.categoryid}">Edit</a></td>
+                    <td><a href="cp_category_edit.jsp?categoryid=${category.categoryid}">Edit</a></td>
                     <td><a href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')">Delete</a></td>
                     </tr>
                 </c:forEach>
