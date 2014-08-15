@@ -73,7 +73,7 @@ public class UserDAO {
     public int addUser(User user) {
         int n = 0;
         try {
-            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO user (username, password, fullname, phonenumber, email, address, salt, role, status, balance, join_date) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
             pre = conn.prepareStatement(sql);
 
             pre.setString(1, user.getUsername());
@@ -85,6 +85,8 @@ public class UserDAO {
             pre.setString(7, user.getSalt());
             pre.setInt(8, user.getRoleId());
             pre.setInt(9, user.getStatusId());
+            pre.setDouble(10, user.getBalance());
+            pre.setString(11, user.getJoinDate());
 
             //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();

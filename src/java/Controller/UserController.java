@@ -140,7 +140,7 @@ public class UserController extends HttpServlet {
             int status = Integer.parseInt(request.getParameter("cb2"));
             int role = Integer.parseInt(request.getParameter("cb1"));
 
-            User user = new User(username, email, status, role);
+            User user = dao.getUser(userId);
             user.setId(userId);
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
