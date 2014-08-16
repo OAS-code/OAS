@@ -13,166 +13,252 @@ import java.util.Date;
  * @author MrTu
  */
 public class Auction {
-
-    int auctionid;
-    int categoryid;
-    int sellerid;
+    int id;
+    int categoryId;
+    String categoryName;
+    int sellerId;
+    String sellerName;
     String title;
     String description;
-    Date start_date;
-    Date start_time;
-    Date end_date;
-    Date end_time;
-    double starting_price;
-    double buy_now_price;
+    Date startDate;
+    Date endDate;
+    double startPrice;
+    double buynowPrice;
+    double increaseBy;
     int status;
-    String video;
-    String image1;
-    String image2;
-    String image3;
-    String image4;
-    String image5;
+    String imgCover;
+    String vYoutube;
+    String img1;
+    String img2;
+    String img3;
+    String img4;
+    String img5;
 
     public Auction() {
     }
 
-    public Auction(int categoryid, int sellerid, String title, String description, Date start_date, Date start_time, Date end_date, Date end_time, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
-        this.categoryid = categoryid;
-        this.sellerid = sellerid;
-        this.title = title;
-        this.description = description;
-        this.start_date = start_date;
-        this.start_time =  start_time;
-        this.end_date = end_date;
-        this.end_time =  end_time;
-        this.starting_price = starting_price;
-        this.buy_now_price = buy_now_price;
-        this.status = status;
-        this.video = video;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.image3 = image3;
-        this.image4 = image4;
-        this.image5 = image5;
+    public int getId() {
+        return id;
     }
 
-    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date end_date, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
-        this.auctionid = auctionid;
-        this.categoryid = categoryid;
-        this.sellerid = sellerid;
-        this.title = title;
-        this.description = description;
-        this.start_date = start_date;
-        this.end_date = end_date;
-        this.starting_price = starting_price;
-        this.buy_now_price = buy_now_price;
-        this.status = status;
-        this.video = video;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.image3 = image3;
-        this.image4 = image4;
-        this.image5 = image5;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public Auction(int auctionid, int categoryid, int sellerid, String title, String description, Date start_date, Date start_time, Date end_date, Date end_time, double starting_price, double buy_now_price, int status, String video, String image1, String image2, String image3, String image4, String image5) {
-        this.auctionid = auctionid;
-        this.categoryid = categoryid;
-        this.sellerid = sellerid;
-        this.title = title;
-        this.description = description;
-        this.start_date = start_date;
-        this.start_time = start_time;
-        this.end_date = end_date;
-        this.end_time = end_time;
-        this.starting_price = starting_price;
-        this.buy_now_price = buy_now_price;
-        this.status = status;
-        this.video = video;
-        this.image1 = image1;
-        this.image2 = image2;
-        this.image3 = image3;
-        this.image4 = image4;
-        this.image5 = image5;
+    public int getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public int getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public String getSellerName() {
+        return sellerName;
+    }
+
+    public void setSellerName(String sellerName) {
+        this.sellerName = sellerName;
     }
     
+    public String getTitle() {
+        return title;
+    }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+    
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public double getStartPrice() {
+        return startPrice;
+    }
+
+    public void setStartPrice(double startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public double getBuynowPrice() {
+        return buynowPrice;
+    }
+
+    public void setBuynowPrice(double buynowPrice) {
+        this.buynowPrice = buynowPrice;
+    }
+
+    public double getIncreaseBy() {
+        return increaseBy;
+    }
+
+    public void setIncreaseBy(double increaseBy) {
+        this.increaseBy = increaseBy;
+    }
+    
     
 
+    public String getImgCover() {
+        return imgCover;
+    }
+
+    public void setImgCover(String imgCover) {
+        this.imgCover = imgCover;
+    }
+
+    public String getvYoutube() {
+        return vYoutube;
+    }
+
+    public void setvYoutube(String vYoutube) {
+        this.vYoutube = vYoutube;
+    }
+
+    public String getImg1() {
+        return img1;
+    }
+
+    public void setImg1(String img1) {
+        this.img1 = img1;
+    }
+
+    public String getImg2() {
+        return img2;
+    }
+
+    public void setImg2(String img2) {
+        this.img2 = img2;
+    }
+
+    public String getImg3() {
+        return img3;
+    }
+
+    public void setImg3(String img3) {
+        this.img3 = img3;
+    }
+
+    public String getImg4() {
+        return img4;
+    }
+
+    public void setImg4(String img4) {
+        this.img4 = img4;
+    }
+
+    public String getImg5() {
+        return img5;
+    }
+
+    public void setImg5(String img5) {
+        this.img5 = img5;
+    }
+
+    ///////////////////////
+    /*
     public String getVideo() {
-        return video;
+        return vYoutube;
     }
 
     public void setVideo(String video) {
-        this.video = video;
+        this.vYoutube = video;
     }
 
     public String getImage1() {
-        return image1;
+        return img1;
     }
 
     public void setImage1(String image1) {
-        this.image1 = image1;
+        this.img1 = image1;
     }
 
     public String getImage2() {
-        return image2;
+        return img2;
     }
 
     public void setImage2(String image2) {
-        this.image2 = image2;
+        this.img2 = image2;
     }
 
     public String getImage3() {
-        return image3;
+        return img3;
     }
 
     public void setImage3(String image3) {
-        this.image3 = image3;
+        this.img3 = image3;
     }
 
     public String getImage4() {
-        return image4;
+        return img4;
     }
 
     public void setImage4(String image4) {
-        this.image4 = image4;
+        this.img4 = image4;
     }
 
     public String getImage5() {
-        return image5;
+        return img5;
     }
 
     public void setImage5(String image5) {
-        this.image5 = image5;
-    }
-
-    public Date getStart_time() {
-        return start_time;
-    }
-
-    public void setStart_time(Date start_time) {
-        this.start_time = start_time;
-    }
-
-    public void setEnd_time(Date end_time) {
-        this.end_time = end_time;
-    }
-
-    public Date getEnd_time() {
-        return end_time;
+        this.img5 = image5;
     }
 
     public void setAuctionid(int auctionid) {
-        this.auctionid = auctionid;
+        this.id = auctionid;
     }
 
     public void setCategoryid(int categoryid) {
-        this.categoryid = categoryid;
+        this.categoryId = categoryid;
     }
 
     public void setSellerid(int sellerid) {
-        this.sellerid = sellerid;
+        this.sellerId = sellerid;
     }
 
     public void setTitle(String title) {
@@ -184,19 +270,19 @@ public class Auction {
     }
 
     public void setStart_date(Date start_date) {
-        this.start_date = start_date;
+        this.startDate = start_date;
     }
 
     public void setEnd_date(Date end_date) {
-        this.end_date = end_date;
+        this.endDate = end_date;
     }
 
     public void setStarting_price(double starting_price) {
-        this.starting_price = starting_price;
+        this.startPrice = starting_price;
     }
 
     public void setBuy_now_price(double buy_now_price) {
-        this.buy_now_price = buy_now_price;
+        this.buynowPrice = buy_now_price;
     }
 
     public void setStatus(int status) {
@@ -204,15 +290,15 @@ public class Auction {
     }
 
     public int getAuctionid() {
-        return auctionid;
+        return id;
     }
 
     public int getCategoryid() {
-        return categoryid;
+        return categoryId;
     }
 
     public int getSellerid() {
-        return sellerid;
+        return sellerId;
     }
 
     public String getTitle() {
@@ -224,23 +310,25 @@ public class Auction {
     }
 
     public Date getStart_date() {
-        return start_date;
+        return startDate;
     }
 
     public Date getEnd_date() {
-        return end_date;
+        return endDate;
     }
 
     public double getStarting_price() {
-        return starting_price;
+        return startPrice;
     }
 
     public double getBuy_now_price() {
-        return buy_now_price;
+        return buynowPrice;
     }
-    public int getStatusId(){
+
+    public int getStatusId() {
         return this.status;
     }
+
     public String getStatus() {
         if (status == 0) {
             return "Inactive";
@@ -254,5 +342,5 @@ public class Auction {
             return "Inactive";
         }
     }
-
+*/
 }

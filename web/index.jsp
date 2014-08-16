@@ -20,15 +20,15 @@
         <jsp:include page="top.jsp" />
         <div class="header2">  
             <%
-                ArrayList<Auction> arr = (ArrayList<Auction>) request.getAttribute("arr");
+                /*ArrayList<Auction> arr = (ArrayList<Auction>) request.getAttribute("arr");
                 if (arr == null) {
                     response.sendRedirect("AuctionController?service=index");
-                } else {
+                } else { */
             %>
             <%@ include file="home_spotlight.jsp" %> 
-            <%@ include file="home.jsp" %> 
+            <%@ include file="home_spotlight.jsp" %> 
             <%
-                }
+                //}
             %>
         </div>
         <jsp:include page="footer.jsp" />

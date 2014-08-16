@@ -30,7 +30,7 @@
                                 <td width="500">
 
                                     <div class="user_name_common">
-                                        <b>Auction type: </b>
+                                        <b>Auction status: </b>
                                     </div>
 
                                     <div class="user_name_common" style="width:400px;">
@@ -60,7 +60,7 @@
                                                         ArrayList<Category> array = (ArrayList<Category>) request.getAttribute("array");
                                                         for (int i = 0; i < array.size(); i++) {
                                                     %>                                
-                                                    <option value="<%=array.get(i).getCategoryid()%>"><%=array.get(i).getName()%></option>                                
+                                                    <option value="<%=array.get(i).getId()%>"><%=array.get(i).getName()%></option>                                
                                                     <%}%>
                                                 </select>
                                             </h2>

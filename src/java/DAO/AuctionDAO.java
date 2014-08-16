@@ -50,7 +50,7 @@ public class AuctionDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = (Connection) DriverManager.getConnection(ulr, username, password);
-            System.out.println("connected");
+            //System.out.println("connected");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -62,120 +62,84 @@ public class AuctionDAO {
         }
     }
 
-    public ArrayList<Auction> list(String keyword, String sta, String cat) throws SQLException {
-        String sql = "SELECT * FROM auction WHERE 1=1 ";
-        String sqlstatus = "AND status = '"+ sta +"'";
-        String sqlcategory = "AND category_id = '"+ cat +"'";
-        String sqlkeyword = "AND title LIKE '%"+ keyword+ "%'";
+    public ArrayList<Auction> list(String keyword, int status, int categoryId) {
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, start_date, end_date, starting_price, buy_now_price, increase_by, a.status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE 1=1  ";
+        String sqlstatus = " AND a.status = ?";
+        String sqlcategory = " AND a.category_id = ?";
+        String sqlkeyword = " AND a.title LIKE '%?%'";
         ArrayList<Auction> arr = new ArrayList<Auction>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            if(!sta.equals("")){
+            
+            if(status != -1){
                 sql = sql + sqlstatus;
             }
-            if(!cat.equals("")){
+            if(categoryId != -1){
                 sql = sql + sqlcategory;
             }
             if(!keyword.equals("")){
                 sql = sql + sqlkeyword;
             }
-            sql = sql + " ORDER BY title DESC";           
+            sql = sql + " ORDER BY a.title DESC";     
+            //System.out.println(sql);
+            pre = conn.prepareStatement(sql);
             
-            rs = state.executeQuery(sql);
-            int auctionid, category_id, seller_id, status;
-            String title, description, video,image1,image2,image3,image4,image5;
-            Date start_date, end_date;
-            Time start_time,end_time;
-            double starting_price, buy_now_price;
+            int index = 0;
+            if(status != -1){
+                index++;
+                pre.setInt(index, status);
+            }
+            if(categoryId != -1){
+                index++;
+                pre.setInt(index, categoryId);
+            }
+            if(!keyword.equals("")){
+                index++;
+                pre.setString(index, keyword);
+            }
+            
+            rs = pre.executeQuery(sql);
             while (rs.next()) {
-                auctionid = rs.getInt("auctionid");
-                category_id = rs.getInt("category_id");
-                seller_id = rs.getInt("seller_id");
-                title = rs.getString("title");
-                description = rs.getString("description");
-                start_date = rs.getDate("start_date");
-                start_time = rs.getTime("start_time");
-                end_date = rs.getDate("end_date");
-                end_time = rs.getTime("end_time");
-                starting_price = rs.getDouble("starting_price");
-                buy_now_price = rs.getDouble("buy_now_price");
-                status = rs.getInt("status");
-                video = rs.getString("video");
-                image1 = rs.getString("image1");
-                image2 = rs.getString("image2");
-                image3 = rs.getString("image3");
-                image4 = rs.getString("image4");
-                image5 = rs.getString("image5");
-                Auction auction = new Auction(auctionid, category_id, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status,video,image1,image2,image3,image4,image5);
+                Auction auction = new Auction();
+                auction.setId(rs.getInt("auctionid"));
+                auction.setCategoryId(rs.getInt("category_id"));
+                auction.setCategoryName(rs.getString("category_name"));
+                auction.setSellerId(rs.getInt("seller_id"));
+                auction.setSellerName(rs.getString("seller_name"));
+                auction.setTitle(rs.getString("title"));
+                auction.setDescription(rs.getString("description"));
+                auction.setStartDate(rs.getDate("start_date"));
+                auction.setEndDate(rs.getDate("end_date"));
+                auction.setStartPrice(rs.getDouble("starting_price"));
+                auction.setBuynowPrice(rs.getDouble("buy_now_price"));
+                auction.setIncreaseBy(rs.getDouble("increase_by"));
+                auction.setStatus(rs.getInt("status"));
+                auction.setvYoutube(rs.getString("v_youtube"));
+                auction.setImgCover(rs.getString("img_cover"));
+                auction.setImg1(rs.getString("img_1"));
+                auction.setImg1(rs.getString("img_2"));
+                auction.setImg1(rs.getString("img_3"));
+                auction.setImg1(rs.getString("img_4"));
+                auction.setImg1(rs.getString("img_5"));
                 arr.add(auction);
+                //System.out.println("++++++"+auction.getSellerName());
             }
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO list failed.");
         }
         return arr;
     }
-    public ArrayList<Auction> list() throws SQLException{
-        return list("", "", "");
+    
+    public ArrayList<Auction> list(){
+        return list("", -1, -1); 
     }
-    /*public ArrayList<Auction> searchAuction(String search, String stt) {
-        String sql = "SELECT * FROM auction WHERE MATCH(title) AGAINST ('" + search + "') AND status LIKE '" + stt + "%'";
-        String sql1 = "SELECT * FROM auction WHERE status LIKE '" + stt + "%'";
-        ArrayList<Auction> arr = new ArrayList<>();
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            if (search.equals("")) {
-                rs = state.executeQuery(sql1);
-                String title, description, status;
-                int auctionid, categoryid, sellerid;
-                double starting_price, reserve_price, buy_now_price;
-                Date start_date, end_date;
-                while (rs.next()) {
-                    auctionid = rs.getInt("auctionid");
-                    categoryid = rs.getInt("category_id");
-                    sellerid = rs.getInt("seller_id");
-                    title = rs.getString("title");
-                    description = rs.getString("description");
-                    start_date = rs.getDate("start_date");
-                    end_date = rs.getDate("end_date");
-                    starting_price = rs.getDouble("starting_price");
-                    reserve_price = rs.getDouble("reserve_price");
-                    buy_now_price = rs.getDouble("buy_now_price");
-                    status = rs.getString("status");
-                    //Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                    //arr.add(auction);
-                }
-            } else {
-                rs = state.executeQuery(sql);
-                String title, description, status;
-                int auctionid, categoryid, sellerid;
-                double starting_price, reserve_price, buy_now_price;
-                Date start_date, end_date;
-                while (rs.next()) {
-                    auctionid = rs.getInt("auctionid");
-                    categoryid = rs.getInt("category_id");
-                    sellerid = rs.getInt("seller_id");
-                    title = rs.getString("title");
-                    description = rs.getString("description");
-                    start_date = rs.getDate("start_date");
-                    end_date = rs.getDate("end_date");
-                    starting_price = rs.getDouble("starting_price");
-                    reserve_price = rs.getDouble("reserve_price");
-                    buy_now_price = rs.getDouble("buy_now_price");
-                    status = rs.getString("status");
-                    //Auction auction = new Auction(auctionid, categoryid, sellerid, title, description, start_date, end_date, starting_price, reserve_price, buy_now_price, status);
-                    //arr.add(auction);
-                }
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return arr;
-    }*/
-
+/*
     public int add(Auction auction) {
         int n = 0;
         try {
             String sql = "INSERT INTO auction (category_id,seller_id,title,description,start_date,start_time, end_date,end_time, starting_price, buy_now_price,status,video,image1,image2,image3,image4,image5) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            
             pre = conn.prepareStatement(sql);
             pre.setInt(1, auction.getCategoryid());
             pre.setInt(2, auction.getSellerid());
@@ -262,7 +226,7 @@ public class AuctionDAO {
         }
         return rs;
     }
-
+*/
     public static void main(String[] args) {
         AuctionDAO dao = new AuctionDAO();
     }

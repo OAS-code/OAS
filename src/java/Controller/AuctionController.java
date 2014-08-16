@@ -79,6 +79,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
         }
+        /*
         if (service.equalsIgnoreCase("deleteAuction")) {
             String id = request.getParameter("auctionid");
             int auctionid = Integer.parseInt(id);
@@ -89,13 +90,13 @@ public class AuctionController extends HttpServlet {
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             }
-        }
+        }*/
         if (service.equalsIgnoreCase("add_auction")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.view();
             request.setAttribute("array", array);
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
-        }
+        }/*
         if (service.equals("viewdetailauction")) {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
@@ -105,8 +106,8 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("rss", rss);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
-        }
-
+        }*/
+/*
         if (service.equalsIgnoreCase("editauction")) {
             String auctionid = request.getParameter("auctionid");
             String categoryid = request.getParameter("categoryid");
@@ -118,7 +119,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("rss", rss);
             rd = request.getRequestDispatcher(edit_auction);
             rd.forward(request, response);
-        }
+        }*/
         if (service.equalsIgnoreCase("search")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.view();
             request.setAttribute("array", array);
@@ -127,11 +128,12 @@ public class AuctionController extends HttpServlet {
             System.out.println(status);
             String category = request.getParameter("category");
             System.out.println(category);
-            ArrayList<Auction> arr = dao.list(keyword, status, category);
+            ArrayList<Auction> arr = dao.list(keyword, -1, -1);
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
+        /*
         if (service.equalsIgnoreCase("updateauction")) {
             SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat hDateFormat = new SimpleDateFormat("HH:mm");
@@ -175,7 +177,8 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
             }
         }
-
+        */
+        /*
         if (service.equalsIgnoreCase("addnewauction")) {
             SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
             SimpleDateFormat hDateFormat = new SimpleDateFormat("HH:mm");
@@ -220,6 +223,7 @@ public class AuctionController extends HttpServlet {
 
             }
         }
+        */
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

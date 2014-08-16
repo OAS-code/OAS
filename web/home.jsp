@@ -37,7 +37,7 @@
 
                         <div class="feature_lft">                        
                                 <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
@@ -47,10 +47,10 @@
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStarting_price()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStarting_price()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -106,7 +106,7 @@
 
                         <div class="feature_lft">                        
                                 <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
@@ -116,10 +116,10 @@
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStarting_price()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStarting_price()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -175,7 +175,7 @@
 
                         <div class="feature_lft">                        
                                 <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
@@ -185,10 +185,10 @@
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStarting_price()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStarting_price()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -244,7 +244,7 @@
 
                         <div class="feature_lft">                        
                                 <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
@@ -254,10 +254,10 @@
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStarting_price()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStarting_price()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
                                 </li>
 
                                 <li>

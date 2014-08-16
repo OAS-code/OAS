@@ -61,20 +61,7 @@
 
 
         </script>
-        <style>
-            body {
-                font-family: Tahoma;
-                font-size: 9pt;
-            }
-            #demoTable thead th {
-                white-space: nowrap;
-                overflow-x:hidden;
-                padding: 3px;
-            }
-            #demoTable tbody td {
-                padding: 3px;
-            }
-        </style>
+        
     </head>
     <body>
         <%
@@ -89,7 +76,10 @@
                     <tr>
                         <th>No.</th>
                         <th>Title</th>
+                        <th>Category</th>
+                        <th>Seller</th>
                         <th>Status</th>
+                        <th>Highest bidder</th>
                     </tr>  
                 </thead>
                 <tbody>
@@ -98,14 +88,17 @@
                     <c:forEach var="auction" items="${arr}" varStatus="status"> 
                         <tr> 
                             <td>${status.count}</td> 
-                            <td><a href="AuctionController?service=viewdetailauction&categoryid=${auction.categoryid}&auctionid=${auction.auctionid}">${auction.title}</a></td>
-                            <td>${auction.status}</td>
+                            <td><a href="AuctionController?service=viewdetailauction&categoryid=${auction.categoryId}&auctionid=${auction.id}">${auction.title}</a></td>
+                            <td>${auction.categoryName}</td>
+                            <td>${auction.sellerName}</td>
+                            <td>${auction.startDate}</td>
+                            <td>${auction.endDate}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
                 <tfoot class="nav">
                     <tr>
-                        <td colspan=5>
+                        <td colspan=6>
                             <div class="pagination"></div>
                             <div class="paginationTitle">Page</div>
                             <div class="selectPerPage"></div>

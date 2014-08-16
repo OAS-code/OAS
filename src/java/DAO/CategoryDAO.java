@@ -76,10 +76,6 @@ public class CategoryDAO {
                 category.setId(id);
                 category.setName(name);
                 category.setDescription(description);
-                System.out.println("---------------------------");
-                System.out.println(category.getId());
-                System.out.println(category.getName());
-                System.out.println(category.getDescription());
                 arr.add(category);
             }
         } catch (SQLException ex) {

@@ -30,27 +30,25 @@ CREATE TABLE `auction` (
   `seller_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `start_date` date NOT NULL DEFAULT '0000-00-00',
-  `start_time` time NOT NULL,
-  `end_date` date NOT NULL DEFAULT '0000-00-00',
-  `end_time` time NOT NULL,
-  `starting_price` double NOT NULL,
-  `buy_now_price` double NOT NULL,
+  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `starting_price` double NOT NULL DEFAULT '0',
+  `buy_now_price` double NOT NULL DEFAULT '1',
+  `increase_by` double NOT NULL DEFAULT '1',
   `status` tinyint(1) NOT NULL DEFAULT '0',
-  `image1` text,
-  `video` text,
-  `image2` text,
-  `image3` text,
-  `image4` text,
-  `image5` text,
+  `img_cover` text NOT NULL,
+  `img_1` text,
+  `img_2` text,
+  `img_3` text,
+  `img_4` text,
+  `img_5` text,
+  `v_youtube` text,
   PRIMARY KEY (`auctionid`),
   KEY `category_id` (`category_id`),
   KEY `seller_id` (`seller_id`),
-  FULLTEXT KEY `title` (`title`),
-  FULLTEXT KEY `title_2` (`title`),
   CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`categoryid`),
   CONSTRAINT `auction_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,6 +57,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
+INSERT INTO `auction` VALUES (2,1,14,'sdsad','asdasd','2014-08-16 19:09:12','2014-08-16 17:52:07',0,1,1,0,'asdasd',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +74,7 @@ CREATE TABLE `category` (
   `description` text,
   PRIMARY KEY (`categoryid`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +83,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart.'),(2,'Real Estate','Properties, houses for sale or for lease.'),(3,'Computers','Computers and computer parts.');
+INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart. '),(8,'fdbfdvdfbvfdv','');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -103,7 +102,7 @@ CREATE TABLE `token` (
   `lifetime` int(5) NOT NULL DEFAULT '24' COMMENT 'How long this token will live in hours.',
   PRIMARY KEY (`id`),
   UNIQUE KEY `token_UNIQUE` (`token`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -112,7 +111,6 @@ CREATE TABLE `token` (
 
 LOCK TABLES `token` WRITE;
 /*!40000 ALTER TABLE `token` DISABLE KEYS */;
-INSERT INTO `token` VALUES (2,'1540475661',14,'2014-08-14 21:00:38',24),(3,'2088939545',14,'2014-08-14 21:01:47',24),(4,'1943447677',14,'2014-08-14 21:12:48',24),(5,'1697902493',14,'2014-08-14 21:15:54',24),(6,'1914479011',14,'2014-08-14 21:17:37',24),(7,'1102641335',14,'2014-08-14 21:32:20',24),(8,'2013436401',14,'2014-08-14 21:40:48',24),(9,'1916098580',14,'2014-08-14 21:41:02',24),(10,'1109535472',14,'2014-08-14 21:41:14',24),(11,'1502431788',14,'2014-08-14 21:54:04',24),(12,'2015745609',14,'2014-08-14 22:13:51',24),(13,'1004381654',14,'2014-08-14 22:16:25',24);
 /*!40000 ALTER TABLE `token` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,10 +124,10 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) NOT NULL,
-  `password` varchar(32) NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `fullname` varchar(40) NOT NULL,
-  `phonenumber` varchar(12) DEFAULT NULL,
+  `password` varchar(32) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `fullname` text,
+  `phonenumber` text,
   `address` text,
   `role` tinyint(1) DEFAULT '0',
   `status` tinyint(1) DEFAULT '0',
@@ -137,12 +135,12 @@ CREATE TABLE `user` (
   `balance` double DEFAULT '0',
   `join_date` datetime DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`,`email`),
-  UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `username` (`username`,`email`),
+  UNIQUE KEY `email_UNIQUE` (`email`),
   FULLTEXT KEY `fullname` (`fullname`,`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -151,7 +149,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (8,'customer','807908e8af11eb3f416ae163762d4739','duccn01663@gmail.com','Customer','','',0,1,'1823378392',0,'2014-08-13 17:01:22'),(14,'admin','807908e8af11eb3f416ae163762d4739','ducchu@live.com','Chu Nhu Duc','097.847.9643','Hanoi HN',2,1,'1823378392',0,'2014-08-13 17:01:22'),(43,'staff','1393975c84ff83deba3f7050b910cf68','duccn01663@fpt.edu.vn','','','',1,1,'1168119770',0,'2014-08-14 13:17:39');
+INSERT INTO `user` VALUES (8,'customer','807908e8af11eb3f416ae163762d4739','duccn01663@gmail.com','Customer1','1','1',0,0,'1823378392',0,'2014-08-13 17:01:22'),(14,'admin','807908e8af11eb3f416ae163762d4739','ducchu@live.com','Chu Nhu Duc1','097.847.9643','Hanoi HN',2,1,'1823378392',0,'2014-08-13 17:01:22'),(43,'staff','1393975c84ff83deba3f7050b910cf68','duccn01663@fpt.edu.vn','staff','','',1,1,'1168119770',0,'2014-08-14 13:17:39'),(44,'admin22','2d6ab00624c6257f7e57d0ec9bbbfed3','asdasdasd@asdasd.com','asdasdasd','asdasdasd','asdasdasd',1,0,'1862159749',0,'2014-08-15 10:20:37'),(45,'111111111111111','166dc49d526214932c8b780eaa92125c','22222222222222222222@.','3333','55555','44444',0,1,'1208191374',0,'2014-08-15 13:35:12');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -164,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-14 22:20:26
+-- Dump completed on 2014-08-17  2:31:46

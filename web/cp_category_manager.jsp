@@ -32,7 +32,7 @@
 
             <% }else if (errorCode.equals("3")) { %>
             <ul id="message" class="error_msg">
-                <li><p>You can not delete this category that isn't empty.</p></li>
+                <li><p>You can not delete this category because it's already occupied.</p></li>
             </ul>   
 
             <% }else if (errorCode.equals("4")) { %>
