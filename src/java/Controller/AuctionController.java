@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -93,8 +91,8 @@ public class AuctionController extends HttpServlet {
             }
         }*/
         else if (service.equalsIgnoreCase("add_auction")) {
-            ArrayList<Category> array = (ArrayList<Category>) cdao.view();
-            request.setAttribute("array", array);
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
         }/*

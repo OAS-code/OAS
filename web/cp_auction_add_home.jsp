@@ -54,10 +54,10 @@
                                         <div class="text_feeld">
                                             <select name="cb1" id="cb1">
                                                 <%
-                                                    ArrayList<Category> ar = (ArrayList<Category>) request.getAttribute("array");
-                                                    for (int i = 0; i < ar.size(); i++) {
+                                                    ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                                                    for (int i = 0; i < categories.size(); i++) {
                                                 %>                                
-                                                <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
+                                                <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>                                
                                                 <%}%>
                                             </select>
                                         </div>
