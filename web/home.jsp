@@ -55,7 +55,7 @@
                                 </li>
 
                                 <li>
-                                    <b><span style="color:#000;">Bid : <span><font class="">$</font> 2</span></span></b>
+                                    <b><span style="color:#000;">Bid <span><font class="">$</font> 2</span></span></b>
 
                                     <div class="bid_price fl clr" style="display:none;"><p class="fl clr">Bid: <font class="">$</font> 2</p></div>
                                 </li>

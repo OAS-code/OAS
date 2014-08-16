@@ -39,7 +39,7 @@
                         <div class="reserve_white" title="Reserve auction"></div>
 
                     </div>
-                    <a name="http://www.unieauction.com/platinum-demo/auctions/addwatchlist" class="addwatchlist" rel="645" title="+ Add to Watchlist"><img width="24" height="25" alt="+ Add to Watchlist" src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png"></a>
+                    <a name="" class="addwatchlist" rel="645" title="+ Add to Watchlist"><img width="24" height="25" alt="+ Add to Watchlist" src="images/plus_bg.png"></a>
                 </div>
 
             </div>
@@ -122,9 +122,7 @@
                         </li>
 
                     </ul>
-                    <div class="increment_block">
-                        <a onclick="document.getElementById('fade1').style.display = 'block';
-                                document.getElementById('box1').style.display = 'block';" title="Bid Increment" class="popup increment" href="javascript:;">Bid Increment</a>
+                    <div class="increment_block">                        
                         <div id="fade1"></div>
                         <div id="box1" class="popupbox2">
                             <div>
@@ -132,91 +130,16 @@
                                     <div class="popup_content">
                                         <div class="pop_tl">
                                             <div class="pop_tr">
-                                                <div class="pop_tm">
-                                                    <h2>Bid Increment</h2>
-                                                    <a onclick="document.getElementById('box1').style.display = 'none';
-                                                        document.getElementById('fade1').style.display = 'none'" class="re_close" title="close" href="javascript:;">Close X</a>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <div class="popup_content_middle">
-                                            <ul class="increment_list">
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><b>Price Range</b></p>
-                                                        <p class="re_bid"><b>Increment price </b></p>
-                                                    </div>   
-                                                </li> 
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>0.01 - <font class="">$</font>0.99</p>
-                                                        <p class="re_bid"><font class="">$</font>0.01</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>0.00 - <font class="">$</font>4.99</p>
-                                                        <p class="re_bid"><font class="">$</font>0.25</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>5.00 - <font class="">$</font>24.99</p>
-                                                        <p class="re_bid"><font class="">$</font>0.50</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>25.00 - <font class="">$</font>99.99</p>
-                                                        <p class="re_bid"><font class="">$</font>2.00</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>100.00 - <font class="">$</font>249.99</p>
-                                                        <p class="re_bid"><font class="">$</font>2.50</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>250.00 - <font class="">$</font>499.99</p>
-                                                        <p class="re_bid"><font class="">$</font>5.00</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>500.00 - <font class="">$</font>999.00</p>
-                                                        <p class="re_bid"><font class="">$</font>100.00</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>1000.00 - <font class="">$</font>2499.99</p>
-                                                        <p class="re_bid"><font class="">$</font>25.00</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>2500.00 - <font class="">$</font>4999.99</p>
-                                                        <p class="re_bid"><font class="">$</font>50.00</p>
-                                                    </div> 
-                                                </li>
-                                                <li>
-                                                    <div class="clearfix">
-                                                        <p class="re_price"><font class="">$</font>5000.00 - <font class="">$</font>0.00</p>
-                                                        <p class="re_bid"><font class="">$</font>100.00</p>
-                                                    </div> 
-                                                </li>
-
-                                            </ul>
-
                                         </div>
 
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="reserve_how"> <a class="increment" title="How It Works" href="http://www.unieauction.com/platinum-demo/cmspage/page/how-it-works">How It Works</a></div>         
+                        </div>        
                     </div>
                 </div>
             </div>

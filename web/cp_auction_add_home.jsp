@@ -14,7 +14,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add new auction</title>
+        <title>Add auction</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>
@@ -24,131 +26,167 @@
                 <p>&nbsp;</p>
             </div>
             <form name="form1" method="post" action="AuctionController">
-                <%
-                    String userid = (String) session.getAttribute("userid");
+                <%                    String userid = (String) session.getAttribute("userid");
                     int id = Integer.parseInt(userid);
                 %>
                 <div class="message_common">
                     <input type="text" hidden="hidden" name="userid" id="userid" value="<%=id%>" class="textbox">
                     <div class="login_middle_common_profil">
-                        <div class="user_name_common">
-                            <p>
-                                Title <span class="red">*</span>: 
-                            </p>
-                            <div class="text_feeld">
-                                <h2>
-                                    <input type="text" name="title" id="title" class="textbox">
-                                </h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Category</p>
-                            <div class="text_feeld">
-                                <select name="cb1" id="cb1">
-                                    <%
-                                        ArrayList<Category> ar = (ArrayList<Category>) request.getAttribute("array");
-                                        for (int i = 0; i < ar.size(); i++) {
-                                    %>                                
-                                    <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
-                                    <%}%>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="user_name_common">
-                            <p>Description <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="description" id="description" class="textbox"></h2>
-                            </div>		
-                        </div>
+                        <table border="0" cellspacing="15" cellpadding="15">
+                            <tr>
+                                <td width="500">
+                                    <div class="user_name_common">
+                                        <b>
+                                            Title <span class="red">*</span>: 
+                                        </b>                                        		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2>
+                                                <input type="text" name="title" id="title" class="textbox">
+                                            </h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Category:</b>                                      
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <select name="cb1" id="cb1">
+                                                <%
+                                                    ArrayList<Category> ar = (ArrayList<Category>) request.getAttribute("array");
+                                                    for (int i = 0; i < ar.size(); i++) {
+                                                %>                                
+                                                <option value="<%=ar.get(i).getCategoryid()%>"><%=ar.get(i).getName()%></option>                                
+                                                <%}%>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Description <span class="red">*</span>: </b>		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="description" id="description" class="textbox"></h2>
+                                        </div>
+                                    </div>
 
-
-                        <div class="user_name_common">
-                            <p>Image <span class="red">*</span>:</p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="image1" id="image1" class="textbox"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p></p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="image2" id="image2" class="textbox"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p></p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="image3" id="image3" class="textbox"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p></p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="image4" id="image4" class="textbox"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p></p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="image5" id="image5" class="textbox"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Video  <span class="red">*</span>:</p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="video" id="video" class="textbox"></h2>
-                            </div>		
-                        </div>
-
-                        <div class="user_name_common">
-                            <p>Plan date: <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <input type="date" name="startdate" id="startdate" value="">
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Plan time:  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <input type="time" name="starttime" id="starttime" value="">
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Close date  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <input type="date" name="enddate" id="enddate" value="">
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Close time  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <input type="time" name="endtime" id="endtime" value="">
-                            </div>		
-                        </div>
-
-                        <div class="user_name_common">
-                            <p>Status  <span class="red">*</span>:</p>
-                            <div class="text_feeld">
-                                <select name="cb2" id="cb2">
-                                    <option value="0">Inactive</option>
-                                    <option value="1">Active</option>
-                                    <option value="2">Future</option>
-                                    <option value="3">Closed</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="user_name_common">
-                            <p>Starting price  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="startingprice" id="startingprice"></h2>
-                            </div>		
-                        </div>
-                        <div class="user_name_common">
-                            <p>Buy now price  <span class="red">*</span>: </p>
-                            <div class="text_feeld">
-                                <h2><input type="text" name="buynowprice" id="buynowprice"></h2>
-                            </div>		
-                        </div>
+                                    <div class="user_name_common">
+                                        <b>Image <span class="red">*</span>:</b>
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="image1" id="image1" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b></b>                                        
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="image2" id="image2" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">   
+                                        <b></b>                                         
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="image3" id="image3" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">  
+                                        <b></b>                                         
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="image4" id="image4" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">       
+                                        <b></b>                                        
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="image5" id="image5" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Video  <span class="red">*</span>:</b>                                        		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="video" id="video" class="textbox"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Plan date: <span class="red">*</span>: </b>	
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <input type="date" name="startdate" id="startdate" value="">
+                                        </div>	
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Plan time:  <span class="red">*</span>: </b>                      		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <input type="time" name="starttime" id="starttime" value="">
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Close date  <span class="red">*</span>: </b>		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <input type="date" name="enddate" id="enddate" value="">
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Close time  <span class="red">*</span>: </b>                                        		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <input type="time" name="endtime" id="endtime" value="">
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Status  <span class="red">*</span>:</b>
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <select name="cb2" id="cb2">
+                                                <option value="0">Inactive</option>
+                                                <option value="1">Active</option>
+                                                <option value="2">Future</option>
+                                                <option value="3">Closed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Starting price  <span class="red">*</span>: </b>		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="startingprice" id="startingprice"></h2>
+                                        </div>
+                                    </div>
+                                    <div class="user_name_common">
+                                        <b>Buy now price<span class="red">*</span>: </b>                                        		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="text" name="buynowprice" id="buynowprice"></h2>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>                           
+                        </table>
+                        <br>
                         <table align="center">
                             <tr>
+                                <td width="90"></td>
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>

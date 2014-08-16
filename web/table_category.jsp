@@ -13,7 +13,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
 
         <script language="JavaScript" type="text/javascript" src="JavaScript/jquery.js"></script>
@@ -95,9 +96,9 @@
                     </script>
                     <td>${status.count}</td> 
                     <td>${category.name}</td>
-                    <td>${category.description}</td>
-                    <td><a href="cp_category_edit.jsp?categoryid=${category.categoryid}">Edit</a></td>
-                    <td><a href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')">Delete</a></td>
+                    <td>${category.description}</td>                    
+                    <td><a class="editicon" title="Edit" href="cp_category_edit.jsp?categoryid=${category.categoryid}"></a></td>
+                    <td><a class="deleteicon" title="Delete" href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')"></a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

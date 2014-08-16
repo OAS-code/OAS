@@ -9,7 +9,9 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add new auction</title>
+        <title>Add auction</title>
+        <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>

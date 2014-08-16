@@ -820,7 +820,7 @@ span.min,span.sec {padding:0 0 0 13px;}
 #won_auctions_tpage .messages_new_watch_status a{font:bold 12px/35px arial; color:#2F9DD0;}
 
 /**venkatraja*/
-.deleteicon {background: url("../images/delet.png") no-repeat;cursor: pointer;float: left;height: 16px; padding: 5px 0 0 7px;    width: 16px;}
+.deleteicon {background: url("../images/delete.png") no-repeat;cursor: pointer;float: left;height: 16px; padding: 5px 0 0 7px;    width: 16px;}
 .sold_image{position:absolute;border:none;width:100px;z-index:10;border:0 !important ;top:12px; right:91px;}
 
 .notice_nsg{width:148px;border:1px solid #00529B;background:#BDE5F8 url(../images/notice_img.png) -1px center no-repeat;padding:5px;z-index:99;position:absolute;margin:0px 0 0 0;position:absolute; bottom:0px; left:0px;}
