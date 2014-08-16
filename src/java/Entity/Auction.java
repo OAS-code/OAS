@@ -5,13 +5,15 @@
  */
 package Entity;
 
-import java.sql.Time;
-import java.util.Date;
+import java.sql.Date;
+import org.joda.time.DateTime;
+
 
 /**
  *
  * @author Duc
  */
+
 public class Auction {
     int id;
     int categoryId;
@@ -20,8 +22,8 @@ public class Auction {
     String sellerName;
     String title;
     String description;
-    Date startDate;
-    Date endDate;
+    DateTime startDate;
+    DateTime endDate;
     double startPrice;
     double buynowPrice;
     double increaseBy;
@@ -35,6 +37,7 @@ public class Auction {
     String img5;
 
     public Auction() {
+ 
     }
 
     public int getId() {
@@ -101,19 +104,19 @@ public class Auction {
         this.moderateStatus = moderateStatus;
     }
     
-    public Date getStartDate() {
+    public DateTime getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public DateTime getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(DateTime endDate) {
         this.endDate = endDate;
     }
 
@@ -201,12 +204,12 @@ public class Auction {
     
     public int getStatus() {
         if (moderateStatus == 0) { // Active
-            Date currentDate = new Date();
-            if (currentDate.before(startDate)) { 
+            DateTime currentDate = new DateTime().now();
+            if (currentDate.isAfterNow()) { 
                 return 0; //Future auctions
-            } else if (startDate.before(currentDate) && currentDate.before(endDate)) { 
+            } else if (startDate.isBeforeNow() && endDate.isAfterNow()) { 
                 return 1; // On-going auctions.
-            } else if (endDate.before(currentDate)) { // Closed auctions.
+            } else if (endDate.isBeforeNow()) { // Closed auctions.
                 return 2;
             }
             return 5; // Invalid auctions.

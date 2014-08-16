@@ -8,8 +8,6 @@ package DAO;
 import Entity.Auction;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
-//import java.sql.Date;
-import java.util.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +16,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.naming.NamingException;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -63,7 +62,7 @@ public class AuctionDAO {
     }
 
     public ArrayList<Auction> list(String keyword, int type, int categoryId) {
-        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, start_date, end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE 1=1  ";
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE 1=1  ";
         //String sqlstatus = " AND a.status = ?";
         String sqlcategory = " AND a.category_id = ?";
         String sqlkeyword = " AND a.title LIKE '%?%'";
@@ -102,8 +101,12 @@ public class AuctionDAO {
                 auction.setSellerName(rs.getString("seller_name"));
                 auction.setTitle(rs.getString("title"));
                 auction.setDescription(rs.getString("description"));
-                auction.setStartDate(rs.getDate("start_date"));
-                auction.setEndDate(rs.getDate("end_date"));
+                long startDateLong = rs.getLong("start_date")*1000;
+                long endDateLong = rs.getLong("end_date")*1000;
+                DateTime startDate = new DateTime(startDateLong);
+                DateTime endDate = new DateTime(endDateLong);
+                auction.setStartDate(startDate);
+                auction.setEndDate(endDate);
                 auction.setStartPrice(rs.getDouble("starting_price"));
                 auction.setBuynowPrice(rs.getDouble("buy_now_price"));
                 auction.setIncreaseBy(rs.getDouble("increase_by"));
