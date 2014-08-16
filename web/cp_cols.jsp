@@ -51,7 +51,14 @@
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="UserController?service=user_manager" title="Manage User">Manage user</a></li>
                         <% }
-                            }%>
+                            }
+                            if (rank == 1) {
+                                if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
+                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
+                        <% } else { %>
+                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
+                        <% }
+                            } %>
 
                     <%
                         if (rank == 1) {
@@ -59,14 +66,6 @@
                     <li class="act_class" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
                         <% } else { %>
                     <li class="" id="dashboard_active"><a href="AuctionController?service=auction_manager" title="Manage Auction">Manage auction</a></li>
-                        <% }
-                            }
-
-                            if (rank == 1) {
-                                if ((current_page != null) && current_page.equalsIgnoreCase("category_manager")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
-                        <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="CategoryController?service=category_manager" title="Manage Category">Manage category</a></li>
                         <% }
                             }
 

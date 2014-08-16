@@ -17,15 +17,7 @@
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
         <%
-            CategoryDAO dao = new CategoryDAO();
-            String cateId = request.getParameter("categoryid");
-            ResultSet rs = dao.search(Integer.parseInt(cateId));
-            Category category = new Category();
-            if (rs.next()) {
-                category.setCategoryid(rs.getInt(1));
-                category.setName(rs.getString(2));
-                category.setDescription(rs.getString(3));
-            }
+            Category category = (Category) request.getAttribute("category");
         %>
     </head>
     <body> 
@@ -48,7 +40,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="name" id="name" value="<%=category.getName()%>"></h2>
+                                            <h2><input type="text" maxlength="20" name="name" id="name" value="<%=category.getName()%>"></h2>
                                         </div>		
                                     </div>
 
@@ -80,8 +72,8 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="hidden" name="service" id="service" value="edit">
-                                                <input type="hidden" name="cateId" id="cateId" value="<%=cateId%>">
+                                                <input type="hidden" name="service" id="service" value="update">
+                                                <input type="hidden" name="id" id="id" value="<%=category.getId()%>">
                                                 <input type="submit" value="Save" name="save">
                                             </a>
                                         </div>

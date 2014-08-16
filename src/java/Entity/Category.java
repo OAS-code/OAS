@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Entity;
 
 /**
@@ -11,54 +10,42 @@ package Entity;
  * @author MrTu
  */
 public class Category {
-    int categoryid;
+
+    int id;
     String name;
     String description;
+
     public Category() {
     }
 
-    public Category(String name) {
-        this.name = name;
-    }
-
-    public Category(int categoryid, String name) {
-        this.categoryid = categoryid;
-        this.name = name;
-    }
-
-    public Category(String name, String description) {
-        this.name = name;
-        this.description = description;
-    }
-
-    public Category(int categoryid, String name, String description) {
-        this.categoryid = categoryid;
-        this.name = name;
-        this.description = description;
-    }
-
     public String getDescription() {
-        return description;
+        if (this.description==null) {
+            return "";
+        }
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public int getCategoryid() {
-        return categoryid;
+    public int getId() {
+        return this.id;
+    }
+
+    public void setId(int categoryid) {
+        this.id = categoryid;
     }
 
     public String getName() {
-        return name;
-    }
-
-    public void setCategoryid(int categoryid) {
-        this.categoryid = categoryid;
+        if (this.name==null) {
+            return "";
+        }
+        return this.name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
-    
+
 }

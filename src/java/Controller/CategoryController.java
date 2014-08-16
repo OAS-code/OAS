@@ -3,13 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
 import DAO.CategoryDAO;
 import Entity.Category;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -41,54 +39,81 @@ public class CategoryController extends HttpServlet {
         CategoryDAO dao = new CategoryDAO();
         String service = request.getParameter("service");
         final String category_manager = "cp_category_manager.jsp?current_page=category_manager";
-        final String TableCategory = "table_category.jsp";
+        final String category_edit = "cp_category_edit.jsp?current_page=category_manager";
+        final String category_add = "cp_category_add.jsp?current_page=category_manager";
+
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("category_manager")) {
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
-        }
-        if (service.equalsIgnoreCase("listall")) {
+        } else if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> arr = dao.view();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
-        }
-        if(service.equalsIgnoreCase("addcategory")){
+        } else if (service.equalsIgnoreCase("addcategory")) {
             String name = request.getParameter("name");
-            String description = request.getParameter("description");
-            Category category = new Category(name,description);
-            int n = dao.add(category);
-            if(n>0){
-               response.sendRedirect(category_manager);
+            if (name == null || name.isEmpty() || name.length() < 3) {
+                rd = request.getRequestDispatcher(category_add+"&errorCode=1");
+                rd.forward(request, response);
+            } else {
+                String description = request.getParameter("description");
+                Category category = new Category();
+                category.setName(name);
+                category.setDescription(description);
+                if (dao.add(category)) {
+                    rd = request.getRequestDispatcher(category_manager+"errorCode=3");
+                    rd.forward(request, response);
+                } else {
+                    rd = request.getRequestDispatcher(category_add+"&errorCode=2");
+                    rd.forward(request, response);
+                }
             }
-        }
-        
-        if(service.equalsIgnoreCase("delete")){
+        } else if (service.equalsIgnoreCase("delete")) {
             String id = request.getParameter("categoryid");
-            int n = dao.delete(Integer.parseInt(id));
-            if (n > 0) {
-                rd = request.getRequestDispatcher(category_manager);
+            if (dao.delete(Integer.parseInt(id))) {
+                rd = request.getRequestDispatcher(category_manager + "&errorCode=4");
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher(category_manager + "&errorCode=3");
                 rd.forward(request, response);
             }
-        }
-        if(service.equalsIgnoreCase("edit")){
-            String id = request.getParameter("cateId");
+        } else if (service.equalsIgnoreCase("edit")) {
+            String id = request.getParameter("categoryid");
             int categoryid = Integer.parseInt(id);
+            Category category = dao.getCategory(categoryid);
+            request.setAttribute("category", category);
+            rd = request.getRequestDispatcher(category_edit);
+            rd.forward(request, response);
+        } else if (service.equalsIgnoreCase("update")) {
+            String id = request.getParameter("id");
             String name = request.getParameter("name");
-            String description = request.getParameter("description");
-            Category category = new Category(categoryid, name,description);
-            int n = dao.update(category);
-            if(n>0){
-                response.sendRedirect(category_manager);
+            String desc = request.getParameter("description");
+            int categoryid = Integer.parseInt(id);
+            if (name == null || name.isEmpty() || name.length() <= 0 || name.length() > 20) {
+                rd = request.getRequestDispatcher(category_manager + "&errorCode=1");
+                rd.forward(request, response);
+            } else {
+                Category category = dao.getCategory(categoryid);
+                category.setName(name);
+                category.setDescription(desc);
+                if (dao.update(category)) {
+                    rd = request.getRequestDispatcher(category_manager + "&errorCode=0");
+                    rd.forward(request, response);
+                } else {
+                    rd = request.getRequestDispatcher(category_manager + "&errorCode=2");
+                    rd.forward(request, response);
+                }
             }
-        }
-        if (service.equalsIgnoreCase("search")) {
+        } else if (service.equalsIgnoreCase("search")) {
             String search = request.getParameter("txtsearch");
             ArrayList<Category> arr = dao.searchCategory(search);
             request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(category_manager+"&keyword="+search);
+            rd = request.getRequestDispatcher(category_manager + "&keyword=" + search);
             rd.forward(request, response);
-        } 
+        } else {
+            response.sendRedirect("notification.jsp?errorCode=2");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

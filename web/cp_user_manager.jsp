@@ -32,7 +32,12 @@
                 <li><p>Failed to delete this user.</p></li>
             </ul>   
                     
-                    <% } %>
+                    <% } else if (errorCode.equals("3")) { %>
+            <ul id="message" class="success_msg">
+                <li><p>Category has been successfully added!</p></li>
+            </ul>   
+
+            <% } %>
             <br>
 
             <%
