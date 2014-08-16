@@ -14,6 +14,16 @@
 <html>
     <head>
         <title>Manage category</title>
+        <%
+            String name = request.getParameter("name");
+            String desc = request.getParameter("desc");
+            if (name == null) {
+                name = "";
+            }
+            if (desc == null) {
+                desc = "";
+            }
+        %>
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>
@@ -36,7 +46,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="name" id="name" class="textbox"></h2>
+                                            <h2><input type="text" maxlength="20" name="name" id="name" class="textbox" value="<%=name%>"></h2>
                                         </div>		
                                     </div>
 
@@ -46,7 +56,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="description" id="description" class="textbox"></h2>
+                                            <h2><input type="text" name="description" id="description" class="textbox" value="<%=desc%>"></h2>
                                         </div>		
                                     </div>
 

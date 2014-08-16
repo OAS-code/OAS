@@ -65,14 +65,14 @@
 
 
         </script>
-        
+
     </head>
     <body>
         <%
-            ArrayList<Category> ar=(ArrayList<Category>)request.getAttribute("arr");
-            if(ar==null){
-                
-            }else{
+            ArrayList<Category> ar = (ArrayList<Category>) request.getAttribute("arr");
+            if (ar == null) {
+
+            } else {
         %>
         <form name="form1" method="post" action="">
             <table id="demoTable" style="border: 1px solid #ccc;" cellspacing="0" width=99.5%>
@@ -96,10 +96,12 @@
                     </script>
                     <td>${status.count}</td> 
                     <td>${category.name}</td>
-                    <td>${category.description}</td>                    
-                    <td><a class="editicon" title="Edit" href="cp_category_edit.jsp?categoryid=${category.categoryid}"></a></td>
-                    <td><a class="deleteicon" title="Delete" href="CategoryController?service=delete&categoryid=${category.categoryid}" onclick="return confirm('Are you sure?')"></a></td>
-                    </tr>
+                    <td>${category.description}</td>      
+                    
+                    <td><a class="editicon" title="Edit" href="CategoryController?service=edit&categoryid=${category.id}"></a></td>
+                    <td><a class="deleteicon" title="Delete" href="CategoryController?service=delete&categoryid=${category.id}" onclick="return confirm('Are you sure?')"></a></td>
+                    
+                </tr>
                 </c:forEach>
                 </tbody>
                 <tfoot class="nav">
@@ -114,6 +116,6 @@
                 </tfoot>
             </table>
         </form> 
-        <% } %>
+        <% }%>
     </body>
 </html>

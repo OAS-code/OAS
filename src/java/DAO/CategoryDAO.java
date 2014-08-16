@@ -30,13 +30,13 @@ public class CategoryDAO {
 
     public CategoryDAO() {
         try {
-         System.out.println("Connecting to DB using the following details:");
+         //System.out.println("Connecting to DB using the following details:");
          javax.naming.Context ctx = new javax.naming.InitialContext();
-         String host = (String) ctx.lookup("java:comp/env/db-host"); System.out.println(host);
-         String port = (String) ctx.lookup("java:comp/env/db-port"); System.out.println(port);
-         String database = (String) ctx.lookup("java:comp/env/db-database"); System.out.println(database);
-         String username = (String) ctx.lookup("java:comp/env/db-username"); System.out.println(username);
-         String password = (String) ctx.lookup("java:comp/env/db-password"); System.out.println(password);
+         String host = (String) ctx.lookup("java:comp/env/db-host"); //System.out.println(host);
+         String port = (String) ctx.lookup("java:comp/env/db-port"); //System.out.println(port);
+         String database = (String) ctx.lookup("java:comp/env/db-database"); //System.out.println(database);
+         String username = (String) ctx.lookup("java:comp/env/db-username"); //System.out.println(username);
+         String password = (String) ctx.lookup("java:comp/env/db-password"); //System.out.println(password);
          connection("jdbc:mysql://" + host + ":" + port + "/" + database +"?useUnicode=true&characterEncoding=UTF-8",username,password);       
          } catch (NamingException ex) {
           Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -48,7 +48,7 @@ public class CategoryDAO {
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             conn = (Connection) DriverManager.getConnection(ulr, username, password);
-            System.out.println("connected");
+            //System.out.println("connected");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -59,28 +59,8 @@ public class CategoryDAO {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    public ArrayList<Category> select() throws SQLException {
-        String sql = "SELECT * FROM category";
-        ArrayList<Category> arr = new ArrayList<Category>();
-        try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = state.executeQuery(sql);
-            int categoryid;
-            String name;
-            String description;
-            while (rs.next()) {
-                categoryid = rs.getInt("categoryid");
-                name = rs.getString("name");
-                description = rs.getString("description");
-                Category category = new Category(categoryid, name, description);
-                arr.add(category);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return arr;
-    }
-    public ArrayList<Category> view() throws SQLException {
+
+    public ArrayList<Category> view() {
         String sql = "SELECT * FROM category";
         ArrayList<Category> arr = new ArrayList<Category>();
         try {
@@ -92,46 +72,47 @@ public class CategoryDAO {
                 id = rs.getInt("categoryid");
                 name = rs.getString("name");
                 description = rs.getString("description");
-                Category category = new Category(id, name,description);
+                Category category = new Category();
+                category.setId(id);
+                category.setName(name);
+                category.setDescription(description);
+                System.out.println("---------------------------");
+                System.out.println(category.getId());
+                System.out.println(category.getName());
+                System.out.println(category.getDescription());
                 arr.add(category);
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        } finally {
-            state.close();
-            conn.close();
-        }
+        } 
         return arr;
     }
-    public int delete(int id) {
-        int n = 0;
+    public boolean delete(int id) throws SQLException {
         String sql = "DELETE FROM category WHERE categoryid = " + id;
         try {
             state = (Statement) conn.createStatement();
-            n = state.executeUpdate(sql);
-            state.close();
-            conn.close();
+            state.executeUpdate(sql);
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
+            return false;
+        }  
     }
-    public int add(Category category) {
-        int n = 0;
+    public boolean add(Category category) throws SQLException {
         try {
             String sql = "INSERT INTO category (name,description) VALUES (?,?)";
 
             pre = conn.prepareStatement(sql);
             pre.setString(1, category.getName());
             pre.setString(2, category.getDescription());
-            n = pre.executeUpdate();
+            pre.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
+            return false;
+        } 
     }
-    public ResultSet search(int id) {
+    public ResultSet search(int id) throws SQLException {
         String sql = "SELECT * FROM category WHERE categoryid = ?";
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -140,25 +121,25 @@ public class CategoryDAO {
             rs = pre.executeQuery();
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
         return rs;
     }
     
-    public int update(Category category) {
-        int n = 0;
+    public boolean update(Category category) throws SQLException {
         String sql = "UPDATE category SET name = ?, description= ? WHERE categoryid = ?";
         try {
             pre = conn.prepareStatement(sql);
             pre.setString(1, category.getName());
             pre.setString(2, category.getDescription());
-            pre.setInt(3, category.getCategoryid());          
-            n = pre.executeUpdate();
+            pre.setInt(3, category.getId());          
+            pre.executeUpdate();
+            return true;
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return n;
+            return false;
+        }  
     }
-    public ArrayList<Category> searchCategory(String search) {
+    public ArrayList<Category> searchCategory(String search) throws SQLException {
         String sql = "SELECT * FROM category WHERE name LIKE '%"+search+"%'";
         ArrayList<Category> arr = new ArrayList<>();
         try {
@@ -170,15 +151,39 @@ public class CategoryDAO {
                     categoryid = rs.getInt("categoryid");
                     name = rs.getString("name");
                     description = rs.getString("description");
-                    Category category = new Category(categoryid, name,description);
+                    Category category = new Category();
+                    category.setId(categoryid);
+                    category.setName(name);
+                    category.setDescription(description);
                     arr.add(category);
                 }          
         } catch (SQLException ex) {
             Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }  
         return arr;
     }
+    
+    public Category getCategory(int categoryid) {
+        Category category = new Category();
+        String sql = "SELECT * FROM category WHERE categoryid = ? LIMIT 1";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, categoryid);
+            rs = pre.executeQuery();
+            rs.next();
+            category.setId(rs.getInt("categoryid"));
+            category.setDescription(rs.getString("description"));
+            category.setName(rs.getString("name"));
+        } catch (SQLException ex) {
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return category;
+    }
+    
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();
     }
+
+    
 }
