@@ -202,7 +202,7 @@ public class Auction {
         this.img5 = img5;
     }
     
-    public int getStatus() {
+    public int getStatusId() {
         if (moderateStatus == 0) { // Active
             DateTime currentDate = new DateTime().now();
             if (currentDate.isAfterNow()) { 
@@ -220,149 +220,21 @@ public class Auction {
         } else 
         return 5; // Invalid auctions.
     }
-
-    ///////////////////////
-    /*
-    public String getVideo() {
-        return vYoutube;
-    }
-
-    public void setVideo(String video) {
-        this.vYoutube = video;
-    }
-
-    public String getImage1() {
-        return img1;
-    }
-
-    public void setImage1(String image1) {
-        this.img1 = image1;
-    }
-
-    public String getImage2() {
-        return img2;
-    }
-
-    public void setImage2(String image2) {
-        this.img2 = image2;
-    }
-
-    public String getImage3() {
-        return img3;
-    }
-
-    public void setImage3(String image3) {
-        this.img3 = image3;
-    }
-
-    public String getImage4() {
-        return img4;
-    }
-
-    public void setImage4(String image4) {
-        this.img4 = image4;
-    }
-
-    public String getImage5() {
-        return img5;
-    }
-
-    public void setImage5(String image5) {
-        this.img5 = image5;
-    }
-
-    public void setAuctionid(int auctionid) {
-        this.id = auctionid;
-    }
-
-    public void setCategoryid(int categoryid) {
-        this.categoryId = categoryid;
-    }
-
-    public void setSellerid(int sellerid) {
-        this.sellerId = sellerid;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setStart_date(Date start_date) {
-        this.startDate = start_date;
-    }
-
-    public void setEnd_date(Date end_date) {
-        this.endDate = end_date;
-    }
-
-    public void setStarting_price(double starting_price) {
-        this.startPrice = starting_price;
-    }
-
-    public void setBuy_now_price(double buy_now_price) {
-        this.buynowPrice = buy_now_price;
-    }
-
-    public void setStatus(int moderateStatus) {
-        this.moderateStatus = moderateStatus;
-    }
-
-    public int getAuctionid() {
-        return id;
-    }
-
-    public int getCategoryid() {
-        return categoryId;
-    }
-
-    public int getSellerid() {
-        return sellerId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Date getStart_date() {
-        return startDate;
-    }
-
-    public Date getEnd_date() {
-        return endDate;
-    }
-
-    public double getStarting_price() {
-        return startPrice;
-    }
-
-    public double getBuy_now_price() {
-        return buynowPrice;
-    }
-
-    public int getStatusId() {
-        return this.moderateStatus;
-    }
-
+    
     public String getStatus() {
-        if (moderateStatus == 0) {
-            return "Inactive";
-        } else if (moderateStatus == 1) {
-            return "Active";
-        } else if (moderateStatus == 2) {
+        int statusId = this.getStatusId();
+        if (statusId== 0) {
             return "Future";
-        } else if (moderateStatus == 3) {
+        } else if (statusId == 1){
+            return "On-going";
+        } else if (statusId == 2) {
             return "Closed";
+        } else if (statusId == 3) {
+            return "Banned";
+        } else if (statusId == 4) {
+            return "Processed";
         } else {
-            return "Inactive";
+            return "Invalid";
         }
     }
-*/
 }

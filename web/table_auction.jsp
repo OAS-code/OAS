@@ -65,8 +65,8 @@
     </head>
     <body>
         <%
-            ArrayList<Auction> ar = (ArrayList<Auction>) request.getAttribute("arr");
-            if (ar == null) {
+            ArrayList<Auction> auctionsCheck = (ArrayList<Auction>) request.getAttribute("auctions");
+            if (auctionsCheck == null) {
 
             } else {
         %>
@@ -83,16 +83,16 @@
                     </tr>  
                 </thead>
                 <tbody>
-                    <jsp:useBean id="arr" class="java.util.ArrayList" scope="request">
+                    <jsp:useBean id="auctions" class="java.util.ArrayList" scope="request">
                     </jsp:useBean>
-                    <c:forEach var="auction" items="${arr}" varStatus="status"> 
+                    <c:forEach var="auction" items="${auctions}" varStatus="status"> 
                         <tr> 
                             <td>${status.count}</td> 
                             <td><a href="AuctionController?service=viewdetailauction&categoryid=${auction.categoryId}&auctionid=${auction.id}">${auction.title}</a></td>
                             <td>${auction.categoryName}</td>
                             <td>${auction.sellerName}</td>
-                            <td>${auction.startDate}</td>
-                            <td>${auction.endDate}</td>
+                            <td>${auction.getStatus()}</td>
+                            <td>No-one</td>
                         </tr>
                     </c:forEach>
                 </tbody>

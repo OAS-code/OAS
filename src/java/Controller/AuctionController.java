@@ -57,23 +57,24 @@ public class AuctionController extends HttpServlet {
 
         if (service.equalsIgnoreCase("auction_manager")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.view();
-            request.setAttribute("array", array);
+            request.setAttribute("categories", array);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("bidnow")) {
+        else if (service.equalsIgnoreCase("bidnow")) {
             rd = request.getRequestDispatcher(bidding_detail);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("listall")) {
-            ArrayList<Category> array = (ArrayList<Category>) cdao.view();
-            request.setAttribute("array", array);
-            ArrayList<Auction> arr = dao.list();
-            request.setAttribute("arr", arr);
+        else if (service.equalsIgnoreCase("listall")) {
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            request.setAttribute("categories", categories);
+            ArrayList<Auction> auctions = dao.list();
+            request.setAttribute("auctions", auctions);
+            
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         }
-        if (service.equalsIgnoreCase("index")) {
+        else if (service.equalsIgnoreCase("index")) {
             ArrayList<Auction> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher("index.jsp");
@@ -91,7 +92,7 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
             }
         }*/
-        if (service.equalsIgnoreCase("add_auction")) {
+        else if (service.equalsIgnoreCase("add_auction")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.view();
             request.setAttribute("array", array);
             rd = request.getRequestDispatcher(add_auction);
@@ -120,17 +121,27 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(edit_auction);
             rd.forward(request, response);
         }*/
-        if (service.equalsIgnoreCase("search")) {
-            ArrayList<Category> array = (ArrayList<Category>) cdao.view();
-            request.setAttribute("array", array);
-            String keyword = request.getParameter("txtsearch");
-            String status = request.getParameter("auction_status");
-            System.out.println(status);
-            String category = request.getParameter("category");
-            System.out.println(category);
-            ArrayList<Auction> arr = dao.list(keyword, -1, -1);
-            request.setAttribute("arr", arr);
-            rd = request.getRequestDispatcher(auction_manager);
+        else if (service.equalsIgnoreCase("search")) {
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            request.setAttribute("categories", categories);
+            String keyword = request.getParameter("keyword");
+            String statusString = request.getParameter("status");
+            int status = -1;
+            String categoryString = request.getParameter("category");
+            int category = -1;
+            if (keyword==null) {
+                keyword = "";
+            }
+            if (statusString!=null) {
+                status = Integer.parseInt(statusString);
+            }
+            if (categoryString!=null) {
+                category = Integer.parseInt(categoryString);
+            }
+            //System.out.println(category);
+            ArrayList<Auction> auctions = dao.list(keyword, status, category);
+            request.setAttribute("auctions", auctions);
+            rd = request.getRequestDispatcher(auction_manager+"&keyword="+keyword+"&status="+status+"&category="+category);
             rd.forward(request, response);
         }
         /*
@@ -224,6 +235,9 @@ public class AuctionController extends HttpServlet {
             }
         }
         */
+        else {
+            response.sendRedirect("notification.jsp?errorCode=2");
+        }
     }
 
 // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

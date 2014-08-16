@@ -61,36 +61,25 @@ public class AuctionDAO {
         }
     }
 
-    public ArrayList<Auction> list(String keyword, int type, int categoryId) {
-        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE 1=1  ";
-        //String sqlstatus = " AND a.status = ?";
-        String sqlcategory = " AND a.category_id = ?";
-        String sqlkeyword = " AND a.title LIKE '%?%'";
+    public ArrayList<Auction> list(String keyword, int status, int categoryId) {
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%"+keyword+"%' ";
+        String sql2 = " AND a.category_id = "+categoryId;
         ArrayList<Auction> arr = new ArrayList<Auction>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
+            
             if (categoryId != -1) {
-                sql = sql + sqlcategory;
-            }
-            if (!keyword.equals("")) {
-                sql = sql + sqlkeyword;
+                sql = sql + sql2;
+            } else if (status == -1 && keyword.equals("")){
+                sql = sql + " OR 1=1 ";
             }
             sql = sql + " ORDER BY a.title DESC";
           
             pre = conn.prepareStatement(sql);
-
-            int index = 0;
-           
-            if (categoryId != -1) {
-                index++;
-                pre.setInt(index, categoryId);
-            }
-            if (!keyword.equals("")) {
-                index++;
-                pre.setString(index, keyword);
-            }
-
+            //System.out.println(sql);
+            //pre.setString(1, "%"+keyword+"%");
+            
+            
             rs = pre.executeQuery(sql);
             while (rs.next()) {
                 Auction auction = new Auction();
@@ -118,7 +107,7 @@ public class AuctionDAO {
                 auction.setImg1(rs.getString("img_3"));
                 auction.setImg1(rs.getString("img_4"));
                 auction.setImg1(rs.getString("img_5"));
-                if (type == -1 || auction.getStatus() == type){
+                if (status == -1 || auction.getStatusId() == status){
                     arr.add(auction);
                 }
             }
