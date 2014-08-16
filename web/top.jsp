@@ -19,6 +19,52 @@
         %>
     </head>
     <body>
+        <!--select_box_top-->
+        <link rel="stylesheet" type="text/css" href="http://www.unieauction.com/buy-sell-demo/public/white/css/stylish-select.css" />
+        <!--<script type="text/javascript" src="http://www.unieauction.com/buy-sell-demo/public/js/plugin.js"></script>-->
+        <script src="http://www.unieauction.com/buy-sell-demo/public/js/jquery.stylish-select.js" type="text/javascript"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function() {
+
+                $('#drop_down_cat').click(function() {
+
+
+                    if ($('#div_category').css('display') == 'none') {
+                        $('#div_category').show();
+                    } else {
+                        $('#div_category').hide();
+                    }
+
+                });
+
+
+
+                $('#my-dropdown, #my-dropdown2, #my-dropdown3, #my-dropdown4, #my-dropdown5, #my-dropdown6').sSelect();
+
+                //set max height
+                $('#my-dropdownCountries').sSelect({ddMaxHeight: '300px'});
+
+                //set value on click
+                $('#setVal').click(function() {
+                    $('#my-dropdown5').getSetSSValue('4');
+                });
+
+                //get value on click
+                $('#getVal').click(function() {
+                    alert('The value is: ' + $('#my-dropdown5').getSetSSValue());
+                });
+
+                //alert change event
+                $('#my-dropdownChange').sSelect().change(function() {
+                    alert('changed')
+                });
+
+
+                return false;
+
+            });
+        </script>
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
@@ -103,37 +149,25 @@
             <div class="header_menu_inner">
                 <ul>
                     <li id="head_cate">
+                        <select style="width:auto; height: 31px;padding: 1px; margin: 0px">
+                            <option value="volvo">All categories</option>
+                            <option value="saab">Smartphone</option>
+                            <option value="opel">Automotive</option>
+                            <option value="audi">Real Estate</option>
+                        </select>
+                    </li>
+                    
+
+                    <!--
+                    <li id="head_cate">
+
+                        <img id="drop_down_cat" src="images/menu_select.png" align="middle" width="8" height="5" alt="" border="0" title="ALL CATEGORIES">
 
 
-
-
-                        <a style="cursor:pointer;" id="category_list" title="Select Category">Select Category				</a>
-                        <span style="padding:8px 5px;">
-                            <img id="drop_down_cat" src="images/menu_select.png" align="middle" width="8" height="5" alt="" border="0" title="ALL CATEGORIES">
-
-
-                            <div id="div_category" style="display:none;">	
-                                <ul class="fl">
-
-                                    <li><a style="width:102px;" href="http://www.unieauction.com/buy-sell-demo/auctions/category/">ALL CATEGORIES</a></li>
-
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/1">Computers</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/2">Electronics</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/3">Mobiles</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/4">Photography</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/5">Sports</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/6">Audi</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/7">Innova</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/8">BMW</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/9">Toyoto</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/10">Car</a></li>
-                                    <li><a href="http://www.unieauction.com/buy-sell-demo/auctions/category/11">Office equipment</a></li>
-                                </ul>
-                            </div>
-                        </span></li>
+                    </li>
+                    -->
 
                     <li id="home_menu"> <a href="index.jsp" title="Home"> Home</a></li>
-                    <!--<li id="home_menu"><a href="cp.jsp?current_page=dashboard" title="CP"> Control Panel</a></li>-->
 
                 </ul>
             </div>

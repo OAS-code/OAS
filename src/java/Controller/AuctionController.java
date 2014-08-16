@@ -172,7 +172,6 @@ public class AuctionController extends HttpServlet {
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
             }
-
         }
 
         if (service.equalsIgnoreCase("addnewauction")) {
