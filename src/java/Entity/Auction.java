@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  *
- * @author MrTu
+ * @author Duc
  */
 public class Auction {
     int id;
@@ -25,7 +25,7 @@ public class Auction {
     double startPrice;
     double buynowPrice;
     double increaseBy;
-    int status;
+    int moderateStatus;
     String imgCover;
     String vYoutube;
     String img1;
@@ -93,12 +93,12 @@ public class Auction {
         this.description = description;
     }
 
-    public int getStatus() {
-        return status;
+    public int getModerateStatus() {
+        return moderateStatus;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setModerateStatus(int moderateStatus) {
+        this.moderateStatus = moderateStatus;
     }
     
     public Date getStartDate() {
@@ -198,6 +198,25 @@ public class Auction {
     public void setImg5(String img5) {
         this.img5 = img5;
     }
+    
+    public int getStatus() {
+        if (moderateStatus == 0) { // Active
+            Date currentDate = new Date();
+            if (currentDate.before(startDate)) { 
+                return 0; //Future auctions
+            } else if (startDate.before(currentDate) && currentDate.before(endDate)) { 
+                return 1; // On-going auctions.
+            } else if (endDate.before(currentDate)) { // Closed auctions.
+                return 2;
+            }
+            return 5; // Invalid auctions.
+        } else if (moderateStatus == 1) { // Banned auctions
+            return 3; // Banned acutions
+        } else if (moderateStatus == 2) { // Processed auctions.
+            return 4; // Processed auctions.
+        } else 
+        return 5; // Invalid auctions.
+    }
 
     ///////////////////////
     /*
@@ -285,8 +304,8 @@ public class Auction {
         this.buynowPrice = buy_now_price;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatus(int moderateStatus) {
+        this.moderateStatus = moderateStatus;
     }
 
     public int getAuctionid() {
@@ -326,17 +345,17 @@ public class Auction {
     }
 
     public int getStatusId() {
-        return this.status;
+        return this.moderateStatus;
     }
 
     public String getStatus() {
-        if (status == 0) {
+        if (moderateStatus == 0) {
             return "Inactive";
-        } else if (status == 1) {
+        } else if (moderateStatus == 1) {
             return "Active";
-        } else if (status == 2) {
+        } else if (moderateStatus == 2) {
             return "Future";
-        } else if (status == 3) {
+        } else if (moderateStatus == 3) {
             return "Closed";
         } else {
             return "Inactive";

@@ -20,7 +20,7 @@ import javax.naming.NamingException;
 
 /**
  *
- * @author MrTu
+ * @author Duc
  */
 public class CategoryDAO {
     private Connection conn = null;

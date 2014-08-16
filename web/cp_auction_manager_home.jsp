@@ -37,11 +37,13 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="auction_status" class=" text_bg select" id="auction_status">	
-                                                    <option value="" selected="selected">Select auction status</option>
-                                                    <option value="0">Inactive</option>
-                                                    <option value="1">Active</option>
-                                                    <option value="2">Future</option>
-                                                    <option value="3">Closed</option>
+                                                    <option value="-1" selected="selected">Select auction status</option>
+                                                    <option value="0">Future auctions</option>
+                                                    <option value="1">On-going auctions</option>
+                                                    <option value="2">Closed/unprocessed auctions</option>
+                                                    <option value="3">Banned auctions</option>
+                                                    <option value="4">Processed auctions</option>
+                                                    <option value="5">Others</option>
                                                 </select>
                                             </h2>
                                         </div>
