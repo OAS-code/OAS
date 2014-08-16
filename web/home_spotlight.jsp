@@ -19,15 +19,9 @@
                 m = checkTime(m);
                 s = checkTime(s);
                 var suffix;
-                if (h >= 12 && h < 24) {
-                    suffix = "PM";
-                } else {
-                    suffix = "AM";
-                }
                 document.getElementById('hour').innerHTML = h;
                 document.getElementById('min').innerHTML = m;
                 document.getElementById('sec').innerHTML = s;
-                document.getElementById('suffix').innerHTML = suffix;
                 var t = setTimeout(function() {
                     startTime()
                 }, 500);
@@ -69,19 +63,25 @@
                             <li><b class="server_time_secs" id="sec"></b>
                                 <label>Sec</label>
                             </li>
-                            <li><b class="server_time_secs" id="suffix"></b>                               
-                            </li>
                         </ul>
                     </div>
+                </div>                
+            </div>
+            <!--<div class="today_head_spotlight">               
+                <div class="today_head_lft">
+                    <h2 title="TODAY  AUCTION">SPOTLIGHT</h2>
                 </div>
-                <!--<div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
+                <div class="arrow_one_spotlight"></div>
+                 <div class="today_head_rgt">
+                     <p><a href="" title="View All">View All</a></p>
+                 </div>
+            </div>
+            <div class="feature_total">
+                <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
-
                         <div class="feature_lft">
-
-
                             <a href="" title="Monitor">
                                 <img src="http://www.unieauction.com/platinum-demo/public/uploaded_files/products/thumb/538d4b832e453viewsonic-va2231wa-led-hd-black-led-22-monitor-slim-bezel-1.jpg" width="82" title="Monitor" height="83" alt="Monitor"></a></div>
                         <div class="feature_rgt">
@@ -127,8 +127,8 @@
                         </div>
                     </div>
                     <div class="notice_nsg fl clr" id="notice_msg502" style="display:none;"></div>
-                </div>-->
-            </div>
+                </div>
+            </div>-->
         </div>
     </body>
 </html>

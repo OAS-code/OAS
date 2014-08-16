@@ -55,7 +55,7 @@
                     <div class="detail_big_history_current_winning"><h1>Current winning Bidders</h1> </div>        
                     <div class="winning_list"> 
                         <ul>
-                            <li> <p class="no_data">No Bids Yet</p> </li>
+                            <li> <p class="no_data">No Bid Yet</p> </li>
                         </ul>
                     </div>
                 </div>
@@ -100,7 +100,10 @@
                                     <span><font class="">$</font>&nbsp;</span>
                                     <div class="hb_place_bid_tb">
                                         <form id="reserve_form" method="post">
-                                            <div class=""><input type="text" value="" maxlength="10" class="savetext" id="yourbidding" name="bidamount" style="border: 1px solid rgb(204, 204, 204);"><input type="hidden" value="&lt;font class=''&gt;$&lt;/font&gt;" class="savetext" id="currency"><p style="font: normal 11px arial;"></p></div>
+                                            <div class="fl"><input type="text" value="" maxlength="10" class="savetext" id="yourbidding" name="bidamount" style="border: 1px solid rgb(204, 204, 204);">
+                                                <input type="hidden" value="&lt;font class=''&gt;$&lt;/font&gt;" class="savetext" id="currency">
+                                                <p style="font: normal 11px arial;"></p>
+                                            </div>
                                         </form>
 
                                     </div>
@@ -152,12 +155,12 @@
                         <h1>Auctions Details</h1>
 
                         <div class="detail-action_detail_lef"> 
-                            <h2>Auction ID :  </h2>
-                            <h2>Auction type(s) :</h2>
+                            <h2>Start time : </h2>
+                            <h2>End time :</h2>
                         </div>     
                         <div class="detail-action_detail_rgt">
-                            <p>645  </p>
-                            <p>Reserve</p>
+                            <p>Aug 14, 12:52 PM</p>
+                            <p>Sep 30, 03:52 PM</p>   
 
                         </div>     
                     </div>     
@@ -167,15 +170,11 @@
 
                         <div class="detail-action_detail_lef"> 
 
-                            <h2> Price Starting From :</h2>
-                            <h2>Start time :</h2>
-                            <h2>End time :</h2>     
+                            <h2> Price Starting From :</h2>   
                         </div>
 
                         <div class="detail-action_detail_rgt">
-                            <p><font class="">$</font> 100  </p>
-                            <p>Aug 14, 12:52 PM</p>
-                            <p>Sep 30, 03:52 PM </p>     
+                            <p><font class="">$</font> 100  </p>                              
                         </div>     
                     </div>
 
@@ -192,7 +191,7 @@
                         </div>
 
                         <div class="detail-action_detail_rgt">
-                            <p><font class="">$</font> 20  </p>
+                            <p><font class=""></font></p>
                             <p></p>
 
                         </div>
