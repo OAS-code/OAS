@@ -30,12 +30,12 @@ CREATE TABLE `auction` (
   `seller_id` int(11) NOT NULL,
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
-  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `end_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `start_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `end_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `starting_price` double NOT NULL DEFAULT '0',
   `buy_now_price` double NOT NULL DEFAULT '1',
   `increase_by` double NOT NULL DEFAULT '1',
-  `status` tinyint(1) NOT NULL DEFAULT '0',
+  `moderate_status` tinyint(1) NOT NULL DEFAULT '0',
   `img_cover` text NOT NULL,
   `img_1` text,
   `img_2` text,
@@ -57,7 +57,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (2,1,14,'sdsad','asdasd','2014-08-16 19:09:12','2014-08-16 17:52:07',0,1,1,0,'asdasd',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `auction` VALUES (2,1,14,'sdsad','asdasd','2014-08-17 02:09:12','2014-08-17 00:52:07',0,1,1,0,'asdasd',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -83,7 +83,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart. '),(8,'fdbfdvdfbvfdv','');
+INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart. ');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-17  2:31:46
+-- Dump completed on 2014-08-17  6:00:55
