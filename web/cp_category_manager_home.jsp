@@ -59,7 +59,7 @@
 
                         <table>
                             <tr>
-                                <td width="95">
+                                <td width="90">
 
                                 </td>
                                 <td>

@@ -37,7 +37,7 @@
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="Monitor">
+                                <a href="" title="<%=arr.get(i).getTitle()%>">
                                     <img src="<%=arr.get(i).getImage1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
@@ -55,7 +55,7 @@
                                 </li>
 
                                 <li>
-                                    <b><span style="color:#000;">Bid : <span><font class="">$</font> 2</span></span></b>
+                                    <b><span style="color:#000;">Bid <span><font class="">$</font> 2</span></span></b>
 
                                     <div class="bid_price fl clr" style="display:none;"><p class="fl clr">Bid: <font class="">$</font> 2</p></div>
                                 </li>
