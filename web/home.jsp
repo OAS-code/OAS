@@ -4,6 +4,9 @@
     Author     : Maxime
 --%>
 
+<%@page import="Entity.Auction"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +15,9 @@
         <title>Online Auction System</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-
+        <%
+            ArrayList<Auction> auctions = (ArrayList<Auction>) request.getAttribute("auctions");
+        %>
     </head>
     <body>  
         <div class="my_message_right">
@@ -28,29 +33,29 @@
             </div>
             <div class="feature_total">
                 <%
-                    for(int i=0;i<arr.size();i++){  
+                    for(int i=0;i<auctions.size();i++){  
                 %>
-                <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
+                <div id="auction_502" class="auction_item auction_item_content" data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                <a href="" title="<%=auctions.get(i).getTitle()%>">
+                                    <img src="<%=auctions.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
                             <label><a href="" title="Monitor">
-                                    <%=arr.get(i).getTitle()%>
+                                    <%=auctions.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=auctions.get(i).getStartPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=auctions.get(i).getStartPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -67,13 +72,13 @@
                                     <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist"><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="AuctionController?service=bidnow" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=bidnow" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>
@@ -97,29 +102,29 @@
             </div>
             <div class="feature_total">
                 <%
-                    for(int i=0;i<arr.size();i++){  
+                    for(int i=0;i<auctions.size();i++){  
                 %>
-                <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
+                <div id="auction_502" class="auction_item auction_item_content" data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                <a href="" title="<%=auctions.get(i).getTitle()%>">
+                                    <img src="<%=auctions.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
                             <label><a href="" title="Monitor">
-                                    <%=arr.get(i).getTitle()%>
+                                    <%=auctions.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=auctions.get(i).getStartPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=auctions.get(i).getStartPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -136,13 +141,13 @@
                                     <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist"><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="AuctionController?service=bidnow" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=bidnow" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>
@@ -166,29 +171,29 @@
             </div>
             <div class="feature_total">
                 <%
-                    for(int i=0;i<arr.size();i++){  
+                    for(int i=0;i<auctions.size();i++){  
                 %>
-                <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
+                <div id="auction_502" class="auction_item auction_item_content" data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                <a href="" title="<%=auctions.get(i).getTitle()%>">
+                                    <img src="<%=auctions.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
                             <label><a href="" title="Monitor">
-                                    <%=arr.get(i).getTitle()%>
+                                    <%=auctions.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=auctions.get(i).getStartPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=auctions.get(i).getStartPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -205,13 +210,13 @@
                                     <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" ><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="AuctionController?service=bidnow" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=bidnow" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>
@@ -235,29 +240,29 @@
             </div>
             <div class="feature_total">
                 <%
-                    for(int i=0;i<arr.size();i++){  
+                    for(int i=0;i<auctions.size();i++){  
                 %>
-                <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
+                <div id="auction_502" class="auction_item auction_item_content"  data-id="502">
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
 
                         <div class="feature_lft">                        
-                                <a href="" title="<%=arr.get(i).getTitle()%>">
-                                    <img src="<%=arr.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                                <a href="" title="<%=auctions.get(i).getTitle()%>">
+                                    <img src="<%=auctions.get(i).getImg1()%>" width="82" title="Monitor" height="83" alt="Monitor">
                                 </a>                           
                         </div>
                         <div class="feature_rgt">
                             <label><a href="" title="Monitor">
-                                    <%=arr.get(i).getTitle()%>
+                                    <%=auctions.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=arr.get(i).getStartingPrice()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class="">$</font><%=auctions.get(i).getStartPrice()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
-                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=arr.get(i).getStartingPrice()%></div><p></p>
+                                    <p><span style="display:none;">Price:</span></p><div class="price" style="display:none;"><%=auctions.get(i).getStartPrice()%></div><p></p>
                                 </li>
 
                                 <li>
@@ -274,13 +279,13 @@
                                     <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist"><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="AuctionController?service=bidnow" name="" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=bidnow"  class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>
@@ -309,7 +314,7 @@
                         item_len > 0 ? Auction.getauctionstatus(3) : "";
                     });
                 </script>
-                <div id="auction_603" class="auction_item auction_item_content" name="">
+                <div id="auction_603" class="auction_item auction_item_content" >
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_left_box"> <div class="auction_lft">
 
@@ -340,7 +345,7 @@
                                     <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a> 
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="603" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="603" class="addwatchlist"><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
 
                                 <div class="feature_bott_rgt">
                                     <div class="bidnow_lft"></div>
