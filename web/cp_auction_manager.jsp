@@ -30,6 +30,11 @@
                 <li><p>Invalid category.</p></li>
             </ul>   
 
+            <% }else if (errorCode.equals("3")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Interal Error! Could not update auction status.</p></li>
+            </ul>   
+
             <% } %>
             <br>
             <% } %> 

@@ -17,13 +17,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
-        <%
-            String categoryIdString = request.getParameter("categoryId");
-            int categoryId = 0;
-            if (categoryIdString != null) {
-                categoryId = Integer.parseInt(categoryIdString);
-            }
-        %>
+      
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>
@@ -52,7 +46,7 @@
                                             ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
                                             for (int i = 0; i < categories.size(); i++) {
                                         %>                                
-                                        <option value="<%=categories.get(i).getId()%>" <% if (categoryId == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
+                                        <option value="<%=categories.get(i).getId()%>" <% if (auction.getCategoryId() == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
                                         <%}%>
                                     </select>
                                 </td>

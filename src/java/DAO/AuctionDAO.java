@@ -212,7 +212,8 @@ public class AuctionDAO {
     public boolean update(Auction auction) {
         try {
             String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?, description = ?, starting_price = ?, buy_now_price = ?, increase_by = ?"
-                    +", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), end_date = FROM_UNIXTIME(?) WHERE auctionid = ? ";
+                    +", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), "
+                    +"end_date = FROM_UNIXTIME(?), moderate_status = ? WHERE auctionid = ? ";
             pre = conn.prepareStatement(sql);
             
             pre.setInt(1, auction.getCategoryId());
@@ -233,8 +234,9 @@ public class AuctionDAO {
             pre.setLong(15, startDate.getMillis()/1000);
             DateTime endDate = auction.getEndDate();
             pre.setLong(16, endDate.getMillis()/1000);
-            pre.setInt(17,auction.getId());
-            System.out.println(auction.getId());
+            pre.setInt(17,auction.getModerateStatus());
+            pre.setInt(18,auction.getId());
+            System.out.println(auction.getCategoryId());
             pre.executeUpdate();
             return true;
         } catch (SQLException ex) {

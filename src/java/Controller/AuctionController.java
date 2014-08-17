@@ -111,15 +111,15 @@ public class AuctionController extends HttpServlet {
 
             String auctionIdString = request.getParameter("auctionId");
             int auctionId = Integer.parseInt(auctionIdString);
-            
+
             Auction auction = dao.getAuction(auctionId);
             request.setAttribute("auction", auction);
-            
+
             ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
-        }   else if (service.equals("moderator_update")) {
+        } else if (service.equals("moderator_update")) {
             String moderateStatus = request.getParameter("moderateStatus");
             String auctionId = request.getParameter("auctionId");
             String categoryId = request.getParameter("categoryId");
@@ -127,28 +127,30 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(Integer.parseInt(auctionId));
             auction.setCategoryId(Integer.parseInt(categoryId));
             auction.setModerateStatus(Integer.parseInt(moderateStatus));
+            
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            request.setAttribute("categories", categories);
             if (dao.update(auction)) {
-                
+                request.setAttribute("auction", auction);
+                rd = request.getRequestDispatcher(view_detail_auction+"&errorCode=1");
+                rd.forward(request, response);
             } else {
-                
+                rd = request.getRequestDispatcher(auction_manager+"&errorCode=3");
+                rd.forward(request, response);
             }
-        }
-        
-        
-        
-        /*
-                 if (service.equalsIgnoreCase("editauction")) {
-                 String auctionid = request.getParameter("auctionid");
-                 String categoryid = request.getParameter("categoryid");
-                 rs = dao.search(Integer.parseInt(auctionid));
-                 rss = cdao.search(Integer.parseInt(categoryid));
-                 ArrayList<Category> array = cdao.view();
-                 request.setAttribute("array", array);
-                 request.setAttribute("rs", rs);
-                 request.setAttribute("rss", rss);
-                 rd = request.getRequestDispatcher(edit_auction);
-                 rd.forward(request, response);
-                 }*/ else if (service.equalsIgnoreCase("search")) {
+        } /*
+         if (service.equalsIgnoreCase("editauction")) {
+         String auctionid = request.getParameter("auctionid");
+         String categoryid = request.getParameter("categoryid");
+         rs = dao.search(Integer.parseInt(auctionid));
+         rss = cdao.search(Integer.parseInt(categoryid));
+         ArrayList<Category> array = cdao.view();
+         request.setAttribute("array", array);
+         request.setAttribute("rs", rs);
+         request.setAttribute("rss", rss);
+         rd = request.getRequestDispatcher(edit_auction);
+         rd.forward(request, response);
+         }*/ else if (service.equalsIgnoreCase("search")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
             request.setAttribute("categories", categories);
             String keyword = request.getParameter("keyword");
@@ -308,19 +310,19 @@ public class AuctionController extends HttpServlet {
 
             DateTime startDate = other.getDateTimeFromString(startDateString).plusMinutes(1);
             DateTime endDate = other.getDateTimeFromString(endDateString).plusMinutes(2);
-            
+
             if (startDate.isBeforeNow()) {
                 rd = request.getRequestDispatcher(add_auction + "&errorCode=8" + savedValues);
                 rd.forward(request, response);
                 return;
             }
-            if (endDate.isBefore(startDate)){
+            if (endDate.isBefore(startDate)) {
                 rd = request.getRequestDispatcher(add_auction + "&errorCode=7" + savedValues);
                 rd.forward(request, response);
                 return;
             }
             Duration duration = new Duration(startDate, endDate);
-            if (duration.getStandardMinutes() < 60) { 
+            if (duration.getStandardMinutes() < 60) {
                 rd = request.getRequestDispatcher(add_auction + "&errorCode=9" + savedValues);
                 rd.forward(request, response);
                 return;
