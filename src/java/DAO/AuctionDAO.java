@@ -236,7 +236,7 @@ public class AuctionDAO {
             pre.setLong(16, endDate.getMillis()/1000);
             pre.setInt(17,auction.getModerateStatus());
             pre.setInt(18,auction.getId());
-            System.out.println(auction.getCategoryId());
+            //System.out.println(auction.getCategoryId());
             pre.executeUpdate();
             return true;
         } catch (SQLException ex) {
