@@ -237,4 +237,3 @@
                                                         inline: true
                                                     });
     </script>
-</html>
