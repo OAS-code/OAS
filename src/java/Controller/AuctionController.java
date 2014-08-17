@@ -187,40 +187,37 @@ public class AuctionController extends HttpServlet {
             }
         }
         */
-        /*
-        if (service.equalsIgnoreCase("addnewauction")) {
-            SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            SimpleDateFormat hDateFormat = new SimpleDateFormat("HH:mm");
+        
+        else if (service.equalsIgnoreCase("add_new_auction")) {
             String title = request.getParameter("title");
             String description = request.getParameter("description");
-            String sta = request.getParameter("cb2");
-            int status = Integer.parseInt(sta);
-            String categoryid1 = request.getParameter("cb1");
-            String start_date1 = request.getParameter("startdate");
-            String start_time1 = request.getParameter("starttime");
-            String end_date1 = request.getParameter("enddate");
-            String end_time1 = request.getParameter("endtime");
-            System.out.println(end_time1);
-            String starting_price1 = request.getParameter("startingprice");
-            String buy_now_price1 = request.getParameter("buynowprice");
-            String image1 = request.getParameter("image1");
-            String image2 = request.getParameter("image2");
-            String image3 = request.getParameter("image3");
-            String image4 = request.getParameter("image4");
-            String image5 = request.getParameter("image5");
-            String video1 = request.getParameter("video");
-            int start = video1.indexOf('=');
-            String video = video1.substring(start + 1);
-            String id = request.getParameter("userid");
-            int seller_id = Integer.parseInt(id);
-            int categoryid = Integer.parseInt(categoryid1);
-            Date start_date = (Date) DateFormat.parse(start_date1);
-            Date start_time = (Date) hDateFormat.parse(start_time1);
-            Date end_date = (Date) DateFormat.parse(end_date1);
-            Date end_time = (Date) hDateFormat.parse(end_time1);
+            String categoryId = request.getParameter("categoryId");
+            String starting_price1 = request.getParameter("startingPrice");
+            String buy_now_price1 = request.getParameter("buynowPrice");
+            String start_date1 = request.getParameter("startDate");
+            
+            String end_date1 = request.getParameter("endDate");
+            
+            String img_cover = request.getParameter("img_cover");
+            String img_1 = request.getParameter("img_1");
+            String img_2 = request.getParameter("img_2");
+            String img_3 = request.getParameter("img_3");
+            String img_4 = request.getParameter("img_4");
+            String img_5 = request.getParameter("img_5");
+            String v_youtube = request.getParameter("v_youtube");
+            
+            String userid = request.getParameter("userid");
+            int seller_id = Integer.parseInt(userid);
+            int categoryid = Integer.parseInt(categoryId);
+            
             double starting_price = Double.parseDouble(starting_price1);
             double buy_now_price = Double.parseDouble(buy_now_price1);
-            Auction auction = new Auction(categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
+            
+            Auction auction = new Auction();
+            auction.setSellerId(seller_id);
+            auction.setTitle(title);
+            auction.setDescription(description);
+            auction.setStartDate(null);
             int n = dao.add(auction);
             if (n > 0) {
                 ArrayList<Category> array = (ArrayList<Category>) cdao.view();
@@ -232,7 +229,7 @@ public class AuctionController extends HttpServlet {
 
             }
         }
-        */
+        
         else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <select name="cb1" id="cb1">
+                                            <select name="categoryId" id="categoryId">
                                                 <%
                                                     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
                                                     for (int i = 0; i < categories.size(); i++) {
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="startingprice" id="startingprice"></h2>
+                                            <h2><input type="text" name="startingPrice" id="startingprice"></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="buynowprice" id="buynowprice"></h2>
+                                            <h2><input type="text" name="buynowPrice" id="buynowprice"></h2>
                                         </div>
                                     </div>
 
@@ -96,7 +96,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="datetime-local" name="startdate" id="startdate" value="">
+                                            <input type="datetime-local" name="startDate" id="startdate" value="">
 
                                            
                                         </div>	
@@ -107,7 +107,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="datetime-local" name="enddate" id="enddate" value="">
+                                            <input type="datetime-local" name="endDate" id="enddate" value="">
                                         </div>
                                     </div>
 
@@ -183,7 +183,7 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="hidden" name="service" id="service" value="addnewauction" >
+                                                <input type="hidden" name="service" id="service" value="add_new_auction" >
                                                 <input type="submit" name="add" value="Add" id="add">
                                             </a>
                                         </div>
