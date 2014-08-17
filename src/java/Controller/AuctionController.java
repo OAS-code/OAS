@@ -50,7 +50,7 @@ public class AuctionController extends HttpServlet {
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String bidding_detail = "cp_bidding_detail.jsp";
         final String add_auction = "cp_auction_add.jsp?current_page=auction_manager";
-        final String view_detail_auction = "cp_auction_view_detail.jsp";
+        final String view_detail_auction = "cp_auction_view_detail.jsp?current_page=auction_manager";
         final String edit_auction = "cp_edit_auction.jsp";
         final String add_new_auction = "cp_auction_add.jsp";
 
@@ -115,9 +115,28 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(auctionId);
             request.setAttribute("auction", auction);
             
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
-        }   /*
+        }   else if (service.equals("moderator_update")) {
+            String moderateStatus = request.getParameter("moderateStatus");
+            String auctionId = request.getParameter("auctionId");
+            String categoryId = request.getParameter("categoryId");
+            //System.out.println(moderateStatus+"-"+auctionId+"-"+categoryId);
+            Auction auction = dao.getAuction(Integer.parseInt(auctionId));
+            auction.setCategoryId(Integer.parseInt(categoryId));
+            auction.setModerateStatus(Integer.parseInt(moderateStatus));
+            if (dao.update(auction)) {
+                
+            } else {
+                
+            }
+        }
+        
+        
+        
+        /*
                  if (service.equalsIgnoreCase("editauction")) {
                  String auctionid = request.getParameter("auctionid");
                  String categoryid = request.getParameter("categoryid");

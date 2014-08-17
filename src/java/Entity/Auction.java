@@ -8,6 +8,8 @@ package Entity;
 import DAO.OtherDAO;
 import java.sql.Date;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -107,6 +109,14 @@ public class Auction {
     public DateTime getStartDate() {
         return startDate;
     }
+    
+    public String getFormattedStartDate() {
+        if (this.startDate==null) {
+            return "Unknown";
+        }
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy 'at' HH:mm");
+        return this.startDate.toString(fmt);
+    }
 
     public void setStartDate(DateTime startDate) {
         this.startDate = startDate;
@@ -114,6 +124,14 @@ public class Auction {
 
     public DateTime getEndDate() {
         return endDate;
+    }
+
+    public String getFormattedEndDate() {
+        if (this.endDate==null) {
+            return "Unknown";
+        }
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy 'at' HH:mm");
+        return this.endDate.toString(fmt);
     }
 
     public void setEndDate(DateTime endDate) {
@@ -155,6 +173,10 @@ public class Auction {
     public String getvYoutube() {
         OtherDAO other = new OtherDAO();
         return other.getValidYoutubeUrl(vYoutube);
+    }
+
+    public String getvYoutubeFull() {
+        return vYoutube;
     }
 
     public void setvYoutube(String vYoutube) {

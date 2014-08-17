@@ -27,7 +27,7 @@
                 <h1 title="User Manager">Edit category</h1>
                 <p>&nbsp;</p>
             </div>    
-            <form name="form1" method="post" action="CategoryController">
+            <form name="form1" method="post" action="CategoryController"> 
                 <div class="message_common">
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="10" cellpadding="10">

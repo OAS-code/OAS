@@ -134,7 +134,7 @@ public class AuctionDAO {
         try {
             String sql = "INSERT INTO auction (category_id, seller_id, title, description, starting_price, buy_now_price, increase_by, img_cover, img_1, img_2, img_3, img_4, img_5, v_youtube, start_date, end_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?)) ";
             pre = conn.prepareStatement(sql);
-            System.out.println(auction.getCategoryId());
+            
             pre.setInt(1, auction.getCategoryId());
             pre.setInt(2, auction.getSellerId());
             pre.setString(3, auction.getTitle());
@@ -148,7 +148,7 @@ public class AuctionDAO {
             pre.setString(11, auction.getImg3());
             pre.setString(12, auction.getImg4());
             pre.setString(13, auction.getImg5());
-            pre.setString(14, auction.getvYoutube());
+            pre.setString(14, auction.getvYoutubeFull());
             DateTime startDate = auction.getStartDate();
             pre.setLong(15, startDate.getMillis()/1000);
             DateTime endDate = auction.getEndDate();
@@ -207,6 +207,41 @@ public class AuctionDAO {
             System.out.println("Auction DAO get failed.");
         }
         return auction;
+    }
+
+    public boolean update(Auction auction) {
+        try {
+            String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?, description = ?, starting_price = ?, buy_now_price = ?, increase_by = ?"
+                    +", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), end_date = FROM_UNIXTIME(?) WHERE auctionid = ? ";
+            pre = conn.prepareStatement(sql);
+            
+            pre.setInt(1, auction.getCategoryId());
+            pre.setInt(2, auction.getSellerId());
+            pre.setString(3, auction.getTitle());
+            pre.setString(4, auction.getDescription());
+            pre.setDouble(5, auction.getStartPrice());
+            pre.setDouble(6, auction.getBuynowPrice());
+            pre.setDouble(7, auction.getIncreaseBy());
+            pre.setString(8, auction.getImgCover());
+            pre.setString(9, auction.getImg1());
+            pre.setString(10, auction.getImg2());
+            pre.setString(11, auction.getImg3());
+            pre.setString(12, auction.getImg4());
+            pre.setString(13, auction.getImg5());
+            pre.setString(14, auction.getvYoutubeFull());
+            DateTime startDate = auction.getStartDate();
+            pre.setLong(15, startDate.getMillis()/1000);
+            DateTime endDate = auction.getEndDate();
+            pre.setLong(16, endDate.getMillis()/1000);
+            pre.setInt(17,auction.getId());
+            System.out.println(auction.getId());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO, update failed.");
+            return false;
+        }
     }
 
 }
