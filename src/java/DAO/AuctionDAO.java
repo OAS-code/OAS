@@ -15,6 +15,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.Message;
+import javax.mail.Session;
 import javax.naming.NamingException;
 import org.joda.time.DateTime;
 
@@ -23,11 +25,13 @@ import org.joda.time.DateTime;
  * @author Duc
  */
 public class AuctionDAO {
-
+    
     private Connection conn = null;
     private Statement state = null;
     private ResultSet rs = null;
     private PreparedStatement pre = null;
+    private Session session = null;
+    Message message = null;
 
     public AuctionDAO() {
         try {
@@ -157,6 +161,52 @@ public class AuctionDAO {
             return false;
         }
         
+    }
+
+    public Auction getAuction(int auctionId) {
+        Auction auction = new Auction();
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, "
+                +"UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, "
+                +"increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a "
+                +"INNER JOIN user u ON a.seller_id = u.id "
+                +"INNER JOIN category c ON a.category_id = c.categoryid "
+                +"WHERE a.auctionid = ? LIMIT 1";
+        //System.out.println(sql);
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, auctionId);
+            rs = pre.executeQuery();
+            rs.next();
+            auction.setId(rs.getInt("auctionid"));
+            auction.setCategoryId(rs.getInt("category_id"));
+            auction.setCategoryName(rs.getString("category_name"));
+            auction.setSellerId(rs.getInt("seller_id"));
+            auction.setSellerName(rs.getString("seller_name"));
+            auction.setTitle(rs.getString("title"));
+            auction.setDescription(rs.getString("description"));
+            long startDateLong = rs.getLong("start_date")*1000;
+            long endDateLong = rs.getLong("end_date")*1000;
+            DateTime startDate = new DateTime(startDateLong);
+            DateTime endDate = new DateTime(endDateLong);
+            auction.setStartDate(startDate);
+            auction.setEndDate(endDate);
+            auction.setStartPrice(rs.getDouble("starting_price"));
+            auction.setBuynowPrice(rs.getDouble("buy_now_price"));
+            auction.setIncreaseBy(rs.getDouble("increase_by"));
+            auction.setModerateStatus(rs.getInt("moderate_status"));
+            auction.setvYoutube(rs.getString("v_youtube"));
+            auction.setImgCover(rs.getString("img_cover"));
+            auction.setImg1(rs.getString("img_1"));
+            auction.setImg1(rs.getString("img_2"));
+            auction.setImg1(rs.getString("img_3"));
+            auction.setImg1(rs.getString("img_4"));
+            auction.setImg1(rs.getString("img_5"));
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO get failed.");
+        }
+        return auction;
     }
 
 }

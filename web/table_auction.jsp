@@ -88,7 +88,7 @@
                     <c:forEach var="auction" items="${auctions}" varStatus="status"> 
                         <tr> 
                             <td>${status.count}</td> 
-                            <td><a href="AuctionController?service=viewdetailauction&categoryid=${auction.categoryId}&auctionid=${auction.id}">${auction.title}</a></td>
+                            <td><a href="AuctionController?service=view_details&auctionId=${auction.id}">${auction.title}</a></td>
                             <td>${auction.categoryName}</td>
                             <td>${auction.sellerName}</td>
                             <td>${auction.getStatus()}</td>

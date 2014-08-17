@@ -5,16 +5,16 @@
  */
 package Entity;
 
+import DAO.OtherDAO;
 import java.sql.Date;
 import org.joda.time.DateTime;
-
 
 /**
  *
  * @author Duc
  */
-
 public class Auction {
+
     int id;
     int categoryId;
     String categoryName;
@@ -37,7 +37,7 @@ public class Auction {
     String img5;
 
     public Auction() {
- 
+
     }
 
     public int getId() {
@@ -79,7 +79,7 @@ public class Auction {
     public void setSellerName(String sellerName) {
         this.sellerName = sellerName;
     }
-    
+
     public String getTitle() {
         return title;
     }
@@ -103,7 +103,7 @@ public class Auction {
     public void setModerateStatus(int moderateStatus) {
         this.moderateStatus = moderateStatus;
     }
-    
+
     public DateTime getStartDate() {
         return startDate;
     }
@@ -143,8 +143,6 @@ public class Auction {
     public void setIncreaseBy(double increaseBy) {
         this.increaseBy = increaseBy;
     }
-    
-    
 
     public String getImgCover() {
         return imgCover;
@@ -155,7 +153,8 @@ public class Auction {
     }
 
     public String getvYoutube() {
-        return vYoutube;
+        OtherDAO other = new OtherDAO();
+        return other.getValidYoutubeUrl(vYoutube);
     }
 
     public void setvYoutube(String vYoutube) {
@@ -201,13 +200,14 @@ public class Auction {
     public void setImg5(String img5) {
         this.img5 = img5;
     }
-    
+
     public int getStatusId() {
-        if (moderateStatus == 0) { // Active
-            DateTime currentDate = new DateTime().now();
-            if (currentDate.isAfterNow()) { 
+        if (startDate == null || endDate == null) {
+            return 5; //invalid
+        } else if (moderateStatus == 0) { // Active
+            if (startDate.isAfterNow()) {
                 return 0; //Future auctions
-            } else if (startDate.isBeforeNow() && endDate.isAfterNow()) { 
+            } else if (startDate.isBeforeNow() && endDate.isAfterNow()) {
                 return 1; // On-going auctions.
             } else if (endDate.isBeforeNow()) { // Closed auctions.
                 return 2;
@@ -217,15 +217,16 @@ public class Auction {
             return 3; // Banned acutions
         } else if (moderateStatus == 2) { // Processed auctions.
             return 4; // Processed auctions.
-        } else 
-        return 5; // Invalid auctions.
+        } else {
+            return 5; // Invalid auctions.
+        }
     }
-    
+
     public String getStatus() {
         int statusId = this.getStatusId();
-        if (statusId== 0) {
+        if (statusId == 0) {
             return "Future";
-        } else if (statusId == 1){
+        } else if (statusId == 1) {
             return "On-going";
         } else if (statusId == 2) {
             return "Closed";

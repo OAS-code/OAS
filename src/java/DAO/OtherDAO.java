@@ -283,13 +283,13 @@ public class OtherDAO {
     }
 
     public String getValidYoutubeUrl(String v_youtube) {
-        if (!v_youtube.contains("?v=")) {
-            return "invalid";
+        if (v_youtube == null || !v_youtube.contains("?v=")) {
+            return "";
         }
         //System.out.println("Processing string: '"+v_youtube+"'");
         int startIndex = v_youtube.indexOf("?v=");
         if (startIndex == -1) {
-            return "invalid";
+            return "";
         }
         startIndex = startIndex + 3;
         //System.out.println("Index where v= at is "+startIndex);
@@ -297,7 +297,7 @@ public class OtherDAO {
         if (result != null && result.length() == 11) {
             return result;
         }
-        return "invalid";
+        return "";
     }
 
     public DateTime getDateTimeFromString(String dateString) {

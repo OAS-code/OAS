@@ -56,6 +56,16 @@
                 <li><p>Starting date must be before closing date.</p></li>
             </ul>   
 
+            <% } else if (errorCode.equals("8")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Starting date must be in future.</p></li>
+            </ul>   
+
+            <% } else if (errorCode.equals("9")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Starting date and closing date must be in at least 60 minutes difference.</p></li>
+            </ul>   
+
             <% } else  { %>
             <ul id="message" class="error_msg">
                 <li><p>Internal error!</p></li>

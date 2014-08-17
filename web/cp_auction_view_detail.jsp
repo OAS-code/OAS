@@ -17,7 +17,7 @@
         <jsp:include page="top.jsp" />
         <div class="header2">
             <jsp:include page="cp_cols.jsp" />
-            <%@ include file="cp_view_detail_auction_home.jsp" %> 
+            <%@ include file="cp_auction_view_detail_home.jsp" %> 
         </div>
         <jsp:include page="footer.jsp" />
     </body>

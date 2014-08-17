@@ -26,50 +26,22 @@
             </div>       
             <form name="form1" method="post" action="AuctionController">
                 <%
-                    ResultSet rs = (ResultSet) request.getAttribute("rs");
-                    Auction auction = new Auction();
-                    if (rs.next()) {
-                        auction.setAuctionid(rs.getInt(1));
-                        auction.setCategoryid(rs.getInt(2));
-                        auction.setSellerid(rs.getInt(3));
-                        auction.setTitle(rs.getString(4));
-                        auction.setDescription(rs.getString(5));
-                        auction.setStart_date(rs.getDate(6));
-                        auction.setStart_time(rs.getTime(7));
-                        auction.setEnd_date(rs.getDate(8));
-                        auction.setEnd_time(rs.getTime(9));
-                        auction.setStarting_price(rs.getDouble(10));
-                        auction.setBuy_now_price(rs.getDouble(11));
-                        auction.setStatus(rs.getInt(12));
-                        auction.setVideo(rs.getString(13));
-                        auction.setImage1(rs.getString(14));
-                        auction.setImage2(rs.getString(15));
-                        auction.setImage3(rs.getString(16));
-                        auction.setImage4(rs.getString(17));
-                        auction.setImage5(rs.getString(18));
-                    }
+                    Auction auction = (Auction) request.getAttribute("auction");
                 %> 
                 <div class="message_common">					 
                     <div class="login_middle_common_profil">
-                        <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getAuctionid()%>">
+                        <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getId()%>">
                         <table border="1"  cellpadding="20" id="viewInfoTable">                            
                             <tr>
                                 <td>Title:</td>
                                 <td><%=auction.getTitle()%></td>
                             </tr>
-                            <%
-                                ResultSet rss = (ResultSet) request.getAttribute("rss");
-                                Category category = new Category();
-                                if (rss.next()) {
-                                    category.setCategoryid(rss.getInt(1));
-                                    category.setName(rss.getString(2));
-                                }
-                            %>
+                            
                             <tr>
                                 <td>Category:</td>
                                 <td>
                                     <select name="cb1" id="cb1">
-                                        <option value="<%=category.getCategoryid()%>"><%=category.getName()%></option>
+                                        <option value="<%=auction.getCategoryId()%>"><%=auction.getCategoryName()%></option>
                                     </select>
                                 </td>
                             </tr>
@@ -80,11 +52,11 @@
                             <script>
                                 currentIndx = 0;
                                 MyImages = new Array();
-                                MyImages[0] = "<%=auction.getImage1()%>";
-                                MyImages[1] = "<%=auction.getImage2()%>";
-                                MyImages[2] = "<%=auction.getImage3()%>";
-                                MyImages[3] = "<%=auction.getImage4()%>";
-                                MyImages[4] = "<%=auction.getImage5()%>";
+                                MyImages[0] = "<%=auction.getImg1()%>";
+                                MyImages[1] = "<%=auction.getImg2()%>";
+                                MyImages[2] = "<%=auction.getImg3()%>";
+                                MyImages[3] = "<%=auction.getImg4()%>";
+                                MyImages[4] = "<%=auction.getImg5()%>";
                                 imagesPreloaded = new Array(5);
                                 for (var i = 0; i < MyImages.length; i++)
                                 {
@@ -128,7 +100,7 @@
                             </script>
                             <tr>
                                 <td>Image:</td>
-                                <td><img SRC="<%=auction.getImage1()%>" NAME="theImage" HEIGHT="320" WIDTH="420"></td>
+                                <td><img SRC="<%=auction.getImgCover()%>" NAME="theImage" HEIGHT="320" WIDTH="420"></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -169,39 +141,33 @@
                             <tr>
                                 <td>Video:</td>
                                 <td>
-                                    <iframe width="530" height="315" src="//www.youtube.com/embed/<%=auction.getVideo()%>" frameborder="0" allowfullscreen></iframe>
+                                    <iframe width="530" height="315" src="//www.youtube.com/embed/<%=auction.getvYoutube()%>" frameborder="0" allowfullscreen></iframe>
                                 </td>
                             </tr>
                             </tr>
                             <tr>
                                 <td >Plan date:</td>
-                                <td><%=auction.getStart_date()%></td>
+                                <td><%=auction.getStartDate()%></td>
                             </tr>
-                            <tr>
-                                <td >Plan time:</td>
-                                <td><%=auction.getStart_time()%></td>
-                            </tr>
+                            
                             <tr>
                                 <td>Close date:</td>
-                                <td><%=auction.getEnd_date()%></td>
+                                <td><%=auction.getEndDate()%></td>
                             </tr>
-                            <tr>
-                                <td >Close time:</td>
-                                <td><%=auction.getEnd_time()%></td>
-                            </tr>
+                            
                             <tr>
                                 <td >Starting price:</td>
-                                <td><%=auction.getStarting_price()%></td>
+                                <td><%=auction.getStartPrice()%></td>
                             </tr>      
                             <tr>
                                 <td>Buy now price:</td>
-                                <td><%=auction.getBuy_now_price()%></td>
+                                <td><%=auction.getBuynowPrice()%></td>
                             </tr>
                             <tr>
                                 <td>Status:</td>
                                 <td>
                                     <select name="cb2" id="cb2">
-                                        <option value="<%=auction.getStatus()%>"><%=auction.getStatus()%></option>
+                                        <option value="<%=auction.getStatusId()%>"><%=auction.getStatus()%></option>
                                     </select>
                                 </td>
                             </tr>
@@ -211,7 +177,7 @@
                                 <div class="profil_butoon">
                                     <div class="res_left"></div>
                                     <div class="res_mid"><a title="Edit">
-                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'AuctionController?service=editauction&auctionid=<%=auction.getAuctionid()%>&categoryid=<%=category.getCategoryid()%>';"></a>
+                                            <input type="button" value="Edit" name="Edit" onclick="window.location = 'AuctionController?service=editauction&auctionid=<%=auction.getId()%>';"></a>
                                     </div>                  
                                     <div class="res_right"></div>
                                 </div>
