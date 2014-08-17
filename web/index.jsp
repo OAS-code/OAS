@@ -18,7 +18,8 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-        <jsp:include page="top.jsp" />
+        
+        <%@ include file="top.jsp" %> 
         <div class="header2">  
             <%
                 ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
