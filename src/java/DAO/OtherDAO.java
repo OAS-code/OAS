@@ -308,5 +308,4 @@ public class OtherDAO {
         DateTime dt = formatter.parseDateTime(dateString);
         return dt;
     }
-
 }
