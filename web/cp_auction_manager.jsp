@@ -12,12 +12,27 @@
         <title>Manage action</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-
+        <%            String errorCode = request.getParameter("errorCode");
+        %>
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <%if (errorCode != null) {
+                    if (errorCode.equals("1")) { %>
+
+            <ul id="message" class="success_msg">
+                <li><p>Your auction has been successfully created!</p></li>
+            </ul>
+            <% } else if (errorCode.equals("2")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Invalid category.</p></li>
+            </ul>   
+
+            <% } %>
+            <br>
+            <% } %> 
             <jsp:include page="cp_cols.jsp" />  
             <jsp:include page="cp_auction_manager_home.jsp" />
         </div>

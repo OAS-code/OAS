@@ -23,6 +23,71 @@
                 background-color: red !important;
             }
         </style>
+        <%
+            String title = request.getParameter("title");
+            if (title == null) {
+                title = "";
+            }
+            String categoryIdString = request.getParameter("categoryId");
+            int categoryId = 0;
+            if (categoryIdString!=null) {
+                categoryId = Integer.parseInt(categoryIdString);
+            }
+            String description = request.getParameter("description");
+            if (description == null) {
+                description = "";
+            }
+            String startingPrice = request.getParameter("startingPrice");
+            if (startingPrice == null) {
+                startingPrice = "0";
+            }
+            String buynowPrice = request.getParameter("buynowPrice");
+            if (buynowPrice == null) {
+                buynowPrice = "1";
+            }
+            String increaseBy = request.getParameter("increaseBy");
+            if (increaseBy == null) {
+                increaseBy = "1";
+            }
+            String startDate = request.getParameter("startDate");
+            if (startDate == null) {
+                startDate = "";
+            }
+            String endDate = request.getParameter("endDate");
+            if (endDate == null) {
+                endDate = "";
+            }
+            String img_1 = request.getParameter("img_1");
+            String img_2 = request.getParameter("img_2");
+            String img_3 = request.getParameter("img_3");
+            String img_4 = request.getParameter("img_4");
+            String img_5 = request.getParameter("img_5");
+            String v_youtube = request.getParameter("v_youtube");
+            String img_cover = request.getParameter("img_cover");
+            if (img_1 == null) {
+                img_1 = "";
+            }
+            if (img_2 == null) {
+                img_2 = "";
+            }
+            if (img_3 == null) {
+                img_3 = "";
+            }
+            if (img_4 == null) {
+                img_4 = "";
+            }
+            if (img_5 == null) {
+                img_5 = "";
+            }
+            if (img_cover == null) {
+                img_cover = "";
+            }
+            if (v_youtube == null) {
+                v_youtube = "";
+            }
+            
+            
+        %>
     </head>
     <body>            
         <%@ include file="perm_staff.jsp" %>
@@ -32,11 +97,9 @@
                 <p>&nbsp;</p>
             </div>
             <form name="form1" method="post" action="AuctionController">
-                <%                    String userid = (String) session.getAttribute("userid");
-                    int id = Integer.parseInt(userid);
-                %>
+                
                 <div class="message_common">
-                    <input type="text" hidden="hidden" name="userid" id="userid" value="<%=id%>" class="textbox">
+                    
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="15" cellpadding="15">
                             <tr>
@@ -49,7 +112,7 @@
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2>
-                                                <input type="text" name="title" id="title" class="textbox" maxlength="100">
+                                                <input type="text" name="title" id="title" class="textbox" maxlength="100" value="<%=title%>">
                                             </h2>
                                         </div>
                                     </div>
@@ -63,7 +126,7 @@
                                                     ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
                                                     for (int i = 0; i < categories.size(); i++) {
                                                 %>                                
-                                                <option value="<%=categories.get(i).getId()%>"><%=categories.get(i).getName()%></option>                                
+                                                <option value="<%=categories.get(i).getId()%>" <% if (categoryId==categories.get(i).getId()) { %> selected="selected" <% } %> ><%=categories.get(i).getName()%></option>                                
                                                 <%}%>
                                             </select>
                                         </div>
@@ -73,7 +136,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="description" id="description" class="textbox"></h2>
+                                            <h2><input type="text" name="description" id="description" class="textbox" value="<%=description%>"></h2>
                                         </div>
                                     </div>
 
@@ -82,7 +145,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="number" name="startingPrice" id="startingprice"></h2>
+                                            <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=startingPrice%>"></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">
@@ -90,7 +153,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="number" name="buynowPrice" id="buynowprice"></h2>
+                                            <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=buynowPrice%>"></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">
@@ -98,7 +161,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="number" name="increaseBy" id="incrementprice"></h2>
+                                            <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=increaseBy%>"></h2>
                                         </div>
                                     </div>
 
@@ -107,7 +170,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="text" id="startdate" name="startDate" value="">
+                                            <input type="text" id="startdate" name="startDate" value="<%=startDate%>">
                                         </div>	
                                     </div>
                                     <div class="user_name_common">
@@ -115,19 +178,16 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="text" id="enddate" name="endDate" value="">
+                                            <input type="text" id="enddate" name="endDate" value="<%=endDate%>">
                                         </div>
                                     </div>
-
-
-
 
                                     <div class="user_name_common">
                                         <b style="width:130px">Cover image <span class="red">*</span>:</b>
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_cover" id="img_cover" class="textbox"></h2>
+                                            <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=img_cover%>"></h2>
                                         </div>
                                     </div>
 
@@ -136,7 +196,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_1" id="img_1" class="textbox"></h2>
+                                            <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=img_1%>" ></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">   
@@ -144,7 +204,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_2" id="img_2" class="textbox"></h2>
+                                            <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=img_2%>" ></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">  
@@ -152,7 +212,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_3" id="img_3" class="textbox"></h2>
+                                            <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=img_3%>" ></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">       
@@ -160,7 +220,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_4" id="img_4" class="textbox"></h2>
+                                            <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=img_4%>" ></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">       
@@ -168,7 +228,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="img_5" id="img_5" class="textbox"></h2>
+                                            <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=img_5%>" ></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">
@@ -176,7 +236,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox"></h2>
+                                            <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=v_youtube%>" ></h2>
                                         </div>
                                     </div>
                                 </td>
