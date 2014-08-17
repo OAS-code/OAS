@@ -23,14 +23,13 @@
                 background-color: red !important;
             }
         </style>
-        <%
-            String title = request.getParameter("title");
+        <%            String title = request.getParameter("title");
             if (title == null) {
                 title = "";
             }
             String categoryIdString = request.getParameter("categoryId");
             int categoryId = 0;
-            if (categoryIdString!=null) {
+            if (categoryIdString != null) {
                 categoryId = Integer.parseInt(categoryIdString);
             }
             String description = request.getParameter("description");
@@ -85,8 +84,8 @@
             if (v_youtube == null) {
                 v_youtube = "";
             }
-            
-            
+
+
         %>
     </head>
     <body>            
@@ -97,148 +96,235 @@
                 <p>&nbsp;</p>
             </div>
             <form name="form1" method="post" action="AuctionController">
-                
+
                 <div class="message_common">
-                    
+
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="15" cellpadding="15">
                             <tr>
-                                <td width="600">
-                                    <div class="user_name_common">
-                                        <b style="width:130px">
-                                            Title <span class="red">*</span>: 
-                                        </b>                                        		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2>
-                                                <input type="text" name="title" id="title" class="textbox" maxlength="100" value="<%=title%>">
-                                            </h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Category:</b>                                      
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <select name="categoryId" id="categoryId">
-                                                <%
-                                                    ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
-                                                    for (int i = 0; i < categories.size(); i++) {
-                                                %>                                
-                                                <option value="<%=categories.get(i).getId()%>" <% if (categoryId==categories.get(i).getId()) { %> selected="selected" <% } %> ><%=categories.get(i).getName()%></option>                                
-                                                <%}%>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Description: </b>		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="description" id="description" class="textbox" value="<%=description%>"></h2>
-                                        </div>
-                                    </div>
+                                <td width="669">
+                                    <table border="0" cellspacing="0" cellpadding="0" height="100%">
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">
+                                                        Title <span class="red">*</span>: 
+                                                    </b>                                        		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2>
+                                                            <input type="text" name="title" id="title" class="textbox" maxlength="100" value="<%=title%>">
+                                                        </h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Category:</b>                                      
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <select name="categoryId" id="categoryId">
+                                                            <%
+                                                                ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                                                                for (int i = 0; i < categories.size(); i++) {
+                                                            %>                                
+                                                            <option value="<%=categories.get(i).getId()%>" <% if (categoryId == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
+                                                            <%}%>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Description: </b>		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="description" id="description" class="textbox" value="<%=description%>"></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Starting price  <span class="red">*</span>: </b>		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=startingPrice%>"></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Buy now price<span class="red">*</span>: </b>                                        		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=buynowPrice%>"></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Increment price<span class="red">*</span>: </b>                                        		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=increaseBy%>"></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table border="0" cellspacing="0" cellpadding="0" height="100%">
+                                        <tr>
+                                            <td >
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Starting date: <span class="red">*</span>: </b>	
+                                                </div>
+                                                <div class="user_name_common" style="width:340px;">
+                                                    <div class="text_feeld">
+                                                        <input type="text" id="startdate" name="startDate" value="<%=startDate%>">
+                                                    </div>	
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Closing date  <span class="red">*</span>: </b>		
+                                                </div>
+                                                <div class="user_name_common" style="width:340px;">
+                                                    <div class="text_feeld">
+                                                        <input type="text" id="enddate" name="endDate" value="<%=endDate%>">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table border="0" cellspacing="0" cellpadding="0" height="100%">
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Cover image <span class="red">*</span>:</b>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=img_cover%>"></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Images (Optional):</b>                                        
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=img_1%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">   
+                                                    <b style="width:130px"></b>                                         
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=img_2%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">  
+                                                    <b style="width:130px"></b>                                         
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=img_3%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">       
+                                                    <b style="width:130px"></b>                                        
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=img_4%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">       
+                                                    <b style="width:130px"></b>                                        
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=img_5%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width:130px">Video (Youtube):</b>                                        		
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="width:400px;">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=v_youtube%>" ></h2>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Starting price  <span class="red">*</span>: </b>		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=startingPrice%>"></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Buy now price<span class="red">*</span>: </b>                                        		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=buynowPrice%>"></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Increment price<span class="red">*</span>: </b>                                        		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=increaseBy%>"></h2>
-                                        </div>
-                                    </div>
-
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Starting date: <span class="red">*</span>: </b>	
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <input type="text" id="startdate" name="startDate" value="<%=startDate%>">
-                                        </div>	
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Closing date  <span class="red">*</span>: </b>		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <input type="text" id="enddate" name="endDate" value="<%=endDate%>">
-                                        </div>
-                                    </div>
-
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Cover image <span class="red">*</span>:</b>
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=img_cover%>"></h2>
-                                        </div>
-                                    </div>
-
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Images (Optional):</b>                                        
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=img_1%>" ></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">   
-                                        <b style="width:130px"></b>                                         
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=img_2%>" ></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">  
-                                        <b style="width:130px"></b>                                         
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=img_3%>" ></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">       
-                                        <b style="width:130px"></b>                                        
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=img_4%>" ></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">       
-                                        <b style="width:130px"></b>                                        
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=img_5%>" ></h2>
-                                        </div>
-                                    </div>
-                                    <div class="user_name_common">
-                                        <b style="width:130px">Video (Youtube):</b>                                        		
-                                    </div>
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=v_youtube%>" ></h2>
-                                        </div>
-                                    </div>
+                                    </table>
                                 </td>
                             </tr>                           
                         </table>

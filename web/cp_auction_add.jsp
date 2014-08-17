@@ -51,6 +51,11 @@
                 <li><p>Youtube link is broken.</p></li>
             </ul>   
 
+            <% } else if (errorCode.equals("7")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Starting date must be before closing date.</p></li>
+            </ul>   
+
             <% } else  { %>
             <ul id="message" class="error_msg">
                 <li><p>Internal error!</p></li>

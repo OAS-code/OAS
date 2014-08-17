@@ -301,6 +301,9 @@ public class OtherDAO {
     }
 
     public DateTime getDateTimeFromString(String dateString) {
+        if (dateString.isEmpty()) {
+            return DateTime.now();
+        }
         org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
         DateTime dt = formatter.parseDateTime(dateString);
         return dt;

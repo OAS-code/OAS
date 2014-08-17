@@ -274,9 +274,12 @@ public class AuctionController extends HttpServlet {
             }
 
             DateTime startDate = other.getDateTimeFromString(startDateString);
-            //System.out.println(startDate.toString());
             DateTime endDate = other.getDateTimeFromString(endDateString);
-
+            if (endDate.isBefore(startDate)){
+                rd = request.getRequestDispatcher(add_auction + "&errorCode=7" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
             if (img_cover == null || img_cover.isEmpty()) {
                 rd = request.getRequestDispatcher(add_auction + "&errorCode=5" + savedValues);
                 rd.forward(request, response);
