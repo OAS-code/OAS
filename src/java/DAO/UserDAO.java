@@ -93,7 +93,7 @@ public class UserDAO {
             if (user.getJoinDate() != null) {
                 pre.setString(11, user.getJoinDate());
             }
- 
+
             //System.out.println(user.getUsername()+user.getPassword());
             n = pre.executeUpdate();
 
@@ -370,14 +370,10 @@ public class UserDAO {
         rs.next();
         return rs.getInt("count") > 0;
     }
-    
-    
 
     public static void main(String[] args) throws SQLException {
         UserDAO dao = new UserDAO();
         //dao.sendMail("tupvse02404@fpt.edu.vn","Auction","successfully");
     }
-    
-    
 
 }

@@ -9,7 +9,6 @@ package DAO;
  *
  * @author ducfpt
  */
-import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import com.mysql.jdbc.Connection;
 import java.math.BigInteger;
@@ -36,6 +35,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.naming.NamingException;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 public class OtherDAO {
 
@@ -193,10 +194,10 @@ public class OtherDAO {
             return false;
         }
     }
-    
+
     public boolean cleanUserToken(int userId) {
         try {
-            String sql = "DELETE FROM token WHERE userid = "+ userId;
+            String sql = "DELETE FROM token WHERE userid = " + userId;
             state = (com.mysql.jdbc.Statement) conn.createStatement();
             state.executeUpdate(sql);
             state.close();
@@ -208,7 +209,7 @@ public class OtherDAO {
             return false;
         }
     }
-    
+
     public String[] getTokenData(String token) {
         String[] tokenData = new String[4];
         try {
@@ -230,8 +231,8 @@ public class OtherDAO {
             return tokenData;
         }
     }
-    
-    public String makeUniqueToken(){
+
+    public String makeUniqueToken() {
         String newToken = this.makeRandomString(10, 10);
         if (newToken.equals(this.getTokenData(newToken)[1])) {
             return "existed";
@@ -255,7 +256,7 @@ public class OtherDAO {
             pre.setInt(2, userId);
             pre.setInt(3, tokenLifetime);
             pre.executeUpdate();
-            
+
             return newToken;
         } catch (SQLException ex) {
             //Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -263,9 +264,46 @@ public class OtherDAO {
             return "existed";
         }
     }
-    
+
+    public double getValidPrice(String str) {
+        double d = 0;
+        try {
+            d = Double.parseDouble(str);
+            if (d < 0) {
+                return -1;
+            }
+        } catch (NumberFormatException nfe) {
+            return -1;
+        }
+        return d;
+    }
+
     public boolean isPasswordValid(String password) {
         return password != null && !password.isEmpty() && password.length() >= 6;
     }
-    
+
+    public String getValidYoutubeUrl(String v_youtube) {
+        if (!v_youtube.contains("?v=")) {
+            return "invalid";
+        }
+        //System.out.println("Processing string: '"+v_youtube+"'");
+        int startIndex = v_youtube.indexOf("?v=");
+        if (startIndex == -1) {
+            return "invalid";
+        }
+        startIndex = startIndex + 3;
+        //System.out.println("Index where v= at is "+startIndex);
+        String result = v_youtube.substring(startIndex, startIndex + 11);
+        if (result != null && result.length() == 11) {
+            return result;
+        }
+        return "invalid";
+    }
+
+    public DateTime getDateTimeFromString(String dateString) {
+        org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy/MM/dd HH:mm");
+        DateTime dt = formatter.parseDateTime(dateString);
+        return dt;
+    }
+
 }

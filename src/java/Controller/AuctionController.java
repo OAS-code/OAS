@@ -7,12 +7,14 @@ package Controller;
 
 import DAO.AuctionDAO;
 import DAO.CategoryDAO;
+import DAO.OtherDAO;
 import Entity.Auction;
 import Entity.Category;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 
 /**
  *
@@ -190,43 +194,112 @@ public class AuctionController extends HttpServlet {
         
         else if (service.equalsIgnoreCase("add_new_auction")) {
             String title = request.getParameter("title");
+            if (title==null || title.isEmpty() || title.length() < 3) {
+                System.out.println("Title must contains at least 3 characters.");
+                return;
+            }
             String description = request.getParameter("description");
-            String categoryId = request.getParameter("categoryId");
-            String starting_price1 = request.getParameter("startingPrice");
-            String buy_now_price1 = request.getParameter("buynowPrice");
-            String start_date1 = request.getParameter("startDate");
+            if (description==null){
+                description = "";
+            }
+            String categoryIdString = request.getParameter("categoryId");
+            int categoryId = 0;
+            if (categoryIdString == null){
+                System.out.println("Invalid category.");
+                return;
+            } else {
+                categoryId = Integer.parseInt(categoryIdString);
+            }
+            String userid = request.getParameter("userid");
+            int seller_id = Integer.parseInt(userid);
             
-            String end_date1 = request.getParameter("endDate");
+            OtherDAO other = new OtherDAO();
+           
+            double startPrice = other.getValidPrice(request.getParameter("startingPrice"));
+            double buynowPrice = other.getValidPrice(request.getParameter("buynowPrice"));
+            
+            if (startPrice == -1 || buynowPrice == -1 || startPrice >= buynowPrice) {
+                System.out.println("Invalid starting price or buy now price. Buy now price must be greater than starting price.");
+                return;
+            }
+            
+            double increaseBy = other.getValidPrice(request.getParameter("increaseBy"));
+            if (increaseBy == -1 ) {
+                System.out.println("Invalid increment price.");
+                return;
+            }
+            
+            String startDateString = request.getParameter("startDate");
+            String endDateString = request.getParameter("endDate");
+            DateTime startDate = other.getDateTimeFromString(startDateString);
+            //System.out.println(startDate.toString());
+            DateTime endDate = other.getDateTimeFromString(endDateString);
+            
             
             String img_cover = request.getParameter("img_cover");
+            if (img_cover==null || img_cover.isEmpty()) {
+                System.out.println("Cover image is mandatory.");
+                return;
+            }
             String img_1 = request.getParameter("img_1");
             String img_2 = request.getParameter("img_2");
             String img_3 = request.getParameter("img_3");
             String img_4 = request.getParameter("img_4");
             String img_5 = request.getParameter("img_5");
             String v_youtube = request.getParameter("v_youtube");
+            if (img_1==null) {
+                img_1 = "";
+            }
+            if (img_2==null) {
+                img_2 = "";
+            }
+            if (img_3==null) {
+                img_3 = "";
+            }
+            if (img_4==null) {
+                img_4 = "";
+            }
+            if (img_5==null) {
+                img_5 = "";
+            }
+            if (v_youtube==null) {
+                v_youtube = "";
+            }
             
-            String userid = request.getParameter("userid");
-            int seller_id = Integer.parseInt(userid);
-            int categoryid = Integer.parseInt(categoryId);
-            
-            double starting_price = Double.parseDouble(starting_price1);
-            double buy_now_price = Double.parseDouble(buy_now_price1);
+            if (v_youtube.length()>0) {
+                v_youtube = other.getValidYoutubeUrl(v_youtube);
+                if (v_youtube.equalsIgnoreCase("invalid")) {
+                    System.out.println("Youtube link is broken.");
+                    return;
+                }
+            }
             
             Auction auction = new Auction();
+            auction.setCategoryId(categoryId);
             auction.setSellerId(seller_id);
             auction.setTitle(title);
             auction.setDescription(description);
-            auction.setStartDate(null);
-            int n = dao.add(auction);
-            if (n > 0) {
-                ArrayList<Category> array = (ArrayList<Category>) cdao.view();
-                request.setAttribute("array", array);
+            auction.setStartPrice(startPrice);
+            auction.setBuynowPrice(buynowPrice);
+            auction.setIncreaseBy(increaseBy);
+            auction.setImgCover(img_cover);
+            auction.setImg1(img_1);
+            auction.setImg2(img_2);
+            auction.setImg3(img_3);
+            auction.setImg4(img_4);
+            auction.setImg5(img_5);
+            auction.setvYoutube(v_youtube);
+            auction.setStartDate(startDate);
+            auction.setEndDate(endDate);
+            
+            if (dao.add(auction)) {
+                ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+                request.setAttribute("categories", categories);
                 rd = request.getRequestDispatcher(auction_manager);
                 rd.forward(request, response);
-                //response.sendRedirect(auction_manager);
+                
             } else {
-
+                
             }
         }
         

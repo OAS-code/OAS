@@ -16,11 +16,15 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Add auction</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
-        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        
+        <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />      
+        <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+        <style type="text/css">
+            .custom-date-style {
+                background-color: red !important;
+            }
+        </style>
     </head>
-    <body>
-
+    <body>            
         <%@ include file="perm_staff.jsp" %>
         <div class="my_message_right" id="edit_profile_page">
             <div class="message_common_border">
@@ -78,7 +82,7 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="startingPrice" id="startingprice"></h2>
+                                            <h2><input type="number" name="startingPrice" id="startingprice"></h2>
                                         </div>
                                     </div>
                                     <div class="user_name_common">
@@ -86,28 +90,32 @@
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" name="buynowPrice" id="buynowprice"></h2>
+                                            <h2><input type="number" name="buynowPrice" id="buynowprice"></h2>
                                         </div>
                                     </div>
-
+                                    <div class="user_name_common">
+                                        <b style="width:130px">Increment price<span class="red">*</span>: </b>                                        		
+                                    </div>
+                                    <div class="user_name_common" style="width:400px;">
+                                        <div class="text_feeld">
+                                            <h2><input type="number" name="increaseBy" id="incrementprice"></h2>
+                                        </div>
+                                    </div>
 
                                     <div class="user_name_common">
                                         <b style="width:130px">Starting date: <span class="red">*</span>: </b>	
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="datetime-local" name="startDate" id="startdate" value="">
-
-                                           
+                                            <input type="text" id="startdate" name="startDate" value="">
                                         </div>	
                                     </div>
-
                                     <div class="user_name_common">
                                         <b style="width:130px">Closing date  <span class="red">*</span>: </b>		
                                     </div>
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <input type="datetime-local" name="endDate" id="enddate" value="">
+                                            <input type="text" id="enddate" name="endDate" value="">
                                         </div>
                                     </div>
 
@@ -177,7 +185,7 @@
                         <br>
                         <table align="center">
                             <tr>
-                                <td width="90"></td>
+                                <td width="120"></td>
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>
@@ -219,4 +227,14 @@
             </form>
         </div>       
     </body>
+    <script type="text/javascript" src="JavaScript/jquery_1.js"></script>
+    <script type="text/javascript" src="JavaScript/jquery.datetimepicker.js"></script>
+    <script>
+                                                    $('#startdate').datetimepicker({
+                                                        inline: true
+                                                    });
+                                                    $('#enddate').datetimepicker({
+                                                        inline: true
+                                                    });
+    </script>
 </html>
