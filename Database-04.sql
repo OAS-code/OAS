@@ -48,7 +48,7 @@ CREATE TABLE `auction` (
   KEY `seller_id` (`seller_id`),
   CONSTRAINT `auction_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `category` (`categoryid`),
   CONSTRAINT `auction_ibfk_2` FOREIGN KEY (`seller_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `auction` (
 
 LOCK TABLES `auction` WRITE;
 /*!40000 ALTER TABLE `auction` DISABLE KEYS */;
-INSERT INTO `auction` VALUES (2,1,14,'sdsad','asdasd','2014-08-17 02:09:12','2014-08-17 00:52:07',0,1,1,0,'asdasd',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `auction` VALUES (1,9,43,'ASUS Zenfone 5','','2014-08-18 01:25:45','2014-09-25 01:15:00',50,250,5,0,'http://fptshop.com.vn/Uploads/images/asus-zenfone-5-4.png','http://cache.media.techz.vn/upload/2014/04/23/image-1398248544-Zenfone5_07.jpg',NULL,NULL,NULL,NULL,'https://www.youtube.com/watch?v=ixhPTFdwHAM'),(2,9,43,'Iphone 5S','','2014-08-18 01:47:46','2014-08-27 01:31:00',20,500,10,0,'http://cdn2.sbnation.com/assets/3256545/IMG_2909-1024.jpg',NULL,NULL,NULL,NULL,NULL,''),(3,10,43,'Honda Airblade 2010','','2014-08-18 04:25:57','2014-08-27 04:25:00',1200,5000,100,0,'http://dantri.vcmedia.vn/Uploaded/2010/05/16/3.jpg','http://1.bp.blogspot.com/_7G-rNqb-F4E/SqoAx1c9GyI/AAAAAAAAAZw/7Fe0wHvOhWw/s400/1209004801_Airblade_White.jpg','https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSoqBPQlSrkisWOYBm9pY5jFv1Mzws18PiBxfuIyqKqx-LjAl_X','http://farm10.gox.vn/tinmoi/store/images/thumb/22122012/6/1083387/can_anh_honda_air_blade_125_do_xang_khong_can_xuong_xe_1.jpg','','','https://www.youtube.com/watch?v=RP8XeWc-0h8'),(4,10,43,'Mercedes C200 2011','','2014-08-18 04:29:12','2014-08-30 04:28:00',15000,35000,300,0,'http://www.thuexedulich.org/files/trangchu/mercedes_c200.8.jpg',NULL,NULL,NULL,NULL,NULL,'https://www.youtube.com/watch?v=qTc7OtSWr-M');
 /*!40000 ALTER TABLE `auction` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -74,7 +74,7 @@ CREATE TABLE `category` (
   `description` text,
   PRIMARY KEY (`categoryid`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -83,7 +83,7 @@ CREATE TABLE `category` (
 
 LOCK TABLES `category` WRITE;
 /*!40000 ALTER TABLE `category` DISABLE KEYS */;
-INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart. ');
+INSERT INTO `category` VALUES (1,'Smartphone','Smartphone for the smart. '),(9,'Home appliances',''),(10,'Vehicles','');
 /*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -162,4 +162,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-17  6:00:55
+-- Dump completed on 2014-08-18  5:05:35
