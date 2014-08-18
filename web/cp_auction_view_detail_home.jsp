@@ -17,7 +17,8 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
-      
+        <link rel="stylesheet" href="css/jquery.rondell.css" type="text/css">
+        <script src="JavaScript/modernizr-2.0.6.min.js"></script>   
     </head>
     <body>
         <%@ include file="perm_staff.jsp" %>
@@ -74,35 +75,67 @@
 
                             <tr>
                                 <td>Closing date:</td>
-                                <td><%=auction.getFormattedEndDate()%></td>
+                                <td><%=auction.getImg1()%></td>
                             </tr>
                             <tr>
                                 <td>Image:</td>
                                 <td>
-                                    <script type="text/javascript"
-                                    src="JavaScript/slide.js"></script>
-                                    <script type="text/javascript">
-                                        var viewer = new PhotoViewer();
-                                        if ('${auction.getImgCover()}'.length > 0)
-                                            viewer.add('${auction.getImgCover()}');
+                                    <div id="rondellTopDemo" class="showOnJS hidden"> 
+                                        <%if (auction.getImgCover() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImgCover()}">
+                                            <img src="${auction.getImgCover()}" >
+                                        </a>   
+                                        <%}
+                                            if (auction.getImg1() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImg1()}" >
+                                            <img src="${auction.getImg1()}" >
+                                        </a>
+                                        <%}
+                                            if (auction.getImg2() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImg2()}" >
+                                            <img src="${auction.getImg2()}" >
+                                        </a>
+                                        <%}
+                                            if (auction.getImg3() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImg3()}" >
+                                            <img src="${auction.getImg3()}" >
+                                        </a>
+                                        <%}
+                                            if (auction.getImg4() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImg4()}" >
+                                            <img src="${auction.getImg4()}" >
+                                        </a>
+                                        <%}
+                                            if (auction.getImg5() != null) {%>
+                                        <a target="_blank" rel="rondell_1" href="${auction.getImg5()}" >
+                                            <img src="${auction.getImg5()}" >
+                                        </a>
+                                        <%}%>
 
-                                        if ('${auction.getImg1()}'.length > 0)
-                                            viewer.add('${auction.getImg1()}');
+                                    </div> 
+                                    <script src="JavaScript/jquery-1.10.2.min.js"></script>
+                                    <script src="JavaScript/jquery.mousewheel-3.0.6.min.js"></script>
+                                    <script src="JavaScript/jquery.rondell.js"></script><script type="text/javascript">
+                                        (function() {
+                                            $("#rondellTopDemo").rondell({
+                                                preset: "carousel",
+                                                radius: {
+                                                    x: 130
+                                                },
+                                                center: {
+                                                    left: 200,
+                                                    top: 110
+                                                },
+                                                itemProperties: {
+                                                    size: {
+                                                        width: 100,
+                                                        height: 100
+                                                    }
+                                                }
+                                            });
 
-                                        if ('${auction.getImg2()}'.length > 0)
-                                            viewer.add('${auction.getImg2()}');
-
-                                        if ('${auction.getImg3()}'.length > 0)
-                                            viewer.add('${auction.getImg3()}');
-
-                                        if ('${auction.getImg4()}'.length > 0)
-                                            viewer.add('${auction.getImg4()}');
-
-                                        if ('${auction.getImg5()}'.length > 0)
-                                            viewer.add('${auction.getImg5()}');
-
-                                    </script>
-                                    <a href="javascript:void(viewer.show(0))">Slideshow</a>
+                                        }).call(this);
+                                    </script>                                  
 
                                 </td>
                             </tr>
@@ -124,7 +157,7 @@
                                     <%=auction.getStatus()%>
                                 </td>
                             </tr>
-                            
+
                             <tr>
                                 <td>Moderate status:</td>
                                 <td>
@@ -146,19 +179,19 @@
                                     </div>                  
                                     <div class="res_right"></div>
                                 </div>
-                                    <!--
-                                <span></span>				
-                                <div class="grand_total_btn_cp">
-                                    <div class="save_left"></div>
-                                    <div class="save_mid">
-                                        <a title="Delete">
-                                            <input type="submit" value="Delete" name="Delete" onclick="return confirm('Are you sure?');">  
-                                            <input type="hidden" id="service" name="service" value="deleteAuction">
-                                        </a>
-                                    </div>
-                                    <div class="save_right"></div>
+                                <!--
+                            <span></span>				
+                            <div class="grand_total_btn_cp">
+                                <div class="save_left"></div>
+                                <div class="save_mid">
+                                    <a title="Delete">
+                                        <input type="submit" value="Delete" name="Delete" onclick="return confirm('Are you sure?');">  
+                                        <input type="hidden" id="service" name="service" value="deleteAuction">
+                                    </a>
                                 </div>
-                                    -->
+                                <div class="save_right"></div>
+                            </div>
+                                -->
                             </div>
                         </div>
                     </div>

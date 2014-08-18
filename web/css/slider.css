@@ -3,7 +3,7 @@ div#top div#nav { float : left; clear : both; width : 715px; height : 52px; marg
 div#top div#nav ul { float : left; width : 700px; height : 52px; list-style-type : none; }
 div#nav ul li { float : left; height : 52px; }
 div#nav ul li a { border : 0; height : 52px; display : block; line-height : 52px; text-indent : -9999px; }
-div.wrap { height : 250px; background : url(images/header-bg.png) no-repeat 50% 0; }
+div.wrap { height : 250px; background : url(../images/header-bg.png) no-repeat 50% 0; }
 div#slide-holder { z-index : 40; width :715px; height : 250px; position : absolute; }
 div#slide-holder div#slide-runner {width :715px; height : 250px; overflow : hidden; position : absolute; }
 div#slide-holder img { margin : 0; display : none; position : absolute; }
@@ -13,7 +13,7 @@ div#slide-holder div#slide-controls p#slide-nav { float : left; display : inline
 div#slide-holder div#slide-controls p#slide-nav a { float : left; width :16px; height : 10px; display : inline; font-size : 0px; margin : 0 5px 0 0; line-height : 24px; font-weight : bold; text-align : center; text-decoration : none; background-position : 0 0; background-repeat : no-repeat; }
 div#slide-holder div#slide-controls p#slide-nav a.on { background : url(../images/slider_act_btn.png) no-repeat; }
 div#slide-holder div#slide-controls p#slide-nav a { background : url(../images/slider_nor_btn.png) no-repeat; }
-div#nav ul li a { background : url(images/nav.png) no-repeat; }
+div#nav ul li a { background : url(../images/nav.png) no-repeat; }
 #slide-nav{background: url(../images/banner_but_bg.png) no-repeat; width:183px; height: 17px; float:left}
 #slide-client,#slide-desc{display: none !important;}
 
