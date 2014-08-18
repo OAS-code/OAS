@@ -389,6 +389,7 @@ public class AuctionController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
+            
 
         } catch (SQLException ex) {
             Logger.getLogger(AuctionController.class
