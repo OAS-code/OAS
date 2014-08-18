@@ -376,7 +376,7 @@ public class UserController extends HttpServlet {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
-            } else if (email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
+            } else if (email==null || email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);

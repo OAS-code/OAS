@@ -35,15 +35,15 @@
             <% if (errorCode != null) {
                     if (errorCode.equals("1")) {%>
             <ul id="message" class="error_msg">
-                <li><p>Username must contain 3 characters or longer.</p></li>
+                <li><p>Username must contains at least 3 characters and at most 20 characters.</p></li>
             </ul>
             <%} else if (errorCode.equals("2")) {%>
             <ul id="message" class="error_msg">
-                <li><p>Email is invalid.</p></li>
+                <li><p>Provided email address is not valid.</p></li>
             </ul>
             <%} else if (errorCode.equals("3")) {%>
             <ul id="message" class="error_msg">
-                <li><p>Username is already taken or email is already in use.</p></li>
+                <li><p>Username or email address is already in use.</p></li>
             </ul>
             <%} else if (errorCode.equals("4")) {%>
             <ul id="message" class="success_msg">
