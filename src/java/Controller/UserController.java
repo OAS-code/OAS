@@ -51,6 +51,7 @@ public class UserController extends HttpServlet {
         final String edit_profile = "cp_edit_profile.jsp?current_page=my_account";
         final String forgot_password = "forgot_password.jsp";
         final String reset_password = "reset_password.jsp";
+        final String user_add = "cp_user_add.jsp?current_page=user_manager";
         RequestDispatcher rd;
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
@@ -154,9 +155,30 @@ public class UserController extends HttpServlet {
             }
         } else if (service.equalsIgnoreCase("add_user")) {
             String username = request.getParameter("username");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
             String email = request.getParameter("email");
+            String address = request.getParameter("address");
             int status = Integer.parseInt(request.getParameter("cb2"));
             int role = Integer.parseInt(request.getParameter("cb1"));
+            String url = user_add + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&cb1="+role+"&cb2="+status+"&errorCode=";
+            if (username==null || username.isEmpty() || username.length() < 3 || username.length() > 20 ) {
+                url = url + "1";
+                rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else if (email==null || email.isEmpty() || email.length() < 3 || email.length() > 50 || !email.contains("@") || !email.contains(".")) {
+                url = url + "2";
+                rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
+            } else {
+                if (dao.isUserExisted(username) || dao.isUserExisted(email)) {
+                    url = url + "3";
+                    rd = request.getRequestDispatcher(url);
+                    rd.forward(request, response);
+                }
+            }
+            
+            
 
             User user = new User(username, email, status, role);
 
@@ -180,7 +202,9 @@ public class UserController extends HttpServlet {
                 OtherDAO other = new OtherDAO();
                 other.sendMail(email, subject, body);
                 //Finish sending email
-                response.sendRedirect(controller_view_detail + "&errorCode=2&username=" + username);
+                url = url + "0";
+                rd = request.getRequestDispatcher(url);
+                rd.forward(request, response);
             } else {
                 response.sendRedirect("notification.jsp?errorCode=1");
             }
@@ -348,7 +372,7 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             String url = user_register + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&errorCode=";
-            if (username.isEmpty() || username.length() < 3) {
+            if (username==null || username.isEmpty() || username.length() < 3) {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);

@@ -14,6 +14,28 @@
 <html>
     <head>
         <title>Add new user</title>
+        <%
+            String errorCode = request.getParameter("errorCode");
+            String username = request.getParameter("username");
+            String email = request.getParameter("email");
+            String fullname = request.getParameter("fullname");
+            String phonenumber = request.getParameter("phonenumber");
+            String address = request.getParameter("address");
+            String statusString = request.getParameter("cb2");
+            String roleString = request.getParameter("cb1");
+            int status = 0;
+            int role = 0;
+            if (errorCode == null) {
+                username = "";
+                email = "";
+                fullname = "";
+                phonenumber = "";
+                address = "";
+            } else {
+                status = Integer.parseInt(statusString);
+                role = Integer.parseInt(roleString);
+            }
+        %>
     </head>
     <body>
         <%@ include file="perm_admin.jsp" %>
@@ -37,7 +59,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="username" id="username" class="textbox" value=""></h2>
+                                            <h2><input type="text" maxlength="20" name="username" id="username" class="textbox" value="<%=username%>"></h2>
                                         </div>		
                                     </div>
 
@@ -47,7 +69,7 @@
 
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="email" id="email" class="textbox" value=""></h2>
+                                            <h2><input type="text" maxlength="50" name="email" id="email" class="textbox" value="<%=email%>"></h2>
                                         </div>		
                                     </div>
 
@@ -59,9 +81,9 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="cb1" id="cb1">
-                                                    <option value="0" selected="selected">Customer</option>
-                                                    <option value="1">Auction staff</option>
-                                                    <option value="2">Administrator</option>
+                                                    <option value="0" <% if (role == 0) { %> selected="selected" <% } %> >Customer</option>
+                                                    <option value="1" <% if (role == 1) { %> selected="selected" <% } %> >Auction staff</option>
+                                                    <option value="2" <% if (role == 2) { %> selected="selected" <% } %> >Administrator</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -75,8 +97,8 @@
                                         <div class="text_feeld">
                                             <h2>
                                                 <select name="cb2" id="cb2">
-                                                    <option value="1" selected="selected">Active</option>
-                                                    <option value="0">Inactive</option>
+                                                    <option value="1" <% if (status == 1) { %> selected="selected" <% } %> >Active</option>
+                                                    <option value="0" <% if (status == 0) { %> selected="selected" <% } %> >Inactive</option>
                                                 </select>
                                             </h2>
                                         </div>
@@ -90,7 +112,7 @@
                                     
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="fullname" id="fullname" class="textbox" value=""></h2>
+                                            <h2><input type="text" maxlength="100" name="fullname" id="fullname" class="textbox" value="<%=fullname%>"></h2>
                                         </div>		
                                     </div>
                                     
@@ -100,7 +122,7 @@
                                     
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="address" id="address" class="textbox" value=""></h2>
+                                            <h2><input type="text" maxlength="100" name="address" id="address" class="textbox" value="<%=address%>"></h2>
                                         </div>		
                                     </div>
                                     
@@ -110,7 +132,7 @@
                                     
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
-                                            <h2><input type="text" maxlength="100" name="phonenumber" id="phonenumber" class="textbox" value=""></h2>
+                                            <h2><input type="text" maxlength="100" name="phonenumber" id="phonenumber" class="textbox" value="<%=phonenumber%>"></h2>
                                         </div>		
                                     </div>
                                     

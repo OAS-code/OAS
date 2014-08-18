@@ -60,13 +60,13 @@
                         <form accept-charset="utf-8" method="post" action="UserController">				<div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
-                                    <input type="text"  name="username" id="username" value="<%=username%>" class="fl">						</div>
+                                    <input type="text"  name="username" id="username" value="<%=username%>" class="fl" maxlength="20">						</div>
                                 <label><span class="red"></span></label>
                             </div>
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Email <span class="red">*</span>:</p></div>
-                                    <input type="text"  name="email" id="email" value="<%=email%>" class="fl" >						</div>
+                                    <input type="text"  name="email" id="email" value="<%=email%>" class="fl" maxlength="50">						</div>
                                 <label style="width:250px;"><span class="red"></span></label>
                             </div>
                             <div class="">

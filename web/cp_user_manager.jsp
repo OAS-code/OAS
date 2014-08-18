@@ -37,6 +37,11 @@
                 <li><p>Category has been successfully added!</p></li>
             </ul>   
 
+            <% } else if (errorCode.equals("4")) { %>
+            <ul id="message" class="error_msg">
+                <li><p>Username must contains at least 3 characters and at most 20 characters.</p></li>
+            </ul>   
+
             <% } %>
             <br>
 
