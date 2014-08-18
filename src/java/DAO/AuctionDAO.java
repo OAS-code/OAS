@@ -107,10 +107,10 @@ public class AuctionDAO {
                 auction.setvYoutube(rs.getString("v_youtube"));
                 auction.setImgCover(rs.getString("img_cover"));
                 auction.setImg1(rs.getString("img_1"));
-                auction.setImg1(rs.getString("img_2"));
-                auction.setImg1(rs.getString("img_3"));
-                auction.setImg1(rs.getString("img_4"));
-                auction.setImg1(rs.getString("img_5"));
+                auction.setImg2(rs.getString("img_2"));
+                auction.setImg3(rs.getString("img_3"));
+                auction.setImg4(rs.getString("img_4"));
+                auction.setImg5(rs.getString("img_5"));
                 auction.setViews(rs.getInt("views"));
                 if (status == -1 || auction.getStatusId() == status){
                     arr.add(auction);
@@ -126,8 +126,6 @@ public class AuctionDAO {
     public ArrayList<Auction> list() {
         return list("", -1, -1);
     }
-    
-    public 
 
     public static void main(String[] args) {
         AuctionDAO dao = new AuctionDAO();
@@ -202,10 +200,10 @@ public class AuctionDAO {
             auction.setvYoutube(rs.getString("v_youtube"));
             auction.setImgCover(rs.getString("img_cover"));
             auction.setImg1(rs.getString("img_1"));
-            auction.setImg1(rs.getString("img_2"));
-            auction.setImg1(rs.getString("img_3"));
-            auction.setImg1(rs.getString("img_4"));
-            auction.setImg1(rs.getString("img_5"));
+            auction.setImg2(rs.getString("img_2"));
+            auction.setImg3(rs.getString("img_3"));
+            auction.setImg4(rs.getString("img_4"));
+            auction.setImg5(rs.getString("img_5"));
             auction.setViews(rs.getInt("views"));
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
