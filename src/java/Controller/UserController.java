@@ -56,15 +56,18 @@ public class UserController extends HttpServlet {
         if (service.equalsIgnoreCase("user_manager")) {
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("delete")) {
             String id = request.getParameter("no");
             int n = dao.delete(Integer.parseInt(id));
             if (n > 0) {
                 rd = request.getRequestDispatcher(userManager + "&errorCode=1");
                 rd.forward(request, response);
+                return;
             } else {
                 rd = request.getRequestDispatcher(userManager + "&errorCode=2");
                 rd.forward(request, response);
+                return;
             }
         } else if (service.equalsIgnoreCase("edit_profile")) {
             HttpSession session = request.getSession(true);
@@ -74,6 +77,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("requestedUser", user);
             rd = request.getRequestDispatcher(edit_profile);
             rd.forward(request, response);
+            return;
 
         } else if (service.equalsIgnoreCase("update_profile")) {
             HttpSession session = request.getSession(true);
@@ -91,6 +95,7 @@ public class UserController extends HttpServlet {
                 rd = request.getRequestDispatcher(edit_profile + "&errorCode=1");
             }
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("change_password")) {
             int userId = Integer.parseInt(request.getParameter("userid"));
             String oldPass = request.getParameter("old_password");
@@ -99,16 +104,20 @@ public class UserController extends HttpServlet {
             if (oldPass == null || newPass == null || confirmPass == null || oldPass.isEmpty() || newPass.isEmpty() || confirmPass.isEmpty() || newPass.length() < 6 || confirmPass.length() < 6) {
                 rd = request.getRequestDispatcher(change_pass + "&errorCode=1");
                 rd.forward(request, response);
+                return;
             } else if (!newPass.equals(confirmPass)) {
                 rd = request.getRequestDispatcher(change_pass + "&errorCode=2");
                 rd.forward(request, response);
+                return;
             } else if (oldPass.equals(newPass)) {
                 rd = request.getRequestDispatcher(change_pass + "&errorCode=3");
                 rd.forward(request, response);
+                return;
             } else {
                 String errorCode = dao.changePassword(oldPass, newPass, userId);
                 rd = request.getRequestDispatcher(change_pass + "&errorCode=" + errorCode);
                 rd.forward(request, response);
+                return;
             }
 
         } else if (service.equalsIgnoreCase("listall")) {
@@ -116,6 +125,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(userManager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("view_detail")) {
             String userId = request.getParameter("userid");
             String username = request.getParameter("username");
@@ -126,11 +136,13 @@ public class UserController extends HttpServlet {
             }
             rd = request.getRequestDispatcher(user_view_detail);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("edit_user")) {
             String userId = request.getParameter("userid");
             request.setAttribute("requestedUser", dao.getUser(Integer.parseInt(userId)));
             rd = request.getRequestDispatcher(edit_user);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("update_user")) {
             int userId = Integer.parseInt(request.getParameter("userid"));
             String fullname = request.getParameter("fullname");
@@ -166,15 +178,18 @@ public class UserController extends HttpServlet {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else if (email==null || email.isEmpty() || email.length() < 3 || email.length() > 50 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else {
                 if (dao.isUserExisted(username) || dao.isUserExisted(email)) {
                     url = url + "3";
                     rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
             }
             
@@ -205,6 +220,7 @@ public class UserController extends HttpServlet {
                 url = url + "0";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else {
                 response.sendRedirect("notification.jsp?errorCode=1");
             }
@@ -217,6 +233,7 @@ public class UserController extends HttpServlet {
             request.setAttribute("balance", balance);
             rd = request.getRequestDispatcher(cp);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("forgot_password")) {
             rd = request.getRequestDispatcher(forgot_password + "?errorCode=0");
             String usernameEmail = request.getParameter("username_email");
@@ -255,11 +272,13 @@ public class UserController extends HttpServlet {
                 }
             }
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("reset_password")) {
             String token = (String) request.getParameter("token");
             if (token == null || token.isEmpty()) {
                 rd = request.getRequestDispatcher(forgot_password + "?errorCode=5");
                 rd.forward(request, response);
+                return;
             } else {
                 OtherDAO other = new OtherDAO();
                 String[] tokenData = new String[4];
@@ -268,6 +287,7 @@ public class UserController extends HttpServlet {
                 if (userIdString == null || userIdString.isEmpty()) {
                     rd = request.getRequestDispatcher(forgot_password + "?errorCode=5");
                     rd.forward(request, response);
+                    return;
                 } else {
                     int userid = Integer.parseInt(userIdString);
                     User user = dao.getUser(userid);
@@ -279,9 +299,11 @@ public class UserController extends HttpServlet {
                     if (dao.update(user)) {
                         rd = request.getRequestDispatcher(reset_password + "?errorCode=0&token="+token);
                         rd.forward(request, response);
+                        return;
                     } else {
                         rd = request.getRequestDispatcher(forgot_password + "?errorCode=6");
                         rd.forward(request, response);
+                        return;
                     }
                 }
             }
@@ -296,13 +318,16 @@ public class UserController extends HttpServlet {
             if (!other.isPasswordValid(password1) || !other.isPasswordValid(password2)) {
                 rd = request.getRequestDispatcher(reset_password + "?errorCode=1&token="+tokenFinish);
                 rd.forward(request, response);
+                return;
             } else if (!password1.equals(password2)) {
                 rd = request.getRequestDispatcher(reset_password + "?errorCode=2&token="+tokenFinish);
                 rd.forward(request, response);
+                return;
             } else {
                 if (tokenFinish == null || tokenFinish.isEmpty()) {
                     rd = request.getRequestDispatcher(forgot_password + "?errorCode=7");
                     rd.forward(request, response);
+                    return;
                 } else {
                     String[] tokenData = new String[4];
                     tokenData = other.getTokenData(tokenFinish);
@@ -310,6 +335,7 @@ public class UserController extends HttpServlet {
                     if (userIdString == null || userIdString.isEmpty()) {
                         rd = request.getRequestDispatcher(forgot_password + "?errorCode=7");
                         rd.forward(request, response);
+                        return;
                     } else {
                         int userid = Integer.parseInt(userIdString);
                         User user = dao.getUser(userid);
@@ -335,9 +361,11 @@ public class UserController extends HttpServlet {
                             //Finish sending email
                             rd = request.getRequestDispatcher(reset_password);
                             rd.forward(request, response);
+                            return;
                         } else {
                             rd = request.getRequestDispatcher(forgot_password + "?errorCode=6");
                             rd.forward(request, response);
+                            return;
                         }
                     }
                 }
@@ -376,15 +404,18 @@ public class UserController extends HttpServlet {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else if (email==null || email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else {
                 if (dao.isUserExisted(username) || dao.isUserExisted(email)) {
                     url = url + "3";
                     rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
             }
 
@@ -411,10 +442,12 @@ public class UserController extends HttpServlet {
                 //Finish sending email
                 rd = request.getRequestDispatcher(loginPage + "?errorCode=7&username=" + username);
                 rd.forward(request, response);
+                return;
             } else {
                 url = url + "4";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             }
 
         } else {

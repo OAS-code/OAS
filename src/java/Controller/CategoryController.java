@@ -46,16 +46,19 @@ public class CategoryController extends HttpServlet {
         if (service.equalsIgnoreCase("category_manager")) {
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("addcategory")) {
             String name = request.getParameter("name");
             if (name == null || name.isEmpty() || name.length() < 3) {
                 rd = request.getRequestDispatcher(category_add+"&errorCode=1");
                 rd.forward(request, response);
+                return;
             } else {
                 String description = request.getParameter("description");
                 Category category = new Category();
@@ -64,9 +67,11 @@ public class CategoryController extends HttpServlet {
                 if (dao.add(category)) {
                     rd = request.getRequestDispatcher(category_manager+"errorCode=3");
                     rd.forward(request, response);
+                    return;
                 } else {
                     rd = request.getRequestDispatcher(category_add+"&errorCode=2");
                     rd.forward(request, response);
+                    return;
                 }
             }
         } else if (service.equalsIgnoreCase("delete")) {
@@ -74,9 +79,11 @@ public class CategoryController extends HttpServlet {
             if (dao.delete(Integer.parseInt(id))) {
                 rd = request.getRequestDispatcher(category_manager + "&errorCode=4");
                 rd.forward(request, response);
+                return;
             } else {
                 rd = request.getRequestDispatcher(category_manager + "&errorCode=3");
                 rd.forward(request, response);
+                return;
             }
         } else if (service.equalsIgnoreCase("edit")) {
             String id = request.getParameter("categoryid");
@@ -85,6 +92,7 @@ public class CategoryController extends HttpServlet {
             request.setAttribute("category", category);
             rd = request.getRequestDispatcher(category_edit);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("update")) {
             String id = request.getParameter("id");
             String name = request.getParameter("name");
@@ -93,6 +101,7 @@ public class CategoryController extends HttpServlet {
             if (name == null || name.isEmpty() || name.length() <= 0 || name.length() > 20) {
                 rd = request.getRequestDispatcher(category_manager + "&errorCode=1");
                 rd.forward(request, response);
+                return;
             } else {
                 Category category = dao.getCategory(categoryid);
                 category.setName(name);
@@ -100,9 +109,11 @@ public class CategoryController extends HttpServlet {
                 if (dao.update(category)) {
                     rd = request.getRequestDispatcher(category_manager + "&errorCode=0");
                     rd.forward(request, response);
+                    return;
                 } else {
                     rd = request.getRequestDispatcher(category_manager + "&errorCode=2");
                     rd.forward(request, response);
+                    return;
                 }
             }
         } else if (service.equalsIgnoreCase("search")) {
@@ -111,6 +122,7 @@ public class CategoryController extends HttpServlet {
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager + "&keyword=" + search);
             rd.forward(request, response);
+            return;
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

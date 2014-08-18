@@ -62,9 +62,11 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("categories", array);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("bidnow")) {
             rd = request.getRequestDispatcher(bidding_detail);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("listall")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
@@ -73,6 +75,7 @@ public class AuctionController extends HttpServlet {
 
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("index")) {
             ArrayList<Category> categories = cdao.getTop(5);
             ArrayList<Auction> auctions = dao.list();
@@ -80,6 +83,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("auctions", auctions);
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);
+            return;
         } /*
          if (service.equalsIgnoreCase("deleteAuction")) {
          String id = request.getParameter("auctionid");
@@ -96,6 +100,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
+            return;
         } else if (service.equals("view_details")) {
             HttpSession session = request.getSession(true);
             String roleString = (String) session.getAttribute("role");
@@ -121,6 +126,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
+            return;
         } else if (service.equals("moderator_update")) {
             String moderateStatus = request.getParameter("moderateStatus");
             String auctionId = request.getParameter("auctionId");
@@ -136,9 +142,11 @@ public class AuctionController extends HttpServlet {
                 request.setAttribute("auction", auction);
                 rd = request.getRequestDispatcher(view_detail_auction+"&errorCode=1");
                 rd.forward(request, response);
+                return;
             } else {
                 rd = request.getRequestDispatcher(auction_manager+"&errorCode=3");
                 rd.forward(request, response);
+                return;
             }
         } /*
          if (service.equalsIgnoreCase("editauction")) {
@@ -174,6 +182,7 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("auctions", auctions);
             rd = request.getRequestDispatcher(auction_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
             rd.forward(request, response);
+            return;
         } /*
          if (service.equalsIgnoreCase("updateauction")) {
          SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
