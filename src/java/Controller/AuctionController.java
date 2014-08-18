@@ -78,8 +78,8 @@ public class AuctionController extends HttpServlet {
             return;
         } else if (service.equalsIgnoreCase("index")) {
             ArrayList<Category> categories = cdao.getTop(5);
-            ArrayList<Auction> auctions = dao.list();
-            request.setAttribute("categories", categories);
+            ArrayList auctions = dao.list(categories);
+            //request.setAttribute("categories", categories);
             request.setAttribute("auctions", auctions);
             rd = request.getRequestDispatcher("index.jsp");
             rd.forward(request, response);

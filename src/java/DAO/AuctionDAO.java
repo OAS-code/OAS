@@ -6,6 +6,7 @@
 package DAO;
 
 import Entity.Auction;
+import Entity.Category;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
@@ -125,6 +126,16 @@ public class AuctionDAO {
 
     public ArrayList<Auction> list() {
         return list("", -1, -1);
+    }
+    
+    public ArrayList list(ArrayList<Category> categories) {
+        ArrayList auctions = new ArrayList();
+        for (Category categorie : categories) {
+            int categoryId = categorie.getId();
+            ArrayList<Auction> subAuctions = this.list("", -1, categoryId);
+            auctions.add(categoryId, subAuctions);
+        }
+        return auctions;
     }
 
     public static void main(String[] args) {

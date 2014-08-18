@@ -22,9 +22,9 @@
         <%@ include file="top.jsp" %> 
         <div class="header2">  
             <%
-                ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                ArrayList auctionsFromServer = (ArrayList) request.getAttribute("auctions");
                 
-                if (categories == null) {
+                if (auctionsFromServer == null) {
                     response.sendRedirect("AuctionController?service=index");
                 } else { 
             %>
