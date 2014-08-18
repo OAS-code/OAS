@@ -75,7 +75,7 @@
 
                             <tr>
                                 <td>Closing date:</td>
-                                <td><%=auction.getImg1()%></td>
+                                <td><%=auction.getFormattedEndDate()%></td>
                             </tr>
                             <tr>
                                 <td>Image:</td>
