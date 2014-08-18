@@ -33,24 +33,24 @@
         <jsp:include page="top.jsp" />
         <div class="header2">   
             <% if (errorCode != null) {
-                if (errorCode.equals("1")) {%>
-                <ul id="message" class="error_msg">
-                    <li><p>Username must contain 3 characters or longer.</p></li>
-                </ul>
-                <%} else if (errorCode.equals("2")) {%>
-                <ul id="message" class="error_msg">
-                    <li><p>Email is invalid.</p></li>
-                </ul>
-                <%} else if (errorCode.equals("3")) {%>
-                <ul id="message" class="error_msg">
-                    <li><p>Username is already taken or email is already in use.</p></li>
-                </ul>
-                <%} else if (errorCode.equals("4")) {%>
-                <ul id="message" class="success_msg">
-                    <li><p>Change password successful. Please to login!.</p></li>
-                </ul>
-                <% }
-            } %>
+                    if (errorCode.equals("1")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Username must contain 3 characters or longer.</p></li>
+            </ul>
+            <%} else if (errorCode.equals("2")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Email is invalid.</p></li>
+            </ul>
+            <%} else if (errorCode.equals("3")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Username is already taken or email is already in use.</p></li>
+            </ul>
+            <%} else if (errorCode.equals("4")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>Change password successful. Please to login!.</p></li>
+            </ul>
+            <% }
+                    }%>
             <div class="login-part">
                 <h2 title="Register">Register</h2>
             </div>
@@ -121,6 +121,6 @@
 
             </div>
         </div>
-
+        <jsp:include page="footer.jsp" />
     </body>
 </html>
