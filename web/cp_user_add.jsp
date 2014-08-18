@@ -62,7 +62,7 @@
 
             <% } else if (errorCode.equals("0")) { %>
             <ul id="message" class="success_msg">
-                <li><p>User has been successfully created!</p></li>
+                <li><p>User has been successfully created, account password has been sent to registered email address!</p></li>
             </ul>   
 
             <% } else  { %>
