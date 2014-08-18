@@ -376,15 +376,18 @@ public class UserController extends HttpServlet {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else if (email==null || email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
+                return;
             } else {
                 if (dao.isUserExisted(username) || dao.isUserExisted(email)) {
                     url = url + "3";
                     rd = request.getRequestDispatcher(url);
                     rd.forward(request, response);
+                    return;
                 }
             }
 
