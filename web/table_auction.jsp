@@ -79,6 +79,7 @@
                         <th>Category</th>
                         <th>Seller</th>
                         <th>Status</th>
+                        <th>Current bid</th>
                         <th>Highest bidder</th>
                     </tr>  
                 </thead>
@@ -92,13 +93,14 @@
                             <td>${auction.categoryName}</td>
                             <td>${auction.sellerName}</td>
                             <td>${auction.getStatus()}</td>
+                            <td>$ --</td>
                             <td>No-one</td>
                         </tr>
                     </c:forEach>
                 </tbody>
                 <tfoot class="nav">
                     <tr>
-                        <td colspan=6>
+                        <td colspan=7>
                             <div class="pagination"></div>
                             <div class="paginationTitle">Page</div>
                             <div class="selectPerPage"></div>

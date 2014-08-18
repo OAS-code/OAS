@@ -58,7 +58,7 @@ public class AuctionController extends HttpServlet {
         RequestDispatcher rd;
 
         if (service.equalsIgnoreCase("auction_manager")) {
-            ArrayList<Category> array = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> array = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", array);
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
@@ -66,7 +66,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(bidding_detail);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("listall")) {
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             ArrayList<Auction> auctions = dao.list();
             request.setAttribute("auctions", auctions);
@@ -74,7 +74,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("index")) {
-            ArrayList<Category> categories = cdao.view();
+            ArrayList<Category> categories = cdao.getTop(5);
             ArrayList<Auction> auctions = dao.list();
             request.setAttribute("categories", categories);
             request.setAttribute("auctions", auctions);
@@ -86,13 +86,13 @@ public class AuctionController extends HttpServlet {
          int auctionid = Integer.parseInt(id);
          int n = dao.delete(auctionid);
          if (n > 0) {
-         ArrayList<Category> array = (ArrayList<Category>) cdao.view();
+         ArrayList<Category> array = (ArrayList<Category>) cdao.list();
          request.setAttribute("array", array);
          rd = request.getRequestDispatcher(auction_manager);
          rd.forward(request, response);
          }
          }*/ else if (service.equalsIgnoreCase("add_auction")) {
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_auction);
             rd.forward(request, response);
@@ -117,7 +117,7 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(auctionId);
             request.setAttribute("auction", auction);
 
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
@@ -130,7 +130,7 @@ public class AuctionController extends HttpServlet {
             auction.setCategoryId(Integer.parseInt(categoryId));
             auction.setModerateStatus(Integer.parseInt(moderateStatus));
             
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             if (dao.update(auction)) {
                 request.setAttribute("auction", auction);
@@ -146,14 +146,14 @@ public class AuctionController extends HttpServlet {
          String categoryid = request.getParameter("categoryid");
          rs = dao.search(Integer.parseInt(auctionid));
          rss = cdao.search(Integer.parseInt(categoryid));
-         ArrayList<Category> array = cdao.view();
+         ArrayList<Category> array = cdao.list();
          request.setAttribute("array", array);
          request.setAttribute("rs", rs);
          request.setAttribute("rss", rss);
          rd = request.getRequestDispatcher(edit_auction);
          rd.forward(request, response);
          }*/ else if (service.equalsIgnoreCase("search")) {
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String keyword = request.getParameter("keyword");
             String statusString = request.getParameter("status");
@@ -211,7 +211,7 @@ public class AuctionController extends HttpServlet {
          Auction auction = new Auction(auctionid_, categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
          int n = dao.update(auction);
          if (n > 0) {
-         ArrayList<Category> array = (ArrayList<Category>) cdao.view();
+         ArrayList<Category> array = (ArrayList<Category>) cdao.list();
          request.setAttribute("array", array);
          //response.sendRedirect(auction_manager);
          rd = request.getRequestDispatcher(auction_manager);
@@ -219,7 +219,7 @@ public class AuctionController extends HttpServlet {
          }
          }
          */ else if (service.equalsIgnoreCase("add_new_auction")) {
-            ArrayList<Category> categories = (ArrayList<Category>) cdao.view();
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");
             String description = request.getParameter("description");

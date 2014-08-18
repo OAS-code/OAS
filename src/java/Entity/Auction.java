@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import DAO.FormatMoney;
 import DAO.OtherDAO;
 import java.sql.Date;
 import org.joda.time.DateTime;
@@ -37,6 +38,19 @@ public class Auction {
     String img3;
     String img4;
     String img5;
+    int views;
+
+    public int getViews() {
+        return views;
+    }
+
+    public void setViews(int views) {
+        this.views = views;
+    }
+    
+    public void addView(){
+        this.views++;
+    }
 
     public Auction() {
 
@@ -141,6 +155,11 @@ public class Auction {
     public double getStartPrice() {
         return startPrice;
     }
+    
+    public String getStartPriceString(){
+        FormatMoney formatMoney = new FormatMoney();
+        return formatMoney.showPriceInUSD(startPrice, 1);
+    }
 
     public void setStartPrice(double startPrice) {
         this.startPrice = startPrice;
@@ -149,6 +168,11 @@ public class Auction {
     public double getBuynowPrice() {
         return buynowPrice;
     }
+    
+    public String getBuynowPriceString(){
+        FormatMoney formatMoney = new FormatMoney();
+        return formatMoney.showPriceInUSD(buynowPrice, 1);
+    }
 
     public void setBuynowPrice(double buynowPrice) {
         this.buynowPrice = buynowPrice;
@@ -156,6 +180,10 @@ public class Auction {
 
     public double getIncreaseBy() {
         return increaseBy;
+    }
+    public String getIncreaseByString(){
+        FormatMoney formatMoney = new FormatMoney();
+        return formatMoney.showPriceInUSD(increaseBy, 1);
     }
 
     public void setIncreaseBy(double increaseBy) {

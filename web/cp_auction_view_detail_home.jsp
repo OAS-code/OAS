@@ -57,15 +57,15 @@
                             </tr>
                             <tr>
                                 <td >Starting price:</td>
-                                <td>$ <%=auction.getStartPrice()%></td>
+                                <td><%=auction.getStartPriceString()%></td>
                             </tr>      
                             <tr>
                                 <td>Buy now price:</td>
-                                <td>$ <%=auction.getBuynowPrice()%></td>
+                                <td><%=auction.getBuynowPriceString()%></td>
                             </tr>
                             <tr>
                                 <td>Increment by:</td>
-                                <td>$ <%=auction.getIncreaseBy()%></td>
+                                <td><%=auction.getIncreaseByString()%></td>
                             </tr>
                             <tr>
                                 <td >Starting date:</td>

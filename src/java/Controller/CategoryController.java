@@ -47,7 +47,7 @@ public class CategoryController extends HttpServlet {
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("listall")) {
-            ArrayList<Category> arr = dao.view();
+            ArrayList<Category> arr = dao.list();
             request.setAttribute("arr", arr);
             rd = request.getRequestDispatcher(category_manager);
             rd.forward(request, response);

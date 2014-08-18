@@ -21,7 +21,6 @@
     </head>
     <body>  
         <div class="my_message_right">
-
             <div class="today_head">
                 <div class="today_head_lft">
                     <h2 title="Camera">Camera</h2>

@@ -66,7 +66,7 @@ public class AuctionDAO {
     }
 
     public ArrayList<Auction> list(String keyword, int status, int categoryId) {
-        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%"+keyword+"%' ";
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%"+keyword+"%' ";
         String sql2 = " AND a.category_id = "+categoryId;
         ArrayList<Auction> arr = new ArrayList<Auction>();
         try {
@@ -111,6 +111,7 @@ public class AuctionDAO {
                 auction.setImg1(rs.getString("img_3"));
                 auction.setImg1(rs.getString("img_4"));
                 auction.setImg1(rs.getString("img_5"));
+                auction.setViews(rs.getInt("views"));
                 if (status == -1 || auction.getStatusId() == status){
                     arr.add(auction);
                 }
@@ -125,6 +126,8 @@ public class AuctionDAO {
     public ArrayList<Auction> list() {
         return list("", -1, -1);
     }
+    
+    public 
 
     public static void main(String[] args) {
         AuctionDAO dao = new AuctionDAO();
@@ -167,7 +170,8 @@ public class AuctionDAO {
         Auction auction = new Auction();
         String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, "
                 +"UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, "
-                +"increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5 FROM auction a "
+                +"increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views "
+                +"FROM auction a "
                 +"INNER JOIN user u ON a.seller_id = u.id "
                 +"INNER JOIN category c ON a.category_id = c.categoryid "
                 +"WHERE a.auctionid = ? LIMIT 1";
@@ -202,6 +206,7 @@ public class AuctionDAO {
             auction.setImg1(rs.getString("img_3"));
             auction.setImg1(rs.getString("img_4"));
             auction.setImg1(rs.getString("img_5"));
+            auction.setViews(rs.getInt("views"));
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Auction DAO get failed.");
@@ -213,7 +218,8 @@ public class AuctionDAO {
         try {
             String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?, description = ?, starting_price = ?, buy_now_price = ?, increase_by = ?"
                     +", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), "
-                    +"end_date = FROM_UNIXTIME(?), moderate_status = ? WHERE auctionid = ? ";
+                    +"end_date = FROM_UNIXTIME(?), moderate_status = ?, views = ? "
+                    +"WHERE auctionid = ? ";
             pre = conn.prepareStatement(sql);
             
             pre.setInt(1, auction.getCategoryId());
@@ -235,7 +241,8 @@ public class AuctionDAO {
             DateTime endDate = auction.getEndDate();
             pre.setLong(16, endDate.getMillis()/1000);
             pre.setInt(17,auction.getModerateStatus());
-            pre.setInt(18,auction.getId());
+            pre.setInt(18,auction.getViews());
+            pre.setInt(19,auction.getId());
             //System.out.println(auction.getCategoryId());
             pre.executeUpdate();
             return true;
@@ -245,5 +252,4 @@ public class AuctionDAO {
             return false;
         }
     }
-
 }
