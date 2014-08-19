@@ -53,7 +53,7 @@ public class AuctionController extends HttpServlet {
         final String view_detail_auction = "cp_auction_view_detail.jsp?current_page=auction_manager";
         final String edit_auction = "cp_edit_auction.jsp";
         final String add_new_auction = "cp_auction_add.jsp";
-
+        final String view_auction = "auction_detail.jsp";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
@@ -127,7 +127,17 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
             return;
-        } else if (service.equals("moderator_update")) {
+            
+        } else if (service.equals("view")) {
+            String auctionIdString = request.getParameter("auctionId");
+            int auctionId = Integer.parseInt(auctionIdString);
+            Auction auction = dao.getAuction(auctionId);
+            request.setAttribute("auction", auction);
+            rd = request.getRequestDispatcher(view_auction);
+            rd.forward(request, response);
+            return;
+        }
+        else if (service.equals("moderator_update")) {
             String moderateStatus = request.getParameter("moderateStatus");
             String auctionId = request.getParameter("auctionId");
             String categoryId = request.getParameter("categoryId");

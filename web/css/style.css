@@ -74,7 +74,7 @@
 .today_head_spotlight{width:250px; float:left;margin: -5px 0 0;z-index:99;}
 .today_head h2{ width:130px; float:left; font:normal 18px helveticaneue_condensedRg;color:#333; text-transform: uppercase;}
 .arrow_one{background:url(../images/arrow_bg.png) repeat-x; width:500px; height:4px; float:left; margin:39px 0px 0px 0px;}
-.arrow_one_spotlight{background:url(../images/arrow_bg.png) repeat-x; width:20px; height:4px; float:left; margin:39px 0px 0px 0px;}
+.arrow_one_spotlight{background:url(../images/arrow_bg.png) repeat-x; width:50px; height:4px; float:left; margin:39px 0px 0px 0px;}
 .today_head_lft{width:auto; float:left;margin:30px 0px 0px 0px;}
 .today_head_lft h2{ width:auto; float:left;  font: 15px helveticaneuemediumcond;color:#333; text-transform:uppercase;}
 .today_head_rgt {width:55px; float:left;margin:30px 0px 0px 0px;}

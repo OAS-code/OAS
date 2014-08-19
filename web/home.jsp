@@ -53,7 +53,7 @@
                             </a>                           
                         </div>
                         <div class="feature_rgt">
-                            <label><a href="" title="Monitor">
+                            <label><a href="AuctionController?service=view&auctionId=<%=subAuctions.get(i).getId()%>" title="<%=subAuctions.get(i).getTitle()%>">
                                     <%=subAuctions.get(i).getTitle()%>
                                 </a></label>
                             <ul style="width:130px;">  
@@ -85,7 +85,7 @@
                                 <div class="bidme_link">
                                     <div class="bidnow_lft"></div>
                                     <div class="bidnow_mid">
-                                        <p>  <a href="AuctionController?service=bidnow" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
+                                        <p>  <a href="AuctionController?service=view&auctionId=<%=subAuctions.get(i).getId()%>" class="bid" title="BID NOW" rel="" id="502" data-auctiontype="25">
                                                 BID NOW                                        </a></p>
                                     </div>
                                     <div class="bidnow_rgt"></div>

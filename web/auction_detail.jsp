@@ -9,13 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Bidding detail</title>
+        <title></title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
     </head>
     <body>
         <jsp:include page="top.jsp" />
-        <%@include file="cp_bidding_detail_home.jsp" %>
+        <%@include file="auction_detail_home.jsp" %>
         <jsp:include page="footer.jsp" />
     </body>
 </html>
