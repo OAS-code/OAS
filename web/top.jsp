@@ -14,17 +14,18 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <%
-            DateTime datetime = DateTime.now();
-            int hours = datetime.getHourOfDay();
-            int minutes = datetime.getMinuteOfHour();
-            int seconds = datetime.getSecondOfMinute();
+            DateTime serverTime = DateTime.now();
+            long serverTimeLong = serverTime.getMillis();
         %>
         <script>
+            var serverTime = new Date(<%=serverTimeLong%>);
+            var clientTime = new Date();
+            var timeDiff = serverTime - clientTime;
             function startTime() {
-                //var today = new Date();
-                var h = <%=hours%>; //today.getHours();
-                var m = <%=minutes%>;//today.getMinutes();
-                var s = <%=seconds%>;//today.getSeconds();
+                var currentTime = new Date();
+                var h = currentTime.getHours();
+                var m = currentTime.getMinutes();
+                var s = currentTime.getSeconds();
                 m = checkTime(m);
                 s = checkTime(s);
                 document.getElementById('hour').innerHTML = h;
@@ -51,6 +52,7 @@
         %>
     </head>
     <body onload="startTime()">
+        
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
