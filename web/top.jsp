@@ -12,6 +12,31 @@
         <title></title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <script>
+            function startTime() {
+                var today = new Date();
+                var h = today.getHours();
+                var m = today.getMinutes();
+                var s = today.getSeconds();
+                m = checkTime(m);
+                s = checkTime(s);
+                var suffix;
+                document.getElementById('hour').innerHTML = h;
+                document.getElementById('min').innerHTML = m;
+                document.getElementById('sec').innerHTML = s;
+                var t = setTimeout(function() {
+                    startTime()
+                }, 500);
+            }
+
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i
+                }
+                ;  // add zero in front of numbers < 10
+                return i;
+            }
+        </script>
         <%
             String userName = (String) session.getAttribute("username");
             String role = (String) session.getAttribute("role");
@@ -22,15 +47,13 @@
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
-                    <!--
-                    <p>Bidding Type   :</p>
                     <ul>
-                        <li style="background:none;"><img src="images/head_top1_bg.png" width="18" height="18" alt="Beginner"><a title="Beginner">Beginner</a></li>
-                        <li><img src="images/head_top2_bg.png" width="18" height="18" alt="Penny auction"><a title="Penny Auction">Penny Auction</a></li>
-                        <li><img src="images/head_top3_bg.png" width="18" height="18" alt="Peak auction"><a title="Peak Auction">Peak Auction</a></li>
-                        <li><img src="images/reserve_icon1.png" width="17" height="17" alt="Reserve auction"><a title="Reserve auction">Reserve auction</a></li>
-                    </ul>
-                    -->
+                        <p>Server time:</p>
+                        <li><img src="images/time_bg.png" width="18" height="18"></li>
+                        <li><a title="Peak Auction" id="hour"></a> <a title="">Hours</a></li>
+                        <li><a title="Peak Auction" id="min"></a> <a title="">Minute</a></li>
+                        <li><a title="Peak Auction" id="sec"></a> <a title="">Second</a></li>
+                    </ul> 
                 </div>
                 <div class="header_rgt">
                     <div class="header_right">

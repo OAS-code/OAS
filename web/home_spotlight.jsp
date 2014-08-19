@@ -9,65 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <script>
-            function startTime() {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
-                m = checkTime(m);
-                s = checkTime(s);
-                var suffix;
-                document.getElementById('hour').innerHTML = h;
-                document.getElementById('min').innerHTML = m;
-                document.getElementById('sec').innerHTML = s;
-                var t = setTimeout(function() {
-                    startTime()
-                }, 500);
-            }
-
-            function checkTime(i) {
-                if (i < 10) {
-                    i = "0" + i
-                }
-                ;  // add zero in front of numbers < 10
-                return i;
-            }
-        </script>
+        <title>JSP Page</title>       
     </head>
     <body onload="startTime()">
         <div class="banner_left_spotlight">           
             <div class="today_head_spotlight">               
-                <div class="today_head_lft">
-                    <!--<h2 title="TODAY  AUCTION">SPOTLIGHT</h2>-->
-                </div>
-                <!-- <div class="arrow_one_spotlight"></div>
-                 <div class="today_head_rgt">
-                     <p><a href="" title="View All">View All</a></p>
-                 </div-->
-            </div>
-
-            <div class="feature_total">
-                <div class="server_time"> 
-                    <span class="server_bg"><img width="33" height="33" alt="img" src="images/time_bg.png"></span>
-                    <div class="server_rgt">
-                        <p>Server Time</p>
-                        <ul>
-                            <li><b class="server_time_hrs" id="hour"></b>
-                                <label>Hours</label>
-                            </li>
-                            <li><b class="server_time_mins" id="min"></b>
-                                <label>Min</label>
-                            </li>
-                            <li><b class="server_time_secs" id="sec"></b>
-                                <label>Sec</label>
-                            </li>
-                        </ul>
-                    </div>
-                </div>                
-            </div>
-            <!--<div class="today_head_spotlight">               
                 <div class="today_head_lft">
                     <h2 title="TODAY  AUCTION">SPOTLIGHT</h2>
                 </div>
@@ -108,9 +54,7 @@
                         </div>
                         <div class="feature_bott">
                             <div class="feature_bott_lft">
-                                <div class="sliders">    
-                                    <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
-
+                                <div class="sliders">  
                                 </div>
                                 <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
@@ -128,7 +72,7 @@
                     </div>
                     <div class="notice_nsg fl clr" id="notice_msg502" style="display:none;"></div>
                 </div>
-            </div>-->
+            </div>
         </div>
     </body>
 </html>
