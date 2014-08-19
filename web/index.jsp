@@ -18,23 +18,22 @@
         <script language="JavaScript" type="text/javascript" src="JavaScript/permissions.js"></script>
     </head>
     <body>
-        
+        <%
+            ArrayList[] auctionsArray = (ArrayList[]) request.getAttribute("auctionsArray");
+
+            if (auctionsArray == null) {
+                response.sendRedirect("AuctionController?service=index");
+            } else {
+
+        %>
         <%@ include file="top.jsp" %> 
         <div class="header2">  
-            <%
-                ArrayList auctionsFromServer = (ArrayList) request.getAttribute("auctions");
-                
-                if (auctionsFromServer == null) {
-                    response.sendRedirect("AuctionController?service=index");
-                } else { 
-            %>
             <%@ include file="home_spotlight.jsp" %> 
             <%@ include file="home.jsp" %> 
-            <%
-                }
-            %>
         </div>
         <jsp:include page="footer.jsp" />
+        <%            }
+        %>
     </body> 
 
 </html>
