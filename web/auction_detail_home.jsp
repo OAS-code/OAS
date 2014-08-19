@@ -145,12 +145,12 @@
                                 <li>
                                     <h3 class="countdown">
                                         <script language="JavaScript">
-                                            TargetDate = "12/31/2014 5:00 AM";
+                                            TargetDate = "08/19/2014 04:09 PM ";
                                             CountActive = true;
                                             CountStepper = -1;
                                             LeadingZero = true;
                                             DisplayFormat = "%%D%%:%%H%%:%%M%%:%%S%%";
-                                            FinishMessage = "It is finally here!";
+                                            FinishMessage = "Auction Closed";
                                         </script>
                                         <script language="JavaScript" src="JavaScript/countdown.js"></script>
                                     </h3>

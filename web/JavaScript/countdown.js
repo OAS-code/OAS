@@ -1,25 +1,3 @@
-/*
-Author: Robert Hashemian
-http://www.hashemian.com/
-
-You can use this code in any manner so long as the author's
-name, Web address and this disclaimer is kept intact.
-********************************************************
-Usage Sample:
-
-<script language="JavaScript">
-TargetDate = "12/31/2020 5:00 AM";
-BackColor = "palegreen";
-ForeColor = "navy";
-CountActive = true;
-CountStepper = -1;
-LeadingZero = true;
-DisplayFormat = "%%D%% Days, %%H%% Hours, %%M%% Minutes, %%S%% Seconds.";
-FinishMessage = "It is finally here!";
-</script>
-<script language="JavaScript" src="http://scripts.hashemian.com/js/countdown.js"></script>
-*/
-
 function calcage(secs, num1, num2) {
   s = ((Math.floor(secs/num1))%num2).toString();
   if (LeadingZero && s.length < 2)
@@ -44,11 +22,17 @@ function CountBack(secs) {
 
 function putspan(backcolor, forecolor) {
  document.write("<span id='cntdwn' style='background-color:" + backcolor + 
-                "; color:" + forecolor + "'></span>");
+                "; color:" + forecolor + "; border-bottom-color: rgb(52, 52, 52);border-bottom-style: none;border-bottom-width: 0px;border-image-outset: 0px;"
+                +"border-image-repeat: stretch;border-image-slice: 100%;border-image-source: none;border-image-width: 1;border-left-color: rgb(52, 52, 52);"
+                +"border-left-style: none;border-left-width: 0px;border-right-color: rgb(52, 52, 52);border-right-style: none;border-right-width: 0px;"
+                +"border-top-color: rgb(52, 52, 52);border-top-style: none;border-top-width: 0px;color: rgb(52, 52, 52);display: block;float: left;font-family: arial;"
+                +"font-size: 24px;font-style: normal;font-variant: normal;font-weight: bold;height: 24px;line-height: 24px;list-style-image: none;list-style-position: outside;"
+                +"list-style-type: none;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;margin-top: 0px;outline-color: rgb(52, 52, 52);outline-style: none;outline-width: 0px;"
+                +"padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;text-align: center;width: 271px;zoom: 1;'></span>");
 }
 
 if (typeof(BackColor)=="undefined")
-  BackColor = "white";
+  BackColor = "#F7F7F7";
 if (typeof(ForeColor)=="undefined")
   ForeColor= "black";
 if (typeof(TargetDate)=="undefined")
@@ -58,7 +42,7 @@ if (typeof(DisplayFormat)=="undefined")
 if (typeof(CountActive)=="undefined")
   CountActive = true;
 if (typeof(FinishMessage)=="undefined")
-  FinishMessage = "";
+  FinishMessage = "Auction Closed";
 if (typeof(CountStepper)!="number")
   CountStepper = -1;
 if (typeof(LeadingZero)=="undefined")

@@ -4,6 +4,7 @@
     Author     : Maxime
 --%>
 
+<%@page import="org.joda.time.DateTime"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,20 +13,27 @@
         <title></title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <%
+            DateTime datetime = DateTime.now();
+            int hours = datetime.getHourOfDay();
+            int minutes = datetime.getMinuteOfHour();
+            int seconds = datetime.getSecondOfMinute();
+        %>
         <script>
             function startTime() {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
+                //var today = new Date();
+                var h = <%=hours%>; //today.getHours();
+                var m = <%=minutes%>;//today.getMinutes();
+                var s = <%=seconds%>;//today.getSeconds();
                 m = checkTime(m);
                 s = checkTime(s);
                 document.getElementById('hour').innerHTML = h;
                 document.getElementById('min').innerHTML = m;
                 document.getElementById('sec').innerHTML = s;
                 var t = setTimeout(function() {
-                    startTime()
+                    startTime();
                 }, 500);
+                //startTime();
             }
 
             function checkTime(i) {
