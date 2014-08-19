@@ -129,17 +129,3 @@ body {
     text-align: left;
     font-weight: bold;
 }
-
-.theTable{
-    display:table; 
-    width:95%; /* or whatever width for your table*/
-}
-.theRow{display:table-row}
-.theCell{
-    display:table-cell;
-    padding: 0px 2px; /* just some padding, if needed*/
-    white-space: pre; /* this will avoid line breaks*/
-}
-.bigCell{
-    width:100%; /* this will shrink other cells */
-}​
