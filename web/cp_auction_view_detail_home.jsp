@@ -81,32 +81,32 @@
                                 <td>Image:</td>
                                 <td>
                                     <div id="rondellTopDemo" class="showOnJS hidden"> 
-                                        <%if (auction.getImgCover() != null) {%>
+                                        <%if (auction.getImgCover() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImgCover()}">
                                             <img src="${auction.getImgCover()}" >
                                         </a>   
                                         <%}
-                                            if (auction.getImg1() != null) {%>
+                                            if (auction.getImg1() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImg1()}" >
                                             <img src="${auction.getImg1()}" >
                                         </a>
                                         <%}
-                                            if (auction.getImg2() != null) {%>
+                                            if (auction.getImg2() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImg2()}" >
                                             <img src="${auction.getImg2()}" >
                                         </a>
                                         <%}
-                                            if (auction.getImg3() != null) {%>
+                                            if (auction.getImg3() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImg3()}" >
                                             <img src="${auction.getImg3()}" >
                                         </a>
                                         <%}
-                                            if (auction.getImg4() != null) {%>
+                                            if (auction.getImg4() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImg4()}" >
                                             <img src="${auction.getImg4()}" >
                                         </a>
                                         <%}
-                                            if (auction.getImg5() != null) {%>
+                                            if (auction.getImg5() != null && !auction.getImgCover().isEmpty()) {%>
                                         <a target="_blank" rel="rondell_1" href="${auction.getImg5()}" >
                                             <img src="${auction.getImg5()}" >
                                         </a>
