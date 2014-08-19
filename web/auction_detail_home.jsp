@@ -61,40 +61,40 @@
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg1()!= null && !auction.getImg1().isEmpty()) {%>
+
+                                        <% if (auction.getImg1() != null && !auction.getImg1().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg1()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg2()!= null && !auction.getImg2().isEmpty()) {%>
+
+                                        <% if (auction.getImg2() != null && !auction.getImg2().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg2()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg3()!= null && !auction.getImg3().isEmpty()) {%>
+
+                                        <% if (auction.getImg3() != null && !auction.getImg3().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg3()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg4()!= null && !auction.getImg4().isEmpty()) {%>
+
+                                        <% if (auction.getImg4() != null && !auction.getImg4().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg4()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg5()!= null && !auction.getImg5().isEmpty()) {%>
+
+                                        <% if (auction.getImg5() != null && !auction.getImg5().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg5()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -141,7 +141,18 @@
                         <div class="hb_bg_mid">
                             <ul class="clearfix">
                                 <li><p><span>Highest Bidder :</span> <strong class="lastbidder">No Bids Yet</strong></p></li>	
-                                <li><h3 class="countdown"><img src=http://www.unieauction.com/buy-sell-demo/public/white/images/ajax-loader.gif></h3>
+                                <li>
+                                    <h3 class="countdown">
+                                        <script language="JavaScript">
+                                            TargetDate = "12/31/2014 5:00 AM";
+                                            CountActive = true;
+                                            CountStepper = -1;
+                                            LeadingZero = true;
+                                            DisplayFormat = "%%D%%:%%H%%:%%M%%:%%S%%";
+                                            FinishMessage = "It is finally here!";
+                                        </script>
+                                        <script language="JavaScript" src="JavaScript/countdown.js"></script>
+                                    </h3>
                                     <label style=" float:left;padding-left:72px;display:block;color:#666;"><span class="hrs">Days</span><span class="min">Hrs</span><span class="min">Min</span><span class="sec">Sec</span></label>
 
                                 </li>
