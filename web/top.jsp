@@ -24,8 +24,7 @@
                 document.getElementById('min').innerHTML = m;
                 document.getElementById('sec').innerHTML = s;
                 var t = setTimeout(function() {
-                    startTime()
-                }, 500);
+                    startTime()}, 500);
             }
 
             function checkTime(i) {
