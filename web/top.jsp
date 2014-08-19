@@ -4,6 +4,7 @@
     Author     : Maxime
 --%>
 
+<%@page import="org.joda.time.DateTime"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,19 +13,28 @@
         <title></title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <%
+            DateTime serverTime = DateTime.now();
+            long serverTimeLong = serverTime.getMillis();
+        %>
         <script>
+            var serverTime = new Date(<%=serverTimeLong%>);
+            var clientTime = new Date();
+            var timeDiff = serverTime - clientTime;
             function startTime() {
-                var today = new Date();
-                var h = today.getHours();
-                var m = today.getMinutes();
-                var s = today.getSeconds();
+                var currentTime = new Date();
+                var h = currentTime.getHours();
+                var m = currentTime.getMinutes();
+                var s = currentTime.getSeconds();
                 m = checkTime(m);
                 s = checkTime(s);
                 document.getElementById('hour').innerHTML = h;
                 document.getElementById('min').innerHTML = m;
                 document.getElementById('sec').innerHTML = s;
                 var t = setTimeout(function() {
-                    startTime()}, 500);
+                    startTime();
+                }, 500);
+                //startTime();
             }
 
             function checkTime(i) {
@@ -42,6 +52,7 @@
         %>
     </head>
     <body onload="startTime()">
+        
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
