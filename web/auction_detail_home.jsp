@@ -1,4 +1,5 @@
 
+<%@page import="Entity.Auction"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
     <title>Car- Detail</title>
@@ -7,6 +8,8 @@
     src="JavaScript/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" 
     src="JavaScript/slides.min.jquery.js"></script>
+    <%                    Auction auction = (Auction) request.getAttribute("auction");
+    %>
 </head>
 <body>
 
@@ -40,7 +43,7 @@
 
                 <div class="detail_page_top">  
 
-                    <h1 class="detail_title">Car</h1>
+                    <h1 class="detail_title"><%=auction.getTitle()%></h1>
                     <div class="detail_page_top_left">
 
                         <!---slide_show-->
@@ -51,18 +54,53 @@
 
                                 <div id="slider">
                                     <ul>							
-
+                                        <% if (auction.getImgCover() != null && !auction.getImgCover().isEmpty()) {%>
                                         <li>
-                                            <a href="#" title="Car"> 
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/53f1844e1e202.jpg" width="353" height="297" alt="1" />
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImgCover()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
+                                        <% }%>
+                                        
+                                        <% if (auction.getImg1()!= null && !auction.getImg1().isEmpty()) {%>
                                         <li>
-                                            <a href="#" title="Car"> 
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/53f1844e1e202.jpg" width="353" height="297" alt="1" />
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImg1()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
-
+                                        <% }%>
+                                        
+                                        <% if (auction.getImg2()!= null && !auction.getImg2().isEmpty()) {%>
+                                        <li>
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImg2()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
+                                            </a>
+                                        </li>
+                                        <% }%>
+                                        
+                                        <% if (auction.getImg3()!= null && !auction.getImg3().isEmpty()) {%>
+                                        <li>
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImg3()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
+                                            </a>
+                                        </li>
+                                        <% }%>
+                                        
+                                        <% if (auction.getImg4()!= null && !auction.getImg4().isEmpty()) {%>
+                                        <li>
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImg4()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
+                                            </a>
+                                        </li>
+                                        <% }%>
+                                        
+                                        <% if (auction.getImg5()!= null && !auction.getImg5().isEmpty()) {%>
+                                        <li>
+                                            <a href="#" title="<%=auction.getTitle()%>"> 
+                                                <img src="<%=auction.getImg5()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
+                                            </a>
+                                        </li>
+                                        <% }%>
                                     </ul>
 
                                 </div>

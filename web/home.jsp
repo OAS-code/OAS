@@ -29,13 +29,26 @@
             %>
 
             <div class="today_head">
-                <div class="today_head_lft">
-                    <h2 title="Camera"><%=categoryName%></h2>
-                </div>
-                <div class="arrow_one"></div>
-                <div class="today_head_rgt">
-                    <p><a href="" title="View All">View All</a></p>
-                </div>
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" >
+                    <tr>
+                        <td>
+                            <div class="today_head_lft">
+                                <h2 title="Camera"><%=categoryName%></h2>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="arrow_one"></div>
+                        </td>
+                        <td>
+                            <div class="today_head_rgt">
+                                <p><a href="" title="View All">View All</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+
             </div>
             <div class="feature_total">
 
@@ -76,7 +89,7 @@
                         <div class="feature_bott">
                             <div class="feature_bott_lft">
                                 <div class="sliders">    
-                                    
+
 
                                 </div>
                                 <a title="+ Add to Watchlist" rel="502" class="addwatchlist"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
