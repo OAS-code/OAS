@@ -73,12 +73,14 @@
 .today_head{width:720px; float:left;margin: -5px 0 0;z-index:99;}
 .today_head_spotlight{width:250px; float:left;margin: -5px 0 0;z-index:99;}
 .today_head h2{ width:130px; float:left; font:normal 18px helveticaneue_condensedRg;color:#333; text-transform: uppercase;}
-.arrow_one{background:url(../images/arrow_bg.png) repeat-x; width:500px; height:4px; float:left; margin:39px 0px 0px 0px;}
-.arrow_one_spotlight{background:url(../images/arrow_bg.png) repeat-x; width:50px; height:4px; float:left; margin:39px 0px 0px 0px;}
+.arrow_one{background:url(../images/arrow_bg.png) repeat-x; width:500px; height:4px; float:right; margin:39px 0px 0px 9px;}
+.arrow_one_spotlight{background:url(../images/arrow_bg.png) repeat-x; width:70px; height:4px; float:right; margin:39px 0px 0px 9px;}
 .today_head_lft{width:auto; float:left;margin:30px 0px 0px 0px;}
 .today_head_lft h2{ width:auto; float:left;  font: 15px helveticaneuemediumcond;color:#333; text-transform:uppercase;}
-.today_head_rgt {width:55px; float:left;margin:30px 0px 0px 0px;}
-.today_head_rgt p a{text-decoration:underline; float:left; font:bold 12px Arial, Helvetica, sans-serif; color:#ee7e2c; padding:3px 0px 0px 8px;}
+.today_head_lft_spotlight{width:auto; float:left;margin:30px 0px 0px 0px;}
+.today_head_lft_spotlight h2{ width:auto; float:left;  font: 15px helveticaneuemediumcond;color:#333; text-transform:uppercase;}
+.today_head_rgt {width:55px; float:right;margin:30px 0px 0px 0px;}
+.today_head_rgt p a{text-decoration:underline; float:right; font:bold 12px Arial, Helvetica, sans-serif; color:#ee7e2c; padding:3px 0px 0px 8px;}
 
 
 .feature_box{ width:231px;border:1px solid #dedddf;float:left; margin:0 5px 5px 3px; position: relative; min-height:170px;}
@@ -205,7 +207,8 @@
 .nauction_pagination_fet ul li {color: #2E9CD1;float: left;font: bold 12px arial;padding: 5px;}
 .nauction_pagination_fet ul li a { float:left;color: #2E9CD1;text-decoration: underline;}
 .nauction_pagination_fet ul li a img {margin-top: 3px;}
-.today_head_lft{width:150px; background:#FFFFFF; float:left;}
+.today_head_lft{width:auto; background:#FFFFFF; float:left;}
+.today_head_lft_spotlight{width:auto; background:#FFFFFF; float:left;}
 .start_det{float: left;width: 100%;margin-top: 10px;}
 .start_det h2{float: left;clear: both;width: 100%;}
 .auction_rgt p{color:#000000;float:left;font:bold 12px Arial,Helvetica,sans-serif;padding: 5px 0 0 3px;}

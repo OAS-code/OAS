@@ -13,14 +13,24 @@
     </head>
     <body onload="startTime()">
         <div class="banner_left_spotlight">           
-            <div class="today_head_spotlight">               
-                <div class="today_head_lft">
-                    <h2 title="TODAY  AUCTION">SPOTLIGHT</h2>
-                </div>
-                <div class="arrow_one_spotlight"></div>
-                 <div class="today_head_rgt">
-                     <p><a href="" title="View All">View All</a></p>
-                 </div>
+            <div class="today_head_spotlight">   
+                <table width="95%" border="0" cellpadding="0" cellspacing="0" >
+                    <tr>
+                        <td>
+                            <div class="today_head_lft">
+                                <h2 title="TODAY  AUCTION">SPOTLIGHT</h2>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="arrow_one_spotlight"></div>
+                        </td>
+                        <td>
+                            <div class="today_head_rgt">
+                                <p><a href="" title="View All">View All</a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
             </div>
             <div class="feature_total">
                 <div id="auction_502" class="auction_item auction_item_content" name="" data-id="502">
