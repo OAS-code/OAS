@@ -26,7 +26,7 @@ import org.joda.time.DateTime;
  * @author Duc
  */
 public class AuctionDAO {
-    
+
     private Connection conn = null;
     private Statement state = null;
     private ResultSet rs = null;
@@ -67,24 +67,23 @@ public class AuctionDAO {
     }
 
     public ArrayList<Auction> list(String keyword, int status, int categoryId) {
-        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%"+keyword+"%' ";
-        String sql2 = " AND a.category_id = "+categoryId;
+        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%" + keyword + "%' ";
+        String sql2 = " AND a.category_id = " + categoryId;
         ArrayList<Auction> arr = new ArrayList<Auction>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            
+
             if (categoryId != -1) {
                 sql = sql + sql2;
-            } else if (status == -1 && keyword.equals("")){
+            } else if (status == -1 && keyword.equals("")) {
                 sql = sql + " OR 1=1 ";
             }
             sql = sql + " ORDER BY a.title DESC";
-          
+
             pre = conn.prepareStatement(sql);
             //System.out.println(sql);
             //pre.setString(1, "%"+keyword+"%");
-            
-            
+
             rs = pre.executeQuery(sql);
             while (rs.next()) {
                 Auction auction = new Auction();
@@ -95,8 +94,8 @@ public class AuctionDAO {
                 auction.setSellerName(rs.getString("seller_name"));
                 auction.setTitle(rs.getString("title"));
                 auction.setDescription(rs.getString("description"));
-                long startDateLong = rs.getLong("start_date")*1000;
-                long endDateLong = rs.getLong("end_date")*1000;
+                long startDateLong = rs.getLong("start_date") * 1000;
+                long endDateLong = rs.getLong("end_date") * 1000;
                 DateTime startDate = new DateTime(startDateLong);
                 DateTime endDate = new DateTime(endDateLong);
                 auction.setStartDate(startDate);
@@ -113,7 +112,7 @@ public class AuctionDAO {
                 auction.setImg4(rs.getString("img_4"));
                 auction.setImg5(rs.getString("img_5"));
                 auction.setViews(rs.getInt("views"));
-                if (status == -1 || auction.getStatusId() == status){
+                if (status == -1 || auction.getStatusId() == status) {
                     arr.add(auction);
                 }
             }
@@ -127,13 +126,58 @@ public class AuctionDAO {
     public ArrayList<Auction> list() {
         return list("", -1, -1);
     }
-    
-    public ArrayList[] list(ArrayList<Category> categories) {
+
+    public ArrayList[] list(ArrayList<Category> categories, int top) {
         ArrayList[] auctionsArray = new ArrayList[categories.size()];
         for (int i = 0; i < categories.size(); i++) {
-            int categoryId = categories.get(i).getId();
-            ArrayList<Auction> subAuctions = this.list("", -1, categoryId);
-            auctionsArray[i] = subAuctions;
+            try {
+                ArrayList<Auction> subAuctions = new ArrayList<Auction>();
+                int categoryId = categories.get(i).getId();
+                String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, "
+                        + "UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, "
+                        + "increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views "
+                        + "FROM auction a INNER JOIN user u ON a.seller_id = u.id "
+                        + "INNER JOIN category c ON a.category_id = c.categoryid "
+                        + "WHERE a.category_id = ? ORDER BY a.views DESC LIMIT ?";
+                state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                pre = conn.prepareStatement(sql);
+                pre.setInt(1, categoryId);
+                pre.setInt(2, top);
+                rs = pre.executeQuery();
+                while (rs.next()) {
+                    Auction auction = new Auction();
+                    auction.setId(rs.getInt("auctionid"));
+                    auction.setCategoryId(rs.getInt("category_id"));
+                    auction.setCategoryName(rs.getString("category_name"));
+                    auction.setSellerId(rs.getInt("seller_id"));
+                    auction.setSellerName(rs.getString("seller_name"));
+                    auction.setTitle(rs.getString("title"));
+                    auction.setDescription(rs.getString("description"));
+                    long startDateLong = rs.getLong("start_date") * 1000;
+                    long endDateLong = rs.getLong("end_date") * 1000;
+                    DateTime startDate = new DateTime(startDateLong);
+                    DateTime endDate = new DateTime(endDateLong);
+                    auction.setStartDate(startDate);
+                    auction.setEndDate(endDate);
+                    auction.setStartPrice(rs.getDouble("starting_price"));
+                    auction.setBuynowPrice(rs.getDouble("buy_now_price"));
+                    auction.setIncreaseBy(rs.getDouble("increase_by"));
+                    auction.setModerateStatus(rs.getInt("moderate_status"));
+                    auction.setvYoutube(rs.getString("v_youtube"));
+                    auction.setImgCover(rs.getString("img_cover"));
+                    auction.setImg1(rs.getString("img_1"));
+                    auction.setImg2(rs.getString("img_2"));
+                    auction.setImg3(rs.getString("img_3"));
+                    auction.setImg4(rs.getString("img_4"));
+                    auction.setImg5(rs.getString("img_5"));
+                    auction.setViews(rs.getInt("views"));
+                    subAuctions.add(auction);
+                }
+                auctionsArray[i] = subAuctions;
+            } catch (SQLException ex) {
+                Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Auction list failed.");
+            }
         }
         return auctionsArray;
     }
@@ -146,7 +190,7 @@ public class AuctionDAO {
         try {
             String sql = "INSERT INTO auction (category_id, seller_id, title, description, starting_price, buy_now_price, increase_by, img_cover, img_1, img_2, img_3, img_4, img_5, v_youtube, start_date, end_date) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,FROM_UNIXTIME(?),FROM_UNIXTIME(?)) ";
             pre = conn.prepareStatement(sql);
-            
+
             pre.setInt(1, auction.getCategoryId());
             pre.setInt(2, auction.getSellerId());
             pre.setString(3, auction.getTitle());
@@ -162,9 +206,9 @@ public class AuctionDAO {
             pre.setString(13, auction.getImg5());
             pre.setString(14, auction.getvYoutubeFull());
             DateTime startDate = auction.getStartDate();
-            pre.setLong(15, startDate.getMillis()/1000);
+            pre.setLong(15, startDate.getMillis() / 1000);
             DateTime endDate = auction.getEndDate();
-            pre.setLong(16, endDate.getMillis()/1000);
+            pre.setLong(16, endDate.getMillis() / 1000);
             pre.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -172,18 +216,18 @@ public class AuctionDAO {
             System.out.println("Auction DAO, add failed.");
             return false;
         }
-        
+
     }
 
     public Auction getAuction(int auctionId) {
         Auction auction = new Auction();
         String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, "
-                +"UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, "
-                +"increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views "
-                +"FROM auction a "
-                +"INNER JOIN user u ON a.seller_id = u.id "
-                +"INNER JOIN category c ON a.category_id = c.categoryid "
-                +"WHERE a.auctionid = ? LIMIT 1";
+                + "UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, "
+                + "increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views "
+                + "FROM auction a "
+                + "INNER JOIN user u ON a.seller_id = u.id "
+                + "INNER JOIN category c ON a.category_id = c.categoryid "
+                + "WHERE a.auctionid = ? LIMIT 1";
         //System.out.println(sql);
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
@@ -198,8 +242,8 @@ public class AuctionDAO {
             auction.setSellerName(rs.getString("seller_name"));
             auction.setTitle(rs.getString("title"));
             auction.setDescription(rs.getString("description"));
-            long startDateLong = rs.getLong("start_date")*1000;
-            long endDateLong = rs.getLong("end_date")*1000;
+            long startDateLong = rs.getLong("start_date") * 1000;
+            long endDateLong = rs.getLong("end_date") * 1000;
             DateTime startDate = new DateTime(startDateLong);
             DateTime endDate = new DateTime(endDateLong);
             auction.setStartDate(startDate);
@@ -226,11 +270,11 @@ public class AuctionDAO {
     public boolean update(Auction auction) {
         try {
             String sql = "UPDATE auction SET category_id = ?, seller_id = ?, title = ?, description = ?, starting_price = ?, buy_now_price = ?, increase_by = ?"
-                    +", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), "
-                    +"end_date = FROM_UNIXTIME(?), moderate_status = ?, views = ? "
-                    +"WHERE auctionid = ? ";
+                    + ", img_cover = ?, img_1 = ?, img_2 = ?, img_3 = ?, img_4 = ?, img_5 = ?, v_youtube = ?, start_date = FROM_UNIXTIME(?), "
+                    + "end_date = FROM_UNIXTIME(?), moderate_status = ?, views = ? "
+                    + "WHERE auctionid = ? ";
             pre = conn.prepareStatement(sql);
-            
+
             pre.setInt(1, auction.getCategoryId());
             pre.setInt(2, auction.getSellerId());
             pre.setString(3, auction.getTitle());
@@ -246,12 +290,12 @@ public class AuctionDAO {
             pre.setString(13, auction.getImg5());
             pre.setString(14, auction.getvYoutubeFull());
             DateTime startDate = auction.getStartDate();
-            pre.setLong(15, startDate.getMillis()/1000);
+            pre.setLong(15, startDate.getMillis() / 1000);
             DateTime endDate = auction.getEndDate();
-            pre.setLong(16, endDate.getMillis()/1000);
-            pre.setInt(17,auction.getModerateStatus());
-            pre.setInt(18,auction.getViews());
-            pre.setInt(19,auction.getId());
+            pre.setLong(16, endDate.getMillis() / 1000);
+            pre.setInt(17, auction.getModerateStatus());
+            pre.setInt(18, auction.getViews());
+            pre.setInt(19, auction.getId());
             //System.out.println(auction.getCategoryId());
             pre.executeUpdate();
             return true;
