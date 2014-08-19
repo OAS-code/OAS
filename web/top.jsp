@@ -20,7 +20,6 @@
                 var s = today.getSeconds();
                 m = checkTime(m);
                 s = checkTime(s);
-                var suffix;
                 document.getElementById('hour').innerHTML = h;
                 document.getElementById('min').innerHTML = m;
                 document.getElementById('sec').innerHTML = s;
@@ -33,7 +32,7 @@
                 if (i < 10) {
                     i = "0" + i
                 }
-                ;  // add zero in front of numbers < 10
+                ;
                 return i;
             }
         </script>
@@ -43,7 +42,7 @@
             String balance = (String) request.getAttribute("balance");
         %>
     </head>
-    <body>
+    <body onload="startTime()">
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
