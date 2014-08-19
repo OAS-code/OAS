@@ -12,29 +12,10 @@
         <title>Login</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        <script src="http://wcetdesigns.com/assets/javascript/jquery.js"></script>
-        <script src="http://wcetdesigns.com/assets/javascript/jquery/cookie-plugin.js"></script>
-        <script>
-            function remember_me() {
-                var c = $("#check");
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 
-                if (c.is(":checked")) {
-                    var u = $("#username").val();
-                    var p = $("#password").val();
-                    $.cookie("username", u, {expires: 365});
-                    $.cookie("password", p, {expires: 365});
-                }
-            }
-            function load_em() {
-                var u = $.cookie("username");
-                var p = $.cookie("password");
-
-                $("#username").val(u);
-                $("#password").val(p);
-            }
-        </script>
     </head>
-    <body onLoad="load_em()">   
+    <body >   
         <%
             String errorCode = request.getParameter("errorCode");
             String username = request.getParameter("username");
@@ -71,7 +52,7 @@
             <ul id="message" class="success_msg">
                 <li><p>Account '<%=username%>' has been created successfully, account's password has been dispatched to your email address!</p></li>
             </ul>
-            <% } %>
+            <% }%>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
@@ -95,6 +76,34 @@
                             </div>
 
                         </div>		<span class="red fl"></span>
+                        <script>
+                            $(function() {
+
+                                if (localStorage.chkbx && localStorage.chkbx != '') {
+                                    $('#check').attr('checked', 'checked');
+                                    $('#username').val(localStorage.usrname);
+                                    $('#password').val(localStorage.pass;
+                                } else {
+                                    $('#check').removeAttr('checked');
+                                    $('#username').val('');
+                                    $('#password').val('');
+                                }
+
+                                $('#check').click(function() {
+
+                                    if ($('#check').is(':checked')) {
+                                        // save username and password
+                                        localStorage.usrname = $('#username').val();
+                                        localStorage.pass = $('#password').val();
+                                        localStorage.chkbx = $('#check').val();
+                                    } else {
+                                        localStorage.usrname = '';
+                                        localStorage.pass = '';
+                                        localStorage.chkbx = '';
+                                    }
+                                });
+                            });
+                        </script>
                         <div class="login_check">
                             <input type="checkbox" name="check" id="check">							
                             <p class="remeber">Remember me</p>

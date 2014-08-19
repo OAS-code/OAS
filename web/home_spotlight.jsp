@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>       
     </head>
-    <body onload="startTime()">
+    <body>
         <div class="banner_left_spotlight">           
             <div class="today_head_spotlight">               
                 <div class="today_head_lft">
@@ -54,7 +54,9 @@
                         </div>
                         <div class="feature_bott">
                             <div class="feature_bott_lft">
-                                <div class="sliders">  
+                                <div class="sliders">    
+                                    <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
+
                                 </div>
                                 <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
