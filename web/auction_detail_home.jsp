@@ -61,40 +61,40 @@
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg1()!= null && !auction.getImg1().isEmpty()) {%>
+
+                                        <% if (auction.getImg1() != null && !auction.getImg1().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg1()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg2()!= null && !auction.getImg2().isEmpty()) {%>
+
+                                        <% if (auction.getImg2() != null && !auction.getImg2().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg2()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg3()!= null && !auction.getImg3().isEmpty()) {%>
+
+                                        <% if (auction.getImg3() != null && !auction.getImg3().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg3()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg4()!= null && !auction.getImg4().isEmpty()) {%>
+
+                                        <% if (auction.getImg4() != null && !auction.getImg4().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg4()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
                                             </a>
                                         </li>
                                         <% }%>
-                                        
-                                        <% if (auction.getImg5()!= null && !auction.getImg5().isEmpty()) {%>
+
+                                        <% if (auction.getImg5() != null && !auction.getImg5().isEmpty()) {%>
                                         <li>
                                             <a href="#" title="<%=auction.getTitle()%>"> 
                                                 <img src="<%=auction.getImg5()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -113,21 +113,22 @@
                         </div>
                         <div class="productDetail" style="display:none;">279</div>  
 
-                        <div class="detail_feature_bott_lft">
+                        <div class="detail_feature_bott_lft" style="padding-top: 2px">
                             <div class="sliders">
                                 <!--<span class="penny_white"></span>-->
 
                             </div>
                             <a title="+ Add to Watchlist" rel="279" class="addwatchlist" name="http://www.unieauction.com/buy-sell-demo/auctions/addwatchlist"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist" /></a>
                         </div>
-
-                        <div class="detail_left_social_link">
-                            <div class="social_sec">
-                                <p>Share :</p>
-                                <g:plusone size="medium" annotation="none"></g:plusone>
-
-                            </div>
-                        </div>
+                        <!--
+                                                <div class="detail_left_social_link">
+                                                    <div class="social_sec">
+                                                        <p>Share :</p>
+                                                        <g:plusone size="medium" annotation="none"></g:plusone>
+                        
+                                                    </div>
+                                                </div>
+                        -->
                     </div>
                     <div class="detail_page_top_mid">
 
@@ -139,7 +140,7 @@
                     <div class="detail_page_top_right">
 
                         <div class="hb_bg_mid">
-                            <ul class="clearfix">
+                            <ul class="clearfix" style="padding-left: 7px">
                                 <li><p><span>Highest Bidder :</span> <strong class="lastbidder">No Bids Yet</strong></p></li>	
                                 <li><h3 class="countdown"><img src=http://www.unieauction.com/buy-sell-demo/public/white/images/ajax-loader.gif></h3>
                                     <label style=" float:left;padding-left:72px;display:block;color:#666;"><span class="hrs">Days</span><span class="min">Hrs</span><span class="min">Min</span><span class="sec">Sec</span></label>
@@ -148,7 +149,7 @@
 
                                 <li>
                                     <div class="hb_buy_now_left">
-                                        <h3 class="currentprice">50</h3> 
+                                        <h3 class="currentprice" > <%=auction.getBuynowPriceString()%></h3> 
                                         <span class="price" style="display:none;"></span>
                                     </div>
 
@@ -189,7 +190,7 @@
                                 </li>
                                 <li class="border_none">
                                     <div class="hb_auction_header">
-                                        <p>With each bid, the auction</p>
+                                        <p>With each bid, the auction will..</p>
                                     </div>
                                 </li>
                                 <li class="hb_li_padding_bottom_none">
@@ -201,7 +202,7 @@
                                     </div>
 
                                 </li>
-
+                                <!--
                                 <li class="hb_li_padding_bottom_none">
                                     <div class="hb_buy_now_left">
                                         <p class="hb_font_weight_normal">Retail Price</p>
@@ -211,7 +212,7 @@
                                     </div>
 
                                 </li>
-
+                                
                                 <li class="hb_li_padding_bottom_none">
                                     <div class="hb_buy_now_left">
                                         <p class="hb_font_weight_normal">Price Paid</p>
@@ -226,6 +227,7 @@
                                             <font class=''>$</font> 450.00                                    </span></p>
                                     <p class="hb_font_weight_normal"  style="padding-left:0px;"><b>from the normal retail price!!</b></p>
                                 </li>	
+                                -->
                             </ul>
                         </div>
 
@@ -244,12 +246,12 @@
 
                         <div class="detail-action_detail_lef"> 
                             <h2>Auction ID :  </h2>
-                            <h2>Auction type(s) :</h2>     
+
                         </div>
 
                         <div class="detail-action_detail_rgt">
-                            <p>279  </p>
-                            <p>Pennyauction </p>
+                            <p>#<%=auction.getId()%>  </p>
+
 
                         </div>
 
@@ -262,15 +264,16 @@
                         <div class="detail-action_detail_lef"> 
 
                             <h2> Price Starting From :</h2>
+                            <h2> Buy now at :</h2>
                             <h2>Start time :</h2>
                             <h2>End time :</h2>
                         </div>
 
                         <div class="detail-action_detail_rgt">
-                            <p><font class=''>$</font> 50  </p>
-                            <p>Aug 18, 06:23 AM</p>
-                            <p>Sep 30, 10:23 AM </p>
-
+                            <p><%=auction.getStartPriceString()%>  </p>
+                            <p><%=auction.getBuynowPriceString()%></p>
+                            <p><%=auction.getFormattedStartDate()%> </p>
+                            <p><%=auction.getFormattedEndDate()%> </p>
                         </div>
 
                     </div>
@@ -279,24 +282,25 @@
 
                         <h1>Shipping Details</h1>
 
+
                         <div class="detail-action_detail_lef"> 
-                            <h2>Shipping Fee :</h2>
-                            <h2>Shipping information :</h2>
+                            <!--<h2>Shipping Fee :</h2>
+                            <h2>Shipping information :</h2>-->
+                            Not available.
                         </div>
-
-                        <div class="detail-action_detail_rgt">
-                            <p><font class=''>$</font> 20  </p>
-                            <p></p>
-
-                        </div>
+                        <!--
+                                                <div class="detail-action_detail_rgt">
+                                                    <p><font class=''>$</font> 20  </p>
+                                                    <p></p>
+                        
+                                                </div>
+                        -->
                     </div>
                 </div>
                 <div class="detail_product_description">
                     <h1>Product Description</h1>
 
-                    <p>asdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsadsadsaasdsadsadsadsad dddsasadasdsad asdsads</p>
-
-
+                    <p><%=auction.getDescription()%></p>
                 </div>
             </div>
         </div>
