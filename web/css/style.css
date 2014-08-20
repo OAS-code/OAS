@@ -1796,7 +1796,7 @@ Sidebar
 .today_head_rgt p a:hover{color:#333;}
 
 
-#countdown1 {
+.countdown_auction_detail {
     background-color:#F7F7F7;
     color:black; 
     border-bottom-color: rgb(52, 52, 52);

@@ -151,9 +151,10 @@
                                     <ul class="clearfix" style="padding-left: 7px">
                                         <li><p><span>Highest Bidder :</span> <strong class="lastbidder">No Bids Yet</strong></p></li>	
                                         <li>
-                                            <h3 class="countdown">
+                                            <h3 class="countdown" >
                                                 <script language="JavaScript">
-                                                    startCountdown("8/21/2014 12:10 AM");
+                                                    startCountdown("8/21/2014 12:55:25 AM", 1, "countdown_auction_detail");
+                                                    //startCountdown("8/21/2014 12:20:55 AM", "2", "countdown_auction_detail");
                                                 </script>
                                             </h3>
                                             <label style=" float:left;padding-left:72px;display:block;color:#666;"><span class="hrs">Days</span><span class="min">Hrs</span><span class="min">Min</span><span class="sec">Sec</span></label>
@@ -173,7 +174,6 @@
                                                     <div class="hb_buy_now_button_mid">
                                                         <p>
                                                             <a href="http://www.unieauction.com/buy-sell-demo/site/buynow/buynow_addcart/279" title="Buy Now">Buy Now</a>
-
                                                         </p>
                                                     </div>
                                                     <div class="hb_buy_now_button_right">

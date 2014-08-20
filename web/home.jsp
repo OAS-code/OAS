@@ -18,7 +18,7 @@
         <%
             ArrayList<Auction> auctions = (ArrayList<Auction>) request.getAttribute("auctions");
         %>
-
+        <script language="JavaScript" src="JavaScript/countdown.js"></script>
     </head>
     <body>  
         <div class="my_message_right">
@@ -84,6 +84,9 @@
                             </ul>
                             <p class="countdown" style="display: block;">
                                 
+                                <script>
+                                    startCountdown('<%=subAuctions.get(i).getFormattedEndDate(1)%>', <%=subAuctions.get(i).getId()%>, "countdown_auction_home");
+                                </script>
                             </p>
                         </div>
                         <div class="feature_bott">
