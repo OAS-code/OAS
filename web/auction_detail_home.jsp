@@ -179,7 +179,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </li>
                                         <li>
                                             Enter more than current amount					<div class="hb_buy_now_left">
@@ -277,6 +276,19 @@
 
 
                                 </div>
+                                    
+                                    <div class="detail-action_detail_lef"> 
+                                    <h2>Auction Status :  </h2>
+
+                                </div>
+
+                                <div class="detail-action_detail_rgt">
+                                    <p><%=auction.getStatus()%></p>
+
+
+                                </div>
+                                    
+                                    
 
                             </div>
 
