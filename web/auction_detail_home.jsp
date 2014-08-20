@@ -131,11 +131,18 @@
                         -->
                     </div>
                     <div class="detail_page_top_mid">
-
                         <div class="detail_big_history"><h1>Bid Histories</h1>  </div>
+                        <div class="bid_history" id="" style="float:left; width:250px;" rel="1" name=""> <link href="css/slider.css" rel="stylesheet" type="text/css">
+                                <div class="detail_big_history_content"><p>1 Bids Total</p>  </div>
 
-                        <div class="bid_history" id="http://www.unieauction.com/buy-sell-demo/auctions/bid_history/279" style="" rel="0"  name=""><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/ajax-loader.gif"/></div>
-
+                                <div class="detail_big_history_current_winning"><h1>Current winning Bidders</h1> </div>        
+                                <div class="winning_list"> 
+                                    <ul>
+                                        <li> <div class="winning_list_left"><h1>n**am</h1> <p>2014-08-17 18:06:29</p>  </div> <div class="winning_list_right"><p><font class="">$</font> 50.01</p>  </div>  </li>
+                                        <div> <a class="detail_winner_down_list" title="Arrow" href="">  </a>  </div>
+                                    </ul>
+                                </div>
+                        </div>
                     </div>
                     <div class="detail_page_top_right">
 
@@ -181,141 +188,149 @@
 
                                 </li>
                                 <li>
-                                    <div class="bidme_link">
-                                        <div class="hb_buy_now_left">
+                                    Enter more than current amount					<div class="hb_buy_now_left">
+                                        <div class="hb_place_bid">
 
-                                        </div>
-                                        <div class="hb_buy_now_right">
-                                            <div class="hb_place_bid_button">
-                                                <div class="hb_place_bid_button_left">
-                                                </div>
-                                                <div class="hb_place_bid_button_mid">
+                                            <span><font class="">$</font>&nbsp;</span>
+                                            <div class="hb_place_bid_tb">
+                                                <form method="post" id="reserve_form">
+                                                    <div class="fl"><input type="text" name="bidamount" id="yourbidding" class="savetext" maxlength="10" value=""><input type="hidden" id="currency" class="savetext" value="<font class=''>$</font>"><p style="font: normal 11px arial;"></p></div>
+                                                                </form>
 
-                                                    <p>                           <a href="javascript:;" name="http://www.unieauction.com/buy-sell-demo/auctions/bid" class="bid" rel="http://www.unieauction.com/buy-sell-demo/users/login/" id="279" data-auctiontype="30" title="Place My Bid">Place My Bid</a>					</p>			
-                                                </div>
-                                                <div class="hb_place_bid_button_right">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="border_none">
-                                    <div class="hb_auction_header">
-                                        <p>With each bid, the auction will..</p>
-                                    </div>
-                                </li>
-                                <li class="hb_li_padding_bottom_none">
-                                    <div class="hb_buy_now_left">
-                                        <p class="hb_font_weight_normal">Price Increases by</p>
-                                    </div>
-                                    <div class="hb_buy_now_right hb_buy_now_right1">
-                                        <span class="hb_font_size_small"><p  class="bidamount"><font class=''>$</font> 4.00</p></span>
-                                    </div>
+                                                                </div>
+                                                                <span>&nbsp;.00</span>
+                                                                </div>
+                                                                </div>
+                                                                <div class="hb_buy_now_right">
+                                                                    <div class="hb_place_bid_button">
+                                                                        <div class="hb_place_bid_button_left">
+                                                                        </div>
+                                                                        <div class="hb_place_bid_button_mid">
+                                                                            <p><a href="javascript:;" title="BID ME" rel="http://www.unieauction.com/buy-sell-demo/users/login/" class="fl popup" id="dialog_link" data-rel="box">BID ME</a></p>
+                                                                        </div>
+                                                                        <div class="hb_place_bid_button_right">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
 
-                                </li>
-                                <!--
-                                <li class="hb_li_padding_bottom_none">
-                                    <div class="hb_buy_now_left">
-                                        <p class="hb_font_weight_normal">Retail Price</p>
-                                    </div>
-                                    <div class="hb_buy_now_right hb_buy_now_right1">
-                                        <p class="hb_font_size_small"><font class=''>$</font> 500.00</p>
-                                    </div>
+                                                                </li>
+                                                                <li class="border_none">
+                                                                    <div class="hb_auction_header">
+                                                                        <p>With each bid, the auction will..</p>
+                                                                    </div>
+                                                                </li>
+                                                                <li class="hb_li_padding_bottom_none">
+                                                                    <div class="hb_buy_now_left">
+                                                                        <p class="hb_font_weight_normal">Price Increases by</p>
+                                                                    </div>
+                                                                    <div class="hb_buy_now_right hb_buy_now_right1">
+                                                                        <span class="hb_font_size_small"><p  class="bidamount"><font class=''>$</font> 4.00</p></span>
+                                                                    </div>
 
-                                </li>
+                                                                </li>
+                                                                <!--
+                                                                <li class="hb_li_padding_bottom_none">
+                                                                    <div class="hb_buy_now_left">
+                                                                        <p class="hb_font_weight_normal">Retail Price</p>
+                                                                    </div>
+                                                                    <div class="hb_buy_now_right hb_buy_now_right1">
+                                                                        <p class="hb_font_size_small"><font class=''>$</font> 500.00</p>
+                                                                    </div>
                                 
-                                <li class="hb_li_padding_bottom_none">
-                                    <div class="hb_buy_now_left">
-                                        <p class="hb_font_weight_normal">Price Paid</p>
-                                    </div>
-                                    <div class="hb_buy_now_right hb_buy_now_right1">
-                                        <span class="hb_font_size_small"><p   class="pricepaid"> <font class=''>$</font> 50.00</p></span>
-                                    </div>
-
-                                </li>
-                                <li class="border_none">
-                                    <p class="save_over_text" style="padding-left:0px;">Save over <span   class="saveover">
-                                            <font class=''>$</font> 450.00                                    </span></p>
-                                    <p class="hb_font_weight_normal"  style="padding-left:0px;"><b>from the normal retail price!!</b></p>
-                                </li>	
-                                -->
-                            </ul>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="notice_nsg2 fl clr" id="notice_msg279" style="display:none;"></div> 
-            <div class="detail_bottom_outer">
-
-                <div class="detail_bottom_outer_top">
-                    <div class="detail-action_detail">  
-
-                        <h1>Auctions Details</h1>
-
-                        <div class="detail-action_detail_lef"> 
-                            <h2>Auction ID :  </h2>
-
-                        </div>
-
-                        <div class="detail-action_detail_rgt">
-                            <p>#<%=auction.getId()%>  </p>
+                                                                </li>
+                                                                
+                                                                <li class="hb_li_padding_bottom_none">
+                                                                    <div class="hb_buy_now_left">
+                                                                        <p class="hb_font_weight_normal">Price Paid</p>
+                                                                    </div>
+                                                                    <div class="hb_buy_now_right hb_buy_now_right1">
+                                                                        <span class="hb_font_size_small"><p   class="pricepaid"> <font class=''>$</font> 50.00</p></span>
+                                                                    </div>
+                                
+                                                                </li>
+                                                                <li class="border_none">
+                                                                    <p class="save_over_text" style="padding-left:0px;">Save over <span   class="saveover">
+                                                                            <font class=''>$</font> 450.00                                    </span></p>
+                                                                    <p class="hb_font_weight_normal"  style="padding-left:0px;"><b>from the normal retail price!!</b></p>
+                                                                </li>	
+                                                                -->
+                                                                </ul>
+                                                                </div>
 
 
-                        </div>
+                                                                </div>
+                                                                </div>
 
-                    </div>
+                                                                </div>
+                                                                <div class="notice_nsg2 fl clr" id="notice_msg279" style="display:none;"></div> 
+                                                                <div class="detail_bottom_outer">
 
-                    <div class="detail-action_detail">  
+                                                                    <div class="detail_bottom_outer_top">
+                                                                        <div class="detail-action_detail">  
 
-                        <h1>Price Details</h1>
+                                                                            <h1>Auctions Details</h1>
 
-                        <div class="detail-action_detail_lef"> 
+                                                                            <div class="detail-action_detail_lef"> 
+                                                                                <h2>Auction ID :  </h2>
 
-                            <h2> Price Starting From :</h2>
-                            <h2> Buy now at :</h2>
-                            <h2>Start time :</h2>
-                            <h2>End time :</h2>
-                        </div>
+                                                                            </div>
 
-                        <div class="detail-action_detail_rgt">
-                            <p><%=auction.getStartPriceString()%>  </p>
-                            <p><%=auction.getBuynowPriceString()%></p>
-                            <p><%=auction.getFormattedStartDate()%> </p>
-                            <p><%=auction.getFormattedEndDate()%> </p>
-                        </div>
-
-                    </div>
-
-                    <div class="detail-action_detail detail_last-bgnone">  
-
-                        <h1>Shipping Details</h1>
+                                                                            <div class="detail-action_detail_rgt">
+                                                                                <p>#<%=auction.getId()%>  </p>
 
 
-                        <div class="detail-action_detail_lef"> 
-                            <!--<h2>Shipping Fee :</h2>
-                            <h2>Shipping information :</h2>-->
-                            Not available.
-                        </div>
-                        <!--
-                                                <div class="detail-action_detail_rgt">
-                                                    <p><font class=''>$</font> 20  </p>
-                                                    <p></p>
-                        
-                                                </div>
-                        -->
-                    </div>
-                </div>
-                <div class="detail_product_description">
-                    <h1>Product Description</h1>
+                                                                            </div>
 
-                    <p><%=auction.getDescription()%></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
-</html>
+                                                                        </div>
+
+                                                                        <div class="detail-action_detail">  
+
+                                                                            <h1>Price Details</h1>
+
+                                                                            <div class="detail-action_detail_lef"> 
+
+                                                                                <h2> Price Starting From :</h2>
+                                                                                <h2> Buy now at :</h2>
+                                                                                <h2>Start time :</h2>
+                                                                                <h2>End time :</h2>
+                                                                            </div>
+
+                                                                            <div class="detail-action_detail_rgt">
+                                                                                <p><%=auction.getStartPriceString()%>  </p>
+                                                                                <p><%=auction.getBuynowPriceString()%></p>
+                                                                                <p><%=auction.getFormattedStartDate()%> </p>
+                                                                                <p><%=auction.getFormattedEndDate()%> </p>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="detail-action_detail detail_last-bgnone">  
+
+                                                                            <h1>Shipping Details</h1>
+
+
+                                                                            <div class="detail-action_detail_lef"> 
+                                                                                <!--<h2>Shipping Fee :</h2>
+                                                                                <h2>Shipping information :</h2>-->
+                                                                                Not available.
+                                                                            </div>
+                                                                            <!--
+                                                                                                    <div class="detail-action_detail_rgt">
+                                                                                                        <p><font class=''>$</font> 20  </p>
+                                                                                                        <p></p>
+                                                                            
+                                                                                                    </div>
+                                                                            -->
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="detail_product_description">
+                                                                        <h1>Product Description</h1>
+
+                                                                        <p><%=auction.getDescription()%></p>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                </div>
+                                                                </body>
+                                                                </html>
