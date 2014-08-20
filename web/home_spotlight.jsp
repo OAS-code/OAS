@@ -65,8 +65,7 @@
                         <div class="feature_bott">
                             <div class="feature_bott_lft">
                                 <div class="sliders">    
-                                    <a><img src="http://www.unieauction.com/platinum-demo/public/white/images/head_top1_bg.png" width="18" height="18" alt="Beginner" title="Beginner"></a>
-
+                                    <a></a>
                                 </div>
                                 <a title="+ Add to Watchlist" rel="502" class="addwatchlist" name=""><img src="http://www.unieauction.com/platinum-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>

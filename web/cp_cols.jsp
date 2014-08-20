@@ -38,35 +38,35 @@
                     <li class="" id="edit_profile_active"><a href="cp_my_account.jsp?current_page=my_account" title="My account">My account</a></li>
                         <% }
                             }
-                            if (rank >= 0) {
+                            if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_watchlist")) { %>
                     <li class="act_class" id="dashboard_active"><a href="cp_customer_my_watchlist.jsp?current_page=my_watchlist" title="My watchlist">My watchlist</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="cp_customer_my_watchlist.jsp?current_page=my_watchlist" title="My watchlist">My watchlist</a></li>
                         <% }
                             }
-                            if (rank >= 0) {
+                            if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_product")) { %>
                     <li class="act_class" id="dashboard_active"><a href="cp_customer_my_product.jsp?current_page=my_product" title="My product">My product</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="cp_customer_my_product.jsp?current_page=my_product" title="My product">My product</a></li>
                         <% }
                             }
-                            if (rank >= 0) {
+                            if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_bids")) { %>
                     <li class="act_class" id="dashboard_active"><a href="cp_customer_my_bids.jsp?current_page=my_bids" title="My bids">My bids</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="cp_customer_my_bids.jsp?current_page=my_bids" title="My bids">My bids</a></li>
                         <% }
                             }
-                            if (rank >= 0) {
+                            if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_transactions")) { %>
                     <li class="act_class" id="dashboard_active"><a href="?current_page=my_transactions" title="My transactions">My transactions</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="?current_page=my_transactions" title="My transactions">My transactions</a></li>
                         <% }
                             }
-                            if (rank >= 0) {
+                            if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("won_auction")) { %>
                     <li class="act_class" id="dashboard_active"><a href="?current_page=won_auction" title="Won auction">Won auction</a></li>
                         <% } else { %>
