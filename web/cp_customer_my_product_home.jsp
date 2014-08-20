@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="profil_butoon">
                                     <div class="res_left"></div>
-                                    <div class="res_mid"><a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = ''"></a>
+                                    <div class="res_mid"><a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_auction';"></a>
                                     </div>
                                     <div class="res_right"></div>
                                 </div>	
@@ -104,9 +104,6 @@
                                         </th>
                                         <th width="100" align="center" colspan="3">
                                             <b>Auction</b>
-                                        </th>
-                                        <th width="100" align="center">
-                                            <b>Auction type</b>
                                         </th>
                                         <th width="100" align="center">
                                             <b> Status</b>
@@ -141,13 +138,6 @@
                                         </td>
                                         <td width="20" align="center">
                                         </td>
-
-
-
-                                        <td width="100" align="center">
-
-                                            <h2 style="width:85px;">Beginner</h2>
-                                        </td>
                                         <td width="100" align="center">
                                             InActive                                </td>
 
@@ -179,16 +169,12 @@
                                             <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/270 " title="Product Edit" class="editicon"></a>                                        &nbsp;
                                         </td>
                                         <td width="20" align="center">
-                                            <a onclick="frmdel_products(270, 1);" class="deleteicon" title="Delete"></a>                                    </td>
-
-
-
-                                        <td width="100" align="center">
-
-                                            <h2 style="width:85px;">Pennyauction</h2>
+                                            <a onclick="frmdel_products(270, 1);" class="deleteicon" title="Delete"></a>                                   
                                         </td>
+                                        
                                         <td width="100" align="center">
-                                            InActive                                </td>
+                                            InActive                                
+                                        </td>
 
                                     </tr>
                                 </tbody></table>

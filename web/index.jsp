@@ -29,7 +29,7 @@
         <%@ include file="top.jsp" %> 
         <div class="header2">  
             <%@ include file="home_spotlight.jsp" %> 
-            <%@ include file="home.jsp" %> 
+            <%@ include file="home.jsp" %>
         </div>
         <jsp:include page="footer.jsp" />
         <%            }

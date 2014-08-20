@@ -17,7 +17,7 @@
         %>
     </head>
     <body>
-        <%@ include file="perm_staff.jsp" %>
+        <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
             <%if (errorCode != null) {
