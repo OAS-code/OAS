@@ -18,6 +18,7 @@
         <%
             ArrayList<Auction> auctions = (ArrayList<Auction>) request.getAttribute("auctions");
         %>
+        <script language="JavaScript" src="JavaScript/countdown.js"></script>
     </head>
     <body>  
         <div class="my_message_right">
@@ -46,9 +47,6 @@
                         </td>
                     </tr>
                 </table>
-
-
-
             </div>
             <div class="feature_total">
 
@@ -84,7 +82,12 @@
                                     <div class="bid_price fl clr" style="display:none;"><p class="fl clr">Bid increment: <font class="">$</font> 2</p></div>
                                 </li>
                             </ul>
-                            <p class="countdown" style="display: block;">4:08:46:43</p>
+                            <p class="countdown" style="display: block;">
+                                
+                                <script>
+                                    startCountdown('<%=subAuctions.get(i).getFormattedEndDate(1)%>', <%=subAuctions.get(i).getId()%>, "countdown_auction_home");
+                                </script>
+                            </p>
                         </div>
                         <div class="feature_bott">
                             <div class="feature_bott_lft">

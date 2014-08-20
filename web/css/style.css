@@ -355,10 +355,10 @@
 .detail-action_detail {background: url("../images/deltil_dels_rightborder.png") no-repeat scroll right 35px transparent;float: left;  padding: 20px 5px 10px 20px;width: 300px;}
 .detail-action_detail h1{float:left; width:280px; text-transform:uppercase; font:normal 16px helveticaneuemediumcond; color:#333; border-bottom:1px solid #DEDDDF; padding-bottom:8px;}
 
-.detail-action_detail_lef{ float:left; width:140px;}
-.detail-action_detail_lef h2{ float:left; width:140px; font:bold 12px/18px arial; color:#2F9DD0; text-align:left; padding:1px;}
-.detail-action_detail_rgt{ float:left; width:140px;}
-.detail-action_detail_rgt p{ float:left; width:140px; text-align:right; font:normal 12px/18px arial; color:#666666; padding:1px;}
+.detail-action_detail_lef{ float:left; width:120px;}
+.detail-action_detail_lef h2{ float:left; width:120px; font:bold 12px/18px arial; color:#2F9DD0; text-align:left; padding:1px;}
+.detail-action_detail_rgt{ float:left; width:160px;}
+.detail-action_detail_rgt p{ float:left; width:160px; text-align:right; font:normal 12px/18px arial; color:#666666; padding:1px;}
 #detail_page .detail_last-bgnone{ background:none;}
 .detail_product_description{ float:left; clear:both; width:950px; padding:15px;}
 .detail_product_description h1{ float:left; clear:both; width:945px; font:normal 18px helveticaneuemediumcond; color:#333;}
@@ -389,9 +389,9 @@
 .hb_buy_now_button_mid p{padding:5px 3px;}
 .hb_buy_now_left div.hb_place_bid{float:left; width:100px;}
 .hb_buy_now_left div.hb_place_bid span{color:#666666; font:normal 18px/27px arial; float:left;}
-.hb_buy_now_left div.hb_place_bid div.hb_place_bid_tb{float:left; width:48px; height:25px; background:url(../images/dollar_tb_bg.jpg) no-repeat;}
-.hb_buy_now_left div.hb_place_bid div.hb_place_bid_tb input[type='text']{width:38px; margin:5px 3px; height:15px; background:none; outline:0; border:none;}
-.hb_place_bid_button{float:left;}
+.hb_buy_now_left div.hb_place_bid div.hb_place_bid_tb{float:left; width:80px; height:25px; background:url(../images/dollar_tb_bg.jpg) no-repeat;}
+.hb_buy_now_left div.hb_place_bid div.hb_place_bid_tb input[type='number']{width:70px; margin:5px 3px; height:15px; background:none; outline:0; border:none;}
+.hb_place_bid_button{float:left; }
 .hb_place_bid_button_left{width:4px; height:25px; float:left; background:url(../images/hb_place_bid_but_left.jpg) no-repeat;}
 .hb_place_bid_button_mid{height:25px; float:left; background:url(../images/hb_place_bid_but_mid.jpg) repeat-x;}
 .hb_place_bid_button_right{width:4px; height:25px; float:left; background:url(../images/hb_place_bid_but_right.jpg) no-repeat;}
@@ -399,7 +399,7 @@
 .hb_place_bid_button_mid p a{text-decoration:none; font:bold 12px arial; color:#fff; text-transform:uppercase;}
 .hb_place_bid_button_mid p{padding:5px 10px;}
 .hb_auction_header{width:100%; height:25px; float:left; background:url(../images/hb_auction_header_bg.png) repeat-x;}
-.hb_bg_mid ul li div.hb_auction_header p{padding:0px 0px 0px 10px; font:bold 11px/24px arial; color:#000; text-transform:uppercase; text-align:left;}
+.hb_bg_mid ul li div.hb_auction_header p{padding:0px 0px 0px 10px; font:bold 11px/24px arial; color:#fff; text-transform:uppercase; text-align:left;}
 .border_none{float:left; width:271px; border:none !important; padding:10px 0px 0px 0px !important;}
 .hb_font_weight_normal{font-weight:normal !important; font-size:11px !important; text-align:left !important; }
 .hb_li_padding_bottom_none{padding-bottom:2px !important;}
@@ -1796,3 +1796,50 @@ Sidebar
 .today_head_rgt p a:hover{color:#333;}
 
 
+.countdown_auction_detail {
+    background-color:#F7F7F7;
+    color:black; 
+    border-bottom-color: rgb(52, 52, 52);
+    border-bottom-style: none;
+    border-bottom-width: 0px;
+    border-image-outset: 0px;
+    border-image-repeat: stretch;border-image-slice: 100%;
+    border-image-source: none;
+    border-image-width: 1;
+    border-left-color: rgb(52, 52, 52);
+    border-left-style: none;
+    border-left-width: 0px;
+    border-right-color: rgb(52, 52, 52);
+    border-right-style: none;
+    border-right-width: 0px;
+    border-top-color: rgb(52, 52, 52);
+    border-top-style: none;
+    border-top-width: 0px;
+    color: rgb(52, 52, 52);
+    display: block;
+    float: left;
+    font-family: arial;
+    font-size: 24px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: bold;
+    height: 24px;
+    line-height: 24px;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    outline-color: rgb(52, 52, 52);
+    outline-style: none;
+    outline-width: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-top: 0px;
+    text-align: center;
+    width: 271px;
+    zoom: 1;
+}
