@@ -1,8 +1,9 @@
 <%-- 
-    Document   : AddAuction
-    Created on : Jul 17, 2014, 9:11:06 PM
-    Author     : MrTu 2
+    Document   : cp_customer_product_edit_home
+    Created on : Aug 21, 2014, 3:19:13 AM
+    Author     : ducfpt
 --%>
+
 <%@page import="DAO.CategoryDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
