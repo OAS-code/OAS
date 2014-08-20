@@ -14,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add auction</title>
+        <title>Create new auction</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />      
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
@@ -92,7 +92,7 @@
         <%@ include file="perm_customer.jsp" %>
         <div class="my_message_right" id="edit_profile_page">
             <div class="message_common_border">
-                <h1 title="User Manager">Add new auction</h1>
+                <h1 title="User Manager">Create new auction</h1>
                 <p>&nbsp;</p>
             </div>
             <form name="form1" method="post" action="AuctionController">

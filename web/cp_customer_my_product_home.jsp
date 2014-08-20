@@ -100,10 +100,10 @@
                                             <b>Title</b>
                                         </th>
                                         <th width="150" align="center">
-                                            <b>Start date-Closed date</b>
+                                            <b>Start date / Closed date</b>
                                         </th>
                                         <th width="100" align="center" colspan="3">
-                                            <b>Auction</b>
+                                            <b>Actions</b>
                                         </th>
                                         <th width="100" align="center">
                                             <b> Status</b>
@@ -127,16 +127,21 @@
 
                                         </td>		
                                         <td width="150" align="center">	
-                                            <h2>2014-08-15 12:45:00 - 2014-08-17 01:00:00</h2>
+                                            <h2>2014-08-15 12:45:00</h2>
+                                            <h2>2014-08-17 01:00:00</h2>
 
                                         </td>
 
                                         <td width="20" align="center">&nbsp;
                                         </td>
                                         <td width="20" align="center"> 
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon"></a>                                        &nbsp;
+                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" title="Product Edit" class="editicon"></a>  
+                                            &nbsp;
+                                             
                                         </td>
                                         <td width="20" align="center">
+                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon" onClick="return confirm('Are you sure?')"><img src="images/delete.png" border="0"></a> 
+                                            &nbsp;
                                         </td>
                                         <td width="100" align="center">
                                             InActive                                </td>
@@ -158,18 +163,24 @@
 
                                         </td>		
                                         <td width="150" align="center">	
-                                            <h2>2014-08-15 01:00:00 - 2014-08-16 01:00:00</h2>
+                                            <h2>2014-08-15 01:00:00</h2>
+                                            <h2>2014-08-16 01:00:00</h2>
 
                                         </td>
 
-                                        <td width="20" align="center">&nbsp;
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/pennyauctionedit?pid=270 " title="Auction Edit" class="auction-editicon"></a>                
-                                        </td>
                                         <td width="20" align="center"> 
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/270 " title="Product Edit" class="editicon"></a>                                        &nbsp;
+                                           
+                                            &nbsp;
+                                             
                                         </td>
                                         <td width="20" align="center">
-                                            <a onclick="frmdel_products(270, 1);" class="deleteicon" title="Delete"></a>                                   
+                                           
+                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon"></a>  
+                                            &nbsp;
+                                        </td>
+                                        <td width="20" align="center">
+                                              <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon"><img src="images/delete.png" border="0"></a>
+                                             &nbsp;
                                         </td>
                                         
                                         <td width="100" align="center">
