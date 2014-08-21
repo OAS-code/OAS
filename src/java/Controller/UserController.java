@@ -173,13 +173,13 @@ public class UserController extends HttpServlet {
             String address = request.getParameter("address");
             int status = Integer.parseInt(request.getParameter("cb2"));
             int role = Integer.parseInt(request.getParameter("cb1"));
-            String url = user_add + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&cb1="+role+"&cb2="+status+"&errorCode=";
-            if (username==null || username.isEmpty() || username.length() < 3 || username.length() > 20 ) {
+            String url = user_add + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&cb1=" + role + "&cb2=" + status + "&errorCode=";
+            if (username == null || username.isEmpty() || username.length() < 3 || username.length() > 20) {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
                 return;
-            } else if (email==null || email.isEmpty() || email.length() < 3 || email.length() > 50 || !email.contains("@") || !email.contains(".")) {
+            } else if (email == null || email.isEmpty() || email.length() < 3 || email.length() > 50 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
@@ -192,8 +192,6 @@ public class UserController extends HttpServlet {
                     return;
                 }
             }
-            
-            
 
             User user = new User(username, email, status, role);
 
@@ -297,7 +295,7 @@ public class UserController extends HttpServlet {
                     user.setStatus(0);
                     //System.out.println(user.getStatus());
                     if (dao.update(user)) {
-                        rd = request.getRequestDispatcher(reset_password + "?errorCode=0&token="+token);
+                        rd = request.getRequestDispatcher(reset_password + "?errorCode=0&token=" + token);
                         rd.forward(request, response);
                         return;
                     } else {
@@ -309,18 +307,18 @@ public class UserController extends HttpServlet {
             }
         } else if (service.equalsIgnoreCase("reset_password_finish")) {
             String tokenFinish = (String) request.getParameter("tokenFinish");
-            
+
             //Validate passwords first
             String password1 = (String) request.getParameter("password1");
             String password2 = (String) request.getParameter("password2");
             //System.out.println(password1+"-"+password2);
             OtherDAO other = new OtherDAO();
             if (!other.isPasswordValid(password1) || !other.isPasswordValid(password2)) {
-                rd = request.getRequestDispatcher(reset_password + "?errorCode=1&token="+tokenFinish);
+                rd = request.getRequestDispatcher(reset_password + "?errorCode=1&token=" + tokenFinish);
                 rd.forward(request, response);
                 return;
             } else if (!password1.equals(password2)) {
-                rd = request.getRequestDispatcher(reset_password + "?errorCode=2&token="+tokenFinish);
+                rd = request.getRequestDispatcher(reset_password + "?errorCode=2&token=" + tokenFinish);
                 rd.forward(request, response);
                 return;
             } else {
@@ -388,10 +386,24 @@ public class UserController extends HttpServlet {
                 session.setAttribute("role", result[4]);
                 session.setAttribute("username", result[2]);
                 session.setAttribute("userid", result[3]);
-                rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
+                String lastPage = (String) session.getAttribute("last_page");
+                //System.out.println("lastPage : " + lastPage);
+                if (lastPage != null) {
+                    rd = request.getRequestDispatcher(lastPage);
+                } else {
+                    rd = request.getRequestDispatcher("cp.jsp?current_page=dashboard&errorCode=1");
+                }
             } else {
                 rd = request.getRequestDispatcher("login.jsp?errorCode=" + result[1]);
             }
+            rd.forward(request, response);
+        } else if (service.equalsIgnoreCase("logout")) {
+            String errorCode = "3";//(String) request.getParameter("errorCode");
+            HttpSession session = request.getSession();
+            if (session!=null){
+                session.invalidate();
+            }
+            rd = request.getRequestDispatcher("login.jsp?errorCode=" + errorCode);
             rd.forward(request, response);
         } else if (service.equals("register")) {
             String username = request.getParameter("username");
@@ -400,12 +412,12 @@ public class UserController extends HttpServlet {
             String email = request.getParameter("email");
             String address = request.getParameter("address");
             String url = user_register + "?username=" + username + "&fullname=" + fullname + "&phonenumber=" + phonenumber + "&email=" + email + "&address=" + address + "&errorCode=";
-            if (username==null || username.isEmpty() || username.length() < 3) {
+            if (username == null || username.isEmpty() || username.length() < 3) {
                 url = url + "1";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);
                 return;
-            } else if (email==null || email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
+            } else if (email == null || email.isEmpty() || email.length() < 3 || !email.contains("@") || !email.contains(".")) {
                 url = url + "2";
                 rd = request.getRequestDispatcher(url);
                 rd.forward(request, response);

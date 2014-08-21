@@ -77,7 +77,7 @@
                                 <%} else {%>
 
                             <li><a href="cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
-                            <li class="active"><a href="logout.jsp?success_page=2" title="Signout" onclick="return confirm('Are you sure?')">Sign out</a></li>
+                            <li class="active"><a href="UserController?service=logout" title="Signout" onclick="return confirm('Are you sure?')">Sign out</a></li>
 
                             <%}%>
 

@@ -7,7 +7,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <script type="text/javascript" src="JavaScript/jquery-1.5.1.min.js"></script>
         <script type="text/javascript" src="JavaScript/slides.min.jquery.js"></script>
-        <script type="text/javascript" src="JavaScript/placebid.js"></script>
+        <script type="text/javascript" src="JavaScript/ajax_auction_detail.js"></script>
         <script language="JavaScript" src="JavaScript/countdown.js"></script>
         <%                    Auction auction = (Auction) request.getAttribute("auction");
         %>
@@ -25,17 +25,17 @@
             <script type="text/javascript" src="JavaScript/easy_jquery.js"></script>
             <script type="text/javascript" src="JavaScript/easySlider1.5.js"></script>
             <script type="text/javascript">
-            $.noConflict();
-            jQuery(document).ready(function(j) {
-                j(document).ready(function() {
-                    j("#slider").easySlider({
-                        controlsBefore: '<p id="controls">',
-                        controlsAfter: '</p>',
-                        auto: true,
-                        continuous: true
+                $.noConflict();
+                jQuery(document).ready(function(j) {
+                    j(document).ready(function() {
+                        j("#slider").easySlider({
+                            controlsBefore: '<p id="controls">',
+                            controlsAfter: '</p>',
+                            auto: true,
+                            continuous: true
+                        });
                     });
-                });
-            });</script>
+                });</script>
             <div class="container_inner element279">
                 <div class="auction_item" id="auction_279" name="">
                     <div class="auction_type" data-auctiontype="30"></div>
@@ -180,36 +180,14 @@
                                                 </div>
                                             </div>
                                         </li>
+
                                         <li>
-                                            Enter more than current amount					<div class="hb_buy_now_left">
-                                                <div class="hb_place_bid">
-
-                                                    <span><font class="">$</font>&nbsp;</span>
-                                                    <div class="hb_place_bid_tb">
-                                                        <form method="post" id="reserve_form">
-                                                            <div class="fl">
-                                                                <input type="number" name="bidamount" id="yourbidding" class="savetext" maxlength="10" value=""></input>
-                                                                <input type="hidden" id="currency" class="savetext" value="<font class=''>$</font>"></input>
-                                                                <!--<p style="font: normal 11px arial;"></p>-->
-                                                            </div>
-                                                        </form>
-                                                    </div>
-                                                    <!--<span>&nbsp;.00</span>-->
-                                                </div>
+                                            <div id="ajax_place_bid"> 
+                                                <center><img src="images/ajax-loader.gif" align="center"></img></center>
                                             </div>
-                                            <div class="hb_buy_now_right">
-                                                <div class="hb_place_bid_button">
-                                                    <div class="hb_place_bid_button_left">
-                                                    </div>
-                                                    <div class="hb_place_bid_button_mid" id="placebid_btn">
-                                                        <p><a href="#" onClick="loadXMLDoc()" title="BID ME" rel="http://www.unieauction.com/buy-sell-demo/users/login/" class="fl popup" id="dialog_link" data-rel="box">PLACE MY BID</a></p>
-                                                    </div>
-                                                    <div class="hb_place_bid_button_right">
-                                                    </div>
-                                                </div>
-                                            </div>
-
                                         </li>
+
+
                                         <li class="border_none">
                                             <div class="hb_auction_header">
                                                 <p>With each bid, the auction will..</p>
@@ -224,32 +202,6 @@
                                             </div>
 
                                         </li>
-                                        <!--
-                                        <li class="hb_li_padding_bottom_none">
-                                            <div class="hb_buy_now_left">
-                                                <p class="hb_font_weight_normal">Retail Price</p>
-                                            </div>
-                                            <div class="hb_buy_now_right hb_buy_now_right1">
-                                                <p class="hb_font_size_small"><font class=''>$</font> 500.00</p>
-                                            </div>
-        
-                                        </li>
-                                        
-                                        <li class="hb_li_padding_bottom_none">
-                                            <div class="hb_buy_now_left">
-                                                <p class="hb_font_weight_normal">Price Paid</p>
-                                            </div>
-                                            <div class="hb_buy_now_right hb_buy_now_right1">
-                                                <span class="hb_font_size_small"><p   class="pricepaid"> <font class=''>$</font> 50.00</p></span>
-                                            </div>
-        
-                                        </li>
-                                        <li class="border_none">
-                                            <p class="save_over_text" style="padding-left:0px;">Save over <span   class="saveover">
-                                                    <font class=''>$</font> 450.00                                    </span></p>
-                                            <p class="hb_font_weight_normal"  style="padding-left:0px;"><b>from the normal retail price!!</b></p>
-                                        </li>	
-                                        -->
                                     </ul>
                                 </div>
 
@@ -276,8 +228,8 @@
 
 
                                 </div>
-                                    
-                                    <div class="detail-action_detail_lef"> 
+
+                                <div class="detail-action_detail_lef"> 
                                     <h2>Auction Status :  </h2>
 
                                 </div>
@@ -287,8 +239,14 @@
 
 
                                 </div>
-                                    
-                                    
+                                <div class="detail-action_detail_lef"> 
+                                    <h2>Auction's owner :  </h2>
+                                </div>
+
+                                <div class="detail-action_detail_rgt">
+                                    <p><%=auction.getSellerName()%></p>
+                                </div>
+
 
                             </div>
 
@@ -336,4 +294,7 @@
             </div>
         </div>
     </body>
+    <script>
+        pageLoading('<%=auction.getId()%>');
+    </script>
 </html>
