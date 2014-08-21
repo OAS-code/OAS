@@ -72,13 +72,15 @@ public class BidDAO {
     }
 
     public ArrayList<Bid> getBidFromAuctionId(int auctionId, int top) {
-        ArrayList<Bid> bids = new ArrayList<>();
-        String sql = "SELECT bid_id, bidder_id, u.username AS bidder_name, auction_id, a.title AS auction_name, amount, UNIX_TIMESTAMP(date) AS date "
-                + " FROM bid b "
-                + "INNER JOIN user u ON b.bidder_id = u.id "
-                + "INNER JOIN auction a ON b.auction_id = a.auctionid "
-                + "WHERE a.auctionid = ? ORDER BY b.amount DESC LIMIT ?";
+        ArrayList<Bid> bids = new ArrayList<Bid>();
         try {
+            
+            String sql = "SELECT bid_id, bidder_id, u.username AS bidder_name, auction_id, a.title AS auction_name, amount, UNIX_TIMESTAMP(date) AS date "
+                    + " FROM bid b "
+                    + "INNER JOIN user u ON b.bidder_id = u.id "
+                    + "INNER JOIN auction a ON b.auction_id = a.auctionid "
+                    + "WHERE a.auctionid = ? ORDER BY b.amount DESC LIMIT ?";
+            
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
             pre.setInt(1, auctionId);
@@ -96,9 +98,12 @@ public class BidDAO {
                 DateTime date = new DateTime(dateLong);
                 bid.setDate(date);
                 bids.add(bid);
+                //System.out.println(bid.getAuctionName());
             }
+            
+            return bids;
         } catch (SQLException ex) {
-            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Bid DAO getBidFromAuctionId failed.");
         }
         return bids;

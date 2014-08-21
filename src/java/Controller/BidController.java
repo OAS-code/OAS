@@ -78,13 +78,16 @@ public class BidController extends HttpServlet {
                     } else {
                         BidDAO bidDao = new BidDAO();
                         ArrayList<Bid> bids = bidDao.getBidFromAuctionId(Integer.parseInt(auctionId), 1);
-                        if (bids.size() > 0 && bids.get(1).getBidderId() == Integer.parseInt(userId)) {
+                        Bid bid = bids.get(1);
+                        int bidderId = bid.getBidderId();
+                        System.out.println("ID: "+bidderId);
+                        System.out.println("ko Ngon!");
+                        if (bids.size() > 0 && bidderId == Integer.parseInt(userId)) {
                             
                             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=6");
                             rd.forward(request, response);
                             return;
                         } else {
-                            System.out.println("Ngon!");
                             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId);
                             rd.forward(request, response);
                             return;
