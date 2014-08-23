@@ -14,8 +14,7 @@
 <html>
     <head>
         <title>Add new user</title>
-        <%
-            String errorCode = request.getParameter("errorCode");
+        <%            String errorCode = request.getParameter("errorCode");
             String username = request.getParameter("username");
             String email = request.getParameter("email");
             String fullname = request.getParameter("fullname");
@@ -98,50 +97,46 @@
                                             <h2>
                                                 <select name="cb2" id="cb2">
                                                     <option value="1" <% if (status == 1) { %> selected="selected" <% } %> >Active</option>
-                                                    <option value="0" <% if (status == 0) { %> selected="selected" <% } %> >Inactive</option>
+                                                    <option value="0" <% if (status == 0) { %> selected="selected" <% }%> >Inactive</option>
                                                 </select>
                                             </h2>
                                         </div>
                                     </div>
-                                    
+
                                     <br>&nbsp;<br>
-                                    
+
                                     <div class="user_name_common">
                                         <b>Full name: </b>
                                     </div>
-                                    
+
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2><input type="text" maxlength="100" name="fullname" id="fullname" class="textbox" value="<%=fullname%>"></h2>
                                         </div>		
                                     </div>
-                                    
+
                                     <div class="user_name_common">
                                         <b>Address: </b>
                                     </div>
-                                    
+
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2><input type="text" maxlength="100" name="address" id="address" class="textbox" value="<%=address%>"></h2>
                                         </div>		
                                     </div>
-                                    
+
                                     <div class="user_name_common">
                                         <b>Phone number: </b>
                                     </div>
-                                    
+
                                     <div class="user_name_common" style="width:400px;">
                                         <div class="text_feeld">
                                             <h2><input type="text" maxlength="100" name="phonenumber" id="phonenumber" class="textbox" value="<%=phonenumber%>"></h2>
                                         </div>		
                                     </div>
-                                    
-                                    
                                 </td>
                             </tr>
                         </table>
-
-
                         <br>
                         <table align="center">
                             <tr>
@@ -182,7 +177,6 @@
                                 </td>
                             </tr>
                         </table>
-
                     </div>
                 </div>
             </form>
