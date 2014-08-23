@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import DAO.FormatMoney;
 import DAO.OtherDAO;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -270,5 +271,10 @@ public class User {
 
     public void setJoinDate(String joinDate) {
         this.joinDate = joinDate;
+    }
+
+    public String getBalanceString() {
+        FormatMoney fm = new FormatMoney();
+        return fm.showPriceInUSD(this.balance, 1);
     }
 }

@@ -462,6 +462,20 @@ public class UserController extends HttpServlet {
                 return;
             }
 
+        } else if (service.equals("ajax_top")) {
+            HttpSession session = request.getSession(true);
+            String roleString = (String) session.getAttribute("role");
+            if (roleString != null) {
+                int role = Integer.parseInt(roleString);
+                if (role == 0){
+                    String userId = (String) session.getAttribute("userid");
+                    User user = dao.getUser(Integer.parseInt(userId));
+                    //System.out.println(user.getBalanceString());
+                    rd = request.getRequestDispatcher("top_ajax.jsp" + "?data1="+user.getUsername()+"&data2="+user.getBalanceString());
+                    rd.forward(request, response);
+                }
+            }
+            return;
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

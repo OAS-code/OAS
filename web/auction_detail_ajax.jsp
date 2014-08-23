@@ -121,7 +121,7 @@
                 <div class="hb_place_bid_button_left">
                 </div>
                 <div class="hb_place_bid_button_mid" id="placebid_btn">
-                    <p>RESTRICTED</p>
+                    <p>ALREADY BID!</p>
                 </div>
                 <div class="hb_place_bid_button_right">
                 </div>
