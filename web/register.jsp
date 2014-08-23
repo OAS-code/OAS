@@ -30,7 +30,7 @@
         <script type="text/javascript" src="JavaScript/validate_register.js"></script>
     </head>
     <body>
-        
+
         <jsp:include page="top.jsp" />
         <div class="header2">   
             <% if (errorCode != null) {
@@ -51,20 +51,21 @@
                 <li><p>Change password successful. Please to login!.</p></li>
             </ul>
             <% }
-                    }%>
+                }%>
             <div class="login-part">
                 <h2 title="Register">Register</h2>
             </div>
             <div class="signup_middle">
                 <div class="signup_lft">
                     <div class="signup_form">
-                        <form accept-charset="utf-8" method="post" action="UserController" name="registerForm" onsubmit="return validateRegister()">				<div class="">
+                        <form accept-charset="utf-8" method="post" action="UserController" name="registerForm" onsubmit="return validateRegister()">				
+                            <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
                                     <input type="text"  name="username" id="username" value="<%=username%>" class="fl" maxlength="20">						</div>
                                 <label><span class="red"></span></label>
                                 <div id="errorUsername">
-                                    
+
                                 </div>
                             </div>
                             <div class="">
@@ -72,6 +73,7 @@
                                     <div class="colm1_width fl"><p>Email <span class="red">*</span>:</p></div>
                                     <input type="text"  name="email" id="email" value="<%=email%>" class="fl" maxlength="50">						</div>
                                 <label style="width:250px;"><span class="red"></span></label>
+                                <div id="errorEmail"
                             </div>
                             <div class="">
                                 <div class="log_fields">

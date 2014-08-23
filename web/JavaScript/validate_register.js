@@ -16,4 +16,6 @@ function checkUsername(){
     }
     return true;
 }
-
+function checkPassword(){
+    
+}

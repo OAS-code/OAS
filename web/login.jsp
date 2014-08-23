@@ -65,9 +65,7 @@
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                             this.value = '';" onblur="if (this.value === '')
                                                         this.value = 'Enter username...'" />
-                                <div>
-                                    <img src="images/error.png" border="0" alt="Error" width="15">
-                                </div>
+                               
                             </div>
                             <span class="red fl"></span>
 
