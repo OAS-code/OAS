@@ -4,10 +4,10 @@
  * and open the template in the editor.
  */
 
+placedBid = 0;
 
-function loadPlaceBidArea(auctionId)
+function ajax_place_bid_area(auctionId)
 {
-  
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -21,16 +21,40 @@ function loadPlaceBidArea(auctionId)
     {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
         {
-            document.getElementById("ajax_place_bid").innerHTML = xmlhttp.responseText;
+            document.getElementById("ajax_place_bid_area").innerHTML = xmlhttp.responseText;
         }
     };
 
     if (document.getElementById("yourbidding")) {
         var userBidValue = document.getElementById("yourbidding").value;
-        xmlhttp.open("GET", "BidController?service=auction_detail_loading&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&random=" + Math.random(), true);
+        xmlhttp.open("GET", "BidController?service=ajax_place_bid_area&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&random=" + Math.random(), true);
     } else {
-        xmlhttp.open("GET", "BidController?service=auction_detail_loading&auctionId=" + auctionId + "&random=" + Math.random(), true);
+        xmlhttp.open("GET", "BidController?service=ajax_place_bid_area&auctionId=" + auctionId + "&random=" + Math.random(), true);
     }
+    xmlhttp.send();
+    return false;
+}
+
+function ajax_load_top_bidder(auctionId){
+    //document.getElementById("ajax_load_top_bidder").innerHTML = '<img src="images/ajax-loader.gif" align="center"></img>';
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_top_bidder").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "BidController?service=ajax_load_top_bidder&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }
@@ -63,7 +87,7 @@ function startBidding(auctionId, nextBidValue)
             document.getElementById("placebid_btn").innerHTML = xmlhttp.responseText;
         }
     };
-    xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&userBidValue="+userBidValue+"&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }

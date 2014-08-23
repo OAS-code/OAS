@@ -51,7 +51,7 @@ public class BidController extends HttpServlet {
 
         final String auction_detail_loading = "auction_detail_ajax.jsp";
 
-        if (service.equalsIgnoreCase("auction_detail_loading")) {
+        if (service.equalsIgnoreCase("ajax_place_bid_area")) {
 
             String auctionId = request.getParameter("auctionId");
             HttpSession session = request.getSession(true);
@@ -78,32 +78,43 @@ public class BidController extends HttpServlet {
                     } else {
                         BidDAO bidDao = new BidDAO();
                         ArrayList<Bid> bids = bidDao.getBidFromAuctionId(Integer.parseInt(auctionId), 1);
-                        
+
                         String userBidValueString = (String) request.getParameter("userBidValue");
                         Double userBidValue = 0.0;
-                        if (userBidValueString==null) {
+                        Double nextBidValue = auction.getStartPrice() + auction.getIncreaseBy();
+                        if (userBidValueString == null) {
                             if (bids.size() > 0) {
-                                userBidValue = bids.get(0).getAmount()+auction.getIncreaseBy();
+                                nextBidValue = bids.get(0).getAmount() + auction.getIncreaseBy();
+                                userBidValue = nextBidValue;
                             } else {
-                                userBidValue = auction.getStartPrice()+auction.getIncreaseBy();
+                                userBidValue = nextBidValue;
                             }
                         } else {
-                           userBidValue = Double.parseDouble(userBidValueString);
+                            userBidValue = Double.parseDouble(userBidValueString);
                         }
                         if (bids.size() > 0 && bids.get(0).getBidderId() == Integer.parseInt(userId)) {
                             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=6");
                             rd.forward(request, response);
                             return;
                         } else {
-                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId+"&userBidValue="+userBidValue);
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&nextBidValue=" + nextBidValue);
                             rd.forward(request, response);
                             return;
                         }
                     }
                 }
             }
+        } else if (service.equalsIgnoreCase("ajax_load_top_bidder")) {
+            String auctionId = request.getParameter("auctionId");
+            BidDAO bidDAO = new BidDAO();
+            String topBidderName = bidDAO.getTopBidderNameFromAuctionId(Integer.parseInt(auctionId));
+            //System.out.println(topBidderName);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=7&data1=" + topBidderName);
+            rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("place_bid")) {
             String auctionId = request.getParameter("auctionId");
+            String userBidValue = request.getParameter("userBidValue");
             HttpSession session = request.getSession(true);
             String roleString = (String) session.getAttribute("role");
             String userId = (String) session.getAttribute("userid");
@@ -125,9 +136,20 @@ public class BidController extends HttpServlet {
                         return;
                     } else {
 
-                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=5&auctionId=" + auctionId);
-                        rd.forward(request, response);
-                        return;
+                        BidDAO bidDao = new BidDAO();
+                        Bid bid = new Bid();
+                        bid.setBidderId(Integer.parseInt(userId));
+                        bid.setAuctionId(Integer.parseInt(auctionId));
+                        bid.setAmount(Double.parseDouble(userBidValue));
+                        if (bidDao.placeBid(bid)) {
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=5&auctionId=" + auctionId);
+                            rd.forward(request, response);
+                            return;
+                        } else {
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=99&auctionId=" + auctionId);
+                            rd.forward(request, response);
+                            return;
+                        }
                     }
                 }
             }
