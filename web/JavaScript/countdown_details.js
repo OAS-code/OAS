@@ -16,12 +16,12 @@ function CountBack(secs) {
     DisplayStr = DisplayStr.replace(/%%M%%/g, calcage(secs, 60, 60));
     DisplayStr = DisplayStr.replace(/%%S%%/g, calcage(secs, 1, 60));
     document.getElementById("ajax_load_countdown").innerHTML = DisplayStr;
-    /*
+    
     if (CountActive) {
         var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 990;
         setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
     }
-    */
+    
     
 }
 
@@ -35,7 +35,7 @@ if (typeof (CountStepper) != "number")
     CountStepper = -1;
 if (typeof (LeadingZero) == "undefined")
     LeadingZero = true;
-function startCountdown(TargetDate, auctionId) {
+function startCountdown(TargetDate) {
     if (!TargetDate) {
         TargetDate = "12/31/2020 5:00 AM";
     }
@@ -49,7 +49,7 @@ function startCountdown(TargetDate, auctionId) {
     else
         ddiff = new Date(dthen - dnow);
     gsecs = Math.floor(ddiff.valueOf() / 1000);
-    CountBack(gsecs, auctionId);
+    CountBack(gsecs);
 }
 
 function putspan(auctionId, css) {
