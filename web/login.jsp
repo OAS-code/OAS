@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="JavaScript/validate_login.js"></script>
 
     </head>
     <body >   
@@ -36,7 +37,7 @@
             </div>
             <div class="login_middle">
                 <div class="login_lft">
-                    <form accept-charset="utf-8" method="post" action="UserController">					
+                    <form accept-charset="utf-8" method="post" action="UserController" onsubmit=" return validateLogin()" name="loginForm">					
                         <div class="login_form">
                             <div class="log_fields" style="width:460px;">
                                 <p>User name <span class="red">*</span>:</p>
