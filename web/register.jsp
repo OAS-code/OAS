@@ -73,7 +73,8 @@
                                     <div class="colm1_width fl"><p>Email <span class="red">*</span>:</p></div>
                                     <input type="text"  name="email" id="email" value="<%=email%>" class="fl" maxlength="50">						</div>
                                 <label style="width:250px;"><span class="red"></span></label>
-                                <div id="errorEmail"
+                                <div id="errorEmail">
+                                </div>
                             </div>
                             <div class="">
                                 <div class="log_fields">
