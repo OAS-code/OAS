@@ -6,7 +6,7 @@ function calcage(secs, num1, num2) {
 }
 
 function CountBack(secs) {
-    if (secs < 0) {
+    if (secs <= 0) {
         document.getElementById("ajax_load_countdown").innerHTML = FinishMessage;
         return;
     }
@@ -16,13 +16,13 @@ function CountBack(secs) {
     DisplayStr = DisplayStr.replace(/%%M%%/g, calcage(secs, 60, 60));
     DisplayStr = DisplayStr.replace(/%%S%%/g, calcage(secs, 1, 60));
     document.getElementById("ajax_load_countdown").innerHTML = DisplayStr;
-    
+
     if (CountActive) {
         var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 990;
         setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
     }
-    
-    
+
+
 }
 
 
@@ -35,20 +35,25 @@ if (typeof (CountStepper) != "number")
     CountStepper = -1;
 if (typeof (LeadingZero) == "undefined")
     LeadingZero = true;
-function startCountdown(TargetDate) {
-    if (!TargetDate) {
-        TargetDate = "12/31/2020 5:00 AM";
+function startCountdown(TargetDate, FinishMessage1) {
+    if (TargetDate) {
+
+        CountStepper = Math.ceil(CountStepper);
+        if (CountStepper == 0)
+            CountActive = false;
+        var dthen = new Date(TargetDate);
+        var dnow = new Date();
+        if (CountStepper > 0)
+            ddiff = new Date(dnow - dthen);
+        else
+            ddiff = new Date(dthen - dnow);
+        gsecs = Math.floor(ddiff.valueOf() / 1000);
+    } else {
+        gsecs = 0;
     }
-    CountStepper = Math.ceil(CountStepper);
-    if (CountStepper == 0)
-        CountActive = false;
-    var dthen = new Date(TargetDate);
-    var dnow = new Date();
-    if (CountStepper > 0)
-        ddiff = new Date(dnow - dthen);
-    else
-        ddiff = new Date(dthen - dnow);
-    gsecs = Math.floor(ddiff.valueOf() / 1000);
+    if (FinishMessage1) {
+        FinishMessage = FinishMessage1;
+    }
     CountBack(gsecs);
 }
 

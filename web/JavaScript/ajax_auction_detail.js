@@ -97,11 +97,11 @@ function ajax_load_countdown(auctionId) {
             var data = rawData.split('|');
             if (data[3] == "On-going") {
                 //alert(data[1]);
-                startCountdown(data[1]);
+                startCountdown(data[1], "Auction Closed");
             } else if (data[3] == "Future") {
-                document.getElementById("ajax_load_countdown").innerHTML = "Coming Soon..";
+                startCountdown(null, "Coming Soon..");
             } else {
-                document.getElementById("ajax_load_countdown").innerHTML = "Auction Closed";
+                startCountdown(null, "Auction Postponed");
             }
         }
     };
