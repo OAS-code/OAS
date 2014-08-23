@@ -56,6 +56,8 @@ public class AuctionController extends HttpServlet {
         final String view_auction = "auction_detail.jsp";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
+        
+        final String auction_detail_loading = "auction_detail_ajax.jsp";
 
         if (service.equalsIgnoreCase("auction_manager")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.list();
@@ -127,7 +129,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(view_detail_auction);
             rd.forward(request, response);
             return;
-            
+
         } else if (service.equals("view")) {
             String auctionIdString = request.getParameter("auctionId");
             int auctionId = Integer.parseInt(auctionIdString);
@@ -136,8 +138,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(view_auction);
             rd.forward(request, response);
             return;
-        }
-        else if (service.equals("moderator_update")) {
+        } else if (service.equals("moderator_update")) {
             String moderateStatus = request.getParameter("moderateStatus");
             String auctionId = request.getParameter("auctionId");
             String categoryId = request.getParameter("categoryId");
@@ -145,16 +146,16 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(Integer.parseInt(auctionId));
             auction.setCategoryId(Integer.parseInt(categoryId));
             auction.setModerateStatus(Integer.parseInt(moderateStatus));
-            
+
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             if (dao.update(auction)) {
                 request.setAttribute("auction", auction);
-                rd = request.getRequestDispatcher(view_detail_auction+"&errorCode=1");
+                rd = request.getRequestDispatcher(view_detail_auction + "&errorCode=1");
                 rd.forward(request, response);
                 return;
             } else {
-                rd = request.getRequestDispatcher(auction_manager+"&errorCode=3");
+                rd = request.getRequestDispatcher(auction_manager + "&errorCode=3");
                 rd.forward(request, response);
                 return;
             }
@@ -389,6 +390,16 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
+        } else if (service.equalsIgnoreCase("ajax_load_countdown")) {
+            String auctionId = request.getParameter("auctionId");
+            Auction auction = dao.getAuction(Integer.parseInt(auctionId));
+            String status = auction.getStatus();
+            String endDate = auction.getFormattedEndDate();
+            System.out.println(status);
+            System.out.println(endDate);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId="+"&data1="+status+"&data2="+endDate);
+            rd.forward(request, response);
+            return;
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }
@@ -408,7 +419,6 @@ public class AuctionController extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-            
 
         } catch (SQLException ex) {
             Logger.getLogger(AuctionController.class

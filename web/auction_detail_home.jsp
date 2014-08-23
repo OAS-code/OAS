@@ -320,6 +320,7 @@
         ajax_place_bid_area('<%=auction.getId()%>');
         ajax_load_top_bidder('<%=auction.getId()%>');
         ajax_load_current_bid('<%=auction.getId()%>');
+        ajax_load_countdown('<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
         window.setInterval(function() {
             var obj = document.getElementById("yourbidding");
             var obj2 = document.getElementById("placebid_btn");
@@ -330,8 +331,9 @@
             }
             ajax_load_top_bidder('<%=auction.getId()%>');
             ajax_load_current_bid('<%=auction.getId()%>');
+            ajax_load_countdown('<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
         }, 3000);
-        ajax_load_countdown('<%=auction.getStatus()%>', '<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
+        
 
     </script>
 </html>

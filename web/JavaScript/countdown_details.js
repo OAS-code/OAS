@@ -16,10 +16,13 @@ function CountBack(secs) {
     DisplayStr = DisplayStr.replace(/%%M%%/g, calcage(secs, 60, 60));
     DisplayStr = DisplayStr.replace(/%%S%%/g, calcage(secs, 1, 60));
     document.getElementById("ajax_load_countdown").innerHTML = DisplayStr;
+    /*
     if (CountActive) {
         var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 990;
         setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
     }
+    */
+    
 }
 
 

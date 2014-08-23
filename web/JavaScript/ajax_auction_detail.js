@@ -78,8 +78,8 @@ function ajax_load_current_bid(auctionId) {
     return false;
 }
 
-function ajax_load_countdown(status, endDate, auctionId) {
-    if (status == "On-going") {
+function ajax_load_countdown(endDate, auctionId, status) {
+    if (!status || status == "On-going") {
         startCountdown(endDate);
     } else if (status == "Future") {
         document.getElementById("ajax_load_countdown").innerHTML = "Coming Soon..";
@@ -101,10 +101,10 @@ function ajax_load_countdown(status, endDate, auctionId) {
     {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
         {
-            document.getElementById("ajax_load_countdown").innerHTML = xmlhttp.responseText;
+            //document.getElementById("ajax_load_countdown").innerHTML = xmlhttp.responseText;
         }
     };
-    xmlhttp.open("GET", "BidController?service=ajax_load_current_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.open("GET", "AuctionController?service=ajax_load_countdown&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }

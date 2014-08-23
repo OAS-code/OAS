@@ -20,7 +20,10 @@
             String userBidValue = (String) request.getParameter("userBidValue");
             String nextBidValue = (String) request.getParameter("nextBidValue");
             String data1 = (String) request.getParameter("data1");
+            String data2 = (String) request.getParameter("data2");
         %>
+        <script type="text/javascript" src="JavaScript/ajax_auction_detail.js"></script>
+        <script language="JavaScript" src="JavaScript/countdown_details.js"></script>
     </head>
     <body>
         <%
@@ -171,6 +174,10 @@
         </div>
         <% } else if (errorCode==12) { %>
         <p>INVALID BID</p>
+        <% }else if (errorCode==13) { %>
+        <script>
+            ajax_load_countdown('<%=data2%>', <%=auctionIdString%>, '<%=data1%>');
+        </script>
         <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>
