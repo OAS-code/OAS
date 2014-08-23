@@ -121,7 +121,7 @@
                                                         </h2>
                                                     </div>
 
-                                                    <div id="errorTitle" ><br>
+                                                    <div id="errorTitle" style="width:500px;padding-top:4px"><br>
 
                                                     </div>    
                                                 </div>
@@ -160,7 +160,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="description" id="description" class="textbox" value="<%=description%>"></h2>
                                                     </div>
-                                                    <div id="errorDescription" ><br>
+                                                    <div id="errorDescription" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -177,7 +177,7 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=startingPrice%>"></h2>
                                                     </div>
-                                                    <div id="errorStartingprice" ><br>
+                                                    <div id="errorStartingprice" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -194,7 +194,7 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=buynowPrice%>"></h2>
                                                     </div>
-                                                    <div id="errorBuynowprice" ><br>
+                                                    <div id="errorBuynowprice" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -211,7 +211,7 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=increaseBy%>"></h2>
                                                     </div>
-                                                    <div id="errorIncrementprice"><br>
+                                                    <div id="errorIncrementprice" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -228,7 +228,7 @@
                                                     <div class="text_feeld">
                                                         <input type="text" id="startdate" name="startDate" value="<%=startDate%>">
                                                     </div>
-                                                    <div id="Startingdate" ><br>
+                                                    <div id="Startingdate" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -241,7 +241,7 @@
                                                     <div class="text_feeld">
                                                         <input type="text" id="enddate" name="endDate" value="<%=endDate%>">
                                                     </div>
-                                                    <div id="Closingdate" ><br>
+                                                    <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -260,7 +260,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=img_cover%>"></h2>
                                                     </div>
-                                                    <div id="errorCoverimage" ><br>
+                                                    <div id="errorCoverimage" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -277,7 +277,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=img_1%>" ></h2>
                                                     </div>
-                                                    <div id="errorImage1" ><br>
+                                                    <div id="errorImage1" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -294,7 +294,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=img_2%>" ></h2>
                                                     </div>
-                                                    <div id="errorImage2" ><br>
+                                                    <div id="errorImage2" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -311,7 +311,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=img_3%>" ></h2>
                                                     </div>
-                                                    <div id="errorImage3" ><br>
+                                                    <div id="errorImage3" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -328,7 +328,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=img_4%>" ></h2>
                                                     </div>
-                                                    <div id="errorImage4" ><br>
+                                                    <div id="errorImage4" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -345,7 +345,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=img_5%>" ></h2>
                                                     </div>
-                                                    <div id="errorImage5" ><br>
+                                                    <div id="errorImage5" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
@@ -362,7 +362,7 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=v_youtube%>" ></h2>
                                                     </div>
-                                                    <div id="errorVideo" ><br>
+                                                    <div id="errorVideo" style="width:500px;padding-top:4px"><br>
 
                                                     </div> 
                                                 </div>
