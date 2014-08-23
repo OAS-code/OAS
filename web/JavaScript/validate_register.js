@@ -22,7 +22,4 @@ function checkUsername(){
 }
 function checkEmail(){
     var email = document.forms["registerForm"]["email"].value;
-    if (){
-        
-    }
 }
