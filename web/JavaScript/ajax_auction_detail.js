@@ -23,7 +23,6 @@ function ajax_place_bid_area(auctionId)
             document.getElementById("ajax_place_bid_area").innerHTML = xmlhttp.responseText;
         }
     };
-
     if (document.getElementById("yourbidding")) {
         var userBidValue = document.getElementById("yourbidding").value;
         xmlhttp.open("GET", "BidController?service=ajax_place_bid_area&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&random=" + Math.random(), true);
@@ -34,8 +33,8 @@ function ajax_place_bid_area(auctionId)
     return false;
 }
 
-function ajax_load_top_bidder(auctionId){
-    //document.getElementById("ajax_load_top_bidder").innerHTML = '<img src="images/ajax-loader.gif" align="center"></img>';
+function ajax_load_top_bidder(auctionId) {
+//document.getElementById("ajax_load_top_bidder").innerHTML = '<img src="images/ajax-loader.gif" align="center"></img>';
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -52,13 +51,12 @@ function ajax_load_top_bidder(auctionId){
             document.getElementById("ajax_load_top_bidder").innerHTML = xmlhttp.responseText;
         }
     };
-
     xmlhttp.open("GET", "BidController?service=ajax_load_top_bidder&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }
 
-function ajax_load_current_bid(auctionId){
+function ajax_load_current_bid(auctionId) {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -75,7 +73,37 @@ function ajax_load_current_bid(auctionId){
             document.getElementById("ajax_load_current_bid").innerHTML = xmlhttp.responseText;
         }
     };
+    xmlhttp.open("GET", "BidController?service=ajax_load_current_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
 
+function ajax_load_countdown(status, endDate, auctionId) {
+    if (status == "On-going") {
+        startCountdown(endDate);
+    } else if (status == "Future") {
+        document.getElementById("ajax_load_countdown").innerHTML = "Coming Soon..";
+    } else { 
+        document.getElementById("ajax_load_countdown").innerHTML = "Auction Closed";
+    }
+    
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_countdown").innerHTML = xmlhttp.responseText;
+        }
+    };
     xmlhttp.open("GET", "BidController?service=ajax_load_current_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
@@ -102,12 +130,12 @@ function startBidding(auctionId, nextBidValue)
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             document.getElementById("placebid_btn").innerHTML = xmlhttp.responseText;
-            if (xmlhttp.responseText=="CHARGE MONEY"){
+            if (xmlhttp.responseText == "CHARGE MONEY") {
                 document.getElementById("yourbidding_noti").innerHTML = '<font color=red>Your account balance is not sufficient!</font>';
             }
         }
     };
-    xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&userBidValue="+userBidValue+"&random=" + Math.random(), true);
+    xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }

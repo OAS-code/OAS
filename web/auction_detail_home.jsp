@@ -8,7 +8,7 @@
         <script type="text/javascript" src="JavaScript/jquery-1.5.1.min.js"></script>
         <script type="text/javascript" src="JavaScript/slides.min.jquery.js"></script>
         <script type="text/javascript" src="JavaScript/ajax_auction_detail.js"></script>
-        <script language="JavaScript" src="JavaScript/countdown.js"></script>
+        <script language="JavaScript" src="JavaScript/countdown_details.js"></script>
         <%                    Auction auction = (Auction) request.getAttribute("auction");
         %>
     </head>
@@ -151,9 +151,16 @@
                                     <ul class="clearfix" style="padding-left: 7px">
                                         <li><p><span>Highest Bidder :</span> <strong class="lastbidder" id="ajax_load_top_bidder"><img src="images/ajax-loader.gif" align="center"></img></strong></p></li>	
                                         <li>
-                                            <h3 class="countdown" >
-                                                <script language="JavaScript">
-                                                    startCountdown('<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>, "countdown_auction_detail");
+                                            <h3 class="countdown">
+                                                <script>
+                                                    document.write("<span id='ajax_load_countdown' style='background-color:#F7F7F7" +
+                                                            "; color:black; border-bottom-color: rgb(52, 52, 52);border-bottom-style: none;border-bottom-width: 0px;border-image-outset: 0px;"
+                                                            + "border-image-repeat: stretch;border-image-slice: 100%;border-image-source: none;border-image-width: 1;border-left-color: rgb(52, 52, 52);"
+                                                            + "border-left-style: none;border-left-width: 0px;border-right-color: rgb(52, 52, 52);border-right-style: none;border-right-width: 0px;"
+                                                            + "border-top-color: rgb(52, 52, 52);border-top-style: none;border-top-width: 0px;color: rgb(52, 52, 52);display: block;float: left;font-family: arial;"
+                                                            + "font-size: 24px;font-style: normal;font-variant: normal;font-weight: bold;height: 24px;line-height: 24px;list-style-image: none;list-style-position: outside;"
+                                                            + "list-style-type: none;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;margin-top: 0px;outline-color: rgb(52, 52, 52);outline-style: none;outline-width: 0px;"
+                                                            + "padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;text-align: center;width: 271px;zoom: 1;'>--:--:--:--</span>");
                                                 </script>
                                             </h3>
                                             <label style=" float:left;padding-left:72px;display:block;color:#666;"><span class="hrs">Days</span><span class="min">Hrs</span><span class="min">Min</span><span class="sec">Sec</span></label>
@@ -187,7 +194,7 @@
                                             </div>
 
                                         </li>
-                                        
+
                                         <li class="hb_li_padding_bottom_none">
                                             <div class="hb_buy_now_left">
                                                 <p class="hb_font_weight_normal">&nbsp;</p>
@@ -324,7 +331,7 @@
             ajax_load_top_bidder('<%=auction.getId()%>');
             ajax_load_current_bid('<%=auction.getId()%>');
         }, 3000);
-
+        ajax_load_countdown('<%=auction.getStatus()%>', '<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
 
     </script>
 </html>

@@ -5,9 +5,9 @@ function calcage(secs, num1, num2) {
     return "<b>" + s + "</b>";
 }
 
-function CountBack(secs, auctionId) {
+function CountBack(secs) {
     if (secs < 0) {
-        document.getElementById("countdown" + auctionId).innerHTML = FinishMessage;
+        document.getElementById("ajax_load_countdown").innerHTML = FinishMessage;
         return;
     }
     var DisplayFormat = "%%D%%:%%H%%:%%M%%:%%S%%";
@@ -15,10 +15,10 @@ function CountBack(secs, auctionId) {
     DisplayStr = DisplayStr.replace(/%%H%%/g, calcage(secs, 3600, 24));
     DisplayStr = DisplayStr.replace(/%%M%%/g, calcage(secs, 60, 60));
     DisplayStr = DisplayStr.replace(/%%S%%/g, calcage(secs, 1, 60));
-    document.getElementById("countdown" + auctionId).innerHTML = DisplayStr;
+    document.getElementById("ajax_load_countdown").innerHTML = DisplayStr;
     if (CountActive) {
         var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 990;
-        setTimeout("CountBack(" + (secs + CountStepper) + ", " + auctionId + ")", SetTimeOutPeriod);
+        setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
     }
 }
 
@@ -32,14 +32,10 @@ if (typeof (CountStepper) != "number")
     CountStepper = -1;
 if (typeof (LeadingZero) == "undefined")
     LeadingZero = true;
-function startCountdown(TargetDate, auctionId, css) {
+function startCountdown(TargetDate, auctionId) {
     if (!TargetDate) {
         TargetDate = "12/31/2020 5:00 AM";
-    } else if (TargetDate == "Closed") {
-        
-        return;
     }
-    putspan(auctionId, css);
     CountStepper = Math.ceil(CountStepper);
     if (CountStepper == 0)
         CountActive = false;
