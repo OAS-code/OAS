@@ -7,7 +7,8 @@
 function validateLogin() {
     var username = document.forms["loginForm"]["username"].value;
     var password = document.forms["loginForm"]["password"].value;
-    if (username === null || username === "" || username === "Enter username..." || password === null || password === "" || password === "********") {
+    var regcharacter = /^[a-zA-Z0-9- ]*$/;
+    if (username == null || username == "" || username == "Enter username..." || password == null || password == "" || password == "********") {
         showError(8);
         return false;
     } else if (username.length < 3 || username.length > 20) {
@@ -16,13 +17,13 @@ function validateLogin() {
     } else if (password.length < 6 || password.length > 20) {
         showError(10);
         return false;
-    }else if(/^[a-zA-Z0-9- ]*$/.test(username) === false){
+    }else if(!regcharacter.test(username)){
         showError(11);
         return false;
-    }else if(username.indexOf(' ') !== -1){
+    }else if(username.indexOf(' ') != -1){
         showError(12);
         return false;
-    }else if(password.indexOf(' ') !== -1){
+    }else if(password.indexOf(' ') != -1){
         showError(13);
         return false;
     }
@@ -53,9 +54,9 @@ function showError(errorCode, username) {
     }else if (errorCode == 11) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username contains illegal characters!</p></li></ul>';
     }else if (errorCode == 12) {
-        document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username contains space characters!</p></li></ul>';
+        document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username can not contain space character!</p></li></ul>';
     }else if (errorCode == 13) {
-        document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Password contains space characters!</p></li></ul>';
+        document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Password can not contain space character!</p></li></ul>';
     }else{
         document.getElementById("errorArea").innerHTML = '';
     }
