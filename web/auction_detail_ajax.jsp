@@ -151,6 +151,26 @@
             <p>FAILED!</p>
         <% } else if (errorCode == 10 ) { %>
         <h3 class="currentprice" >Current bid: <%=data1%></h3> 
+        <% } else if (errorCode == 11) { %>
+        Your have to bid more than that.
+        <div class="hb_buy_now_left">
+            <div class="hb_place_bid">
+
+            </div>
+        </div>
+        <div class="hb_buy_now_right">
+            <div class="hb_place_bid_button">
+                <div class="hb_place_bid_button_left">
+                </div>
+                <div class="hb_place_bid_button_mid" id="placebid_btn">
+                    <p>RETURNING..</p>
+                </div>
+                <div class="hb_place_bid_button_right">
+                </div>
+            </div>
+        </div>
+        <% } else if (errorCode==12) { %>
+        <p>INVALID BID</p>
         <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>

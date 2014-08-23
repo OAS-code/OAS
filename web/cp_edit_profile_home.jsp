@@ -18,6 +18,7 @@
         <link rel="stylesheet" type="text/css" href="css/table.css"/>
         <%            User user = (User) request.getAttribute("requestedUser");
         %>
+        <script type="text/javascript" src="JavaScript/validate_profile_edit.js"></script>
     </head>
     <body>
         <%@ include file="perm_customer.jsp" %>
@@ -26,57 +27,118 @@
                 <h1 title="User Manager">Edit profile - <%=user.getUsername()%></h1>
                 <p>&nbsp;</p>
             </div>
-            <form name="form1" method="post" action="UserController"> 
+            <form name="editProfileForm" method="post" action="UserController"onsubmit="return validateEditProfile();"> 
                 <div class="message_common">
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="10" cellpadding="10">
                             <tr>
-                                <td width="500">
+                                <td width="100%">
+                                    <table border="0" cellpadding="0" cellspacing="0">
 
-                                    <div class="user_name_common">
-                                        <b>Full name: </b>
-                                    </div>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b>Full name: </b>
+                                                </div>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" class="textbox" title="Full Name" value="<%=user.getFullname()%>" name="fullname"></h2>
-                                        </div>		
-                                    </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" class="textbox" title="Full Name" value="<%=user.getFullname()%>" name="fullname"></h2>
 
-                                    <div class="user_name_common">
-                                        <b>Address: </b>
-                                    </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div  id="errorFullname" style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" class="textbox" title="Address"  value="<%=user.getAddress()%>" name="address"></h2>
-                                        </div>		
-                                    </div>
 
-                                    <div class="user_name_common">
-                                        <b>Phone number: </b>
-                                    </div>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" class="textbox" title="Phone Number" maxlength="20" value="<%=user.getPhonenumber()%>" name="phonenumber"></h2>
-                                        </div>		
-                                    </div>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b>Address: </b>
+                                                </div>
 
-                                    <div class="user_name_common">
-                                        <b>Email <span class="red">*</span>: </b>
-                                    </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" class="textbox" title="Address"  value="<%=user.getAddress()%>" name="address"></h2>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" readonly="readonly" class="textbox" title="Email" maxlength="50" value="<%=user.getEmail()%>" name="email"></h2>
-                                        </div>		
-                                    </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div id="errorAddress" style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
 
+
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b>Phone number: </b>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" class="textbox" title="Phone Number" value="<%=user.getPhonenumber()%>" name="phonenumber"></h2>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div  id="errorPhonenumber" style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b>Email <span class="red">*</span>: </b>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" readonly="readonly" class="textbox" title="Email" maxlength="50" value="<%=user.getEmail()%>" name="email"></h2>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div  style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </table>
                                 </td>
                             </tr>
-                        </table>
-                                        
+                        </table>               
                         <br>
 
                         <table align="center">

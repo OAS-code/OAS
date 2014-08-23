@@ -15,19 +15,16 @@
         <%
             String errorCode = request.getParameter("errorCode");
         %>
+         <script type="text/javascript" src="JavaScript/validate_category_add.js"></script>
     </head>
     <body>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <div id="error">
             <%if (errorCode != null) {
-                    if (errorCode.equals("1")) { %>
-
+                     if (errorCode.equals("2")) { %>
             <ul id="message" class="error_msg">
-                <li><p>Failed to add category. Category name is invalid!</p></li>
-            </ul>
-            <% } else if (errorCode.equals("2")) { %>
-            <ul id="message" class="error_msg">
-                <li><p>Failed to update category. Internal error!</p></li>
+                <li><p>Category name is already in use.</p></li>
             </ul>   
 
             <% }else if (errorCode.equals("3")) { %>
@@ -51,6 +48,7 @@
             <%
                 }
             %>
+            </div>
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_category_add_home.jsp" />             
         </div>
