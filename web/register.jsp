@@ -27,9 +27,10 @@
                 address = "";
             }
         %>
+        <script type="text/javascript" src="JavaScript/validate_register.js"></script>
     </head>
     <body>
-        <jsp:include page="logout.jsp" />
+        
         <jsp:include page="top.jsp" />
         <div class="header2">   
             <% if (errorCode != null) {
@@ -57,11 +58,14 @@
             <div class="signup_middle">
                 <div class="signup_lft">
                     <div class="signup_form">
-                        <form accept-charset="utf-8" method="post" action="UserController">				<div class="">
+                        <form accept-charset="utf-8" method="post" action="UserController" name="registerForm" onsubmit="return validateRegister()">				<div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
                                     <input type="text"  name="username" id="username" value="<%=username%>" class="fl" maxlength="20">						</div>
                                 <label><span class="red"></span></label>
+                                <div id="errorUsername">
+                                    
+                                </div>
                             </div>
                             <div class="">
                                 <div class="log_fields">

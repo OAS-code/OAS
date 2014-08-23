@@ -61,6 +61,10 @@
     <env-entry>
         <env-entry-name>db-password</env-entry-name>
         <env-entry-type>java.lang.String</env-entry-type>
-        <env-entry-value>12345678</env-entry-value>
+        <env-entry-value>1234</env-entry-value>
     </env-entry>
+    <context-param>
+        <param-name>domain</param-name>
+        <param-value>http://localhost:8084/OAS/</param-value>
+    </context-param>
 </web-app>
