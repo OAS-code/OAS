@@ -5,7 +5,7 @@
  */
 
 function validateRegister(){
-    return checkUsername();
+    return checkUsername() && ckeckEmail();
 }
 function checkUsername(){
     var username = document.forms["registerForm"]["username"].value;
@@ -21,8 +21,13 @@ function checkUsername(){
     return true;
 }
 function checkEmail(){
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var email = document.forms["registerForm"]["email"].value;
-    if (){
-        
+    if (email.value.match(mailformat)){
+        return true;
+    }
+    else {
+        document.getElementById("errorEmail").innerHTML='<div id="errorEmail"><label><span class="red">Please enter valid Email!</span></label></div>';
+        return false;
     }
 }
