@@ -78,17 +78,24 @@ public class BidController extends HttpServlet {
                     } else {
                         BidDAO bidDao = new BidDAO();
                         ArrayList<Bid> bids = bidDao.getBidFromAuctionId(Integer.parseInt(auctionId), 1);
-                        Bid bid = bids.get(1);
-                        int bidderId = bid.getBidderId();
-                        System.out.println("ID: "+bidderId);
-                        System.out.println("ko Ngon!");
-                        if (bids.size() > 0 && bidderId == Integer.parseInt(userId)) {
-                            
+                        
+                        String userBidValueString = (String) request.getParameter("userBidValue");
+                        Double userBidValue = 0.0;
+                        if (userBidValueString==null) {
+                            if (bids.size() > 0) {
+                                userBidValue = bids.get(0).getAmount()+auction.getIncreaseBy();
+                            } else {
+                                userBidValue = auction.getStartPrice()+auction.getIncreaseBy();
+                            }
+                        } else {
+                           userBidValue = Double.parseDouble(userBidValueString);
+                        }
+                        if (bids.size() > 0 && bids.get(0).getBidderId() == Integer.parseInt(userId)) {
                             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=6");
                             rd.forward(request, response);
                             return;
                         } else {
-                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId);
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId+"&userBidValue="+userBidValue);
                             rd.forward(request, response);
                             return;
                         }

@@ -98,7 +98,6 @@ public class BidDAO {
                 DateTime date = new DateTime(dateLong);
                 bid.setDate(date);
                 bids.add(bid);
-                //System.out.println(bid.getAuctionName());
             }
             
             return bids;
@@ -107,6 +106,16 @@ public class BidDAO {
             System.out.println("Bid DAO getBidFromAuctionId failed.");
         }
         return bids;
+    }
+    
+    public String getTopBidderNameFromAuctionId(int auctionId){
+        ArrayList<Bid> bids = getBidFromAuctionId(auctionId, 1);
+        if (bids.size() > 0) {
+            UserDAO userDao = new UserDAO();
+            return userDao.getUser(bids.get(0).getBidderId()).getUsername();
+        } else {
+            return "No Bids Yet";
+        }
     }
 
 }

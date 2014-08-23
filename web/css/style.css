@@ -383,7 +383,7 @@
 .hb_bg_mid ul li div.hb_buy_now_left h3{font:bold 20px arial; color:#ee7e2c; text-align:left;}
 .hb_buy_now_button{float:left;}
 .hb_buy_now_button_left{width:4px; height:26px; float:left; background:url(../images/hb_buy_now_but_left.jpg) no-repeat;}
-.hb_buy_now_button_mid{ width:76px; height:26px; float:left; background:url(../images/hb_buy_now_but_mid.jpg) repeat-x;}
+.hb_buy_now_button_mid{ width:auto; height:26px; float:left; background:url(../images/hb_buy_now_but_mid.jpg) repeat-x;}
 .hb_buy_now_button_right{width:4px; height:26px; float:left; background:url(../images/hb_buy_now_but_right.jpg) no-repeat;}
 .hb_buy_now_button_mid p a{text-decoration:none; font:bold 12px arial; color:#fff; text-transform:uppercase;}
 .hb_buy_now_button_mid p{padding:5px 3px;}

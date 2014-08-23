@@ -265,7 +265,7 @@ public class UserDAO {
     public String[] logUserIn(String username, String password) throws SQLException, NoSuchAlgorithmException {
         String[] result = new String[5];
         User user = getUser(username);
-        System.out.println(user.getUsername());
+        //System.out.println(user.getUsername());
         if ((user.getUsername() == null) || (!user.getUsername().equalsIgnoreCase(username))) {
             result[0] = "fail";
             result[1] = "1"; //error code

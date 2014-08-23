@@ -5,9 +5,11 @@
  */
 package Entity;
 
+import DAO.BidDAO;
 import DAO.FormatMoney;
 import DAO.OtherDAO;
 import java.sql.Date;
+import java.util.ArrayList;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
@@ -299,5 +301,21 @@ public class Auction {
         } else {
             return "Invalid";
         }
+    }
+    
+    public Double getCurrentBid(){
+        BidDAO bidDao = new BidDAO();
+        ArrayList bids = bidDao.getBidFromAuctionId(this.id, 1);
+        if (bids.size() >0) {
+            Bid topBidder = (Bid) bids.get(0);
+            return topBidder.getAmount();
+        } else {
+            return this.startPrice;
+        }
+    }
+    
+    public String getCurrentBidString(){
+        FormatMoney formartMoney = new FormatMoney();
+        return formartMoney.showPriceInUSD(this.getCurrentBid(), 1);
     }
 }

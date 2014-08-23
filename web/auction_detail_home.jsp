@@ -162,22 +162,8 @@
 
                                         <li>
                                             <div class="hb_buy_now_left">
-                                                <h3 class="currentprice" > <%=auction.getBuynowPriceString()%></h3> 
+                                                <h3 class="currentprice" >Current bid: <%=auction.getCurrentBidString()%></h3> 
                                                 <span class="price" style="display:none;"></span>
-                                            </div>
-
-                                            <div class="hb_buy_now_right">
-                                                <div class="hb_buy_now_button">
-                                                    <div class="hb_buy_now_button_left">
-                                                    </div>
-                                                    <div class="hb_buy_now_button_mid">
-                                                        <p>
-                                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buynow/buynow_addcart/279" title="Buy Now">Buy Now</a>
-                                                        </p>
-                                                    </div>
-                                                    <div class="hb_buy_now_button_right">
-                                                    </div>
-                                                </div>
                                             </div>
                                         </li>
 
@@ -198,9 +184,47 @@
                                                 <p class="hb_font_weight_normal">Price Increases by</p>
                                             </div>
                                             <div class="hb_buy_now_right hb_buy_now_right1">
-                                                <span class="hb_font_size_small"><p  class="bidamount"><font class=''>$</font> 4.00</p></span>
+                                                <span class="hb_font_size_small"><p  class="bidamount"><%=auction.getIncreaseByString()%></p></span>
                                             </div>
 
+                                        </li>
+                                        <li class="hb_li_padding_bottom_none">
+                                            <div class="hb_buy_now_left">
+                                                <p class="hb_font_weight_normal">&nbsp;</p>
+                                            </div>
+                                            <div class="hb_buy_now_right hb_buy_now_right1">
+                                                <span class="hb_font_size_small"><p  class="bidamount">&nbsp;</p></span>
+                                            </div>
+
+                                        </li>
+                                        <li class="hb_li_padding_bottom_none">
+                                            <div class="hb_buy_now_left">
+                                                <p class="hb_font_weight_normal">&nbsp;</p>
+                                            </div>
+                                            <div class="hb_buy_now_right hb_buy_now_right1">
+                                                <span class="hb_font_size_small"><p  class="bidamount">&nbsp;</p></span>
+                                            </div>
+
+                                        </li>
+                                        <li>
+                                            <div class="hb_buy_now_left">
+                                                <h3 class="currentprice" > </h3> 
+                                                <span class="price" style="display:none;"></span>
+                                            </div>
+
+                                            <div class="hb_buy_now_right">
+                                                <div class="hb_buy_now_button">
+                                                    <div class="hb_buy_now_button_left">
+                                                    </div>
+                                                    <div class="hb_buy_now_button_mid">
+                                                        <p>
+                                                            <a href="" title="Buy Now">Buy Now at <%=auction.getBuynowPriceString()%></a>
+                                                        </p>
+                                                    </div>
+                                                    <div class="hb_buy_now_button_right">
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </li>
                                     </ul>
                                 </div>
@@ -255,14 +279,14 @@
                                 <h1>Price Details</h1>
 
                                 <div class="detail-action_detail_lef"> 
-
                                     <h2> Price Starting From :</h2>
-                                    <h2> Buy now at :</h2>
-
+                                    <h2> Bidding step: </h2>
+                                    <h2> Reserved price :</h2>
                                 </div>
 
                                 <div class="detail-action_detail_rgt">
                                     <p><%=auction.getStartPriceString()%>  </p>
+                                    <p><%=auction.getIncreaseByString()%></p>
                                     <p><%=auction.getBuynowPriceString()%></p>
                                 </div>
 
@@ -295,6 +319,11 @@
         </div>
     </body>
     <script>
-        pageLoading('<%=auction.getId()%>');
+        loadPlaceBidArea('<%=auction.getId()%>');
+        window.setInterval(function() {
+            loadPlaceBidArea('<%=auction.getId()%>');
+        }, 3000);
+        
+        
     </script>
 </html>
