@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />      
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+        <script src="JavaScript/validate_auction_add.js"></script>
         <style type="text/css">
             .custom-date-style {
                 background-color: red !important;
@@ -95,13 +96,13 @@
                 <h1 title="User Manager">Create new auction</h1>
                 <p>&nbsp;</p>
             </div>
-            <form name="form1" method="post" action="AuctionController">
+            <form method="post" action="AuctionController" name="addAuctionForm" onsubmit=" return validateAuction();">
 
                 <div class="message_common">
 
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="15" cellpadding="15">
-                            <tr>
+                            <tr >
                                 <td width="669">
                                     <table border="0" cellspacing="0" cellpadding="0" height="100%">
                                         <tr>
@@ -119,9 +120,14 @@
                                                             <input type="text" name="title" id="title" class="textbox" maxlength="100" value="<%=title%>">
                                                         </h2>
                                                     </div>
+
+                                                    <div id="errorTitle" ><br>
+
+                                                    </div>    
                                                 </div>
                                             </td>
                                         </tr>
+
                                         <tr>
                                             <td>
                                                 <div class="user_name_common">
@@ -154,6 +160,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="description" id="description" class="textbox" value="<%=description%>"></h2>
                                                     </div>
+                                                    <div id="errorDescription" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -168,6 +177,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=startingPrice%>"></h2>
                                                     </div>
+                                                    <div id="errorStartingprice" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -182,6 +194,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=buynowPrice%>"></h2>
                                                     </div>
+                                                    <div id="errorBuynowprice" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -196,6 +211,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=increaseBy%>"></h2>
                                                     </div>
+                                                    <div id="errorIncrementprice"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -209,7 +227,10 @@
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
                                                         <input type="text" id="startdate" name="startDate" value="<%=startDate%>">
-                                                    </div>	
+                                                    </div>
+                                                    <div id="Startingdate" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                             <td>
@@ -220,6 +241,9 @@
                                                     <div class="text_feeld">
                                                         <input type="text" id="enddate" name="endDate" value="<%=endDate%>">
                                                     </div>
+                                                    <div id="Closingdate" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -236,6 +260,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=img_cover%>"></h2>
                                                     </div>
+                                                    <div id="errorCoverimage" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -250,6 +277,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=img_1%>" ></h2>
                                                     </div>
+                                                    <div id="errorImage1" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -264,6 +294,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=img_2%>" ></h2>
                                                     </div>
+                                                    <div id="errorImage2" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -278,6 +311,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=img_3%>" ></h2>
                                                     </div>
+                                                    <div id="errorImage3" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -292,6 +328,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=img_4%>" ></h2>
                                                     </div>
+                                                    <div id="errorImage4" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -306,6 +345,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=img_5%>" ></h2>
                                                     </div>
+                                                    <div id="errorImage5" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -320,6 +362,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=v_youtube%>" ></h2>
                                                     </div>
+                                                    <div id="errorVideo" ><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
