@@ -15,22 +15,14 @@
         <%
             String errorCode = request.getParameter("errorCode");
         %>
+        <script type="text/javascript" src="JavaScript/validate_user_add.js"></script>
     </head>
     <body>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <div id = "error">
             <%if (errorCode != null) {
-                    if (errorCode.equals("1")) { %>
-
-            <ul id="message" class="error_msg">
-                <li><p>Username must contains at least 3 characters and at most 20 characters.</p></li>
-            </ul>
-            <% } else if (errorCode.equals("2")) { %>
-            <ul id="message" class="error_msg">
-                <li><p>Provided email address is not valid.</p></li>
-            </ul>   
-
-            <% } else if (errorCode.equals("3")) { %>
+                   if (errorCode.equals("3")) { %>
             <ul id="message" class="error_msg">
                 <li><p>Username or email address is already in use.</p></li>
             </ul>   
@@ -74,7 +66,7 @@
             <br>
 
             <% }%>
-            
+            </div>
             <jsp:include page="cp_cols.jsp" />
             <jsp:include page="cp_user_add_home.jsp" />             
         </div>

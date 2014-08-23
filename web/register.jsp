@@ -32,8 +32,21 @@
     <body>
 
         <jsp:include page="top.jsp" />
-        <div class="header2">   
+        <div class="header2">
+            <div id = "error">
+                
             
+            <% if (errorCode != null) {
+                    if (errorCode.equals("3")) {%>
+            <ul id="message" class="error_msg">
+                <li><p>Username or email address is already in use.</p></li>
+            </ul>
+            <%} else if (errorCode.equals("4")) {%>
+            <ul id="message" class="success_msg">
+                <li><p>Change password successful. Please to login!.</p></li>
+            </ul>
+            <% }
+                }%></div>
             <div class="login-part">
                 <h2 title="Register">Register</h2>
             </div>
@@ -63,21 +76,27 @@
                                     <div class="colm1_width fl"><p>Full name: </p></div>
                                     <input type="text"  name="fullname" id="fullname" value="<%=fullname%>">	
                                 </div>
-                                <span class="red"></span>
+                                <label ><span class="red"></span></label>
+                                <div id="errorFullname">
+                                </div>
                             </div> 
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Phone number: </p></div>
                                     <input type="text"  name="phonenumber" id="phonenumber" value="<%=phonenumber%>">	
                                 </div>
-                                <span class="red"></span>
+                                <label ><span class="red"></span></label>
+                                <div id="errorPhonenumber">
+                                </div>
                             </div> 
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Address: </p></div>
                                     <input type="text"  name="address" id="address" value="<%=address%>">	
                                 </div>
-                                <span class="red"></span>
+                                <label ><span class="red"></span></label>
+                                <div id="errorAddress">
+                                </div>
                             </div> 
                             <div>     
                             </div>

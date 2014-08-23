@@ -117,5 +117,42 @@ public class BidDAO {
             return "No Bids Yet";
         }
     }
+    
+    public Double getCurrentBidFromAuctionId(int auctionId){
+        ArrayList<Bid> bids = getBidFromAuctionId(auctionId, 1);
+        if (bids.size() > 0) {
+            return bids.get(0).getAmount();
+        } else {
+            AuctionDAO auctionDAO = new AuctionDAO();
+            Auction auction = auctionDAO.getAuction(auctionId);
+            return auction.getStartPrice();
+        }
+    }
+    
+    public String getCurrentBidFromAuctionIdString(int auctionId) {
+        FormatMoney fm = new FormatMoney();
+        return fm.showPriceInUSD(this.getCurrentBidFromAuctionId(auctionId), 1);
+    }
+
+    public boolean placeBid(Bid bid) {
+        try {
+            String sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
+            pre = conn.prepareStatement(sql);
+            pre.setDouble(1, bid.getAmount());
+            pre.setInt(2, bid.getBidderId());
+            pre.executeUpdate();
+            sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bid.getBidderId());
+            pre.setInt(2, bid.getAuctionId());
+            pre.setDouble(3, bid.getAmount());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Bid DAO, placeBid failed.");
+            return false;
+        }
+    }
 
 }

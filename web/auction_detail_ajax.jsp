@@ -18,6 +18,8 @@
             }
             String auctionIdString = (String) request.getParameter("auctionId");
             String userBidValue = (String) request.getParameter("userBidValue");
+            String nextBidValue = (String) request.getParameter("nextBidValue");
+            String data1 = (String) request.getParameter("data1");
         %>
     </head>
     <body>
@@ -97,7 +99,7 @@
                 <div class="hb_place_bid_button_left">
                 </div>
                 <div class="hb_place_bid_button_mid" id="placebid_btn">
-                    <p><a href="#" onClick="startBidding('<%=auctionIdString%>', '<%=userBidValue%>')" title="BID ME" class="fl popup" id="dialog_link" data-rel="box">PLACE MY BID</a></p>
+                    <p><a href="#" onClick="startBidding('<%=auctionIdString%>', '<%=nextBidValue%>')" title="BID ME" class="fl popup" id="dialog_link" data-rel="box">PLACE MY BID</a></p>
                 </div>
                 <div class="hb_place_bid_button_right">
                 </div>
@@ -119,14 +121,38 @@
                 <div class="hb_place_bid_button_left">
                 </div>
                 <div class="hb_place_bid_button_mid" id="placebid_btn">
-                    <p>RESTRICTED</p>
+                    <p>ALREADY BID!</p>
                 </div>
                 <div class="hb_place_bid_button_right">
                 </div>
             </div>
         </div>
+        <% } else if (errorCode == 7) { %>
+        <%=data1%>
+        <% } else if (errorCode == 8) { %>
+        Your account balance is not sufficient!
+        <div class="hb_buy_now_left">
+            <div class="hb_place_bid">
+
+            </div>
+        </div>
+        <div class="hb_buy_now_right">
+            <div class="hb_place_bid_button">
+                <div class="hb_place_bid_button_left">
+                </div>
+                <div class="hb_place_bid_button_mid" id="placebid_btn">
+                    <p><a href="UserController?service=start_charing" title="" class="fl popup" id="dialog_link" data-rel="box">CHARGE MONEY</a></p>
+                </div>
+                <div class="hb_place_bid_button_right">
+                </div>
+            </div>
+        </div>   
+        <% } else if (errorCode==9) { %>
+            <p>FAILED!</p>
+        <% } else if (errorCode == 10 ) { %>
+        <h3 class="currentprice" >Current bid: <%=data1%></h3> 
         <% } else { %>
-        <p>Exception!</p>
+        <p>INTERNAL ERROR!</p>
         <% } %>
     </body>
 </html>

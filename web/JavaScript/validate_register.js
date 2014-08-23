@@ -5,6 +5,7 @@
  */
 
 function validateRegister() {
+    document.getElementById("error").innerHTML = '';
     var total = 0;
     if (checkUsername()){
         total ++;
@@ -12,7 +13,16 @@ function validateRegister() {
     if (checkEmail()){
         total ++;
     }
-    if (total <2) {
+    if (checkFullname()){
+        total ++;
+    }
+    if (checkPhonenumber()){
+        total ++;
+    }
+    if (checkAddress()){
+        total ++;
+    }
+    if (total < 5) {
         return false;
     }
     return true;
@@ -51,5 +61,32 @@ function checkEmail() {
         return false;
     }
     document.getElementById("errorEmail").innerHTML = '';
+    return true;
+}
+function checkFullname(){
+    var fullname = document.forms["registerForm"]["fullname"].value;
+    if (fullname.length > 50) {
+        document.getElementById("errorFullname").innerHTML = '<div id="errorFullname"><label><span class="red">Fullname must contains at most 50 characters.</span></label></div>';
+        return false;
+    }
+    document.getElementById("errorFullname").innerHTML = '';
+    return true;
+}
+function checkPhonenumber(){
+    var phone = document.forms["registerForm"]["phonenumber"].value;
+    if (phone.length > 50) {
+        document.getElementById("errorPhonenumber").innerHTML = '<div id="errorPhonenumber"><label><span class="red">Phonenumber must contains at most 50 characters.</span></label></div>';
+        return false;
+    }
+    document.getElementById("errorPhonenumber").innerHTML = '';
+    return true;
+}
+function checkAddress(){
+    var address = document.forms["registerForm"]["address"].value;
+    if (address.length > 50) {
+        document.getElementById("errorAddress").innerHTML = '<div id="errorAddress"><label><span class="red">Address must contains at most 50 characters.</span></label></div>';
+        return false;
+    }
+    document.getElementById("errorAddress").innerHTML = '';
     return true;
 }
