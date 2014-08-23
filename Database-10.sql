@@ -75,12 +75,8 @@ CREATE TABLE `bid` (
   `auction_id` int(11) NOT NULL,
   `amount` double NOT NULL DEFAULT '0',
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`bid_id`),
-  KEY `bidder_id_idx` (`bidder_id`),
-  KEY `auction_id_idx` (`auction_id`),
-  CONSTRAINT `auction_id` FOREIGN KEY (`auction_id`) REFERENCES `auction` (`auctionid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `bidder_id` FOREIGN KEY (`bidder_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`bid_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,7 +85,7 @@ CREATE TABLE `bid` (
 
 LOCK TABLES `bid` WRITE;
 /*!40000 ALTER TABLE `bid` DISABLE KEYS */;
-INSERT INTO `bid` VALUES (1,8,12,500,'2014-08-21 07:57:57');
+INSERT INTO `bid` VALUES (1,8,2,30,'2014-08-23 22:40:42'),(2,8,7,429,'2014-08-23 22:45:43');
 /*!40000 ALTER TABLE `bid` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -255,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-08-21  9:01:56
+-- Dump completed on 2014-08-23 23:00:19
