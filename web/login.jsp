@@ -20,7 +20,7 @@
             String errorCode = request.getParameter("errorCode");
             String username = request.getParameter("username");
         %>
-        
+
         <jsp:include page="top.jsp" />
 
         <div class="header2">   
@@ -60,11 +60,14 @@
                 <div class="login_lft">
                     <form accept-charset="utf-8" method="post" action="UserController">					
                         <div class="login_form">
-                            <div class="log_fields">
+                            <div class="log_fields" style="width:460px;">
                                 <p>User name <span class="red">*</span>:</p>
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
                                             this.value = '';" onblur="if (this.value === '')
-                                                        this.value = 'Enter username...'">						
+                                                        this.value = 'Enter username...'" />
+                                <div>
+                                    <img src="images/error.png" border="0" alt="Error" width="15">
+                                </div>
                             </div>
                             <span class="red fl"></span>
 
