@@ -38,7 +38,7 @@
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="10" cellpadding="10">
                             <tr>
-                                <td width="100%">
+                                <td width="700">
                                     <table border="0" cellpadding="0" cellspacing="0">
 
                                         <tr>
