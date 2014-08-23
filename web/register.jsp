@@ -33,32 +33,14 @@
 
         <jsp:include page="top.jsp" />
         <div class="header2">   
-            <% if (errorCode != null) {
-                    if (errorCode.equals("1")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Username must contains at least 3 characters and at most 20 characters.</p></li>
-            </ul>
-            <%} else if (errorCode.equals("2")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Provided email address is not valid.</p></li>
-            </ul>
-            <%} else if (errorCode.equals("3")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Username or email address is already in use.</p></li>
-            </ul>
-            <%} else if (errorCode.equals("4")) {%>
-            <ul id="message" class="success_msg">
-                <li><p>Change password successful. Please to login!.</p></li>
-            </ul>
-            <% }
-                }%>
+            
             <div class="login-part">
                 <h2 title="Register">Register</h2>
             </div>
             <div class="signup_middle">
                 <div class="signup_lft">
                     <div class="signup_form">
-                        <form accept-charset="utf-8" method="post" action="UserController" name="registerForm" onsubmit="return validateRegister()">				
+                        <form accept-charset="utf-8" method="post" action="UserController" name="registerForm" onsubmit="return validateRegister();">				
                             <div class="">
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Username <span class="red">*</span>:</p></div>
@@ -72,7 +54,7 @@
                                 <div class="log_fields">
                                     <div class="colm1_width fl"><p>Email <span class="red">*</span>:</p></div>
                                     <input type="text"  name="email" id="email" value="<%=email%>" class="fl" maxlength="50">						</div>
-                                <label style="width:250px;"><span class="red"></span></label>
+                                <label ><span class="red"></span></label>
                                 <div id="errorEmail">
                                 </div>
                             </div>
