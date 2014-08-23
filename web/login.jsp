@@ -24,35 +24,13 @@
         <jsp:include page="top.jsp" />
 
         <div class="header2">   
-            <%if (errorCode != null && errorCode.equals("1")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>User name or password does not exist.</p></li>
-            </ul>
-            <%} else if (errorCode != null && errorCode.equals("2")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Please login to access!</p></li>
-            </ul>
-            <%} else if (errorCode != null && errorCode.equals("3")) {%>
-            <ul id="message" class="success_msg">
-                <li><p>You have been logged out, session terminated.</p></li>
-            </ul>
-            <%} else if (errorCode != null && errorCode.equals("4")) {%>
-            <ul id="message" class="success_msg">
-                <li><p>Change password successful. Please to login!.</p></li>
-            </ul>
-            <% } else if (errorCode != null && errorCode.equals("5")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Account is not activated. Please check your email's inbox or contact an administrator for support.</p></li>
-            </ul>
-            <% } else if (errorCode != null && errorCode.equals("6")) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Incorrect username or password.</p></li>
-            </ul>
-            <% } else if (errorCode != null && errorCode.equals("7")) {%>
-            <ul id="message" class="success_msg">
-                <li><p>Account '<%=username%>' has been created successfully, account's password has been dispatched to your email address!</p></li>
-            </ul>
-            <% }%>
+            <div id="errorArea">
+                <script>
+                    if('<%=errorCode%>'){
+                        showError('<%=errorCode%>','<%=username%>');
+                    }
+                </script>
+            </div>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
