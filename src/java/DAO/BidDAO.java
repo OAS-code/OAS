@@ -118,4 +118,25 @@ public class BidDAO {
         }
     }
 
+    public boolean placeBid(Bid bid) {
+        try {
+            String sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
+            pre = conn.prepareStatement(sql);
+            pre.setDouble(1, bid.getAmount());
+            pre.setInt(2, bid.getBidderId());
+            pre.executeUpdate();
+            sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bid.getBidderId());
+            pre.setInt(2, bid.getAuctionId());
+            pre.setDouble(3, bid.getAmount());
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Bid DAO, placeBid failed.");
+            return false;
+        }
+    }
+
 }

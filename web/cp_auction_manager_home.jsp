@@ -131,7 +131,6 @@
                                         <div class="res_right"></div>
                                     </div>
                                 </td>
-
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>

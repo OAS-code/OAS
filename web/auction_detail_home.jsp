@@ -149,7 +149,7 @@
 
                                 <div class="hb_bg_mid">
                                     <ul class="clearfix" style="padding-left: 7px">
-                                        <li><p><span>Highest Bidder :</span> <strong class="lastbidder">No Bids Yet</strong></p></li>	
+                                        <li><p><span>Highest Bidder :</span> <strong class="lastbidder" id="ajax_load_top_bidder"><img src="images/ajax-loader.gif" align="center"></img></strong></p></li>	
                                         <li>
                                             <h3 class="countdown" >
                                                 <script language="JavaScript">
@@ -168,7 +168,7 @@
                                         </li>
 
                                         <li>
-                                            <div id="ajax_place_bid"> 
+                                            <div id="ajax_place_bid_area"> 
                                                 <center><img src="images/ajax-loader.gif" align="center"></img></center>
                                             </div>
                                         </li>
@@ -319,11 +319,19 @@
         </div>
     </body>
     <script>
-        loadPlaceBidArea('<%=auction.getId()%>');
+        ajax_place_bid_area('<%=auction.getId()%>');
+        ajax_load_top_bidder('<%=auction.getId()%>');
         window.setInterval(function() {
-            loadPlaceBidArea('<%=auction.getId()%>');
+            var obj = document.getElementById("yourbidding");
+            var obj2 = document.getElementById("placebid_btn");
+            if (document.activeElement === obj || document.activeElement === obj2) {
+                //do nothing
+            } else {
+                ajax_place_bid_area('<%=auction.getId()%>');
+            }
+            ajax_load_top_bidder('<%=auction.getId()%>');
         }, 3000);
-        
-        
+
+
     </script>
 </html>

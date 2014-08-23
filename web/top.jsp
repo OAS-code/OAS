@@ -50,9 +50,10 @@
             String role = (String) session.getAttribute("role");
             String balance = (String) request.getAttribute("balance");
         %>
+        <script type="text/javascript" src="JavaScript/ajax_top.js"></script>
     </head>
     <body onload="startTime()">
-        
+
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
@@ -76,7 +77,7 @@
                             <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
 
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Howdy, <%=userName%></a></li>
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Control Panel</a></li>
                             <li class="active"><a href="UserController?service=logout" title="Signout" onclick="return confirm('Are you sure?')">Sign out</a></li>
 
                             <%}%>
@@ -98,9 +99,11 @@
 
             <div class="header2_rgt">
                 <div class="dash_rgt">
+                    <ul id="userInfo">
+                        
+                    </ul>
                     <ul> 
                         <li>
-
                             <div class="search_total">
                                 <div class="search_total_lft"> </div>
                                 <div class="search_total_midd">
@@ -127,7 +130,9 @@
                                 </div>
                                 <div class="search_total_rgt"></div>
                             </div>
-                        </li></ul></div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -165,4 +170,10 @@
         <br>
         <br>
     </body>
+    <script>
+        loadUserInfo();
+        window.setInterval(function() {
+             loadUserInfo();
+        }, 5000);
+    </script>
 </html>
