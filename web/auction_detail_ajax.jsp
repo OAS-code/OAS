@@ -149,7 +149,9 @@
         </div>   
         <% } else if (errorCode==9) { %>
             <p>FAILED!</p>
-        <% }else { %>
+        <% } else if (errorCode == 10 ) { %>
+        <h3 class="currentprice" >Current bid: <%=data1%></h3> 
+        <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>
     </body>
