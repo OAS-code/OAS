@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 
-placedBid = 0;
 
 function ajax_place_bid_area(auctionId)
 {
@@ -55,6 +54,29 @@ function ajax_load_top_bidder(auctionId){
     };
 
     xmlhttp.open("GET", "BidController?service=ajax_load_top_bidder&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
+
+function ajax_load_current_bid(auctionId){
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_current_bid").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "BidController?service=ajax_load_current_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }

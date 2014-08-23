@@ -161,9 +161,8 @@
                                         </li>
 
                                         <li>
-                                            <div class="hb_buy_now_left">
+                                            <div class="hb_buy_now_left" id="ajax_load_current_bid">
                                                 <h3 class="currentprice" >Current bid: <%=auction.getCurrentBidString()%></h3> 
-                                                <span class="price" style="display:none;"></span>
                                             </div>
                                         </li>
 
@@ -188,15 +187,7 @@
                                             </div>
 
                                         </li>
-                                        <li class="hb_li_padding_bottom_none">
-                                            <div class="hb_buy_now_left">
-                                                <p class="hb_font_weight_normal">&nbsp;</p>
-                                            </div>
-                                            <div class="hb_buy_now_right hb_buy_now_right1">
-                                                <span class="hb_font_size_small"><p  class="bidamount">&nbsp;</p></span>
-                                            </div>
-
-                                        </li>
+                                        
                                         <li class="hb_li_padding_bottom_none">
                                             <div class="hb_buy_now_left">
                                                 <p class="hb_font_weight_normal">&nbsp;</p>
@@ -321,6 +312,7 @@
     <script>
         ajax_place_bid_area('<%=auction.getId()%>');
         ajax_load_top_bidder('<%=auction.getId()%>');
+        ajax_load_current_bid('<%=auction.getId()%>');
         window.setInterval(function() {
             var obj = document.getElementById("yourbidding");
             var obj2 = document.getElementById("placebid_btn");
@@ -330,6 +322,7 @@
                 ajax_place_bid_area('<%=auction.getId()%>');
             }
             ajax_load_top_bidder('<%=auction.getId()%>');
+            ajax_load_current_bid('<%=auction.getId()%>');
         }, 3000);
 
 

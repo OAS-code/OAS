@@ -56,7 +56,9 @@ function showError(errorCode, username) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username contains space characters!</p></li></ul>';
     }else if (errorCode == 13) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Password contains space characters!</p></li></ul>';
-    } 
+    }else{
+        document.getElementById("errorArea").innerHTML = '';
+    }
 }
 
 

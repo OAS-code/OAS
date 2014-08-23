@@ -77,7 +77,7 @@
                             <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
 
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer">Control Panel</a></li>
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer"><%if (role.equals("0")) { %>User<% }else if(role.equals("1")){ %>Staff<% }else if(role.equals("2")){ %>Admin<% } %> Control Panel</a></li>
                             <li class="active"><a href="UserController?service=logout" title="Signout" onclick="return confirm('Are you sure?')">Sign out</a></li>
 
                             <%}%>
