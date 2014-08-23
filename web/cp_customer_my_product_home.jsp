@@ -122,7 +122,7 @@
 
                                         <td width="100" align="center">
 
-                                            <a href="http://www.unieauction.com/buy-sell-demo/auctions/view/dsadfsaf" title="Dsadfsaf">
+                                            <a href="" title="Dsadfsaf">
                                                 Honda CBR 250</a>
 
                                         </td>		
@@ -135,12 +135,14 @@
                                         <td width="20" align="center">&nbsp;
                                         </td>
                                         <td width="20" align="center"> 
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" title="Product Edit" class="editicon"></a>  
+                                            <a href="AuctionController?service=edit_myproduct" title="Product Edit" class="editicon"></a>  
                                             &nbsp;
                                              
                                         </td>
                                         <td width="20" align="center">
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon" onClick="return confirm('Are you sure?')"><img src="images/delete.png" border="0"></a> 
+                                            <a href="" title="Product Delete" onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" >
+                                                <img src="images/delete.png" border="0">
+                                            </a> 
                                             &nbsp;
                                         </td>
                                         <td width="100" align="center">
@@ -158,7 +160,7 @@
 
                                         <td width="100" align="center">
 
-                                            <a href="http://www.unieauction.com/buy-sell-demo/auctions/view/test1" title="Test1">
+                                            <a href="" title="Test1">
                                                 Keyboard razer</a>
 
                                         </td>		
@@ -175,11 +177,11 @@
                                         </td>
                                         <td width="20" align="center">
                                            
-                                            <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon"></a>  
+                                            <a href=" " title="Product Edit" class="editicon"></a>  
                                             &nbsp;
                                         </td>
                                         <td width="20" align="center">
-                                              <a href="http://www.unieauction.com/buy-sell-demo/site/buyerseller/editproduct/277 " title="Product Edit" class="editicon"><img src="images/delete.png" border="0"></a>
+                                              <a href=" " title="Product Delete"><img src="images/delete.png" border="0"></a>
                                              &nbsp;
                                         </td>
                                         

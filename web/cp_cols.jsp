@@ -61,16 +61,16 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_transactions")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="?current_page=my_transactions" title="My transactions">My transactions</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="cp_customer_transaction.jsp?current_page=my_transactions" title="My transactions">My transactions</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="?current_page=my_transactions" title="My transactions">My transactions</a></li>
+                    <li class="" id="edit_profile_active"><a href="cp_customer_transaction.jsp?current_page=my_transactions" title="My transactions">My transactions</a></li>
                         <% }
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("won_auction")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="?current_page=won_auction" title="Won auction">Won auction</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="cp_customer_auction_won.jsp?current_page=won_auction" title="Won auction">Won auction</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="?current_page=won_auction" title="Won auction">Won auction</a></li>
+                    <li class="" id="edit_profile_active"><a href="cp_customer_auction_won.jsp?current_page=won_auction" title="Won auction">Won auction</a></li>
                         <% }
                             }
                             if (rank == 2) {
