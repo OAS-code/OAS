@@ -24,14 +24,12 @@
 
         <jsp:include page="top.jsp" />
 
-        <div class="header2">   
-            <div id="errorArea">
-                <script>
-                    if('<%=errorCode%>'){
-                        showError('<%=errorCode%>','<%=username%>');
-                    }
-                </script>
+        <div class="header2"> 
+            <div id="errorArea"> 
             </div>
+            <script>
+                showError('<%=errorCode%>', '<%=username%>');
+            </script>
             <div class="login-part">
                 <h2 title="LOGIN">Login</h2>
             </div>
@@ -42,17 +40,20 @@
                             <div class="log_fields" style="width:460px;">
                                 <p>User name <span class="red">*</span>:</p>
                                 <input type="text"  name="username" id="username" value="Enter username..." class="fl" onfocus="if (this.value === 'Enter username...')
-                                            this.value = '';" onblur="if (this.value === '')
-                                                        this.value = 'Enter username...'" />
-                               
+                                            this.value = '';" onblur="if (thi
+                                                            s.value === ''
+                                                    )
+                                                            this.value = 'Enter username...'" />
                             </div>
                             <span class="red fl"></span>
 
                             <div class="log_fields">
                                 <p>Password <span class="red">*</span>:</p>
                                 <input type="password" id="password" name="password" id="password" value="********" class="fl" onfocus="if (this.value === '********')
-                                            this.value = '';" onblur="if (this.value === '')
-                                                        this.value = '********'">    
+                                            this.value = '';" onblur="if (thi
+                                                            s.value === ''
+                                                    )
+                                                            this.value = '********'">    
                             </div>
 
                         </div>		<span class="red fl"></span>
@@ -62,7 +63,7 @@
                                 if (localStorage.chkbx && localStorage.chkbx != '') {
                                     $('#check').attr('checked', 'checked');
                                     $('#username').val(localStorage.usrname);
-                                    $('#password').val(localStorage.pass;
+                                            $('#password').val(localStorage.pass;
                                 } else {
                                     $('#check').removeAttr('checked');
                                     $('#username').val('');
@@ -92,7 +93,7 @@
                         <div class="login_button fl clr">
                             <div class="login_button_lft"></div>
                             <div class="login_button_midd">
-                                <input type="submit" title="SIGNIN" value="Signin" name="login" id="login" onClick="remember_me()">
+                                <input type="submit" title="SIGNIN" value="Signin" name="login" id="login" onClick="validateLogin()">
                                 <input type="hidden" name="service" id="service" value="login">
                             </div>
                             <div class="login_button_rgt"></div>
@@ -110,7 +111,6 @@
                             <div class="reg_lft"></div>
                             <div class="reg_midd"><a title="Register" href="register.jsp">Register</a></div>
                             <div class="reg_rgt"></div>
-
                         </div>
                     </div>
                 </div>

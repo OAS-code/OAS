@@ -30,31 +30,31 @@ function validateLogin() {
 }
 
 function showError(errorCode, username) {
-    if (errorCode === 1) {
+    if (errorCode == 1) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>User name or password does not exist.</p></li></ul>';
-    } else if (errorCode === 2) {
+    } else if (errorCode == 2) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Please login to access!</p></li></ul>';
-    } else if (errorCode === 3) {
+    } else if (errorCode == 3) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="success_msg"><li><p>You have been logged out, session terminated.</p></li></ul>';
-    } else if (errorCode === 4) {
+    } else if (errorCode == 4) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="success_msg"><li><p>Change password successful. Please to login!.</p></li></ul>';
-    } else if (errorCode === 5) {
+    } else if (errorCode == 5) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Account is not activated. Please check your email\'s inbox or contact an administrator for support.</p></li></ul>';
-    } else if (errorCode === 6) {
+    } else if (errorCode == 6) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Incorrect username or password.</p></li></ul>';
-    } else if (errorCode === 7) {
+    } else if (errorCode == 7) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="success_msg"><li><p>Account ' + username + ' has been created successfully, account\'s password has been dispatched to your email address!</p></li></ul>';
-    } else if (errorCode === 8) {
+    } else if (errorCode == 8) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Please enter username or pasword.</p></li></ul>';
-    } else if (errorCode === 9) {
+    } else if (errorCode == 9) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username must contains at least 3 characters and at most 20 characters!</p></li></ul>';
-    }else if (errorCode === 10) {
+    }else if (errorCode == 10) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Password must contains at least 3 characters and at most 20 characters!</p></li></ul>';
-    }else if (errorCode === 11) {
+    }else if (errorCode == 11) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username contains illegal characters!</p></li></ul>';
-    }else if (errorCode === 12) {
+    }else if (errorCode == 12) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Username contains space characters!</p></li></ul>';
-    }else if (errorCode === 13) {
+    }else if (errorCode == 13) {
         document.getElementById("errorArea").innerHTML = '<ul id="message" class="error_msg"><li><p>Password contains space characters!</p></li></ul>';
     } 
 }
