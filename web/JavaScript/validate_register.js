@@ -9,13 +9,14 @@ function validateRegister(){
 }
 function checkUsername(){
     var username = document.forms["registerForm"]["username"].value;
+    if ()
     if(username.length < 3 || username.length > 20 )  {
-       document.getElementById("errorUsername").innerHTML='<div id="errorUsername"><img src="images/error.png" width="15"><label><span class="red">Error</span></label></div>';
+       document.getElementById("errorUsername").innerHTML='<div id="errorUsername"><img src="images/error.png" width="15"><label><span class="red">Username must contains at least 3 characters and at most 20 characters.</span></label></div>';
         return false;     
         
     }
     return true;
 }
-function checkPassword(){
+function checkEmail(){
     
 }
