@@ -120,7 +120,12 @@ public class BidDAO {
 
     public boolean placeBid(Bid bid) {
         try {
-            String sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
+            String sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
+            pre = conn.prepareStatement(sql);
+            pre.setDouble(1, bid.getAmount());
+            pre.setInt(2, bid.getBidderId());
+            pre.executeUpdate();
+            sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, bid.getBidderId());
             pre.setInt(2, bid.getAuctionId());

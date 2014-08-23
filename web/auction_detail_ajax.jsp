@@ -129,8 +129,28 @@
         </div>
         <% } else if (errorCode == 7) { %>
         <%=data1%>
-        <% } else { %>
-        <p>Internal Error!</p>
+        <% } else if (errorCode == 8) { %>
+        Your account balance is not sufficient!
+        <div class="hb_buy_now_left">
+            <div class="hb_place_bid">
+
+            </div>
+        </div>
+        <div class="hb_buy_now_right">
+            <div class="hb_place_bid_button">
+                <div class="hb_place_bid_button_left">
+                </div>
+                <div class="hb_place_bid_button_mid" id="placebid_btn">
+                    <p><a href="UserController?service=start_charing" title="" class="fl popup" id="dialog_link" data-rel="box">CHARGE MONEY</a></p>
+                </div>
+                <div class="hb_place_bid_button_right">
+                </div>
+            </div>
+        </div>   
+        <% } else if (errorCode==9) { %>
+            <p>FAILED!</p>
+        <% }else { %>
+        <p>INTERNAL ERROR!</p>
         <% } %>
     </body>
 </html>

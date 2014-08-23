@@ -172,6 +172,8 @@
     </body>
     <script>
         loadUserInfo();
-        
+        window.setInterval(function() {
+             loadUserInfo();
+        }, 5000);
     </script>
 </html>

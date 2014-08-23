@@ -65,12 +65,7 @@ function startBidding(auctionId, nextBidValue)
     var userBidValue = document.getElementById("yourbidding").value;
     if (isNaN(userBidValue)) {
         document.getElementById("placebid_btn").innerHTML = '<p><a href="#" onClick="startBidding(' + auctionId + ', ' + nextBidValue + ')" title="BID ME" class="fl popup" id="dialog_link" data-rel="box">PLACE MY BID</a></p>';
-        document.getElementById("yourbidding_noti").innerHTML = '<div id="yourbidding_noti"><font color=red>Your bid must be in number!</font></div>';
-        return false;
-    }
-    else if (userBidValue < nextBidValue) {
-        document.getElementById("placebid_btn").innerHTML = '<p><a href="#" onClick="startBidding(' + auctionId + ', ' + nextBidValue + ')" title="BID ME" class="fl popup" id="dialog_link" data-rel="box">PLACE MY BID</a></p>';
-        document.getElementById("yourbidding_noti").innerHTML = '<div id="yourbidding_noti"><font color=red>Your bid is invalid. Suggested bid: $' + nextBidValue + '</font></div>';
+        document.getElementById("yourbidding_noti").innerHTML = '<font color=red>Your bid must be in number!</font>';
         return false;
     }
     var xmlhttp;
@@ -85,6 +80,9 @@ function startBidding(auctionId, nextBidValue)
     xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
             document.getElementById("placebid_btn").innerHTML = xmlhttp.responseText;
+            if (xmlhttp.responseText=="CHARGE MONEY"){
+                document.getElementById("yourbidding_noti").innerHTML = '<font color=red>Your account balance is not sufficient!</font>';
+            }
         }
     };
     xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&userBidValue="+userBidValue+"&random=" + Math.random(), true);
