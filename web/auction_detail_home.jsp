@@ -131,20 +131,10 @@
                                                         </div>
                                 -->
                             </div>
-                            <div class="detail_page_top_mid">
-                                <div class="detail_big_history"><h1>Bid Histories</h1>  </div>
-                                <div class="bid_history" id="" style="float:left; width:250px;" rel="1" name=""> <link href="css/slider.css" rel="stylesheet" type="text/css">
-                                        <div class="detail_big_history_content"><p>1 Bids Total</p>  </div>
-
-                                        <div class="detail_big_history_current_winning"><h1>Current winning Bidders</h1> </div>        
-                                        <div class="winning_list"> 
-                                            <ul>
-                                                <li> <div class="winning_list_left"><h1>n**am</h1> <p>2014-08-17 18:06:29</p>  </div> <div class="winning_list_right"><p><font class="">$</font> 50.01</p>  </div>  </li>
-                                                <div> <a class="detail_winner_down_list" title="Arrow" href="">  </a>  </div>
-                                            </ul>
-                                        </div>
-                                </div> 
+                            <div class="detail_page_top_mid" id="ajax_load_detail_page_top_mid">
+                                <img src="images/ajax-loader.gif" align="center"></img>
                             </div>
+                                            
                             <div class="detail_page_top_right">
 
                                 <div class="hb_bg_mid">
@@ -251,12 +241,14 @@
         </div>
     </body>
     <script>
+        ajax_load_detail_page_top_mid('<%=auction.getId()%>');
         ajax_place_bid_area('<%=auction.getId()%>');
         ajax_load_top_bidder('<%=auction.getId()%>');
         ajax_load_current_bid('<%=auction.getId()%>');
         ajax_load_countdown('<%=auction.getId()%>');
         ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
         window.setInterval(function() {
+            ajax_load_detail_page_top_mid('<%=auction.getId()%>');
             var obj = document.getElementById("yourbidding");
             var obj2 = document.getElementById("placebid_btn");
             if (document.activeElement === obj || document.activeElement === obj2) {

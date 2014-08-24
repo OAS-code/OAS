@@ -134,6 +134,29 @@ function ajax_load_detail_bottom_outer_top(auctionId){
     return false;
 }
 
+function ajax_load_detail_page_top_mid(auctionId){
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_detail_page_top_mid").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "BidController?service=ajax_load_detail_page_top_mid&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
+
 function startBidding(auctionId, nextBidValue)
 {
     document.getElementById("placebid_btn").innerHTML = '<p>PROCESSING..</p>';

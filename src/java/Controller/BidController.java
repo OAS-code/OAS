@@ -137,6 +137,14 @@ public class BidController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=10&data1=" + currentBid);
             rd.forward(request, response);
             return;
+        } else if (service.equalsIgnoreCase("ajax_load_detail_page_top_mid")) {
+            String auctionId = request.getParameter("auctionId");
+            BidDAO bidDAO = new BidDAO();
+            ArrayList bids = bidDAO.getBidFromAuctionId(Integer.parseInt(auctionId), 7);
+            request.setAttribute("bids", bids);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=16&data1="+bidDAO.getTotalBidsOnAuctionId(Integer.parseInt(auctionId)));
+            rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("place_bid")) {
             String auctionId = request.getParameter("auctionId");
             String userBidValue = request.getParameter("userBidValue");

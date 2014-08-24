@@ -4,6 +4,8 @@
     Author     : Duc
 --%>
 
+<%@page import="Entity.Bid"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -250,6 +252,43 @@
                 <p><%=auction.getFormattedEndDate()%> </p>
             </div>
         </div>
+        <% } else if (errorCode == 16) {
+            ArrayList<Bid> bids = (ArrayList) request.getAttribute("bids");
+            int count = 0;
+        %>
+        <!--
+        <div class="detail_big_history">
+            <h1>Bid Histories</h1>  
+        </div>
+        -->
+        <div class="bid_history" id="" style="float:left; width:250px;" rel="1" name=""> <link href="css/slider.css" rel="stylesheet" type="text/css">
+            <!--
+            <div class="detail_big_history_content">
+                <p> Bids Total</p>  
+            </div>
+            -->
+            <div class="detail_big_history_current_winning">
+                <h1>Current winning Bidders (Total bids: <%=data1%>)</h1> 
+            </div>        
+            <div class="winning_list"> 
+                <% while (count < bids.size()) { %>
+                <ul>
+                    <li> <div class="winning_list_left"><h1><%=bids.get(count).getBidderName()%></h1> <p><%=bids.get(count).getDateFormatted()%></p>  </div> <div class="winning_list_right"><p><%=bids.get(count).getAmountString()%></p>  </div>  </li>
+                    
+                </ul>
+                <% 
+                count++;
+            } 
+                if (count <=0) { %>
+                <ul>
+                    <li> <div class="winning_list_left"><h1>No Bids Yet</h1></div>   </li>
+                </ul>
+                <% } %>
+            </div>
+                <% if (Integer.parseInt(data1) > 7) { %> 
+                <div class="detail_winner_down_list">  </div>
+                <% } %>
+        </div> 
         <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% }%>

@@ -74,13 +74,13 @@ public class BidDAO {
     public ArrayList<Bid> getBidFromAuctionId(int auctionId, int top) {
         ArrayList<Bid> bids = new ArrayList<Bid>();
         try {
-            
+
             String sql = "SELECT bid_id, bidder_id, u.username AS bidder_name, auction_id, a.title AS auction_name, amount, UNIX_TIMESTAMP(date) AS date "
                     + " FROM bid b "
                     + "INNER JOIN user u ON b.bidder_id = u.id "
                     + "INNER JOIN auction a ON b.auction_id = a.auctionid "
                     + "WHERE a.auctionid = ? ORDER BY b.amount DESC LIMIT ?";
-            
+
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);
             pre.setInt(1, auctionId);
@@ -99,7 +99,7 @@ public class BidDAO {
                 bid.setDate(date);
                 bids.add(bid);
             }
-            
+
             return bids;
         } catch (SQLException ex) {
             Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -107,8 +107,8 @@ public class BidDAO {
         }
         return bids;
     }
-    
-    public String getTopBidderNameFromAuctionId(int auctionId){
+
+    public String getTopBidderNameFromAuctionId(int auctionId) {
         ArrayList<Bid> bids = getBidFromAuctionId(auctionId, 1);
         if (bids.size() > 0) {
             UserDAO userDao = new UserDAO();
@@ -117,8 +117,8 @@ public class BidDAO {
             return "No Bids Yet";
         }
     }
-    
-    public Double getCurrentBidFromAuctionId(int auctionId){
+
+    public Double getCurrentBidFromAuctionId(int auctionId) {
         ArrayList<Bid> bids = getBidFromAuctionId(auctionId, 1);
         if (bids.size() > 0) {
             return bids.get(0).getAmount();
@@ -128,10 +128,26 @@ public class BidDAO {
             return auction.getStartPrice();
         }
     }
-    
+
     public String getCurrentBidFromAuctionIdString(int auctionId) {
         FormatMoney fm = new FormatMoney();
         return fm.showPriceInUSD(this.getCurrentBidFromAuctionId(auctionId), 1);
+    }
+
+    public int getTotalBidsOnAuctionId(int auctionId) {
+        try {
+            String sql = "SELECT COUNT(*) AS totalBids FROM bid WHERE auction_id = ?";
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, auctionId);
+            rs = pre.executeQuery();
+            rs.next();
+            return rs.getInt("totalBids");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return 0;
+        }
     }
 
     public boolean placeBid(Bid bid) {
