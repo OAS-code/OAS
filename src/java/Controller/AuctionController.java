@@ -394,10 +394,10 @@ public class AuctionController extends HttpServlet {
             String auctionId = request.getParameter("auctionId");
             Auction auction = dao.getAuction(Integer.parseInt(auctionId));
             String status = auction.getStatus();
-            String endDate = auction.getFormattedEndDate();
-            System.out.println(status);
-            System.out.println(endDate);
-            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId="+"&data1="+status+"&data2="+endDate);
+            String endDate = auction.getFormattedEndDate(1);
+            //System.out.println(status);
+            //System.out.println(endDate);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId="+auctionId+"&data1="+status+"&data2="+endDate);
             rd.forward(request, response);
             return;
         } else {

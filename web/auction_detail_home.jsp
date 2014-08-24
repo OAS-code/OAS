@@ -160,7 +160,7 @@
                                                             + "border-top-color: rgb(52, 52, 52);border-top-style: none;border-top-width: 0px;color: rgb(52, 52, 52);display: block;float: left;font-family: arial;"
                                                             + "font-size: 24px;font-style: normal;font-variant: normal;font-weight: bold;height: 24px;line-height: 24px;list-style-image: none;list-style-position: outside;"
                                                             + "list-style-type: none;margin-bottom: 0px;margin-left: 0px;margin-right: 0px;margin-top: 0px;outline-color: rgb(52, 52, 52);outline-style: none;outline-width: 0px;"
-                                                            + "padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;text-align: center;width: 271px;zoom: 1;'>--:--:--:--</span>");
+                                                            + "padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;text-align: center;width: 271px;zoom: 1;'><img src='images/ajax-loader.gif' align='center'></img></span>");
                                                 </script>
                                             </h3>
                                             <label style=" float:left;padding-left:72px;display:block;color:#666;"><span class="hrs">Days</span><span class="min">Hrs</span><span class="min">Min</span><span class="sec">Sec</span></label>
@@ -169,7 +169,7 @@
 
                                         <li>
                                             <div class="hb_buy_now_left" id="ajax_load_current_bid">
-                                                <h3 class="currentprice" >Current bid: <%=auction.getCurrentBidString()%></h3> 
+                                                <h3 class="currentprice" >Current bid: <img src='images/ajax-loader.gif' align='center'></img></h3> 
                                             </div>
                                         </li>
 
@@ -320,7 +320,7 @@
         ajax_place_bid_area('<%=auction.getId()%>');
         ajax_load_top_bidder('<%=auction.getId()%>');
         ajax_load_current_bid('<%=auction.getId()%>');
-        ajax_load_countdown('<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
+        ajax_load_countdown(<%=auction.getId()%>);
         window.setInterval(function() {
             var obj = document.getElementById("yourbidding");
             var obj2 = document.getElementById("placebid_btn");
@@ -331,7 +331,7 @@
             }
             ajax_load_top_bidder('<%=auction.getId()%>');
             ajax_load_current_bid('<%=auction.getId()%>');
-            ajax_load_countdown('<%=auction.getFormattedEndDate(1)%>', <%=auction.getId()%>);
+            ajax_load_countdown(<%=auction.getId()%>);
         }, 3000);
         
 

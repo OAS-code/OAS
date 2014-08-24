@@ -78,16 +78,8 @@ function ajax_load_current_bid(auctionId) {
     return false;
 }
 
-function ajax_load_countdown(endDate, auctionId, status) {
-    if (!status || status == "On-going") {
-        startCountdown(endDate);
-    } else if (status == "Future") {
-        document.getElementById("ajax_load_countdown").innerHTML = "Coming Soon..";
-    } else { 
-        document.getElementById("ajax_load_countdown").innerHTML = "Auction Closed";
-    }
-    
-    
+countdownFirstTime = 0;
+function ajax_load_countdown(auctionId) {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -101,9 +93,19 @@ function ajax_load_countdown(endDate, auctionId, status) {
     {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
         {
-            //document.getElementById("ajax_load_countdown").innerHTML = xmlhttp.responseText;
+            var rawData = xmlhttp.responseText;
+            var data = rawData.split('|');
+            if (data[3] == "On-going") {
+                //alert(data[1]);
+                startCountdown(data[1], "Auction Closed");
+            } else if (data[3] == "Future") {
+                startCountdown(null, "Coming Soon..");
+            } else {
+                startCountdown(null, "Auction Postponed");
+            }
         }
     };
+
     xmlhttp.open("GET", "AuctionController?service=ajax_load_countdown&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
