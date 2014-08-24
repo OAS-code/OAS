@@ -34,39 +34,18 @@
                 int error = Integer.parseInt(errorCode);
         %>
         <div class="header2"> 
-            <%if (error == 0) {
-                } else if (error == 1) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Passwords must contains at least 6 characters or longer.</p></li>
-            </ul><br>
-            <% } else if (error == 2) {%>
-            <ul id="message" class="error_msg">
-                <li><p>Re-type password does not match.</p></li>
-            </ul><br>
-            <% } else if (error == 4) { %>
-            <ul id="message" class="error_msg">
-                <li><p>Internal error! Please try again later.</p></li>
-            </ul><br>
-            <% } else if (error == 5) { %>
-            <ul id="message" class="error_msg">
-                <li><p>It looks like that link has expired. But don't worry, you can request a new one here. </p></li>
-            </ul><br>
-            <% } else if (error == 6) { %>
-            <ul id="message" class="error_msg">
-                <li><p>Internal Error! Could not reset your account password, please try again later. </p></li>
-            </ul><br>
-            <% } else if (error == 7) { %>
-            <ul id="message" class="error_msg">
-                <li><p>Token is hacked! But don't worry, you can request a new one here. </p></li>
-            </ul><br>
-            <% }%>
+            <div id="errorArea"> 
+            </div>
+            <script>
+                showError('<%=errorCode%>');
+            </script>
 
             <div class="login-part">
                 <h2 title="Forgot_password">Please enter your new password below.</h2>
             </div>
             <div class="login_middle">
                 <div class="login_lft">
-                    <form accept-charset="utf-8" method="post" action="UserController">	
+                    <form accept-charset="utf-8" method="post" action="UserController" name="reset_password" onsubmit="return validateResetPassword();">	
                         <div class="login_form">
                             <div class="log_fields">
                                 <p>New password <span class="red">*</span>:</p>
@@ -88,7 +67,7 @@
                             <div class="login_button_midd">
                                 <input type="hidden" id="tokenFinish" name="tokenFinish" value="<%=token%>">
                                 <input type="hidden" id="service" name="service" value="reset_password_finish">
-                                <input type="submit" title="Send" value="Submit" name="reset_password" id="reset_password">
+                                <input type="submit" title="Send" value="Submit" name="reset_password" id="reset_password" onclick="validateResetPassword();">
                             </div>
                             <div class="login_button_rgt"></div>
                         </div>
