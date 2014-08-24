@@ -19,6 +19,7 @@
         <%
             Category category = (Category) request.getAttribute("category");
         %>
+        <script type="text/javascript" src="JavaScript/validate_category_edit.js"></script>
     </head>
     <body> 
         <%@ include file="perm_staff.jsp" %>
@@ -27,33 +28,65 @@
                 <h1 title="User Manager">Edit category</h1>
                 <p>&nbsp;</p>
             </div>    
-            <form name="form1" method="post" action="CategoryController"> 
+            <form name="EditCategoryForm" method="post" action="CategoryController" onsubmit="return validateEditCategory();"> 
                 <div class="message_common">
                     <div class="login_middle_common_profil">
                         <table border="0" cellspacing="10" cellpadding="10">
                             <tr>
                                 <td width="550">
+                                    <table border="0" cellpadding="0" cellspacing="0">
 
-                                    <div class="user_name_common">
-                                        <b style="width: 150px;">Category name <span class="red">*</span>:</b>
-                                    </div>
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width: 150px;">Category name <span class="red">*</span>:</b>
+                                                </div>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" maxlength="20" name="name" id="name" value="<%=category.getName()%>"></h2>
-                                        </div>		
-                                    </div>
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="name" id="name" value="<%=category.getName()%>"></h2>
 
-                                    <div class="user_name_common">
-                                        <b style="width: 150px;">Description: </b>
-                                    </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div  id="errorCategoryname" style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
 
-                                    <div class="user_name_common" style="width:400px;">
-                                        <div class="text_feeld">
-                                            <h2><input type="text" name="description" id="description" value="<%=category.getDescription()%>"></h2>
-                                        </div>		
-                                    </div>
 
+
+
+                                        <tr>
+                                            <td>
+                                                <div class="user_name_common">
+                                                    <b style="width: 150px;">Description: </b>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div class="user_name_common" style="margin: 0px 0px 0px 0px">
+                                                    <div class="text_feeld">
+                                                        <h2><input type="text" name="description" id="description" value="<%=category.getDescription()%>"></h2>
+
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <div  id="errorDescription" style="margin: 0px 0px 10px 0px">
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                         </table>
@@ -66,7 +99,7 @@
                                 <td width="140">
 
                                 </td>
-                                
+
                                 <td>
                                     <div class="profil_butoon" style="width:auto;">
                                         <div class="res_left"></div>

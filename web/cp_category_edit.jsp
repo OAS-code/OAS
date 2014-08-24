@@ -12,11 +12,14 @@
         <title>Edit category</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        <script type="text/javascript" src="JavaScript/validate_category_edit.js"></script>
     </head>
     <body>
         <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <div id="error">
+            </div>
             <jsp:include page="cp_cols.jsp" />
             <%@ include file="cp_category_edit_home.jsp" %>                    
         </div>

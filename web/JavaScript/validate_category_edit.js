@@ -4,26 +4,24 @@
  * and open the template in the editor.
  */
 
-function validateAddCategory() {
-    
+function validateEditCategory() {
     document.getElementById("error").innerHTML = '';
     var total = 0;
     if (checkCategoryname()){
-        total++;
+        total ++;
     }
-   
     if (checkDescription()){
-        total++;
-        
+        total ++;
     }
-      if (total < 2) {
+    
+    if (total < 2) {
         return false;
     }
     return true;
 }
 function checkCategoryname() {
-    var name = document.forms["AddCategoryForm"]["name"].value;
-    if (!name || name.length < 1) {
+    var name = document.forms["EditCategoryForm"]["name"].value;
+    if (name == "" || name == null) {
         document.getElementById("errorCategoryname").innerHTML = '<font color="red">Please enter Category name!</font>';
         return false;
     } 
@@ -37,10 +35,8 @@ function checkCategoryname() {
 }
 
 function checkDescription(){
-    var description = document.forms["AddCategoryForm"]["description"].value;
-    
-    if (description.length > 100) {
-       
+    var description = document.forms["EditCategoryForm"]["description"].value;
+    if (description &&description.length>0 &&description.length > 100) {
         document.getElementById("errorDescription").innerHTML = '<font color="red">Description must contains at most 100 characters.</font>';
         return false;
     }
