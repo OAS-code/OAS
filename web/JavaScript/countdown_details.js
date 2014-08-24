@@ -4,7 +4,7 @@ function calcage(secs, num1, num2) {
         s = "0" + s;
     return "<b>" + s + "</b>";
 }
-
+runningClock = 0;
 function CountBack(secs) {
     if (secs <= 0) {
         document.getElementById("ajax_load_countdown").innerHTML = FinishMessage;
@@ -19,7 +19,7 @@ function CountBack(secs) {
 
     if (CountActive) {
         var SetTimeOutPeriod = (Math.abs(CountStepper) - 1) * 1000 + 990;
-        setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
+        runningClock = setTimeout("CountBack(" + (secs + CountStepper) + ")", SetTimeOutPeriod);
     }
 
 
@@ -37,7 +37,6 @@ if (typeof (LeadingZero) == "undefined")
     LeadingZero = true;
 function startCountdown(TargetDate, FinishMessage1) {
     if (TargetDate) {
-
         CountStepper = Math.ceil(CountStepper);
         if (CountStepper == 0)
             CountActive = false;
@@ -54,6 +53,7 @@ function startCountdown(TargetDate, FinishMessage1) {
     if (FinishMessage1) {
         FinishMessage = FinishMessage1;
     }
+    clearTimeout(runningClock);
     CountBack(gsecs);
 }
 

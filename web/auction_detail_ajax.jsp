@@ -4,6 +4,7 @@
     Author     : Duc
 --%>
 
+<%@page import="Entity.Auction"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -21,8 +22,16 @@
             String nextBidValue = (String) request.getParameter("nextBidValue");
             String data1 = (String) request.getParameter("data1");
             String data2 = (String) request.getParameter("data2");
+            String data3 = (String) request.getParameter("data3");
+            String data4 = (String) request.getParameter("data4");
+            String data5 = (String) request.getParameter("data5");
+            String data6 = (String) request.getParameter("data6");
+            String data7 = (String) request.getParameter("data7");
+            String data8 = (String) request.getParameter("data8");
+            String data9 = (String) request.getParameter("data9");
+            String data10 = (String) request.getParameter("data10");
         %>
-        
+
     </head>
     <body>
         <%
@@ -109,9 +118,9 @@
         </div>
         <% } else if (errorCode == 4) { %>
         <p>BIDDING FAILED!</p>
-        <% }else if (errorCode == 5) { %>
+        <% } else if (errorCode == 5) { %>
         <p>BID PLACED!</p>
-        <% }else if (errorCode == 6) { %>
+        <% } else if (errorCode == 6) { %>
         You're already the highest bidder!
         <div class="hb_buy_now_left">
             <div class="hb_place_bid">
@@ -129,7 +138,7 @@
                 </div>
             </div>
         </div>
-        <% } else if (errorCode == 7) { %>
+        <% } else if (errorCode == 7) {%>
         <%=data1%>
         <% } else if (errorCode == 8) { %>
         Your account balance is not sufficient!
@@ -149,9 +158,9 @@
                 </div>
             </div>
         </div>   
-        <% } else if (errorCode==9) { %>
-            <p>FAILED!</p>
-        <% } else if (errorCode == 10 ) { %>
+        <% } else if (errorCode == 9) { %>
+        <p>FAILED!</p>
+        <% } else if (errorCode == 10) {%>
         <h3 class="currentprice" >Current bid: <%=data1%></h3> 
         <% } else if (errorCode == 11) { %>
         Your have to bid more than that.
@@ -171,9 +180,9 @@
                 </div>
             </div>
         </div>
-        <% } else if (errorCode==12) { %>
+        <% } else if (errorCode == 12) { %>
         <p>INVALID BID</p>
-        <% }else if (errorCode==13) { %>
+        <% } else if (errorCode == 13) {%>
         <p>|<%=data2%>|<%=auctionIdString%>|<%=data1%>|</p>
         <% } else if (errorCode == 14) { %>
         Auction is not available at the moment.
@@ -193,8 +202,56 @@
                 </div>
             </div>
         </div>   
+        <% } else if (errorCode == 15) {
+            Auction auction = (Auction) request.getAttribute("auction");
+        %>
+        <div class="detail-action_detail">  
+            <h1>Auction Details</h1>
+            <div class="detail-action_detail_lef"> 
+                <h2>Auction ID :  </h2>
+            </div>
+            <div class="detail-action_detail_rgt">
+                <p>#<%=auction.getId()%>  </p>
+            </div>
+            <div class="detail-action_detail_lef"> 
+                <h2>Auction Status :  </h2>
+            </div>
+            <div class="detail-action_detail_rgt">
+                <p><%=auction.getStatus()%></p>
+            </div>
+            <div class="detail-action_detail_lef"> 
+                <h2>Auction's owner :  </h2>
+            </div>
+            <div class="detail-action_detail_rgt">
+                <p><%=auction.getSellerName()%></p>
+            </div>
+        </div>
+        <div class="detail-action_detail">  
+            <h1>Price Details</h1>
+            <div class="detail-action_detail_lef"> 
+                <h2> Price Starting From :</h2>
+                <h2> Bidding step: </h2>
+                <h2> Reserved price :</h2>
+            </div>
+            <div class="detail-action_detail_rgt">
+                <p><%=auction.getStartPriceString()%>  </p>
+                <p><%=auction.getIncreaseByString()%></p>
+                <p><%=auction.getBuynowPriceString()%></p>
+            </div>
+        </div>
+        <div class="detail-action_detail detail_last-bgnone">  
+            <h1>Timing Details</h1>
+            <div class="detail-action_detail_lef"> 
+                <h2>Start time :</h2>
+                <h2>End time :</h2>
+            </div>
+            <div class="detail-action_detail_rgt">
+                <p><%=auction.getFormattedStartDate()%> </p>
+                <p><%=auction.getFormattedEndDate()%> </p>
+            </div>
+        </div>
         <% } else { %>
         <p>INTERNAL ERROR!</p>
-        <% } %>
+        <% }%>
     </body>
 </html>

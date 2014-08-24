@@ -70,7 +70,7 @@
                             <ul style="width:130px;">  
                                 <li>
                                     <b>Bid to beat: </b><br>
-                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class=""></font><%=subAuctions.get(i).getStartPriceString()%></div>
+                                    <div style="color: rgb(238, 126, 63); font-weight: bold; display: block;" class="currentprice"><font class=""></font><%=subAuctions.get(i).getCurrentBidString()%></div>
                                     <div style="color:#EE7E3F;font-weight:bold;" class="loader502"></div>
 
                                     <p></p>

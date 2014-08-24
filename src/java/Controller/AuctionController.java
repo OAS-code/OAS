@@ -396,12 +396,17 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(Integer.parseInt(auctionId));
             String status = auction.getStatus();
             String endDate = auction.getFormattedEndDate(1);
-            //System.out.println(status);
-            //System.out.println(endDate);
             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate);
             rd.forward(request, response);
             return;
-        } else if (service.equalsIgnoreCase("edit_myproduct")) {
+        } else if (service.equalsIgnoreCase("ajax_load_detail_bottom_outer_top")) {
+            String auctionId = request.getParameter("auctionId");
+            Auction auction = dao.getAuction(Integer.parseInt(auctionId));
+            request.setAttribute("auction", auction);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=15&auctionId=" + auction.getId());
+            rd.forward(request, response);
+            return;
+        }else if (service.equalsIgnoreCase("edit_myproduct")) {
             rd = request.getRequestDispatcher(product_edit);
             rd.forward(request, response);
         } else{
