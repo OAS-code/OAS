@@ -55,7 +55,7 @@
 
                                         <div id="slider">
                                             <ul>							
-                                                <% if (auction.getImgCover() != null && !auction.getImgCover().isEmpty()) {%>
+                                                <% if (auction.getImgCover() != null && !auction.getImgCover().isEmpty() && auction.getImgCover().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImgCover()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -63,7 +63,7 @@
                                                 </li>
                                                 <% }%>
 
-                                                <% if (auction.getImg1() != null && !auction.getImg1().isEmpty()) {%>
+                                                <% if (auction.getImg1() != null && !auction.getImg1().isEmpty()&& auction.getImg1().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImg1()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -71,7 +71,7 @@
                                                 </li>
                                                 <% }%>
 
-                                                <% if (auction.getImg2() != null && !auction.getImg2().isEmpty()) {%>
+                                                <% if (auction.getImg2() != null && !auction.getImg2().isEmpty()&& auction.getImg2().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImg2()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -79,7 +79,7 @@
                                                 </li>
                                                 <% }%>
 
-                                                <% if (auction.getImg3() != null && !auction.getImg3().isEmpty()) {%>
+                                                <% if (auction.getImg3() != null && !auction.getImg3().isEmpty() && auction.getImg3().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImg3()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -87,7 +87,7 @@
                                                 </li>
                                                 <% }%>
 
-                                                <% if (auction.getImg4() != null && !auction.getImg4().isEmpty()) {%>
+                                                <% if (auction.getImg4() != null && !auction.getImg4().isEmpty() && auction.getImg4().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImg4()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
@@ -95,7 +95,7 @@
                                                 </li>
                                                 <% }%>
 
-                                                <% if (auction.getImg5() != null && !auction.getImg5().isEmpty()) {%>
+                                                <% if (auction.getImg5() != null && !auction.getImg5().isEmpty() && auction.getImg5().length()>0) {%>
                                                 <li>
                                                     <a href="#" title="<%=auction.getTitle()%>"> 
                                                         <img src="<%=auction.getImg5()%>" width="353" height="297" alt="<%=auction.getTitle()%>" />
