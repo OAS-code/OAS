@@ -54,9 +54,10 @@ public class AuctionController extends HttpServlet {
         final String edit_auction = "cp_edit_auction.jsp";
         final String add_new_auction = "cp_auction_add.jsp";
         final String view_auction = "auction_detail.jsp";
+        final String product_edit = "cp_customer_product_edit.jsp";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
-        
+
         final String auction_detail_loading = "auction_detail_ajax.jsp";
 
         if (service.equalsIgnoreCase("auction_manager")) {
@@ -397,10 +398,13 @@ public class AuctionController extends HttpServlet {
             String endDate = auction.getFormattedEndDate(1);
             //System.out.println(status);
             //System.out.println(endDate);
-            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId="+auctionId+"&data1="+status+"&data2="+endDate);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate);
             rd.forward(request, response);
             return;
-        } else {
+        } else if (service.equalsIgnoreCase("edit_myproduct")) {
+            rd = request.getRequestDispatcher(product_edit);
+            rd.forward(request, response);
+        } else{
             response.sendRedirect("notification.jsp?errorCode=2");
         }
     }

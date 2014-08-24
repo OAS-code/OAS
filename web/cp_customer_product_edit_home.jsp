@@ -19,12 +19,13 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />      
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
+        <script src="JavaScript/validate_auction_add.js"></script>
         <style type="text/css">
             .custom-date-style {
                 background-color: red !important;
             }
         </style>
-        
+
     </head>
     <body>            
         <%@ include file="perm_customer.jsp" %>
@@ -33,7 +34,7 @@
                 <h1 title="User Manager">Add new auction</h1>
                 <p>&nbsp;</p>
             </div>
-            <form name="form1" method="post" action="AuctionController">
+            <form method="post" name="addAuctionForm" action="AuctionController" onsubmit=" return validateAuction();">
 
                 <div class="message_common">
 
@@ -57,6 +58,9 @@
                                                             <input type="text" name="title" id="title" class="textbox" maxlength="100" value="">
                                                         </h2>
                                                     </div>
+                                                    <div id="errorTitle" style="width:500px;padding-top:4px"><br>
+
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -70,9 +74,9 @@
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
                                                         <select name="categoryId" id="categoryId">
-                                                                                          
+
                                                             <option value=""></option>                                
-                                                            
+
                                                         </select>
                                                     </div>
                                                 </div>
@@ -89,6 +93,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="description" id="description" class="textbox" value=""></h2>
                                                     </div>
+                                                    <div id="errorDescription" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -103,6 +110,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="startingPrice" id="startingprice" value=""></h2>
                                                     </div>
+                                                    <div id="errorStartingprice" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -117,6 +127,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value=""></h2>
                                                     </div>
+                                                    <div id="errorBuynowprice" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -131,6 +144,9 @@
                                                     <div class="text_feeld">
                                                         <h2>$ <input type="number" name="increaseBy" id="incrementprice" value=""></h2>
                                                     </div>
+                                                    <div id="errorIncrementprice" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -144,7 +160,10 @@
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
                                                         <input type="text" id="startdate" name="startDate" value="">
-                                                    </div>	
+                                                    </div>
+                                                    <div id="Startingdate" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                             <td>
@@ -155,6 +174,9 @@
                                                     <div class="text_feeld">
                                                         <input type="text" id="enddate" name="endDate" value="">
                                                     </div>
+                                                    <div id="Closingdate" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -171,6 +193,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value=""></h2>
                                                     </div>
+                                                    <div id="errorCoverimage" style="width:500px;padding-top:4px"><br>
+
+                                                    </div>
                                                 </div>
                                             </td>
                                         </tr>
@@ -185,6 +210,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_1" id="img_1" class="textbox" value="" ></h2>
                                                     </div>
+                                                    <div id="errorImage1" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -199,6 +227,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_2" id="img_2" class="textbox" value="" ></h2>
                                                     </div>
+                                                    <div id="errorImage2" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -212,6 +243,9 @@
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_3" id="img_3" class="textbox" value="" ></h2>
+                                                    </div>
+                                                    <div id="errorImage3" style="width:500px;padding-top:4px"><br>
+
                                                     </div>
                                                 </div>
                                             </td>
@@ -227,6 +261,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_4" id="img_4" class="textbox" value="" ></h2>
                                                     </div>
+                                                    <div id="errorImage4" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -241,6 +278,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="img_5" id="img_5" class="textbox" value="" ></h2>
                                                     </div>
+                                                    <div id="errorImage5" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -255,6 +295,9 @@
                                                     <div class="text_feeld">
                                                         <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="" ></h2>
                                                     </div>
+                                                    <div id="errorVideo" style="width:500px;padding-top:4px"><br>
+
+                                                    </div> 
                                                 </div>
                                             </td>
                                         </tr>
@@ -273,7 +316,7 @@
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
                                                 <input type="hidden" name="service" id="service" value="save_myproduct" >
-                                                <input type="submit" name="save" value="Save" id="save">
+                                                <input type="submit" name="save" value="Save" id="save" onclick="validateAuction();">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>
@@ -284,7 +327,7 @@
                                         <div class="res_left"></div>
                                         <div class="res_mid" style="width:auto;">
                                             <a style="width:auto;">
-                                                <input type="button" name="cancel" id="cancel" value="Cancel" onclick="window.location = 'UserController?service=dashboard';">
+                                                <input type="button" name="cancel" id="cancel" value="Cancel" onclick="window.location = 'cp_customer_my_product.jsp?current_page=my_product';">
                                             </a>
                                         </div>
                                         <div class="res_right"></div>
