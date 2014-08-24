@@ -76,7 +76,7 @@
                                             <td>
                                                 <div class="user_name_common" style="margin: 0px 0px 0px 0px">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="description" id="description" class="textbox" value="<%=desc%>"></h2>
+                                                        <h2><input type="text" name="description" id="description" maxlength="200" class="textbox" value="<%=desc%>"></h2>
 
                                                     </div>
                                                 </div>
