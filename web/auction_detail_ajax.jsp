@@ -175,6 +175,24 @@
         <p>INVALID BID</p>
         <% }else if (errorCode==13) { %>
         <p>|<%=data2%>|<%=auctionIdString%>|<%=data1%>|</p>
+        <% } else if (errorCode == 14) { %>
+        Auction is not available at the moment.
+        <div class="hb_buy_now_left">
+            <div class="hb_place_bid">
+
+            </div>
+        </div>
+        <div class="hb_buy_now_right">
+            <div class="hb_place_bid_button">
+                <div class="hb_place_bid_button_left">
+                </div>
+                <div class="hb_place_bid_button_mid" id="placebid_btn">
+                    <p>RESTRICTED</p>
+                </div>
+                <div class="hb_place_bid_button_right">
+                </div>
+            </div>
+        </div>   
         <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>

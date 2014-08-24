@@ -234,67 +234,43 @@
                     </div>
                     <div class="notice_nsg2 fl clr" id="notice_msg279" style="display:none;"></div> 
                     <div class="detail_bottom_outer">
-
                         <div class="detail_bottom_outer_top">
                             <div class="detail-action_detail">  
-
                                 <h1>Auction Details</h1>
-
                                 <div class="detail-action_detail_lef"> 
                                     <h2>Auction ID :  </h2>
-
                                 </div>
-
                                 <div class="detail-action_detail_rgt">
                                     <p>#<%=auction.getId()%>  </p>
-
-
                                 </div>
-
                                 <div class="detail-action_detail_lef"> 
                                     <h2>Auction Status :  </h2>
-
                                 </div>
-
                                 <div class="detail-action_detail_rgt">
                                     <p><%=auction.getStatus()%></p>
-
-
                                 </div>
                                 <div class="detail-action_detail_lef"> 
                                     <h2>Auction's owner :  </h2>
                                 </div>
-
                                 <div class="detail-action_detail_rgt">
                                     <p><%=auction.getSellerName()%></p>
                                 </div>
-
-
                             </div>
-
                             <div class="detail-action_detail">  
-
                                 <h1>Price Details</h1>
-
                                 <div class="detail-action_detail_lef"> 
                                     <h2> Price Starting From :</h2>
                                     <h2> Bidding step: </h2>
                                     <h2> Reserved price :</h2>
                                 </div>
-
                                 <div class="detail-action_detail_rgt">
                                     <p><%=auction.getStartPriceString()%>  </p>
                                     <p><%=auction.getIncreaseByString()%></p>
                                     <p><%=auction.getBuynowPriceString()%></p>
                                 </div>
-
                             </div>
-
                             <div class="detail-action_detail detail_last-bgnone">  
-
                                 <h1>Timing Details</h1>
-
-
                                 <div class="detail-action_detail_lef"> 
                                     <h2>Start time :</h2>
                                     <h2>End time :</h2>
@@ -303,12 +279,13 @@
                                     <p><%=auction.getFormattedStartDate()%> </p>
                                     <p><%=auction.getFormattedEndDate()%> </p>
                                 </div>
-
                             </div>
                         </div>
                         <div class="detail_product_description">
                             <h1>Product Description</h1>
-
+                            <% if (!auction.getvYoutube().isEmpty()) {%>
+                            <p><iframe width="530" height="315" src="//www.youtube.com/embed/<%=auction.getvYoutube()%>" frameborder="0" allowfullscreen></iframe></p>
+                            <% }%>
                             <p><%=auction.getDescription()%></p>
                         </div>
                     </div>
@@ -317,10 +294,10 @@
         </div>
     </body>
     <script>
-        ajax_place_bid_area('<%=auction.getId()%>');
-        ajax_load_top_bidder('<%=auction.getId()%>');
-        ajax_load_current_bid('<%=auction.getId()%>');
-        ajax_load_countdown(<%=auction.getId()%>);
+        //ajax_place_bid_area('<%=auction.getId()%>');
+        //ajax_load_top_bidder('<%=auction.getId()%>');
+        //ajax_load_current_bid('<%=auction.getId()%>');
+        //ajax_load_countdown(<%=auction.getId()%>);
         window.setInterval(function() {
             var obj = document.getElementById("yourbidding");
             var obj2 = document.getElementById("placebid_btn");

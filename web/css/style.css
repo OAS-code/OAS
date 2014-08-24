@@ -350,7 +350,7 @@
 .winning_list_right{ float:left;width:70px;}
 .winning_list_right p{ float:left;width:70px; text-align:center; font:bold 12px/28px arial; color:#EE7E2C;}
 .detail_winner_down_list{ float:left;background: url("../images/detail_sprite.png") -102px -9px no-repeat; width:35px; height:21px; margin: 1px 0px 0px 120px;}
-.detail_bottom_outer{ float:left; clear:both; width:980px; border:1px solid #DEDDDF; height:350px; margin-top:15px;}
+.detail_bottom_outer{ float:left; clear:both; width:980px; border:1px solid #DEDDDF; height:auto; margin-top:15px;}
 .detail_bottom_outer_top{ float:left; clear:both; width:100%;background: url("../images/roll_bottom_border.png") bottom center no-repeat; padding-bottom:15px; }
 .detail-action_detail {background: url("../images/deltil_dels_rightborder.png") no-repeat scroll right 35px transparent;float: left;  padding: 20px 5px 10px 20px;width: 300px;}
 .detail-action_detail h1{float:left; width:280px; text-transform:uppercase; font:normal 16px helveticaneuemediumcond; color:#333; border-bottom:1px solid #DEDDDF; padding-bottom:8px;}

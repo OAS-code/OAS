@@ -72,11 +72,12 @@ public class BidController extends HttpServlet {
                 } else {
                     AuctionDAO auctionDAO = new AuctionDAO();
                     Auction auction = auctionDAO.getAuction(Integer.parseInt(auctionId));
+                    String auctionStatus = auction.getStatus();
                     if (auction.getSellerId() == Integer.parseInt(userId)) {
                         rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=3");
                         rd.forward(request, response);
                         return;
-                    } else {
+                    } else if (auctionStatus.equals("On-going")) {
                         BidDAO bidDao = new BidDAO();
                         ArrayList<Bid> bids = bidDao.getBidFromAuctionId(Integer.parseInt(auctionId), 1);
                         String userBidValueString = (String) request.getParameter("userBidValue");
@@ -114,6 +115,10 @@ public class BidController extends HttpServlet {
                                 return;
                             }
                         }
+                    } else {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=14");
+                        rd.forward(request, response);
+                        return;
                     }
                 }
             }
@@ -154,7 +159,7 @@ public class BidController extends HttpServlet {
                         rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=4");
                         rd.forward(request, response);
                         return;
-                    } else {
+                    } else if (auction.getStatus().equals("On-going")) {
                         BidDAO bidDao = new BidDAO();
                         Bid bid = new Bid();
                         UserDAO userDao = new UserDAO();
@@ -183,6 +188,10 @@ public class BidController extends HttpServlet {
                                 return;
                             }
                         }
+                    } else {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=12&auctionId=" + auctionId);
+                        rd.forward(request, response);
+                        return;
                     }
                 }
             }
