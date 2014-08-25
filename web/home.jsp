@@ -59,7 +59,6 @@
                     <div class="auction_type" data-auctiontype="25"></div>
                     <div class="feature_box">
                         <div class="feature_lable"></div>
-
                         <div class="feature_lft">                        
                             <a href="" title="<%=subAuctions.get(i).getTitle()%>">
                                 <img src="<%=subAuctions.get(i).getImgCover()%>" width="82" title="Monitor" height="83" alt="Monitor">

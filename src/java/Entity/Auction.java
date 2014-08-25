@@ -156,7 +156,7 @@ public class Auction {
         }
         String format = "d MMMM, yyyy 'at' HH:mm";
         if (type == 1) {
-            format = "MM/dd/yyyy HH:mm:ss a";
+            format = "MM/dd/yyyy HH:mm:ss";
         }
         DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
         return this.endDate.toString(fmt);

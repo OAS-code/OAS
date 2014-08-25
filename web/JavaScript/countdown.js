@@ -35,9 +35,6 @@ if (typeof (LeadingZero) == "undefined")
 function startCountdown(TargetDate, auctionId, css) {
     if (!TargetDate) {
         TargetDate = "12/31/2020 5:00 AM";
-    } else if (TargetDate == "Closed") {
-        
-        return;
     }
     putspan(auctionId, css);
     CountStepper = Math.ceil(CountStepper);
@@ -49,7 +46,10 @@ function startCountdown(TargetDate, auctionId, css) {
         ddiff = new Date(dnow - dthen);
     else
         ddiff = new Date(dthen - dnow);
-    gsecs = Math.floor(ddiff.valueOf() / 1000);
+    var gsecs = Math.floor(ddiff.valueOf() / 1000);
+    /*if (auctionId==18){
+        alert(TargetDate);
+    }*/
     CountBack(gsecs, auctionId);
 }
 
