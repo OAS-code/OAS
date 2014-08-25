@@ -21,7 +21,7 @@
         <label>Welcome, <%=data1%>! &nbsp;</label>
     </li>
     <li>
-        <p>Your Balance:</p>
+        <p>Your balance:</p>
         <span><font class=""></font></span><span class="user_balance" title=""><%=data2%></span>
     </li>
 </body>
