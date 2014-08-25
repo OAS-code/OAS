@@ -260,7 +260,7 @@
             ajax_load_current_bid('<%=auction.getId()%>');
             ajax_load_countdown(<%=auction.getId()%>);
             ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
-        }, 3000);
+        }, 5000);
 
 
     </script>

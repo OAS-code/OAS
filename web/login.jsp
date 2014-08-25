@@ -12,7 +12,7 @@
         <title>Login</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script src="JavaScript/jquery-1.9.1.js"></script>
         <script src="JavaScript/validate_login.js"></script>
 
     </head>
