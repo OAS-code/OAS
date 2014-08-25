@@ -149,7 +149,7 @@
                 <% if (categoryMenu != null) { %>
                 <ul id="ajax_load_top_categories">
                     <li>
-                        <select style="width:auto; height: 31px;padding: 1px; margin: 0px" ONCHANGE="location = this.options[this.selectedIndex].value;">
+                        <select style="width:auto; height: 31px;padding: 1px; margin: 0px;background: url(images/menu_bg.png) repeat-x;border:0px;font: bold 12px Arial, Helvetica, sans-serif;" ONCHANGE="location = this.options[this.selectedIndex].value;">
                             <option value="AuctionController?service=index">All categories</option>
                             <%     for (int i = 0; i < categoryMenu.size(); i++) {%>
                             <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>"><%=categoryMenu.get(i).getName()%></option>
