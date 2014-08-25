@@ -320,7 +320,7 @@ public class Auction {
     }
     
     public Double getBidToBeat(){
-        return this.getCurrentBid()+this.getCurrentBid();
+        return this.getCurrentBid()+this.increaseBy;
     }
     
     public String getBidToBeatString(){

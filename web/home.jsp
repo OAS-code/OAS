@@ -60,8 +60,8 @@
                     <div class="feature_box">
                         <div class="feature_lable"></div>
                         <div class="feature_lft">                        
-                            <a href="" title="<%=subAuctions.get(i).getTitle()%>">
-                                <img src="<%=subAuctions.get(i).getImgCover()%>" width="82" title="Monitor" height="83" alt="Monitor">
+                            <a href="AuctionController?service=view&auctionId=<%=subAuctions.get(i).getId()%>" title="<%=subAuctions.get(i).getTitle()%>">
+                                <img src="<%=subAuctions.get(i).getImgCover()%>" width="82" title="" height="83" alt="Monitor">
                             </a>                           
                         </div>
                         <div class="feature_rgt">
@@ -112,9 +112,11 @@
                     </div>
                     <div class="notice_nsg fl clr" id="notice_msg502" style="display:none;"></div>
                 </div>
-                <%}
-                    }%>
-            </div>
+                <% } %>
+                    </div>
+                    
+                    <% }%>
+            
         <!--
         </div>
         -->
