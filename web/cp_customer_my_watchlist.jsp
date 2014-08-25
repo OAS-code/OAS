@@ -18,7 +18,7 @@
         <jsp:include page="top.jsp" />
         <div class="header2">
             <jsp:include page="cp_cols.jsp" />
-            <jsp:include page="cp_customer_my_watchlist_home.jsp"/>   
+            <%@ include file="cp_customer_my_watchlist_home.jsp" %>   
         </div>
         <jsp:include page="footer.jsp" />
     </body>

@@ -4,6 +4,7 @@
     Author     : ducfpt
 --%>
 
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -22,6 +23,7 @@
             <div class="message_common">
                 <div class="forms_common">
                     <div class="title_cont_watchilist">
+                        
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
@@ -55,60 +57,10 @@
                                     <td width="100" align="center">
                                         2014-08-18 00:17:29		</td>
                                     <td width="100" align="center">
-                                        <a href="/buy-sell-demo/users/watchlist/68" title="Delete"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/delet.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
+                                        <a href="/buy-sell-demo/users/watchlist/68" title="Delete"><img src="images/delete.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td width="100" align="center">
-                                        <h3><a href="/buy-sell-demo/auctions/view/bikekV2hx" title="Bike">
 
-
-
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/53e32515743d6Sports_bikes_wallpaper6.jpg" width="65" height="65" alt="Bike"></a></h3>
-                                    </td>
-
-                                    <td width="100" align="center">
-                                        <a title="Bike" href="http://www.unieauction.com/buy-sell-demo/auctions/view/bikekV2hx">Bike</a>
-                                    </td>
-                                    <td width="100" align="center">
-                                        2014-08-19 05:05:08		</td>
-                                    <td width="100" align="center">
-                                        <a href="/buy-sell-demo/users/watchlist/67" title="Delete"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/delet.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="100" align="center">
-                                        <h3><a href="/buy-sell-demo/auctions/view/mousejI7SB" title="Mouse">
-
-
-
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/53eb28612b95eWired-Optical-Mouse-LD-1141.jpg" width="65" height="65" alt="Mouse"></a></h3>
-                                    </td>
-
-                                    <td width="100" align="center">
-                                        <a title="Mouse" href="http://www.unieauction.com/buy-sell-demo/auctions/view/mousejI7SB">Mouse</a>
-                                    </td>
-                                    <td width="100" align="center">
-                                        2014-09-30 14:38:43		</td>
-                                    <td width="100" align="center">
-                                        <a href="/buy-sell-demo/users/watchlist/66" title="Delete"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/delet.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="100" align="center">
-                                        <h3><a href="/buy-sell-demo/auctions/view/chairs4O96x" title="Chairs">
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/533e57efdf40ewhite-home-office-chairs-193.jpg" width="65" height="65" alt="Chairs"></a></h3>
-                                    </td>
-
-                                    <td width="100" align="center">
-                                        <a title="Chairs" href="http://www.unieauction.com/buy-sell-demo/auctions/view/chairs4O96x">Chairs</a>
-                                    </td>
-                                    <td width="100" align="center">
-                                        2020-01-31 00:00:00		</td>
-                                    <td width="100" align="center">
-                                        <a href="/buy-sell-demo/users/watchlist/52" title="Delete"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/delet.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
-                                    </td>
-                                </tr>
                             </tbody></table>
                     </div>
 

@@ -3,34 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
+import Entity.Auction;
 import Entity.WatchList;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.naming.NamingException;
+import org.joda.time.DateTime;
 
 /**
  *
  * @author MrTu
  */
 public class WatchListDAO {
+
     private Connection conn = null;
     private Statement state = null;
     private ResultSet rs = null;
     private PreparedStatement pre = null;
     private Session session = null;
     Message message = null;
-    
+
     public WatchListDAO() throws SQLException {
         if (this.conn == null) {
             try {
@@ -68,16 +72,16 @@ public class WatchListDAO {
             Logger.getLogger(WatchListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public int add(WatchList watchlist) {
         int n = 0;
         try {
-            String sql = "INSERT INTO watchlist (user_id,auction_id,date) VALUES (?,?,?)";            
+            String sql = "INSERT INTO watchlist (user_id,auction_id) VALUES (?,?)";
             pre = conn.prepareStatement(sql);
-            
+
             pre.setInt(1, watchlist.getUser_id());
             pre.setInt(2, watchlist.getAuction_id());
-            pre.setString(3, watchlist.getDate());
-            
+
             n = pre.executeUpdate();
 
         } catch (SQLException ex) {
@@ -86,4 +90,58 @@ public class WatchListDAO {
         }
         return n;
     }
+
+    public int delete(int auctionid) {
+        int n = 0;
+        String sql = "DELETE FROM watchlist WHERE auction_id = " + auctionid;
+        try {
+            state = (Statement) conn.createStatement();
+            n = state.executeUpdate(sql);
+            state.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return n;
+    }
+
+    public int getAuctionId(int user_id) throws SQLException {
+        int auction_id = 0;
+        String sql = "SELECT auction_id FROM watchlist WHERE user_id = '" + user_id + "'";
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = state.executeQuery(sql);
+            while (rs.next()) {
+                auction_id = rs.getInt("auction_id");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return auction_id;
+    }
+
+    public ArrayList<WatchList> list(int userid) {
+        String sql = "SELECT * FROM watchlist WHERE user_id=" + userid + " ORDER BY watchlist_id DESC ";
+
+        ArrayList<WatchList> arr = new ArrayList<>();
+        try {
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            rs = state.executeQuery(sql);
+            DateTime date;
+            int user_id, auction_id;
+            while (rs.next()) {
+                user_id = rs.getInt("user_id");
+                auction_id = rs.getInt("auction_id");
+                long endDate = rs.getLong("date") * 1000;
+                date = new DateTime(endDate);
+                WatchList watchlist = new WatchList(user_id, auction_id, date);
+                arr.add(watchlist);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(WatchListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return arr;
+    }
+
 }

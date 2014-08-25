@@ -8,8 +8,10 @@ package Controller;
 import DAO.AuctionDAO;
 import DAO.CategoryDAO;
 import DAO.OtherDAO;
+import DAO.WatchListDAO;
 import Entity.Auction;
 import Entity.Category;
+import Entity.WatchList;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -47,6 +49,7 @@ public class AuctionController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AuctionDAO dao = new AuctionDAO();
         CategoryDAO cdao = new CategoryDAO();
+        WatchListDAO wdao = new WatchListDAO();
         String service = request.getParameter("service");
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String bidding_detail = "cp_bidding_detail.jsp";
@@ -56,6 +59,7 @@ public class AuctionController extends HttpServlet {
         final String add_new_auction = "cp_auction_add.jsp";
         final String view_auction = "auction_detail.jsp";
         final String product_edit = "cp_customer_product_edit.jsp";
+        final String index = "index.jsp?errorCode=";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
@@ -87,8 +91,9 @@ public class AuctionController extends HttpServlet {
             ArrayList<Category> categories = cdao.getTop(5);
             ArrayList[] auctionsArray = dao.list(categories, 8);
             //request.setAttribute("categories", categories);
+            String errorCode = request.getParameter("errorCode");
             request.setAttribute("auctionsArray", auctionsArray);
-            rd = request.getRequestDispatcher("index.jsp");
+            rd = request.getRequestDispatcher("index.jsp?errorCode=" + errorCode);
             rd.forward(request, response);
             return;
         } /*
@@ -412,10 +417,41 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=15&auctionId=" + auction.getId());
             rd.forward(request, response);
             return;
-        }else if (service.equalsIgnoreCase("edit_myproduct")) {
+        } else if (service.equalsIgnoreCase("edit_myproduct")) {
             rd = request.getRequestDispatcher(product_edit);
-            rd.forward(request, response);        
-        }else{
+            rd.forward(request, response);
+        } else if (service.equalsIgnoreCase("addtowatchlist")) {
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            if (userIdString == null || userIdString == "" || userIdString.isEmpty()) {
+                response.sendRedirect("AuctionController?service=index&errorCode=0");
+            } else {
+                String auctionIdString = (String) request.getParameter("auctionId");
+                int auctionId = Integer.parseInt(auctionIdString);
+                int userId = Integer.parseInt(userIdString);
+                int auction_id = wdao.getAuctionId(userId);
+                if (auctionId == auction_id) {
+                    response.sendRedirect("AuctionController?service=index&errorCode=1");
+                } else {
+                    WatchList watchlist = new WatchList(userId, auctionId);
+                    int n = wdao.add(watchlist);
+                    if (n > 0) {
+                        response.sendRedirect("AuctionController?service=index&errorCode=2");
+                    } else {
+                        response.sendRedirect("AuctionController?service=index&errorCode=3");
+                    }
+                }
+            }
+
+        } else if (service.equalsIgnoreCase("viewwatchlist")) {           
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            ArrayList<WatchList> array = (ArrayList<WatchList>) wdao.list(Integer.parseInt(userIdString));
+            for(int i=0;i<array.size();i++){
+                int auction_id = array.get(i).getAuction_id();                
+            }
+            response.sendRedirect("cp_customer_my_watchlist.jsp");
+        } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }
     }
