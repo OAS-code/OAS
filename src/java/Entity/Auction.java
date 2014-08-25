@@ -318,4 +318,13 @@ public class Auction {
         FormatMoney formartMoney = new FormatMoney();
         return formartMoney.showPriceInUSD(this.getCurrentBid(), 1);
     }
+    
+    public Double getBidToBeat(){
+        return this.getCurrentBid()+this.getCurrentBid();
+    }
+    
+    public String getBidToBeatString(){
+        FormatMoney fm = new FormatMoney();
+        return fm.showPriceInUSD(this.getBidToBeat(), 1);
+    }
 }

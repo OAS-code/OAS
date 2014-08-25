@@ -246,10 +246,12 @@
             <div class="detail-action_detail_lef"> 
                 <h2>Start time :</h2>
                 <h2>End time :</h2>
+                <h2>Views :</h2>
             </div>
             <div class="detail-action_detail_rgt">
                 <p><%=auction.getFormattedStartDate()%> </p>
                 <p><%=auction.getFormattedEndDate()%> </p>
+                <p><%=auction.getViews()%> </p>
             </div>
         </div>
         <% } else if (errorCode == 16) {

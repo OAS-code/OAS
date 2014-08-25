@@ -108,11 +108,12 @@ function checkIncrementPrice() {
         document.getElementById("errorIncrementprice").innerHTML = '<font color="red" >&nbsp;Please enter increment price.</font>';
         return false;
     }
-    if(incrementPrice < 0){
+    else if(incrementPrice < 0){
         document.getElementById("errorIncrementprice").innerHTML = '<font color="red" >&nbsp;Increment price must be greater than 0.</font>';
         return false;
     }
-    if(incrementPrice >=buyNowPrice){
+    else if(incrementPrice-buyNowPrice >= 0 ){
+        alert(incrementPrice-buyNowPrice);
         document.getElementById("errorIncrementprice").innerHTML = '<font color="red" >&nbsp;Increment must be smaller than buy now price.</font>';
         return false;
     }
