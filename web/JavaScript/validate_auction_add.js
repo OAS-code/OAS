@@ -113,7 +113,7 @@ function checkIncrementPrice() {
         return false;
     }
     else if(incrementPrice-buyNowPrice >= 0 ){
-        alert(incrementPrice-buyNowPrice);
+        //alert(incrementPrice-buyNowPrice);
         document.getElementById("errorIncrementprice").innerHTML = '<font color="red" >&nbsp;Increment must be smaller than buy now price.</font>';
         return false;
     }
