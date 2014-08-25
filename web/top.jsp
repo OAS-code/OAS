@@ -18,11 +18,15 @@
             long serverTimeLong = serverTime.getMillis();
         %>
         <script>
-            var serverTime = new Date(<%=serverTimeLong%>);
-            var clientTime = new Date();
-            var timeDiff = serverTime - clientTime;
+            
+            //alert(serverTime);
+            //alert(clientTime);
+            //alert(diffTime);
             function startTime() {
-                var currentTime = new Date();
+                var serverTime = new Date(<%=serverTimeLong%>);
+                var clientTime = new Date();
+                var diffTime = Date(serverTime - clientTime);
+                var currentTime = new Date(diffTime);//new Date();
                 var h = currentTime.getHours();
                 var m = currentTime.getMinutes();
                 var s = currentTime.getSeconds();
