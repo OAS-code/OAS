@@ -6,6 +6,8 @@
 
 package Entity;
 
+import org.joda.time.DateTime;
+
 /**
  *
  * @author MrTu
@@ -14,15 +16,20 @@ public class WatchList {
     int watchlist_id;
     int user_id;
     int auction_id;
-    String date;
+    DateTime date;
 
     public WatchList() {
     }
 
-    public WatchList(int user_id, int auction_id, String date) {
+    public WatchList(int user_id, int auction_id, DateTime date) {
         this.user_id = user_id;
         this.auction_id = auction_id;
         this.date = date;
+    }   
+
+    public WatchList(int user_id, int auction_id) {
+        this.user_id = user_id;
+        this.auction_id = auction_id;
     }
     
     public int getWatchlist_id() {
@@ -49,12 +56,12 @@ public class WatchList {
         this.auction_id = auction_id;
     }
 
-    public String getDate() {
+    public DateTime getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(DateTime date) {
         this.date = date;
     }
-    
+
 }

@@ -24,15 +24,44 @@
             if (auctionsArray == null) {
                 response.sendRedirect("AuctionController?service=index");
             } else {
-
+                String errorCode = request.getParameter("errorCode");
         %>
         <%@ include file="top.jsp" %> 
         <div class="header2">  
-            
+            <%
+                if (errorCode.equals("0")) {
+            %>       
+            <ul id="message" class="error_msg">
+                <li><p></p></li>
+            </ul>
+            <%} else if (errorCode.equals("1")) {
+            %>
+            <ul id="message" class="error_msg">
+                <li><p></p>Already in your watchlist.</li>
+            </ul>
+            <%
+            } else if (errorCode.equals("2")) {
+            %>
+            <ul id="message" class="success_msg">
+                <li><p></p>Add to watchlist success.</li>
+            </ul>
+            <%
+            } else if (errorCode.equals("3")) {
+            %>
+            <ul id="message" class="success_msg">
+                <li><p></p>Add to watchlist fail.</li>
+            </ul>
+            <%
+            } else {
+            %>
+            <%
+                }
+            %>
             <%@ include file="home.jsp" %>
         </div>
         <jsp:include page="footer.jsp" />
-        <%            }
+        <%            
+            }
         %>
     </body> 
 
