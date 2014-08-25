@@ -96,7 +96,7 @@
 
 
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=subAuctions.get(i).getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">

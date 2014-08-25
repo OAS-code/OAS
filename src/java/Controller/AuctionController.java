@@ -11,6 +11,7 @@ import DAO.OtherDAO;
 import Entity.Auction;
 import Entity.Category;
 import java.io.IOException;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -410,8 +411,8 @@ public class AuctionController extends HttpServlet {
             return;
         }else if (service.equalsIgnoreCase("edit_myproduct")) {
             rd = request.getRequestDispatcher(product_edit);
-            rd.forward(request, response);
-        } else{
+            rd.forward(request, response);        
+        }else{
             response.sendRedirect("notification.jsp?errorCode=2");
         }
     }
