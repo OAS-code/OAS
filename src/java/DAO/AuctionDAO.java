@@ -139,7 +139,7 @@ public class AuctionDAO {
                         + "increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views "
                         + "FROM auction a INNER JOIN user u ON a.seller_id = u.id "
                         + "INNER JOIN category c ON a.category_id = c.categoryid "
-                        + "WHERE a.category_id = ?  ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, a.views DESC LIMIT ?";
+                        + "WHERE a.category_id = ? AND ((UNIX_TIMESTAMP(a.end_date)-UNIX_TIMESTAMP(NOW()) > 0)) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, a.views DESC LIMIT ?";
                 state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 pre = conn.prepareStatement(sql);
                 pre.setInt(1, categoryId);
