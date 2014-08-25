@@ -96,15 +96,14 @@
             <div class="header2_lft" id="header2_lft">
                 <h1 title="Online Auction System">
                     <a href="index.jsp" title="Online Auction System" class="fl">
-                        <img src="images/action-logo.png" alt="Online Auction System" title="Online Auction System" border="0" width="145" height="29"> 
+                        <img src="images/auction-logo.png" alt="Online Auction System" title="Online Auction System" border="0" > 
                     </a>
                 </h1>	
             </div>
 
             <div class="header2_rgt">
                 <div class="dash_rgt">
-                    <ul id="userInfo">
-                        
+                    <ul id="ajax_load_top_balance">
                     </ul>
                     <ul> 
                         <li>
@@ -175,9 +174,9 @@
         <br>
     </body>
     <script>
-        loadUserInfo();
+        ajax_load_top_balance('<%=role%>');
         window.setInterval(function() {
-             loadUserInfo();
-        }, 5000);
+             ajax_load_top_balance('<%=role%>');
+        }, 3000);
     </script>
 </html>

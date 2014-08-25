@@ -16,6 +16,7 @@
         %>
     </head>
     <body>
+        
     <li>
         <label>Welcome, <%=data1%>! &nbsp;</label>
     </li>
