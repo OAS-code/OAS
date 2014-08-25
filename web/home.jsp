@@ -21,7 +21,9 @@
         <script language="JavaScript" src="JavaScript/countdown.js"></script>
     </head>
     <body>  
+        <!--
         <div class="my_message_right">
+        -->
 
             <%
                 for (int j = 0; j < auctionsArray.length; j++) {
@@ -114,7 +116,8 @@
                 <%}
                     }%>
             </div>
+        <!--
         </div>
-    </div>
+        -->
 </body>
 </html>
