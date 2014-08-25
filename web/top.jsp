@@ -4,6 +4,9 @@
     Author     : Maxime
 --%>
 
+<%@page import="Entity.Category"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="org.joda.time.DateTime"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -18,7 +21,7 @@
             long serverTimeLong = serverTime.getMillis();
         %>
         <script>
-            
+
             //alert(serverTime);
             //alert(clientTime);
             //alert(diffTime);
@@ -53,11 +56,11 @@
             String userName = (String) session.getAttribute("username");
             String role = (String) session.getAttribute("role");
             String balance = (String) request.getAttribute("balance");
+            ArrayList<Category> categoryMenu = (ArrayList<Category>) request.getAttribute("categoryMenu");
         %>
         <script type="text/javascript" src="JavaScript/ajax_top.js"></script>
     </head>
     <body onload="startTime()">
-
         <div id="header">
             <div class="header_inner">
                 <div class="header_lft">
@@ -81,7 +84,7 @@
                             <li class="active"><a href="register.jsp" title="Register">Register</a></li>                           
                                 <%} else {%>
 
-                            <li><a href="cp.jsp?current_page=dashboard" title="Customer"><%if (role.equals("0")) { %>User<% }else if(role.equals("1")){ %>Staff<% }else if(role.equals("2")){ %>Admin<% } %> Control Panel</a></li>
+                            <li><a href="cp.jsp?current_page=dashboard" title="Customer"><%if (role.equals("0")) { %>User<% } else if (role.equals("1")) { %>Staff<% } else if (role.equals("2")) { %>Admin<% } %> Control Panel</a></li>
                             <li class="active"><a href="UserController?service=logout" title="Signout" onclick="return confirm('Are you sure?')">Sign out</a></li>
 
                             <%}%>
@@ -143,40 +146,31 @@
 
         <div id="header_menu">
             <div class="header_menu_inner">
-                <ul>
-                    <li id="head_cate">
+                <% if (categoryMenu != null) { %>
+                <ul id="ajax_load_top_categories">
+                    <li>
                         <select style="width:auto; height: 31px;padding: 1px; margin: 0px" ONCHANGE="location = this.options[this.selectedIndex].value;">
-                            <option value="">Select categories</option>
                             <option value="AuctionController?service=index">All categories</option>
-                            <option value="AuctionController?service=index">Smartphone</option>
-                            <option value="dantri.com">Automotive</option>
-                            <option value="zing.vn">Real Estate</option>
+                            <%     for (int i = 0; i < categoryMenu.size(); i++) {%>
+                            <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>"><%=categoryMenu.get(i).getName()%></option>
+                            <% } %>
                         </select>
                     </li>
-
-
-                    <!--
-                    <li id="head_cate">
-
-                        <img id="drop_down_cat" src="images/menu_select.png" align="middle" width="8" height="5" alt="" border="0" title="ALL CATEGORIES">
-
-
-                    </li>
-                    -->
-
+                </ul>
+                <% }%>
+                <ul>
                     <li id="home_menu"> <a href="index.jsp" title="Home"> Home</a></li>
-
                 </ul>
             </div>
         </div>
         <br>
-        <br>
-        <br>
+
     </body>
     <script>
         ajax_load_top_balance('<%=role%>');
+        //ajax_load_top_categories();
         window.setInterval(function() {
-             ajax_load_top_balance('<%=role%>');
+            ajax_load_top_balance('<%=role%>');
         }, 3000);
     </script>
 </html>

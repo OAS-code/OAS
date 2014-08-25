@@ -123,6 +123,12 @@ public class CategoryController extends HttpServlet {
             rd = request.getRequestDispatcher(category_manager + "&keyword=" + search);
             rd.forward(request, response);
             return;
+        } else if (service.equalsIgnoreCase("load_top")) {
+            ArrayList<Category> categories = dao.getTop(1000);
+            request.setAttribute("categories", categories);
+            rd = request.getRequestDispatcher("top.jsp");
+            rd.forward(request, response);
+            return;
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

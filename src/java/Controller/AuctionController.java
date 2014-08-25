@@ -81,6 +81,9 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
             return;
         } else if (service.equalsIgnoreCase("index")) {
+            ArrayList<Category> categoryMenu = cdao.getTop(1000);
+            request.setAttribute("categoryMenu", categoryMenu);
+            
             ArrayList<Category> categories = cdao.getTop(5);
             ArrayList[] auctionsArray = dao.list(categories, 8);
             //request.setAttribute("categories", categories);
