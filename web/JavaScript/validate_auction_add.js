@@ -94,7 +94,7 @@ function checkBuyNowPrice() {
         document.getElementById("errorBuynowprice").innerHTML = '<font color="red" >&nbsp;Buy now price must be greater than 0.</font>';
         return false;
     }
-    if (startingPrice >= buyNowPrice) {
+    if (startingPrice-buyNowPrice >=0 ) {
         document.getElementById("errorBuynowprice").innerHTML = '<font color="red" >&nbsp;Buy now price must be greater than starting price.</font>';
         return false;
     }
