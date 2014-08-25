@@ -47,9 +47,11 @@ function startCountdown(TargetDate, auctionId, css) {
     else
         ddiff = new Date(dthen - dnow);
     var gsecs = Math.floor(ddiff.valueOf() / 1000);
-    /*if (auctionId==18){
+    /*
+    if (auctionId==18){
         alert(TargetDate);
-    }*/
+    }
+    */
     CountBack(gsecs, auctionId);
 }
 
