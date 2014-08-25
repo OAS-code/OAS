@@ -119,7 +119,7 @@
                                         <!--<span class="penny_white"></span>-->
 
                                     </div>
-                                    <a title="+ Add to Watchlist" rel="279" class="addwatchlist" name="http://www.unieauction.com/buy-sell-demo/auctions/addwatchlist"><img src="http://www.unieauction.com/buy-sell-demo/public/white/images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist" /></a>
+                                    <a title="+ Add to Watchlist" rel="279" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=auction.getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist" /></a>
                                 </div>
                                 <!--
                                                         <div class="detail_left_social_link">
