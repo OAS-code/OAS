@@ -462,7 +462,7 @@ public class UserController extends HttpServlet {
                 return;
             }
 
-        } else if (service.equals("ajax_top")) {
+        } else if (service.equals("ajax_load_top_balance")) {
             HttpSession session = request.getSession(true);
             String roleString = (String) session.getAttribute("role");
             if (roleString != null) {

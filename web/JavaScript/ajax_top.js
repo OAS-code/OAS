@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 
-function loadUserInfo(){
+function ajax_load_top_balance(role){
+    if (role!=0) {
+        return;
+    }
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -18,11 +21,11 @@ function loadUserInfo(){
     {
         if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
         {
-            document.getElementById("userInfo").innerHTML = xmlhttp.responseText;
+            document.getElementById("ajax_load_top_balance").innerHTML = xmlhttp.responseText;
         }
     };
 
-    xmlhttp.open("GET", "UserController?service=ajax_top&random=" + Math.random(), true);
+    xmlhttp.open("GET", "UserController?service=ajax_load_top_balance&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }
