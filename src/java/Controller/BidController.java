@@ -186,6 +186,7 @@ public class BidController extends HttpServlet {
                             bid.setBidderId(user.getId());
                             bid.setAuctionId(Integer.parseInt(auctionId));
                             bid.setAmount(Double.parseDouble(userBidValue));
+                            bid.setAuctionName(auction.getTitle());
                             if (bidDao.placeBid(bid)) {
                                 rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=5&auctionId=" + auctionId);
                                 rd.forward(request, response);
