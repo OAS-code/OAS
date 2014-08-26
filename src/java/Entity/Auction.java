@@ -130,7 +130,7 @@ public class Auction {
         if (this.startDate==null) {
             return "Unknown";
         }
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy 'at' HH:mm");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy HH:mm:ss");
         return this.startDate.toString(fmt);
     }
 
@@ -146,7 +146,7 @@ public class Auction {
         if (this.endDate==null) {
             return "Unknown";
         }
-        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy 'at' HH:mm");
+        DateTimeFormatter fmt = DateTimeFormat.forPattern("d MMMM, yyyy HH:mm:ss");
         return this.endDate.toString(fmt);
     }
     
@@ -154,7 +154,7 @@ public class Auction {
         if (this.endDate==null) {
             return "Unknown";
         }
-        String format = "d MMMM, yyyy 'at' HH:mm";
+        String format = "d MMMM, yyyy HH:mm:ss";
         if (type == 1) {
             format = "MM/dd/yyyy HH:mm:ss";
         }
@@ -166,7 +166,7 @@ public class Auction {
         if (this.startDate==null) {
             return "Unknown";
         }
-        String format = "d MMMM, yyyy 'at' HH:mm";
+        String format = "d MMMM, yyyy HH:mm:ss";
         if (type == 1) {
             format = "MM/dd/yyyy HH:mm:ss";
         }
