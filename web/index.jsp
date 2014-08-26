@@ -31,9 +31,6 @@
             <%
                 if (errorCode.equals("0")) {
             %>       
-            <ul id="message" class="error_msg">
-                <li><p></p></li>
-            </ul>
             <%} else if (errorCode.equals("1")) {
             %>
             <ul id="message" class="error_msg">

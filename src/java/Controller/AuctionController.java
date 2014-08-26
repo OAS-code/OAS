@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -392,14 +393,14 @@ public class AuctionController extends HttpServlet {
         } else if (service.equalsIgnoreCase("addtowatchlist")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
+            String auctionIdString = (String) request.getParameter("auctionId");
+            int auctionId = Integer.parseInt(auctionIdString);
+            int userId = Integer.parseInt(userIdString);
             if (userIdString == null || userIdString == "" || userIdString.isEmpty()) {
                 response.sendRedirect("AuctionController?service=index&errorCode=0");
             } else {
-                String auctionIdString = (String) request.getParameter("auctionId");
-                int auctionId = Integer.parseInt(auctionIdString);
-                int userId = Integer.parseInt(userIdString);
-                int auction_id = wdao.getAuctionId(userId);
-                if (auctionId == auction_id) {
+                boolean existed = wdao.getAuctionId(userId, auctionId);
+                if (existed) {
                     response.sendRedirect("AuctionController?service=index&errorCode=1");
                 } else {
                     WatchList watchlist = new WatchList(userId, auctionId);
@@ -415,11 +416,25 @@ public class AuctionController extends HttpServlet {
         } else if (service.equalsIgnoreCase("viewwatchlist")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
+            String errorCode = request.getParameter("errorCode");
             ArrayList<WatchList> array = (ArrayList<WatchList>) wdao.list(Integer.parseInt(userIdString));
+            ArrayList<Auction> auction = new ArrayList<>();
             for (int i = 0; i < array.size(); i++) {
-                int auction_id = array.get(i).getAuction_id();
+                int auctionid = array.get(i).getAuction_id();
+                auction.add(dao.getAuction(auctionid));
             }
-            response.sendRedirect("cp_customer_my_watchlist.jsp");
+            request.setAttribute("arraylist", auction);
+            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?errorCode="+errorCode);
+            rd.forward(request, response);
+        } else if (service.equalsIgnoreCase("delwatchlist")) {
+            String id = request.getParameter("auction_id");
+            int auction_id = Integer.parseInt(id);
+            int n = wdao.delete(auction_id);
+            if (n > 0) {
+                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1");
+            } else {
+                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0");
+            }
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }
