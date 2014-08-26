@@ -47,9 +47,9 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_product")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="cp_customer_my_product.jsp?current_page=my_product" title="My product">My product</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=myproduct" title="My product">My product</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="cp_customer_my_product.jsp?current_page=my_product" title="My product">My product</a></li>
+                    <li class="" id="edit_profile_active"><a href="AuctionController?service=myproduct" title="My product">My product</a></li>
                         <% }
                             }
                             if (rank == 0) {

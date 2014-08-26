@@ -4,6 +4,8 @@
     Author     : ducfpt
 --%>
 
+<%@page import="Entity.Category"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,6 +14,22 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />  
         <link type="text/css" href="css/en_style.css" rel="stylesheet" media="screen" />
+        <%
+            String keyword = request.getParameter("keyword");
+            String statusString = request.getParameter("status");
+            int status = -1;
+            String categoryString = request.getParameter("category");
+            int category = -1;
+            if (keyword==null) {
+                keyword = "";
+            }
+            if (statusString!=null) {
+                status = Integer.parseInt(statusString);
+            }
+            if (categoryString!=null) {
+                category = Integer.parseInt(categoryString);
+            }
+        %>
     </head>
     <body>
         <div class="my_message_right" id="mybids_page">
@@ -34,41 +52,13 @@
                                 <p style="font-weight:bold;">Category</p>
                                 <div class="boxcesss_top3">
                                     <select name="category_search" id="category_search">
-                                        <option value="">Select</option>
-
-                                        <option value="6">
-                                            Audi</option>
-
-                                        <option value="8">
-                                            BMW</option>
-
-                                        <option value="10">
-                                            Car</option>
-
-                                        <option value="1">
-                                            Computers</option>
-
-                                        <option value="2">
-                                            Electronics</option>
-
-                                        <option value="7">
-                                            Innova</option>
-
-                                        <option value="3">
-                                            Mobiles</option>
-
-                                        <option value="11">
-                                            Office equipment</option>
-
-                                        <option value="4">
-                                            Photography</option>
-
-                                        <option value="5">
-                                            Sports</option>
-
-                                        <option value="9">
-                                            Toyoto</option>
-
+                                        <option value="-1" <%if (category == -1) { %> selected="selected" <% } %>>Select category</option>
+                                        <%
+                                            ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                                            for (int i = 0; i < categories.size(); i++) {
+                                        %> 
+                                        <option value="<%=categories.get(i).getId()%>" <%if (category == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
+                                        <%}%>
                                     </select>
                                 </div>
                             </div>
@@ -82,7 +72,7 @@
                                 </div>
                                 <div class="profil_butoon">
                                     <div class="res_left"></div>
-                                    <div class="res_mid"><a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_auction';"></a>
+                                    <div class="res_mid"><a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_product';"></a>
                                     </div>
                                     <div class="res_right"></div>
                                 </div>	
@@ -137,7 +127,7 @@
                                         <td width="20" align="center"> 
                                             <a href="AuctionController?service=edit_myproduct" title="Product Edit" class="editicon"></a>  
                                             &nbsp;
-                                             
+
                                         </td>
                                         <td width="20" align="center">
                                             <a href="" title="Product Delete" onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" >
@@ -171,20 +161,20 @@
                                         </td>
 
                                         <td width="20" align="center"> 
-                                           
+
                                             &nbsp;
-                                             
+
                                         </td>
                                         <td width="20" align="center">
-                                           
+
                                             <a href=" " title="Product Edit" class="editicon"></a>  
                                             &nbsp;
                                         </td>
                                         <td width="20" align="center">
-                                              <a href=" " title="Product Delete"><img src="images/delete.png" border="0"></a>
-                                             &nbsp;
+                                            <a href=" " title="Product Delete"><img src="images/delete.png" border="0"></a>
+                                            &nbsp;
                                         </td>
-                                        
+
                                         <td width="100" align="center">
                                             InActive                                
                                         </td>
