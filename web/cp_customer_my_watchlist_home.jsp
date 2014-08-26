@@ -28,11 +28,10 @@
                         <%
                             ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("arraylist");
 
-                            if (auction == null){
-                        %>                       
-                            <h4>
-                                No watchlist.
-                            </h4>
+                            if (auction == null) {
+                        %>
+                        <h4 class="">No items</h4>
+
                         <%
                         } else {
                             for (int i=0;i<auction.size();i++) {
@@ -65,12 +64,12 @@
                                     </td>
 
                                     <td width="100" align="center">
-                                        <a title="<%=auction.get(i).getTitle()%>" href="http://localhost:8084/OAS/AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>"><%=auction.get(i).getTitle()%></a>
+                                        <a title="<%=auction.get(i).getTitle()%>" href="AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>"><%=auction.get(i).getTitle()%></a>
                                     </td>
                                     <td width="100" align="center">
                                         <%=auction.get(i).getFormattedEndDate()%>		</td>
                                     <td width="100" align="center">
-                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auction.get(i).getId()%>" title="Delete" onclick=" return confirm('Are you sure want to delete?')">
+                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auction.get(i).getId()%>" title="Delete" onclick="return confirm('Are you sure want to delete?')">
                                             <img src="images/delete.png" alt="Delete">
                                         </a>
                                     </td>

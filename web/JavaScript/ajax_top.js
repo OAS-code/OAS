@@ -6,6 +6,7 @@
 
 function ajax_load_top_balance(role){
     if (role!=0) {
+        //document.getElementById("ajax_load_buy_now").innerHTML = 'Buy now is unavailable';
         return;
     }
     var xmlhttp;

@@ -245,10 +245,7 @@
                             </li>
                         </ul>
                         <p class="countdown" style="display: block;">
-
-                            <script>
-                                    startCountdown('<%=auctionsClosed.get(i).getFormattedEndDate(1)%>', <%=auctionsClosed.get(i).getId()%>, "countdown_auction_home");
-                            </script>
+                            Auction Closed
                         </p>
                     </div>
                     <div class="feature_bott">

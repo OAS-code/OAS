@@ -96,13 +96,14 @@ function ajax_load_countdown(auctionId) {
             var rawData = xmlhttp.responseText;
             var data = rawData.split('|');
             if (data[3] == "On-going") {
-                //alert(data[1]);
                 startCountdown(data[1], "Auction Closed");
             } else if (data[3] == "Future") {
                 startCountdown(null, "Coming Soon..");
-            } else {
-                startCountdown(null, "Auction Postponed");
+            } else if (data[3] == "Closed") {
+                startCountdown(null, "Auction Closed");
             }
+
+
         }
     };
 
@@ -111,7 +112,7 @@ function ajax_load_countdown(auctionId) {
     return false;
 }
 
-function ajax_load_detail_bottom_outer_top(auctionId){
+function ajax_load_detail_bottom_outer_top(auctionId) {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -134,7 +135,7 @@ function ajax_load_detail_bottom_outer_top(auctionId){
     return false;
 }
 
-function ajax_load_detail_page_top_mid(auctionId){
+function ajax_load_detail_page_top_mid(auctionId) {
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -159,6 +160,10 @@ function ajax_load_detail_page_top_mid(auctionId){
 
 function startBidding(auctionId, nextBidValue)
 {
+    var r = confirm("You are about to place a bid on this auction. Your money will be instantly held until the auction's closure or until another bidder beat you.\nAre you sure you want to continue?");
+    if (!r) {
+        return false;
+    }
     document.getElementById("placebid_btn").innerHTML = '<p>PROCESSING..</p>';
     var userBidValue = document.getElementById("yourbidding").value;
     if (isNaN(userBidValue)) {
@@ -184,6 +189,61 @@ function startBidding(auctionId, nextBidValue)
         }
     };
     xmlhttp.open("GET", "BidController?service=place_bid&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
+processingBuynow = false;
+function ajax_load_buy_now(auctionId) {
+    if (processingBuynow) {
+        return false;
+    }
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_buy_now").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "AuctionController?service=ajax_load_buy_now&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
+
+function startBuying(auctionId) {
+    processingBuynow = true;
+    var r = confirm("You are about to pay the reserved price on this auction to buy it straightly.\nAre you sure you want to continue?");
+    if (!r) {
+        processingBuynow = false;
+        return false;
+    }
+    document.getElementById("ajax_load_buy_now").innerHTML = "Processing.."
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            processingBuynow = false;
+            document.getElementById("ajax_load_buy_now").innerHTML = xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open("GET", "BidController?service=buy_now&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }
