@@ -7,7 +7,6 @@ package DAO;
 
 import Entity.Auction;
 import Entity.Bid;
-import Entity.User;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;

@@ -226,7 +226,7 @@ public class UserDAO {
     public boolean update(User user) {
         String sql = "UPDATE user SET fullname = ?, username = ?, phonenumber = ?, email = ?, address = ?, role = ?, status = ?, balance = ?, password = ?, salt = ?, join_date = ? WHERE id = ?";
         try {
-            pre = conn.prepareStatement(sql);
+            PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
             pre.setString(2, user.getUsername());
             pre.setString(3, user.getPhonenumber());
@@ -251,7 +251,7 @@ public class UserDAO {
         int n = 0;
         String sql = "UPDATE user SET fullname = ?, phonenumber = ?, address = ? WHERE id = ?";
         try {
-            pre = conn.prepareStatement(sql);
+            PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, user.getFullname());
             pre.setString(2, user.getPhonenumber());
             pre.setString(3, user.getAddress());

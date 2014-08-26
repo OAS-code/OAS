@@ -72,13 +72,13 @@ public class OtherDAO {
             conn = (Connection) DriverManager.getConnection(ulr, username, password);
             //System.out.println("connected");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(OtherDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
