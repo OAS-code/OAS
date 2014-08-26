@@ -238,6 +238,7 @@ public class BidController extends HttpServlet {
                             bid.setBidderId(user.getId());
                             bid.setAuctionId(auction.getId());
                             bid.setAmount(auction.getBuynowPrice());
+                            bid.setAuctionName(auction.getTitle());
                             if (bidDao.placeBid(bid)) {
                                 rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18&data1=ok");
                                 rd.forward(request, response);

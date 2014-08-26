@@ -6,7 +6,10 @@
 
 package Entity;
 
+import DAO.FormatMoney;
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 /**
  *
@@ -41,6 +44,11 @@ public class Transaction {
     public Double getAmount() {
         return amount;
     }
+    
+    public String getAmountString() {
+        FormatMoney fm = new FormatMoney();
+        return fm.showPriceInUSD(amount,1);
+    }
 
     public void setAmount(Double amount) {
         this.amount = amount;
@@ -48,6 +56,12 @@ public class Transaction {
 
     public DateTime getDate() {
         return date;
+    }
+    
+    public String getDateString() {
+        String format = "d MMMM, yyyy HH:mm:ss";
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
+        return this.date.toString(fmt);
     }
 
     public void setDate(DateTime date) {

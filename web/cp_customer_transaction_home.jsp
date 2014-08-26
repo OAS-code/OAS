@@ -27,50 +27,52 @@
                             if (trans == null) {
                         %>
                         <h4 class="">No items</h4>
-                        <%} else {
+                        <%} else { %>
 
-                            for (int i=0;i<trans.size();i++ ) {
-                        %>
+                            
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
 
-                                    <th width="60" align="center">
-                                        <b>Transaction ID</b>
+                                    <th width="30" align="center">
+                                        <b>ID</b>
                                     </th>
-                                    <th width="100" align="center">
+                                    <th  align="center">
                                         <b>Transaction Date</b>
                                     </th>
-                                    <th width="220" align="center">
+                                    <th width="350" align="left">
                                         <b>Description</b>
                                     </th>
-                                    <th width="80" align="center">
+                                    <th align="left">
                                         <b>Total Amount</b>
                                     </th>
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody> 
+                                <% for (int i=0;i<trans.size();i++ ) {
+                        %> 
                                 <tr>
-                                    <td width="80" align="center">
+                                    <td align="center">
                                         <h2><%=trans.get(i).getId()%></h2>
                                     </td>
-                                    <td width="100" align="center">
+                                    <td align="center">
 
-                                        <h2><%=trans.get(i).getDate()%></h2>
+                                        <h2><%=trans.get(i).getDateString()%></h2>
                                     </td>
 
-                                    <td width="180" align="center">
+                                    <td  align="left">
                                         <h2><%=trans.get(i).getDesc()%></h2>
                                     </td>
-                                    <td width="100" align="center">
-                                        <h2><font class="">$</font><%=trans.get(i).getAmount()%></h2>
+                                    <td align="left">
+                                        <h2><font class=""></font><%=trans.get(i).getAmountString()%></h2>
                                     </td>
                                 </tr>
+                                <% } %>
                             </tbody>
                         </table>
                         <%
-                                }
+                                
                             }
                         %>
                     </div>
