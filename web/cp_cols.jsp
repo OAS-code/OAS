@@ -61,9 +61,9 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_transactions")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="cp_customer_transaction.jsp?current_page=my_transactions" title="My transactions">My transactions</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="TransactionController?service=mytransaction" title="My transactions">My transactions</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="cp_customer_transaction.jsp?current_page=my_transactions" title="My transactions">My transactions</a></li>
+                    <li class="" id="edit_profile_active"><a href="TransactionController?service=mytransaction" title="My transactions">My transactions</a></li>
                         <% }
                             }
                             if (rank == 0) {

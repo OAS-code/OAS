@@ -6,12 +6,17 @@
 
 package Controller;
 
+import DAO.TransactionDAO;
+import Entity.Transaction;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -32,8 +37,17 @@ public class TransactionController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String service = request.getParameter("service");
-        if (service.equalsIgnoreCase("")) {
-            
+        TransactionDAO dao = new TransactionDAO();
+        final String myTransaction = "cp_customer_transaction.jsp?current_page=my_transactions";
+        RequestDispatcher rd;
+        if (service.equalsIgnoreCase("mytransaction")) {
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int user_id = Integer.parseInt(userIdString);
+            ArrayList<Transaction> array = (ArrayList<Transaction>)dao.getTransactionFromUserId(user_id, 30);
+            request.setAttribute("transaction", array);
+            rd = request.getRequestDispatcher(myTransaction);
+            rd.forward(request, response);
         }
     }
 

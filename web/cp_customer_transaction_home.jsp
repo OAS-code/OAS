@@ -4,6 +4,8 @@
     Author     : ducfpt
 --%>
 
+<%@page import="Entity.Transaction"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -20,42 +22,57 @@
             <div class="message_common">
                 <div class="forms_common">
                     <div class="title_cont_watchilist">
+                        <%
+                            ArrayList<Transaction> trans = (ArrayList<Transaction>) request.getAttribute("transaction");
+                            if (trans == null) {
+                        %>
+                        <h4 class="">No items</h4>
+                        <%} else {
+
+                            for (int i=0;i<trans.size();i++ ) {
+                        %>
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
 
-                                    <th width="110" align="center">
+                                    <th width="60" align="center">
                                         <b>Transaction ID</b>
                                     </th>
                                     <th width="100" align="center">
                                         <b>Transaction Date</b>
                                     </th>
-                                    <th width="150" align="center">
+                                    <th width="220" align="center">
                                         <b>Description</b>
                                     </th>
-                                    <th width="100" align="center">
+                                    <th width="80" align="center">
                                         <b>Total Amount</b>
                                     </th>
                                 </tr>
                             </thead>
 
-                            <tbody><tr>
-                                    <td width="110" align="center">
-                                        <h2>1</h2>
+                            <tbody>
+                                <tr>
+                                    <td width="80" align="center">
+                                        <h2><%=trans.get(i).getId()%></h2>
                                     </td>
                                     <td width="100" align="center">
 
-                                        <h2 title="Mobile">2014-08-21 01:31:01</h2>
+                                        <h2><%=trans.get(i).getDate()%></h2>
                                     </td>
 
-                                    <td width="150" align="center">
-                                        <h2>Ndotuser bought Mobile for <font class="">$</font> 55.00(Product C…...</h2>
+                                    <td width="180" align="center">
+                                        <h2><%=trans.get(i).getDesc()%></h2>
                                     </td>
                                     <td width="100" align="center">
-                                        <h2><font class="">$</font> 55.00</h2>
+                                        <h2><font class="">$</font><%=trans.get(i).getAmount()%></h2>
                                     </td>
                                 </tr>
-                            </tbody></table>
+                            </tbody>
+                        </table>
+                        <%
+                                }
+                            }
+                        %>
                     </div>
                 </div>
                 <div class="user" style="display:none;">344</div>
