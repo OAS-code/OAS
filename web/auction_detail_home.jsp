@@ -205,8 +205,8 @@
                                                     <div class="hb_buy_now_button_left">
                                                     </div>
                                                     <div class="hb_buy_now_button_mid">
-                                                        <p>
-                                                            <a href="" title="Buy Now">Buy Now at <%=auction.getBuynowPriceString()%></a>
+                                                        <p id="ajax_load_buy_now">
+                                                            
                                                         </p>
                                                     </div>
                                                     <div class="hb_buy_now_button_right">
@@ -247,6 +247,7 @@
         ajax_load_current_bid('<%=auction.getId()%>');
         ajax_load_countdown('<%=auction.getId()%>');
         ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
+        //ajax_load_buy_now('<%=auction.getId()%>','<%=auction.getStatus()%>','<%=auction.getBuynowPriceString()%>');
         window.setInterval(function() {
             ajax_load_detail_page_top_mid('<%=auction.getId()%>');
             var obj = document.getElementById("yourbidding");

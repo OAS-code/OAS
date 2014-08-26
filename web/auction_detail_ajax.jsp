@@ -185,7 +185,7 @@
         <% } else if (errorCode == 12) { %>
         <p>INVALID BID</p>
         <% } else if (errorCode == 13) {%>
-        <p>|<%=data2%>|<%=auctionIdString%>|<%=data1%>|</p>
+        <p>|<%=data2%>|<%=auctionIdString%>|<%=data1%>|<%=data3%>|</p>
         <% } else if (errorCode == 14) { %>
         Auction is not available at the moment.
         <div class="hb_buy_now_left">

@@ -546,7 +546,8 @@ public class AuctionController extends HttpServlet {
             Auction auction = dao.getAuction(Integer.parseInt(auctionId));
             String status = auction.getStatus();
             String endDate = auction.getFormattedEndDate(1);
-            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate);
+            String buynowString = auction.getBuynowPriceString();
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate+"&data3="+buynowString);
             rd.forward(request, response);
             return;
         } else if (service.equalsIgnoreCase("ajax_load_detail_bottom_outer_top")) {
