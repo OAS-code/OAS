@@ -611,6 +611,10 @@ public class AuctionController extends HttpServlet {
                 }
             }
         } else if (service.equalsIgnoreCase("edit_myproduct")) {
+            String auctionid = request.getParameter("auctionid");
+            int auction_id = Integer.parseInt(auctionid);
+            Auction auction = dao.getAuction(auction_id);
+            request.setAttribute("auction", auction);
             rd = request.getRequestDispatcher(product_edit);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("addtowatchlist")) {

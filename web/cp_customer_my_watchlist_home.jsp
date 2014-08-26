@@ -34,7 +34,7 @@
 
                         <%
                         } else {
-                            for (int i=0;i<auction.size();i++) {
+
                         %>
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
@@ -53,7 +53,7 @@
                                     </th>
                                 </tr>
                             </thead>
-
+                            <% for (int i = 0; i < auction.size(); i++) {%>
                             <tbody><tr>
                                     <td width="100" align="center">
                                         <h3><a href="#" title="<%=auction.get(i).getTitle()%>">
@@ -75,11 +75,14 @@
                                     </td>
                                 </tr>
 
-                            </tbody></table>
+                            </tbody>
                             <%
-                                    }
                                 }
                             %>
+                        </table>
+                        <%
+                            }
+                        %>
                     </div>
 
                     <div class="user" style="display:none;">344</div>
