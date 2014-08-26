@@ -211,6 +211,17 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
             rd.forward(request, response);
             return;
+        } else if (service.equalsIgnoreCase("search_auction")) {
+            ArrayList<Category> categoryMenu = cdao.getTop(1000);
+            request.setAttribute("categoryMenu", categoryMenu);
+            
+            String keyword = request.getParameter("keyword");
+            ArrayList<Auction> auctions = dao.searchAuctionByTitle(keyword);
+            request.setAttribute("auctions", auctions);
+            
+            rd = request.getRequestDispatcher("auction_search.jsp"+"?keyword=" + keyword);
+            rd.forward(request, response);
+            return;
         }
         if (service.equalsIgnoreCase("load_auctions_in_category")) {
             ArrayList<Category> categoryMenu = cdao.getTop(1000);

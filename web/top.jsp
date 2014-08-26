@@ -64,6 +64,7 @@
             }
         %>
         <script type="text/javascript" src="JavaScript/ajax_top.js"></script>
+        <script type="text/javascript" src="JavaScript/validate_auction_search.js"></script>
     </head>
     <body onload="startTime()">
         <div id="header">
@@ -122,17 +123,15 @@
                                         <div class="search_icon"></div>
 
 
-                                        <form action="" id="user_search" name="user_search" method="get">
-                                            <input type="text" value="Search Products..." name="search" class="fl" onfocus="if (this.value == 'Search Products...')
-                                                        this.value = '';" onblur="if (this.value == '')
-                                                                    this.value = 'Search Products...'" id="search" maxlength="300">
+                                        <form action="AuctionController" id="user_search" name="user_search" method="get">
+                                            <input type="text" value="" name="search" class="fl" id="search" maxlength="300">
                                         </form>
                                     </div>
                                     <div class="search_rgt">
                                         <div class="search_button">
                                             <div class="search_button_lft"></div>
                                             <div class="search_button_mid" style="cursor:pointer;">
-                                                <p style="cursor:pointer;"><a class="fl" onclick="document.user_search.submit();" title="SEARCH">SEARCH</a></p>
+                                                <p style="cursor:pointer;"><a class="fl" onclick="return isSearchKeywordValid()" title="SEARCH">SEARCH</a></p>
                                             </div>
                                             <div class="search_button_rgt"></div>
                                         </div>

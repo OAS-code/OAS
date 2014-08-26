@@ -374,4 +374,23 @@ public class AuctionDAO {
         }
         return arr;
     }
+
+    public ArrayList<Auction> searchAuctionByTitle(String keyword) {
+        ArrayList<Auction> auctions = new ArrayList<>();
+        String sql = "SELECT auctionid FROM auction WHERE title LIKE ? ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT 100";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, "'%"+keyword+"%'");
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                int auctionId = rs.getInt("auctionid");
+                Auction auction = this.getAuction(auctionId);
+                auctions.add(auction);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO searchAuctionByTitle failed.");
+        }
+        return auctions;
+    }
 }
