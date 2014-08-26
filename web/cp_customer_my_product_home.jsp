@@ -135,7 +135,7 @@
                                         <td width="20" align="center">&nbsp;
                                         </td>
                                         <td width="20" align="center"> 
-                                            <a href="AuctionController?service=edit_myproduct" title="Product Edit" class="editicon"></a>  
+                                            <a href="AuctionController?service=edit_myproduct&auctionid=<%=auction.get(i).getId()%>" title="Product Edit" class="editicon"></a>  
                                             &nbsp;
                                         </td>
                                         <td width="20" align="center">

@@ -31,7 +31,7 @@
         <%@ include file="perm_customer.jsp" %>
         <div class="my_message_right" id="edit_profile_page">
             <div class="message_common_border">
-                <h1 title="User Manager">Add new auction</h1>
+                <h1 title="User Manager">Edit product</h1>
                 <p>&nbsp;</p>
             </div>
             <form method="post" name="addAuctionForm" action="AuctionController" onsubmit=" return validateAuction();">
