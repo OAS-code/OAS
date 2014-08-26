@@ -15,8 +15,23 @@
     </head>
     <body>
         <%@ include file="perm_customer.jsp" %>
+        <%            String errorCode = request.getParameter("errorCode");
+        %>
         <jsp:include page="top.jsp" />
         <div class="header2">
+            <%if (errorCode.equals("0")) {%>
+            <ul id="message" class="error_msg">
+                <li><p></p>Delete fail! Can not delete this watchlist.</li>
+            </ul>
+            <br>
+            <%} else if (errorCode.equals("1")) {%>
+            <ul id="message" class="success_msg">
+                <li><p></p>Delete a watchlist success.</li>
+            </ul>
+            <br>
+            <%} else {%>
+
+            <%}%>
             <jsp:include page="cp_cols.jsp" />
             <%@ include file="cp_customer_my_watchlist_home.jsp" %>   
         </div>

@@ -4,6 +4,8 @@
     Author     : ducfpt
 --%>
 
+<%@page import="Entity.WatchList"%>
+<%@page import="Entity.Auction"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -23,7 +25,17 @@
             <div class="message_common">
                 <div class="forms_common">
                     <div class="title_cont_watchilist">
-                        
+                        <%
+                            ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("arraylist");
+
+                            if (auction == null) {
+                        %>
+                        <h4 class="">No watchlist</h4>
+
+                        <%
+                        } else {
+                            for (int i=0;i<auction.size();i++) {
+                        %>
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
@@ -44,24 +56,30 @@
 
                             <tbody><tr>
                                     <td width="100" align="center">
-                                        <h3><a href="/buy-sell-demo/auctions/view/keyboard6tb04" title="Keyboard">
+                                        <h3><a href="#" title="<%=auction.get(i).getTitle()%>">
 
 
 
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/53e32582313fbkeyboard-.jpg" width="65" height="65" alt="Keyboard"></a></h3>
+                                                <img src="<%=auction.get(i).getImgCover()%>" width="65" height="65" alt="Keyboard"></a></h3>
                                     </td>
 
                                     <td width="100" align="center">
-                                        <a title="Keyboard" href="http://www.unieauction.com/buy-sell-demo/auctions/view/keyboard6tb04">Keyboard</a>
+                                        <a title="<%=auction.get(i).getTitle()%>" href="http://localhost:8088/OAS/AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>"><%=auction.get(i).getTitle()%></a>
                                     </td>
                                     <td width="100" align="center">
-                                        2014-08-18 00:17:29		</td>
+                                        <%=auction.get(i).getFormattedEndDate()%>		</td>
                                     <td width="100" align="center">
-                                        <a href="/buy-sell-demo/users/watchlist/68" title="Delete"><img src="images/delete.png" onclick=" return confirmDelete('Are you sure want to delete?');" alt="Delete"></a>
+                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auction.get(i).getId()%>" title="Delete" onclick=" return confirm('Are you sure want to delete?')">
+                                            <img src="images/delete.png" alt="Delete">
+                                        </a>
                                     </td>
                                 </tr>
 
                             </tbody></table>
+                            <%
+                                    }
+                                }
+                            %>
                     </div>
 
                     <div class="user" style="display:none;">344</div>

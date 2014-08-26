@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
@@ -105,29 +106,32 @@ public class WatchListDAO {
         return n;
     }
 
-    public int getAuctionId(int user_id) throws SQLException {
-        int auction_id = 0;
-        String sql = "SELECT auction_id FROM watchlist WHERE user_id = '" + user_id + "'";
+    public boolean getAuctionId(int user_id,int auction_id) throws SQLException {
+        boolean existed = false;
+        String sql = "SELECT COUNT(*) AS count FROM watchlist WHERE user_id = ? AND auction_id = ?";
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            rs = state.executeQuery(sql);
-            while (rs.next()) {
-                auction_id = rs.getInt("auction_id");
-            }
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, user_id);
+            pre.setInt(2, auction_id);
+            rs = pre.executeQuery();
+            rs.next();
+            return rs.getInt("count")>0;
         } catch (SQLException ex) {
             Logger.getLogger(WatchListDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return auction_id;
+            return false;
+        }       
     }
 
     public ArrayList<WatchList> list(int userid) {
-        String sql = "SELECT * FROM watchlist WHERE user_id=" + userid + " ORDER BY watchlist_id DESC ";
+        String sql = "SELECT * FROM watchlist WHERE user_id = ?";
 
-        ArrayList<WatchList> arr = new ArrayList<>();
+        ArrayList<WatchList> arr = new ArrayList<WatchList>();
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-            rs = state.executeQuery(sql);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, userid);
+            rs = pre.executeQuery();
             DateTime date;
             int user_id, auction_id;
             while (rs.next()) {
