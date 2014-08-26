@@ -279,7 +279,7 @@ public class Auction {
 
     public int getStatusId() {
         if (startDate == null || endDate == null) {
-            return 5; //invalid
+            return 6; //invalid
         } else if (moderateStatus == 0) { // Active
             if (startDate.isAfterNow()) {
                 return 0; //Future auctions
@@ -293,8 +293,10 @@ public class Auction {
             return 3; // Banned acutions
         } else if (moderateStatus == 2) { // Processed auctions.
             return 4; // Processed auctions.
+        } else if (moderateStatus == 3) { // Closed but unprocessed auctions.
+            return 5; // Closed but unprocessed auctions.
         } else {
-            return 5; // Invalid auctions.
+            return 6; // Invalid auctions.
         }
     }
 
@@ -310,6 +312,8 @@ public class Auction {
             return "Banned";
         } else if (statusId == 4) {
             return "Processed";
+        } else if (statusId == 5) {
+            return "Closed";
         } else {
             return "Invalid";
         }

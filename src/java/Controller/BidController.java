@@ -142,7 +142,7 @@ public class BidController extends HttpServlet {
             BidDAO bidDAO = new BidDAO();
             ArrayList bids = bidDAO.getBidFromAuctionId(Integer.parseInt(auctionId), 7);
             request.setAttribute("bids", bids);
-            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=16&data1="+bidDAO.getTotalBidsOnAuctionId(Integer.parseInt(auctionId)));
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=16&data1=" + bidDAO.getTotalBidsOnAuctionId(Integer.parseInt(auctionId)));
             rd.forward(request, response);
             return;
         } else if (service.equalsIgnoreCase("place_bid")) {
@@ -198,6 +198,57 @@ public class BidController extends HttpServlet {
                         }
                     } else {
                         rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=12&auctionId=" + auctionId);
+                        rd.forward(request, response);
+                        return;
+                    }
+                }
+            }
+        } else if (service.equalsIgnoreCase("buy_now")) {
+            String auctionId = request.getParameter("auctionId");
+            HttpSession session = request.getSession(true);
+            String roleString = (String) session.getAttribute("role");
+            String userId = (String) session.getAttribute("userid");
+            if (roleString == null) {
+                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
+                rd.forward(request, response);
+                return;
+            } else {
+                if (Integer.parseInt(roleString) != 0) {
+                    rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
+                    rd.forward(request, response);
+                    return;
+                } else {
+                    AuctionDAO auctionDAO = new AuctionDAO();
+                    Auction auction = auctionDAO.getAuction(Integer.parseInt(auctionId));
+                    if (auction.getSellerId() == Integer.parseInt(userId)) {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
+                        rd.forward(request, response);
+                        return;
+                    } else if (auction.getStatus().equals("On-going")) {
+                        UserDAO userDao = new UserDAO();
+                        User user = userDao.getUser(Integer.parseInt(userId));
+                        if (user.getBalance() < auction.getBuynowPrice()) {
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
+                            rd.forward(request, response);
+                            return;
+                        } else {
+                            BidDAO bidDao = new BidDAO();
+                            Bid bid = new Bid();
+                            bid.setBidderId(user.getId());
+                            bid.setAuctionId(auction.getId());
+                            bid.setAmount(auction.getBuynowPrice());
+                            if (bidDao.placeBid(bid)) {
+                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18&data1=ok");
+                                rd.forward(request, response);
+                                return;
+                            } else {
+                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
+                                rd.forward(request, response);
+                                return;
+                            }
+                        }
+                    } else {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=18");
                         rd.forward(request, response);
                         return;
                     }

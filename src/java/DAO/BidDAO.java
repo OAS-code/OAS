@@ -153,7 +153,17 @@ public class BidDAO {
 
     public boolean placeBid(Bid bid) {
         try {
-            String sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
+            String sql = "";
+            PreparedStatement pre = null;
+            AuctionDAO auctionDao = new AuctionDAO();
+            Auction auction = auctionDao.getAuction(bid.getAuctionId());
+            if (bid.getAmount() >= auction.getBuynowPrice()) {
+                sql = "UPDATE auction SET moderate_status=3 WHERE auctionid = ? ";
+                pre = conn.prepareStatement(sql);
+                pre.setInt(1, bid.getAuctionId());
+                pre.executeUpdate();
+            }
+            sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
             pre = conn.prepareStatement(sql);
             pre.setDouble(1, bid.getAmount());
             pre.setInt(2, bid.getBidderId());

@@ -206,7 +206,7 @@
                                                     </div>
                                                     <div class="hb_buy_now_button_mid">
                                                         <p id="ajax_load_buy_now">
-                                                            
+                                                            <img src="images/ajax-loader.gif" align="center"></img>
                                                         </p>
                                                     </div>
                                                     <div class="hb_buy_now_button_right">
@@ -247,7 +247,7 @@
         ajax_load_current_bid('<%=auction.getId()%>');
         ajax_load_countdown('<%=auction.getId()%>');
         ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
-        //ajax_load_buy_now('<%=auction.getId()%>','<%=auction.getStatus()%>','<%=auction.getBuynowPriceString()%>');
+        ajax_load_buy_now('<%=auction.getId()%>');
         window.setInterval(function() {
             ajax_load_detail_page_top_mid('<%=auction.getId()%>');
             var obj = document.getElementById("yourbidding");
@@ -263,6 +263,7 @@
         window.setInterval(function() {
             ajax_load_countdown(<%=auction.getId()%>);
             ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
+            ajax_load_buy_now('<%=auction.getId()%>');
         }, 10000);
 
 

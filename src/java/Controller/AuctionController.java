@@ -8,9 +8,11 @@ package Controller;
 import DAO.AuctionDAO;
 import DAO.CategoryDAO;
 import DAO.OtherDAO;
+import DAO.UserDAO;
 import DAO.WatchListDAO;
 import Entity.Auction;
 import Entity.Category;
+import Entity.User;
 import Entity.WatchList;
 import java.io.IOException;
 import java.sql.Date;
@@ -213,7 +215,7 @@ public class AuctionController extends HttpServlet {
         if (service.equalsIgnoreCase("load_auctions_in_category")) {
             ArrayList<Category> categoryMenu = cdao.getTop(1000);
             request.setAttribute("categoryMenu", categoryMenu);
-            
+
             String categoryIdString = request.getParameter("categoryId");
             int categoryId = Integer.parseInt(categoryIdString);
             ArrayList<Auction> auctionsOnGoing = dao.getAuctionsFromCategoryId(categoryId, "On-going", 100);
@@ -377,19 +379,19 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-        } else if(service.equalsIgnoreCase("myproduct")){
+        } else if (service.equalsIgnoreCase("myproduct")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", array);
             rd = request.getRequestDispatcher(myproduct);
             rd.forward(request, response);
             return;
-        }else if(service.equalsIgnoreCase("add_product")){
+        } else if (service.equalsIgnoreCase("add_product")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_product);
             rd.forward(request, response);
             return;
-        }else if (service.equalsIgnoreCase("add_new_product")) {
+        } else if (service.equalsIgnoreCase("add_new_product")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");
@@ -547,7 +549,7 @@ public class AuctionController extends HttpServlet {
             String status = auction.getStatus();
             String endDate = auction.getFormattedEndDate(1);
             String buynowString = auction.getBuynowPriceString();
-            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate+"&data3="+buynowString);
+            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=13&auctionId=" + auctionId + "&data1=" + status + "&data2=" + endDate + "&data3=" + buynowString);
             rd.forward(request, response);
             return;
         } else if (service.equalsIgnoreCase("ajax_load_detail_bottom_outer_top")) {
@@ -557,6 +559,38 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=15&auctionId=" + auction.getId());
             rd.forward(request, response);
             return;
+        } else if (service.equalsIgnoreCase("ajax_load_buy_now")) {
+            String auctionId = request.getParameter("auctionId");
+            HttpSession session = request.getSession(true);
+            String roleString = (String) session.getAttribute("role");
+            String userId = (String) session.getAttribute("userid");
+            if (roleString == null || !roleString.equals("0")) {
+                
+                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
+                rd.forward(request, response);
+                return;
+            } else {
+                Auction auction = dao.getAuction(Integer.parseInt(auctionId));
+                if (!auction.getStatus().equals("On-going")) {
+                    
+                    rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
+                    rd.forward(request, response);
+                    return;
+                } else {
+                    UserDAO userDao = new UserDAO();
+                    User user = userDao.getUser(Integer.parseInt(userId));
+                    if (user.getBalance() < auction.getBuynowPrice()) {
+                        //System.out.println("Checked.");
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
+                        rd.forward(request, response);
+                        return;
+                    } else {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17&data1="+auction.getBuynowPriceString());
+                        rd.forward(request, response);
+                        return;
+                    }
+                }
+            }
         } else if (service.equalsIgnoreCase("edit_myproduct")) {
             rd = request.getRequestDispatcher(product_edit);
             rd.forward(request, response);
@@ -594,7 +628,7 @@ public class AuctionController extends HttpServlet {
                 auction.add(dao.getAuction(auctionid));
             }
             request.setAttribute("arraylist", auction);
-            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?errorCode="+errorCode);
+            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?errorCode=" + errorCode);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("delwatchlist")) {
             String id = request.getParameter("auction_id");

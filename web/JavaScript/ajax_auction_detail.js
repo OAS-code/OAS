@@ -96,15 +96,14 @@ function ajax_load_countdown(auctionId) {
             var rawData = xmlhttp.responseText;
             var data = rawData.split('|');
             if (data[3] == "On-going") {
-                document.getElementById("ajax_load_buy_now").innerHTML = '<a href="" title="">Buy Now at '+data[4]+'</a>';
                 startCountdown(data[1], "Auction Closed");
             } else if (data[3] == "Future") {
-                document.getElementById("ajax_load_buy_now").innerHTML = 'Buy now is unavailable';
                 startCountdown(null, "Coming Soon..");
             } else if (data[3] == "Closed") {
-                document.getElementById("ajax_load_buy_now").innerHTML = 'Buy now is unavailable';
                 startCountdown(null, "Auction Closed");
             }
+
+
         }
     };
 
@@ -193,13 +192,58 @@ function startBidding(auctionId, nextBidValue)
     xmlhttp.send();
     return false;
 }
-
-function ajax_load_buy_now(auctionId, status, price){
-    /*
-    var r = confirm("You are about to pay the reserved price on this auction to buy it straightly.\nAre you sure you want to continue?");
-    if (!r) {
+processingBuynow = false;
+function ajax_load_buy_now(auctionId) {
+    if (processingBuynow) {
         return false;
     }
-    */
-   
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200)
+        {
+            document.getElementById("ajax_load_buy_now").innerHTML = xmlhttp.responseText;
+        }
+    };
+
+    xmlhttp.open("GET", "AuctionController?service=ajax_load_buy_now&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
+}
+
+function startBuying(auctionId) {
+    processingBuynow = true;
+    var r = confirm("You are about to pay the reserved price on this auction to buy it straightly.\nAre you sure you want to continue?");
+    if (!r) {
+        processingBuynow = false;
+        return false;
+    }
+    document.getElementById("ajax_load_buy_now").innerHTML = "Processing.."
+    
+    var xmlhttp;
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+            processingBuynow = false;
+            document.getElementById("ajax_load_buy_now").innerHTML = xmlhttp.responseText;
+        }
+    };
+    xmlhttp.open("GET", "BidController?service=buy_now&auctionId=" + auctionId + "&random=" + Math.random(), true);
+    xmlhttp.send();
+    return false;
 }

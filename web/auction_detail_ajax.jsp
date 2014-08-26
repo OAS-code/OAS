@@ -275,7 +275,7 @@
             <div class="winning_list"> 
                 <% while (count < bids.size()) { %>
                 <ul>
-                    <li> <div class="winning_list_left"><h1><%=bids.get(count).getBidderName()%></h1> <p><%=bids.get(count).getDateFormatted()%></p>  </div> <div class="winning_list_right"><p><%=bids.get(count).getAmountString()%></p>  </div>  </li>
+                    <li> <div class="winning_list_left"><h1><%=count+1%>. <%=bids.get(count).getBidderName()%></h1> <p><%=bids.get(count).getDateFormatted()%></p>  </div> <div class="winning_list_right"><p><%=bids.get(count).getAmountString()%></p>  </div>  </li>
                     
                 </ul>
                 <% 
@@ -291,8 +291,20 @@
                 <div class="detail_winner_down_list">  </div>
                 <% } %>
         </div> 
+        <% } else if (errorCode==17) { 
+            if (data1!=null){ %>
+               <a href="#" onClick="startBuying('<%=auctionIdString%>')" title="">Buy Now at <%=data1%></a>
         <% } else { %>
+               Buy now is unavailable 
+            <% }
+        } else if (errorCode==18) { 
+            if (data1!=null){ %>
+               Bought!
+        <% } else { %>
+               Failed to buy. 
+            <% }
+        } else { %>
         <p>INTERNAL ERROR!</p>
-        <% }%>
+        <% } %>
     </body>
 </html>
