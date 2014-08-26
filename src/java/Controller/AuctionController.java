@@ -393,6 +393,11 @@ public class AuctionController extends HttpServlet {
         } else if (service.equalsIgnoreCase("myproduct")) {
             ArrayList<Category> array = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", array);
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int user_id = Integer.parseInt(userIdString);
+            ArrayList<Auction> auction = (ArrayList<Auction>) dao.list(user_id);
+            request.setAttribute("auction", auction);
             rd = request.getRequestDispatcher(myproduct);
             rd.forward(request, response);
             return;
