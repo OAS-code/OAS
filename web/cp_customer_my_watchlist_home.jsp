@@ -30,7 +30,7 @@
 
                             if (auction == null) {
                         %>
-                        <h4 class="">No watchlist</h4>
+                        <h4 class="">No items</h4>
 
                         <%
                         } else {
@@ -64,7 +64,7 @@
                                     </td>
 
                                     <td width="100" align="center">
-                                        <a title="<%=auction.get(i).getTitle()%>" href="http://localhost:8088/OAS/AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>"><%=auction.get(i).getTitle()%></a>
+                                        <a title="<%=auction.get(i).getTitle()%>" href="AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>"><%=auction.get(i).getTitle()%></a>
                                     </td>
                                     <td width="100" align="center">
                                         <%=auction.get(i).getFormattedEndDate()%>		</td>

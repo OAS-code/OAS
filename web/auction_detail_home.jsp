@@ -259,9 +259,9 @@
             }
             ajax_load_top_bidder('<%=auction.getId()%>');
             ajax_load_current_bid('<%=auction.getId()%>');
+            ajax_load_countdown(<%=auction.getId()%>);
         }, 5000);
         window.setInterval(function() {
-            ajax_load_countdown(<%=auction.getId()%>);
             ajax_load_detail_bottom_outer_top('<%=auction.getId()%>');
             ajax_load_buy_now('<%=auction.getId()%>');
         }, 10000);

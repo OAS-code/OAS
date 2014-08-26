@@ -158,22 +158,38 @@ public class BidDAO {
             AuctionDAO auctionDao = new AuctionDAO();
             Auction auction = auctionDao.getAuction(bid.getAuctionId());
             if (bid.getAmount() >= auction.getBuynowPrice()) {
+                bid.setAmount(auction.getBuynowPrice());
                 sql = "UPDATE auction SET moderate_status=3 WHERE auctionid = ? ";
                 pre = conn.prepareStatement(sql);
                 pre.setInt(1, bid.getAuctionId());
                 pre.executeUpdate();
             }
+
             sql = "UPDATE user SET balance=balance-? WHERE id = ? ";
             pre = conn.prepareStatement(sql);
             pre.setDouble(1, bid.getAmount());
             pre.setInt(2, bid.getBidderId());
             pre.executeUpdate();
+
             sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, bid.getBidderId());
             pre.setInt(2, bid.getAuctionId());
             pre.setDouble(3, bid.getAmount());
             pre.executeUpdate();
+
+            sql = "SELECT * FROM bid WHERE auction_id = ? ORDER BY amount DESC";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bid.getAuctionId());
+            ResultSet rs = pre.executeQuery();
+            rs.next();
+            while (rs.next()) {
+                sql = "UPDATE user SET balance = balance + ? WHERE id = ?";
+                pre = conn.prepareStatement(sql);
+                pre.setDouble(1, rs.getDouble("amount"));
+                pre.setInt(2, rs.getInt("bidder_id"));
+                pre.executeUpdate();
+            }
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);

@@ -572,11 +572,14 @@ public class AuctionController extends HttpServlet {
             } else {
                 Auction auction = dao.getAuction(Integer.parseInt(auctionId));
                 if (!auction.getStatus().equals("On-going")) {
-                    
                     rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
                     rd.forward(request, response);
                     return;
-                } else {
+                } else if (auction.getSellerId() == Integer.parseInt(userId)) {
+                    rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
+                    rd.forward(request, response);
+                    return;
+                }else {
                     UserDAO userDao = new UserDAO();
                     User user = userDao.getUser(Integer.parseInt(userId));
                     if (user.getBalance() < auction.getBuynowPrice()) {
