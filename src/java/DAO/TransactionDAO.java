@@ -75,6 +75,12 @@ public class TransactionDAO {
             pre.setString(2, desc);
             pre.setDouble(3, amount);
             pre.executeUpdate();
+            
+            sql = "UPDATE user SET balance = balance + ? WHERE id = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setDouble(1, amount);
+            pre.setInt(2, userId);
+            pre.executeUpdate();
             return true;
         } catch (SQLException ex) {
             Logger.getLogger(TransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
