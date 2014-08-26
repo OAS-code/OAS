@@ -218,9 +218,20 @@ public class AuctionController extends HttpServlet {
 
             String categoryIdString = request.getParameter("categoryId");
             int categoryId = Integer.parseInt(categoryIdString);
-            ArrayList<Auction> auctionsOnGoing = dao.getAuctionsFromCategoryId(categoryId, "On-going", 100);
-            ArrayList<Auction> auctionsFuture = dao.getAuctionsFromCategoryId(categoryId, "Future", 100);
-            ArrayList<Auction> auctionsClosed = dao.getAuctionsFromCategoryId(categoryId, "Closed", 100);
+            ArrayList<Auction> auctions = dao.getAuctionsFromCategoryId(categoryId, 500);
+            ArrayList<Auction> auctionsOnGoing = new ArrayList<>();
+            ArrayList<Auction> auctionsFuture = new ArrayList<>();
+            ArrayList<Auction> auctionsClosed = new ArrayList<>();
+            for (int i=0; i<auctions.size(); i++){
+                Auction auction = auctions.get(i);
+                if (auction.getStatus().equals("On-going")){
+                    auctionsOnGoing.add(auction);
+                } else if (auction.getStatus().equals("Future")){
+                    auctionsFuture.add(auction);
+                } else {
+                    auctionsClosed.add(auction);
+                }
+            }
             request.setAttribute("auctionsOnGoing", auctionsOnGoing);
             request.setAttribute("auctionsFuture", auctionsFuture);
             request.setAttribute("auctionsClosed", auctionsClosed);

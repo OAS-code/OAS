@@ -184,7 +184,7 @@ public class CategoryDAO {
 
     public ArrayList<Category> getTop(int i) {
         ArrayList<Category> categories = new ArrayList<>();
-        String sql = "SELECT category_id , name, category.description, count(category_id) AS count, SUM(views) AS sum FROM auction LEFT JOIN category ON auction.category_id=category.categoryid WHERE (UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) > 0) GROUP BY category_id ORDER BY sum DESC LIMIT ?";
+        String sql = "SELECT category_id , name, category.description, count(category_id) AS count, SUM(views) AS sum FROM auction LEFT JOIN category ON auction.category_id=category.categoryid GROUP BY category_id ORDER BY sum DESC LIMIT ?";
         try {
             state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             pre = conn.prepareStatement(sql);

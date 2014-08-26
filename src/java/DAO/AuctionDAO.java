@@ -172,7 +172,9 @@ public class AuctionDAO {
                     auction.setImg4(rs.getString("img_4"));
                     auction.setImg5(rs.getString("img_5"));
                     auction.setViews(rs.getInt("views"));
-                    subAuctions.add(auction);
+                    if (auction.getStatus().equals("On-going")) {
+                        subAuctions.add(auction);
+                    }
                 }
                 auctionsArray[i] = subAuctions;
             } catch (SQLException ex) {
@@ -307,18 +309,9 @@ public class AuctionDAO {
         }
     }
 
-    public ArrayList<Auction> getAuctionsFromCategoryId(int categoryId, String status, int limit) {
+    public ArrayList<Auction> getAuctionsFromCategoryId(int categoryId, int limit) {
         ArrayList<Auction> auctions = new ArrayList<>();
-        String sql = "";
-        if (status.equals("Future")) {
-            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(start_date)-UNIX_TIMESTAMP(NOW())>0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
-        } else if (status.equals("Closed")) {
-            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW())<0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
-        } else if (status.equals("On-going")) {
-            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(start_date)-UNIX_TIMESTAMP(NOW())<0) AND (UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW())>0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
-        } else {
-            sql = "SELECT auctionid FROM auction WHERE category_id = ? ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, a.views DESC LIMIT ?";
-        }
+        String sql = "SELECT auctionid FROM auction WHERE category_id = ? ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
         try {
             //state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
             PreparedStatement pre = conn.prepareStatement(sql);
@@ -332,7 +325,7 @@ public class AuctionDAO {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Auction DAO get failed.");
+            System.out.println("Auction DAO getAuctionsFromCategoryId failed.");
         }
         return auctions;
     }

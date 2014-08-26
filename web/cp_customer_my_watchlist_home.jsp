@@ -69,7 +69,7 @@
                                     <td width="100" align="center">
                                         <%=auction.get(i).getFormattedEndDate()%>		</td>
                                     <td width="100" align="center">
-                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auction.get(i).getId()%>" title="Delete" onclick=" return confirm('Are you sure want to delete?')">
+                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auction.get(i).getId()%>" title="Delete" onclick="return confirm('Are you sure want to delete?')">
                                             <img src="images/delete.png" alt="Delete">
                                         </a>
                                     </td>
