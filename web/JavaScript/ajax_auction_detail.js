@@ -103,7 +103,6 @@ function ajax_load_countdown(auctionId) {
                 startCountdown(null, "Auction Closed");
             }
 
-
         }
     };
 

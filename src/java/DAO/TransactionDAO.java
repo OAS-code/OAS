@@ -67,6 +67,20 @@ public class TransactionDAO {
         TransactionDAO dao = new TransactionDAO();
     }
 
-    
+    public boolean makeTransaction(int userId, String desc, Double amount) {
+        try {
+            String sql = "INSERT INTO transaction (user_id, description, amount) VALUES (?, ?, ?) ";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, userId);
+            pre.setString(2, desc);
+            pre.setDouble(3, amount);
+            pre.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Trans DAO, makeTransaction failed!");
+            return false;
+        }
+    }
 
 }
