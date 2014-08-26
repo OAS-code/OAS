@@ -70,16 +70,14 @@ public class TransactionDAO {
         TransactionDAO dao = new TransactionDAO();
     }
 
-    public ArrayList<Transaction> getTransactionFromUserId(int user_id) {
-        ArrayList<Transaction> transaction = new ArrayList<Transaction>();
+    public ArrayList<Transaction> getTransactionFromUserId(int user_id, int limit) {
+        ArrayList<Transaction> transactions = new ArrayList<Transaction>();
         try {
-
-            String sql = "SELECT * FROM transaction WHERE user_id = ?";
-
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-            pre = conn.prepareStatement(sql);
+            String sql = "SELECT transaction_id, amount, description, user_id, UNIX_TIMESTAMP(date) AS date FROM transaction WHERE user_id = ? ORDER BY date DESC LIMIT ?";
+            PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, user_id);
-            rs = pre.executeQuery();
+            pre.setInt(2, limit);
+            ResultSet rs = pre.executeQuery();
             while (rs.next()) {
                 Transaction trans = new Transaction();
                 trans.setId(rs.getInt("transaction_id"));
@@ -88,15 +86,15 @@ public class TransactionDAO {
                 long dateLong = rs.getLong("date") * 1000;
                 DateTime date = new DateTime(dateLong);
                 trans.setDate(date);
-                transaction.add(trans);
+                transactions.add(trans);
             }
-
-            return transaction;
         } catch (SQLException ex) {
             Logger.getLogger(TransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Transaction DAO getTransactionFromUserId failed.");
         }
-        return transaction;
+        return transactions;
+    }
+    
     public boolean makeTransaction(int userId, String desc, Double amount) {
         try {
             String sql = "INSERT INTO transaction (user_id, description, amount) VALUES (?, ?, ?) ";
