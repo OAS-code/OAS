@@ -161,6 +161,18 @@ public class Auction {
         DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
         return this.endDate.toString(fmt);
     }
+    
+    public String getFormattedStartDate(int type) {
+        if (this.startDate==null) {
+            return "Unknown";
+        }
+        String format = "d MMMM, yyyy 'at' HH:mm";
+        if (type == 1) {
+            format = "MM/dd/yyyy HH:mm:ss";
+        }
+        DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
+        return this.startDate.toString(fmt);
+    }
 
     public void setEndDate(DateTime endDate) {
         this.endDate = endDate;

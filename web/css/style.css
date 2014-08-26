@@ -83,10 +83,10 @@
 .today_head_rgt p a{text-decoration:underline; float:right; font:bold 12px Arial, Helvetica, sans-serif; color:#ee7e2c; padding:3px 0px 0px 8px;}
 
 
-.feature_box{ width:235px;border:1px solid #dedddf;float:left; margin:0 5px 5px 3px; position: relative; min-height:170px;}
+.feature_box{ width:235px;height:190px;border:1px solid #dedddf;float:left; margin:0 5px 5px 3px; position: relative; min-height:170px;}
 .feature_lft{width:88px; float:left;position:relative;}
 .feature_lft .featured img {position:absolute;width:46px;height:46px;left:0;top:0;border:0;}
-.feature_rgt{width:137px; float:right; min-height:135px;}
+.feature_rgt{width:137px; float:right; height:153px;}
 .feature_rgt label a{text-decoration:underline; float:left; color:#2f9dd0; font: bold 12px Arial, Helvetica, sans-serif; padding:5px 0px 0px 15px;}
 .feature_rgt span{ color:#ee7e2c;}
 .feature_rgt ul{list-style-type:none; float:left; margin:12px 0px 0px 0;clear:both;width:100px;}

@@ -7,7 +7,7 @@ function calcage(secs, num1, num2) {
 
 function CountBack(secs, auctionId) {
     if (secs < 0) {
-        document.getElementById("countdown" + auctionId).innerHTML = FinishMessage;
+        document.getElementById("countdown" + auctionId).innerHTML = "00:00:00:00";
         return;
     }
     var DisplayFormat = "%%D%%:%%H%%:%%M%%:%%S%%";
