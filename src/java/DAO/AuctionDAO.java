@@ -306,4 +306,34 @@ public class AuctionDAO {
             return false;
         }
     }
+
+    public ArrayList<Auction> getAuctionsFromCategoryId(int categoryId, String status, int limit) {
+        ArrayList<Auction> auctions = new ArrayList<>();
+        String sql = "";
+        if (status.equals("Future")) {
+            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(start_date)-UNIX_TIMESTAMP(NOW())>0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
+        } else if (status.equals("Closed")) {
+            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW())<0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
+        } else if (status.equals("On-going")) {
+            sql = "SELECT auctionid FROM auction WHERE category_id = ? AND (UNIX_TIMESTAMP(start_date)-UNIX_TIMESTAMP(NOW())<0) AND (UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW())>0) ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC LIMIT ?";
+        } else {
+            sql = "SELECT auctionid FROM auction WHERE category_id = ? ORDER BY UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, a.views DESC LIMIT ?";
+        }
+        try {
+            //state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, categoryId);
+            pre.setInt(2, limit);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                int auctionId = rs.getInt("auctionid");
+                Auction auction = this.getAuction(auctionId);
+                auctions.add(auction);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO get failed.");
+        }
+        return auctions;
+    }
 }

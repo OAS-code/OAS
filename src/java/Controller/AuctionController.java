@@ -87,7 +87,7 @@ public class AuctionController extends HttpServlet {
         } else if (service.equalsIgnoreCase("index")) {
             ArrayList<Category> categoryMenu = cdao.getTop(1000);
             request.setAttribute("categoryMenu", categoryMenu);
-            
+
             ArrayList<Category> categories = cdao.getTop(5);
             ArrayList[] auctionsArray = dao.list(categories, 8);
             //request.setAttribute("categories", categories);
@@ -206,51 +206,20 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
             rd.forward(request, response);
             return;
-        } /*
-         if (service.equalsIgnoreCase("updateauction")) {
-         SimpleDateFormat DateFormat = new SimpleDateFormat("yyyy-MM-dd");
-         SimpleDateFormat hDateFormat = new SimpleDateFormat("HH:mm");
-         String title = request.getParameter("title");
-         String description = request.getParameter("description");
-         String sta = request.getParameter("cb2");
-         int status = Integer.parseInt(sta);
-         String categoryid1 = request.getParameter("cb1");
-         String start_date1 = request.getParameter("startdate");
-         String start_time1 = request.getParameter("starttime");
-         String end_date1 = request.getParameter("enddate");
-         String end_time1 = request.getParameter("endtime");
-         String starting_price1 = request.getParameter("startingprice");
-         String buy_now_price1 = request.getParameter("buynowprice");
-         String image1 = request.getParameter("image1");
-         String image2 = request.getParameter("image2");
-         String image3 = request.getParameter("image3");
-         String image4 = request.getParameter("image4");
-         String image5 = request.getParameter("image5");
-         String video1 = request.getParameter("video");
-         int start = video1.indexOf('=');
-         String video = video1.substring(start + 1);
-         String userid = request.getParameter("userid");
-         int seller_id = Integer.parseInt(userid);
-         String auction_id = request.getParameter("auctionid");
-         int auctionid_ = Integer.parseInt(auction_id);
-         int categoryid = Integer.parseInt(categoryid1);
-         Date start_date = (Date) DateFormat.parse(start_date1);
-         Date start_time = (Date) hDateFormat.parse(start_time1);
-         Date end_date = (Date) DateFormat.parse(end_date1);
-         Date end_time = (Date) hDateFormat.parse(end_time1);
-         double starting_price = Double.parseDouble(starting_price1);
-         double buy_now_price = Double.parseDouble(buy_now_price1);
-         Auction auction = new Auction(auctionid_, categoryid, seller_id, title, description, start_date, start_time, end_date, end_time, starting_price, buy_now_price, status, video, image1, image2, image3, image4, image5);
-         int n = dao.update(auction);
-         if (n > 0) {
-         ArrayList<Category> array = (ArrayList<Category>) cdao.list();
-         request.setAttribute("array", array);
-         //response.sendRedirect(auction_manager);
-         rd = request.getRequestDispatcher(auction_manager);
-         rd.forward(request, response);
-         }
-         }
-         */ else if (service.equalsIgnoreCase("add_new_auction")) {
+        }
+        if (service.equalsIgnoreCase("load_auctions_in_category")) {
+            String categoryIdString = request.getParameter("categoryId");
+            int categoryId = Integer.parseInt(categoryIdString);
+            ArrayList<Auction> auctionsOnGoing = dao.getAuctionsFromCategoryId(categoryId, "On-going", 100);
+            ArrayList<Auction> auctionsFuture = dao.getAuctionsFromCategoryId(categoryId, "Future", 100);
+            ArrayList<Auction> auctionsClosed = dao.getAuctionsFromCategoryId(categoryId, "Closed", 100);
+            request.setAttribute("auctionsOnGoing", auctionsOnGoing);
+            request.setAttribute("auctionsFuture", auctionsFuture);
+            request.setAttribute("auctionsClosed", auctionsClosed);
+            rd = request.getRequestDispatcher("category_detail.jsp" + "?categoryId=" + categoryId);
+            rd.forward(request, response);
+            return;
+        } else if (service.equalsIgnoreCase("add_new_auction")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");
@@ -443,12 +412,12 @@ public class AuctionController extends HttpServlet {
                 }
             }
 
-        } else if (service.equalsIgnoreCase("viewwatchlist")) {           
+        } else if (service.equalsIgnoreCase("viewwatchlist")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
             ArrayList<WatchList> array = (ArrayList<WatchList>) wdao.list(Integer.parseInt(userIdString));
-            for(int i=0;i<array.size();i++){
-                int auction_id = array.get(i).getAuction_id();                
+            for (int i = 0; i < array.size(); i++) {
+                int auction_id = array.get(i).getAuction_id();
             }
             response.sendRedirect("cp_customer_my_watchlist.jsp");
         } else {
