@@ -57,6 +57,11 @@
             String role = (String) session.getAttribute("role");
             String balance = (String) request.getAttribute("balance");
             ArrayList<Category> categoryMenu = (ArrayList<Category>) request.getAttribute("categoryMenu");
+            String categoryIdString1 = request.getParameter("categoryId");
+            int categoryId1 = 0;
+            if (categoryIdString1!=null) {
+                categoryId1 = Integer.parseInt(categoryIdString1);
+            }
         %>
         <script type="text/javascript" src="JavaScript/ajax_top.js"></script>
     </head>
@@ -152,7 +157,7 @@
                         <select style="width:auto; height: 31px;padding: 1px; margin: 0px;background: url(images/menu_bg.png) repeat-x;border:0px;font: bold 12px Arial, Helvetica, sans-serif;" ONCHANGE="location = this.options[this.selectedIndex].value;">
                             <option value="AuctionController?service=index">All categories</option>
                             <%     for (int i = 0; i < categoryMenu.size(); i++) {%>
-                            <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>"><%=categoryMenu.get(i).getName()%></option>
+                            <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>" <% if (categoryId1==categoryMenu.get(i).getId()) { %>selected<% } %> ><%=categoryMenu.get(i).getName()%></option>
                             <% } %>
                         </select>
                     </li>

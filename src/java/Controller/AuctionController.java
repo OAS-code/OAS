@@ -209,6 +209,9 @@ public class AuctionController extends HttpServlet {
             return;
         }
         if (service.equalsIgnoreCase("load_auctions_in_category")) {
+            ArrayList<Category> categoryMenu = cdao.getTop(1000);
+            request.setAttribute("categoryMenu", categoryMenu);
+            
             String categoryIdString = request.getParameter("categoryId");
             int categoryId = Integer.parseInt(categoryIdString);
             ArrayList<Auction> auctionsOnGoing = dao.getAuctionsFromCategoryId(categoryId, "On-going", 100);
