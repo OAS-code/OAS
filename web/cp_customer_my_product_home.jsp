@@ -4,6 +4,7 @@
     Author     : ducfpt
 --%>
 
+<%@page import="Entity.Auction"%>
 <%@page import="Entity.Category"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,13 +21,13 @@
             int status = -1;
             String categoryString = request.getParameter("category");
             int category = -1;
-            if (keyword==null) {
+            if (keyword == null) {
                 keyword = "";
             }
-            if (statusString!=null) {
+            if (statusString != null) {
                 status = Integer.parseInt(statusString);
             }
-            if (categoryString!=null) {
+            if (categoryString != null) {
                 category = Integer.parseInt(categoryString);
             }
         %>
@@ -81,6 +82,14 @@
                     </div>
                     <div class="forms_common">
                         <div class="title_cont_watchilist">
+                            <%
+                                ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("auction");
+                                if (auction == null) {
+                            %>
+
+                            <%} else {
+                                for (int i=0;i<auction.size();i++) {
+                            %>
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                                 <thead>
                                     <tr><th width="100" align="center">
@@ -104,7 +113,7 @@
 
                                         <td width="100" align="center">
                                             <h3> 
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/53e32515743d6Sports_bikes_wallpaper6.jpg" title="cbr250" width="65" height="65">
+                                                <img src="<%=auction.get(i).getImgCover()%>" title="<%=auction.get(i).getTitle()%>" width="65" height="65">
 
                                             </h3>
                                         </td>
@@ -112,13 +121,14 @@
 
                                         <td width="100" align="center">
 
-                                            <a href="" title="Dsadfsaf">
-                                                Honda CBR 250</a>
+                                            <a href="" title="<%=auction.get(i).getTitle()%>">
+                                                <%=auction.get(i).getTitle()%>
+                                            </a>
 
                                         </td>		
                                         <td width="150" align="center">	
-                                            <h2>2014-08-15 12:45:00</h2>
-                                            <h2>2014-08-17 01:00:00</h2>
+                                            <h2><%=auction.get(i).getFormattedStartDate()%></h2>
+                                            <h2><%=auction.get(i).getFormattedEndDate()%></h2>
 
                                         </td>
 
@@ -127,7 +137,6 @@
                                         <td width="20" align="center"> 
                                             <a href="AuctionController?service=edit_myproduct" title="Product Edit" class="editicon"></a>  
                                             &nbsp;
-
                                         </td>
                                         <td width="20" align="center">
                                             <a href="" title="Product Delete" onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" >
@@ -136,51 +145,16 @@
                                             &nbsp;
                                         </td>
                                         <td width="100" align="center">
-                                            InActive                                </td>
-
-                                    </tr><tr>
-
-                                        <td width="100" align="center">
-                                            <h3> 
-                                                <img src="http://www.unieauction.com/buy-sell-demo/public/uploaded_files/products/thumb1/53e32582313fbkeyboard-.jpg" title="Test1" width="65" height="65">
-
-                                            </h3>
+                                            <a href="" title="">
+                                                <%=auction.get(i).getStatus()%>
+                                            </a>                               
                                         </td>
-
-
-                                        <td width="100" align="center">
-
-                                            <a href="" title="Test1">
-                                                Keyboard razer</a>
-
-                                        </td>		
-                                        <td width="150" align="center">	
-                                            <h2>2014-08-15 01:00:00</h2>
-                                            <h2>2014-08-16 01:00:00</h2>
-
-                                        </td>
-
-                                        <td width="20" align="center"> 
-
-                                            &nbsp;
-
-                                        </td>
-                                        <td width="20" align="center">
-
-                                            <a href=" " title="Product Edit" class="editicon"></a>  
-                                            &nbsp;
-                                        </td>
-                                        <td width="20" align="center">
-                                            <a href=" " title="Product Delete"><img src="images/delete.png" border="0"></a>
-                                            &nbsp;
-                                        </td>
-
-                                        <td width="100" align="center">
-                                            InActive                                
-                                        </td>
-
                                     </tr>
                                 </tbody></table>
+                                <%
+                                        }
+                                    }
+                                %>
                         </div>
                         <div class="user" style="display:none;">344</div>
                     </div>
