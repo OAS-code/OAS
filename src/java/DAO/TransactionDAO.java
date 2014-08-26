@@ -5,17 +5,20 @@
  */
 package DAO;
 
+import Entity.Transaction;
 import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.naming.NamingException;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -67,6 +70,33 @@ public class TransactionDAO {
         TransactionDAO dao = new TransactionDAO();
     }
 
+    public ArrayList<Transaction> getTransactionFromUserId(int user_id) {
+        ArrayList<Transaction> transaction = new ArrayList<Transaction>();
+        try {
+
+            String sql = "SELECT * FROM transaction WHERE user_id = ?";
+
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, user_id);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                Transaction trans = new Transaction();
+                trans.setId(rs.getInt("transaction_id"));
+                trans.setAmount(rs.getDouble("amount"));
+                trans.setDesc(rs.getString("description"));
+                long dateLong = rs.getLong("date") * 1000;
+                DateTime date = new DateTime(dateLong);
+                trans.setDate(date);
+                transaction.add(trans);
+            }
+
+            return transaction;
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Transaction DAO getTransactionFromUserId failed.");
+        }
+        return transaction;
     public boolean makeTransaction(int userId, String desc, Double amount) {
         try {
             String sql = "INSERT INTO transaction (user_id, description, amount) VALUES (?, ?, ?) ";

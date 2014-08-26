@@ -25,45 +25,33 @@
                                 <tr>
 
                                     <th width="110" align="center">
-                                        <b>Transaction Date</b>
+                                        <b>Transaction ID</b>
                                     </th>
                                     <th width="100" align="center">
-                                        <b>Package Name</b>
+                                        <b>Transaction Date</b>
                                     </th>
                                     <th width="150" align="center">
-                                        <b>Package Description</b>
+                                        <b>Description</b>
                                     </th>
                                     <th width="100" align="center">
                                         <b>Total Amount</b>
-                                    </th>
-                                    <th width="60" align="center">
-                                        <b>Debit</b>
-                                    </th>
-                                    <th width="60" align="center">
-                                        <b>Credit</b>
                                     </th>
                                 </tr>
                             </thead>
 
                             <tbody><tr>
                                     <td width="110" align="center">
-                                        <h2>2014-08-21 01:31:01</h2>
+                                        <h2>1</h2>
                                     </td>
                                     <td width="100" align="center">
 
-                                        <h2 title="Mobile">Mobile</h2>
+                                        <h2 title="Mobile">2014-08-21 01:31:01</h2>
                                     </td>
 
                                     <td width="150" align="center">
                                         <h2>Ndotuser bought Mobile for <font class="">$</font> 55.00(Product C…...</h2>
                                     </td>
                                     <td width="100" align="center">
-                                        <h2><font class="">$</font> 55.00</h2>
-                                    </td>
-                                    <td width="60" align="center">
-                                        <h2>--</h2>
-                                    </td>
-                                    <td width="60" align="center">
                                         <h2><font class="">$</font> 55.00</h2>
                                     </td>
                                 </tr>
