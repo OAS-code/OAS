@@ -13,10 +13,15 @@
         <%
             String data1 = request.getParameter("data1");
             String data2 = request.getParameter("data2");
+            String errorCodeString = request.getParameter("errorCode");
+            int errorCode = 0;
+            if (errorCodeString != null) {
+                errorCode = Integer.parseInt(errorCodeString);
+            }
         %>
     </head>
     <body>
-        
+        <% if (errorCode == 1) {%>
     <li>
         <label>Welcome, <%=data1%>! &nbsp;</label>
     </li>
@@ -24,5 +29,9 @@
         <p>Your balance:</p>
         <span><font class=""></font></span><span class="user_balance" title=""><%=data2%></span>
     </li>
+    <% } else if (errorCode == 2) { 
+    %>
+    
+    <% }%>
 </body>
 </html>

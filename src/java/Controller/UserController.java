@@ -471,7 +471,7 @@ public class UserController extends HttpServlet {
                     String userId = (String) session.getAttribute("userid");
                     User user = dao.getUser(Integer.parseInt(userId));
                     //System.out.println(user.getBalanceString());
-                    rd = request.getRequestDispatcher("top_ajax.jsp" + "?data1="+user.getUsername()+"&data2="+user.getBalanceString());
+                    rd = request.getRequestDispatcher("top_ajax.jsp?errorCode=1" + "&data1="+user.getUsername()+"&data2="+user.getBalanceString());
                     rd.forward(request, response);
                 }
             }
