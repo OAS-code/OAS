@@ -28,7 +28,8 @@
             <%
                 for (int j = 0; j < auctionsArray.length; j++) {
                     ArrayList<Auction> subAuctions = auctionsArray[j];
-                    String categoryName = subAuctions.get(0).getCategoryName();
+                    if (subAuctions.size()>0) {
+                        String categoryName = subAuctions.get(0).getCategoryName();
             %>
 
             <div class="today_head">
@@ -115,7 +116,7 @@
                 <% } %>
                     </div>
                     
-                    <% }%>
+                    <% }}%>
             
         <!--
         </div>
