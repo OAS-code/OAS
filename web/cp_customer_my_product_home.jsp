@@ -45,7 +45,7 @@
                             <div class="form_cont_top2">
                                 <p style="font-weight:bold;">Keyword</p>
                                 <div class="boxcesss_top">
-                                    <input type="text" name="keyword_search" id="keyword_search" maxlength="256" value="">
+                                    <input type="text" name="keyword_search" id="keyword_search" maxlength="256" value="<%=keyword%>">
                                 </div>
                                 <label> <span class="search_info_label" style="color:#1E90FF;">Search by products name</span></label>
                             </div>

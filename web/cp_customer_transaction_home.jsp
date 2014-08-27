@@ -51,7 +51,7 @@
 
                             <tbody> 
                                 <% for (int i=0;i<trans.size();i++ ) {
-                        %> 
+                                %> 
                                 <tr>
                                     <td align="center">
                                         <h2><%=trans.get(i).getId()%></h2>
