@@ -5,9 +5,10 @@
  */
 
 function isSearchKeywordValid(){
-    var keyword = document.forms["user_search"]["search"].value;
+    var keyword = document.forms["user_search"]["keyword"].value;
     //alert(keyword);
     if (keyword && keyword.length >=3 ) {
+        document.getElementById('user_search').submit();
         return true;
     } else if (keyword==''){
         alert("Your search keyword is empty...Try different keywords");

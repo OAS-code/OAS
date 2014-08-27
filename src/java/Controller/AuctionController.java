@@ -101,18 +101,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("index.jsp?errorCode=" + errorCode);
             rd.forward(request, response);
             return;
-        } /*
-         if (service.equalsIgnoreCase("deleteAuction")) {
-         String id = request.getParameter("auctionid");
-         int auctionid = Integer.parseInt(id);
-         int n = dao.delete(auctionid);
-         if (n > 0) {
-         ArrayList<Category> array = (ArrayList<Category>) cdao.list();
-         request.setAttribute("array", array);
-         rd = request.getRequestDispatcher(auction_manager);
-         rd.forward(request, response);
-         }
-         }*/ else if (service.equalsIgnoreCase("add_auction")) {
+        }  else if (service.equalsIgnoreCase("add_auction")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_auction);
@@ -176,19 +165,7 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-        } /*
-         if (service.equalsIgnoreCase("editauction")) {
-         String auctionid = request.getParameter("auctionid");
-         String categoryid = request.getParameter("categoryid");
-         rs = dao.search(Integer.parseInt(auctionid));
-         rss = cdao.search(Integer.parseInt(categoryid));
-         ArrayList<Category> array = cdao.list();
-         request.setAttribute("array", array);
-         request.setAttribute("rs", rs);
-         request.setAttribute("rss", rss);
-         rd = request.getRequestDispatcher(edit_auction);
-         rd.forward(request, response);
-         }*/ else if (service.equalsIgnoreCase("search")) {
+        } else if (service.equalsIgnoreCase("search")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String keyword = request.getParameter("keyword");
@@ -211,19 +188,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
             rd.forward(request, response);
             return;
-        } else if (service.equalsIgnoreCase("search_auction")) {
-            ArrayList<Category> categoryMenu = cdao.getTop(1000);
-            request.setAttribute("categoryMenu", categoryMenu);
-            
-            String keyword = request.getParameter("keyword");
-            ArrayList<Auction> auctions = dao.searchAuctionByTitle(keyword);
-            request.setAttribute("auctions", auctions);
-            
-            rd = request.getRequestDispatcher("auction_search.jsp"+"?keyword=" + keyword);
-            rd.forward(request, response);
-            return;
-        }
-        if (service.equalsIgnoreCase("load_auctions_in_category")) {
+        } else if (service.equalsIgnoreCase("load_auctions_in_category")) {
             ArrayList<Category> categoryMenu = cdao.getTop(1000);
             request.setAttribute("categoryMenu", categoryMenu);
 
@@ -249,7 +214,32 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("category_detail.jsp" + "?categoryId=" + categoryId);
             rd.forward(request, response);
             return;
-        } else if (service.equalsIgnoreCase("add_new_auction")) {
+        } else if (service.equalsIgnoreCase("search_auction")) {
+            String keyword = request.getParameter("keyword");
+            ArrayList<Category> categoryMenu = cdao.getTop(1000);
+            request.setAttribute("categoryMenu", categoryMenu);
+            
+            ArrayList<Auction> auctions = dao.searchAuctionByTitle(keyword, 100);
+            ArrayList<Auction> auctionsOnGoing = new ArrayList<>();
+            ArrayList<Auction> auctionsFuture = new ArrayList<>();
+            ArrayList<Auction> auctionsClosed = new ArrayList<>();
+            for (int i=0; i<auctions.size(); i++){
+                Auction auction = auctions.get(i);
+                if (auction.getStatus().equals("On-going")){
+                    auctionsOnGoing.add(auction);
+                } else if (auction.getStatus().equals("Future")){
+                    auctionsFuture.add(auction);
+                } else {
+                    auctionsClosed.add(auction);
+                }
+            }
+            request.setAttribute("auctionsOnGoing", auctionsOnGoing);
+            request.setAttribute("auctionsFuture", auctionsFuture);
+            request.setAttribute("auctionsClosed", auctionsClosed);
+            rd = request.getRequestDispatcher("auction_search.jsp" + "?keyword=" + keyword);
+            rd.forward(request, response);
+            return;
+        }else if (service.equalsIgnoreCase("add_new_auction")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");

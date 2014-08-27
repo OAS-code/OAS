@@ -59,8 +59,12 @@
             ArrayList<Category> categoryMenu = (ArrayList<Category>) request.getAttribute("categoryMenu");
             String categoryIdString1 = request.getParameter("categoryId");
             int categoryId1 = 0;
-            if (categoryIdString1!=null) {
+            if (categoryIdString1 != null) {
                 categoryId1 = Integer.parseInt(categoryIdString1);
+            }
+            String keyword = request.getParameter("keyword");
+            if (keyword==null){
+                keyword = "";
             }
         %>
         <script type="text/javascript" src="JavaScript/ajax_top.js"></script>
@@ -123,23 +127,26 @@
                                         <div class="search_icon"></div>
 
 
-                                        <form action="AuctionController" id="user_search" name="user_search" method="get">
-                                            <input type="text" value="" name="search" class="fl" id="search" maxlength="300">
-                                        </form>
-                                    </div>
-                                    <div class="search_rgt">
-                                        <div class="search_button">
-                                            <div class="search_button_lft"></div>
-                                            <div class="search_button_mid" style="cursor:pointer;">
-                                                <p style="cursor:pointer;"><a class="fl" onclick="return isSearchKeywordValid()" title="SEARCH">SEARCH</a></p>
+                                        <form action="AuctionController" id="user_search" name="user_search" method="get" onSubmit="return isSearchKeywordValid()">
+                                            <input type="hidden" name="service" value="search_auction">
+                                            <input type="text" value="<%=keyword%>" name="keyword" id="keyword" class="fl" maxlength="300">
                                             </div>
-                                            <div class="search_button_rgt"></div>
-                                        </div>
+                                            <div class="search_rgt">
+                                                <div class="search_button">
+                                                    <div class="search_button_lft"></div>
+                                                    <div class="search_button_mid" style="cursor:pointer;">
+                                                        <p style="cursor:pointer;"><a class="fl" onclick="return isSearchKeywordValid()" title="SEARCH">SEARCH</a></p>
+                                                    </div>
+                                                    <div class="search_button_rgt"></div>
+                                                </div>
+                                            </div>
+                                        </form>
+
+
                                     </div>
 
+                                    <div class="search_total_rgt"></div>
                                 </div>
-                                <div class="search_total_rgt"></div>
-                            </div>
                         </li>
                     </ul>
                 </div>
@@ -156,7 +163,7 @@
                         <select style="width:auto; height: 31px;padding: 1px; margin: 0px;background: url(images/menu_bg.png) repeat-x;border:0px;font: bold 12px Arial, Helvetica, sans-serif;" ONCHANGE="location = this.options[this.selectedIndex].value;">
                             <option value="AuctionController?service=index">All categories</option>
                             <%     for (int i = 0; i < categoryMenu.size(); i++) {%>
-                            <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>" <% if (categoryId1==categoryMenu.get(i).getId()) { %>selected<% } %> ><%=categoryMenu.get(i).getName()%></option>
+                            <option value="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryMenu.get(i).getId()%>" <% if (categoryId1 == categoryMenu.get(i).getId()) { %>selected<% }%> ><%=categoryMenu.get(i).getName()%></option>
                             <% } %>
                         </select>
                     </li>
