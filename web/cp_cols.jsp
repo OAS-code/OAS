@@ -54,7 +54,7 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_bids")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="BidController?service=mybibs" title="My bids">My bids</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="BidController?service=mybids" title="My bids">My bids</a></li>
                         <% } else { %>
                     <li class="" id="edit_profile_active"><a href="BidController?service=mybids" title="My bids">My bids</a></li>
                         <% }
