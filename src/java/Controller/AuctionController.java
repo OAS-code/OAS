@@ -651,16 +651,16 @@ public class AuctionController extends HttpServlet {
                 auction.add(dao.getAuction(auctionid));
             }
             request.setAttribute("arraylist", auction);
-            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?errorCode=" + errorCode);
+            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?current_page=my_watchlist&errorCode=" + errorCode);
             rd.forward(request, response);
         } else if (service.equalsIgnoreCase("delwatchlist")) {
             String id = request.getParameter("auction_id");
             int auction_id = Integer.parseInt(id);
             int n = wdao.delete(auction_id);
             if (n > 0) {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1");
+                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
             } else {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0");
+                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
             }
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");

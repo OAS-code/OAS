@@ -156,17 +156,17 @@ public class BidDAO {
             PreparedStatement pre = null;
             AuctionDAO auctionDao = new AuctionDAO();
             Auction auction = auctionDao.getAuction(bid.getAuctionId());
-            String transLog = "Bidded on auction '"+bid.getAuctionName()+"' (ID #"+bid.getAuctionId()+")";
+            String transLog = "Bidded on auction '" + bid.getAuctionName() + "' (ID #" + bid.getAuctionId() + ")";
             if (bid.getAmount() >= auction.getBuynowPrice()) {
                 bid.setAmount(auction.getBuynowPrice());
-                transLog = "Paid reserved price on auction '"+bid.getAuctionName()+"' (ID #"+bid.getAuctionId()+")";
+                transLog = "Paid reserved price on auction '" + bid.getAuctionName() + "' (ID #" + bid.getAuctionId() + ")";
             }
-            
+
             TransactionDAO transDao = new TransactionDAO();
-            if (!transDao.makeTransaction(bid.getBidderId(), transLog, -bid.getAmount())){
+            if (!transDao.makeTransaction(bid.getBidderId(), transLog, -bid.getAmount())) {
                 return false;
-            } 
-            
+            }
+
             if (bid.getAmount() >= auction.getBuynowPrice()) {
                 sql = "UPDATE auction SET moderate_status = 3 WHERE auctionid = ? ";
                 pre = conn.prepareStatement(sql);
@@ -178,10 +178,10 @@ public class BidDAO {
             pre = conn.prepareStatement(sql);
             pre.setInt(1, bid.getAuctionId());
             ResultSet rs = pre.executeQuery();
-            if (rs.next() && !transDao.makeTransaction(rs.getInt("bidder_id"), "Refunded from losing bid on auction '"+bid.getAuctionName()+"' (ID #"+bid.getAuctionId()+")", rs.getDouble("amount"))){
+            if (rs.next() && !transDao.makeTransaction(rs.getInt("bidder_id"), "Refunded from losing bid on auction '" + bid.getAuctionName() + "' (ID #" + bid.getAuctionId() + ")", rs.getDouble("amount"))) {
                 return false;
             }
-            
+
             sql = "INSERT INTO bid (bidder_id, auction_id, amount) VALUES (?, ?, ?) ";
             pre = conn.prepareStatement(sql);
             pre.setInt(1, bid.getBidderId());
@@ -196,4 +196,51 @@ public class BidDAO {
         }
     }
 
+    public ArrayList<Bid> getBidFromUserId(int bidder_id) {
+        ArrayList<Bid> bid = new ArrayList<Bid>();
+        try {
+            String sql = "SELECT * FROM bid WHERE bidder_id = ? GROUP BY auction_id ORDER BY date DESC";
+            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bidder_id);
+            rs = pre.executeQuery();
+            while (rs.next()) {
+                Bid bids = new Bid();
+                bids.setBidId(rs.getInt("bid_id"));
+                bids.setBidderId(rs.getInt("bidder_id"));
+                bids.setAuctionId(rs.getInt("auction_id"));
+                bids.setAmount(rs.getDouble("amount"));
+                long dateLong = rs.getLong("date") * 1000;
+                DateTime date = new DateTime(dateLong);
+                bids.setDate(date);
+
+                bid.add(bids);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Bid list failed.");
+        }
+
+        return bid;
+    }
+
+    public ArrayList<Auction> getBiddedAuctionsFromUserId(int user_id) {
+        ArrayList<Auction> auctions = new ArrayList<>();
+        try {
+            String sql = "SELECT auction_id FROM bid WHERE bidder_id = ? GROUP BY auction_id ORDER BY date DESC";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, user_id);
+            ResultSet rs = pre.executeQuery();
+            while (rs.next()) {
+                int auctionId = rs.getInt("auction_id");
+                AuctionDAO auctionDao = new AuctionDAO();
+                Auction auction = auctionDao.getAuction(auctionId);
+                auctions.add(auction);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("BidDAO getBiddedAuctionsFromUserId failed.");
+        }
+        return auctions;
+    }
 }

@@ -256,6 +256,16 @@ public class BidController extends HttpServlet {
                     }
                 }
             }
+        }else if(service.equalsIgnoreCase("mybids")){
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int user_id = Integer.parseInt(userIdString);
+            
+            BidDAO dao = new BidDAO();
+            ArrayList<Auction> auctions = dao.getBiddedAuctionsFromUserId(user_id);
+            request.setAttribute("auctions", auctions);
+            rd = request.getRequestDispatcher("cp_customer_my_bids.jsp?current_page=my_bids");
+            rd.forward(request, response);
         }
     }
 
