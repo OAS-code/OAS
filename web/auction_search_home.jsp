@@ -25,7 +25,7 @@
     <body>
         
         <% int sum = auctionsClosed.size() + auctionsFuture.size() + auctionsOnGoing.size();
-            if ( sum <= 0) {%>
+            if ( sum <= 0) { %>
         <div class="">
             <div class="message_common">
                 Your search <span style="font-size:18px;"><%=keyword%></span> did not match any auctions...Try different keywords				</h4> 

@@ -28,7 +28,7 @@
                             <%
                                 ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("auctions");
 
-                                if (auction == null) {
+                                if (auction.size()<=0) {
                             %>
                             <h4 class="">No items</h4>
 
@@ -36,8 +36,9 @@
                             } else {
 
                             %>
+                            
+                            
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
-
                                 <thead>
                                     <tr>
                                         <th width="100" align="center"><b>Image</b></th>
@@ -47,7 +48,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <%for(int i=0;i<auction.size();i++){%>
+                                    <% for (int i=0;i<auction.size();i++) { %>
                                     <tr>
                                         <td width="100" align="center">
 
@@ -67,7 +68,7 @@
                                             <h2><%=auction.get(i).getStatus()%></h2>		
                                         </td>
                                     </tr> 
-                                    <%}%>
+                                    <% } %>
                                 </tbody>
                             </table>
                             <%
