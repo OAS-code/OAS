@@ -24,12 +24,10 @@
                     <div class="title_cont_watchilist">
                         <%
                             ArrayList<Transaction> trans = (ArrayList<Transaction>) request.getAttribute("transaction");
-                            if (trans == null) {
+                            if (trans.size()<=0) {
                         %>
                         <h4 class="">No items</h4>
-                        <%} else { %>
-
-                            
+                        <%} else { %>    
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
