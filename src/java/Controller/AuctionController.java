@@ -6,10 +6,12 @@
 package Controller;
 
 import DAO.AuctionDAO;
+import DAO.BidDAO;
 import DAO.CategoryDAO;
 import DAO.OtherDAO;
 import DAO.UserDAO;
 import Entity.Auction;
+import Entity.Bid;
 import Entity.Category;
 import Entity.User;
 import java.io.IOException;
@@ -453,6 +455,14 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
             return;
         } else if(service.equalsIgnoreCase("save_myproduct")){
+            String auctionid = request.getParameter("auctionid");
+            BidDAO bidDao = new BidDAO();
+            ArrayList<Bid> bids = bidDao.getBidFromAuctionId(Integer.parseInt(auctionid), 1);
+            if(bids.size() > 0){
+                rd = request.getRequestDispatcher(auction_detail_loading+"?errorCode=21");
+                rd.forward(request, response);
+                return;
+            }
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");
@@ -576,7 +586,7 @@ public class AuctionController extends HttpServlet {
                 }
             }
 
-            Auction auction = new Auction();
+            Auction auction = dao.getAuction(Integer.parseInt(auctionid));
             auction.setCategoryId(categoryId);
             auction.setSellerId(seller_id);
             auction.setTitle(title);
@@ -595,7 +605,7 @@ public class AuctionController extends HttpServlet {
             auction.setEndDate(endDate);
 
             if (dao.update(auction)) {
-                rd = request.getRequestDispatcher(myproduct + "&errorCode=1");
+                rd = request.getRequestDispatcher(myproduct + "&errorCode=0");
                 rd.forward(request, response);
                 return;
             } else {
@@ -609,7 +619,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(add_product);
             rd.forward(request, response);
             return;
-        } else if (service.equalsIgnoreCase("add_new_product")) {
+        }else if (service.equalsIgnoreCase("add_new_product")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");

@@ -67,7 +67,8 @@ public class Auction {
     }
 
     public Auction() {
-
+        this.views = 0;
+        this.buyerConfirm = "";
     }
 
     public int getId() {

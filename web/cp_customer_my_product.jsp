@@ -16,7 +16,26 @@
     <body>
         <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
-        <div class="header2">
+        <%            
+            String errorCode = request.getParameter("errorCode");
+            if(errorCode==null){
+                errorCode = "";
+            }
+        %>
+        <div class="header2" id="errorTop">
+            <%if (errorCode.equals("1")) {%>
+            <ul id="message" class="success_msg">
+                <li><p></p>Add new auction successfully!</li>
+            </ul>
+            <br>
+            <%} else if (errorCode.equals("0")) {%>
+            <ul id="message" class="success_msg">
+                <li><p></p>Auction saved successfully!</li>
+            </ul>
+            <br>
+            <%} else {%>
+
+            <%}%>
             <jsp:include page="cp_cols.jsp" />
             <%@ include file="cp_customer_my_product_home.jsp" %>   
         </div>
