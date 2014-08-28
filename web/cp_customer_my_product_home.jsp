@@ -146,7 +146,7 @@
 
                                         <td align="center">
                                             <h3> 
-                                                <a href="">
+                                                <a href="AuctionController?service=view&auctionId=<%=auctions.get(i).getId()%>">
                                                     <img src="<%=auctions.get(i).getImgCover()%>" title="<%=auctions.get(i).getTitle()%>" width="65" height="65">
                                                     <br>
                                                     <%=auctions.get(i).getTitle()%>

@@ -158,7 +158,7 @@
                                         <tr>
                                             <td >
                                                 <div class="user_name_common">
-                                                    <b style="width:130px">Starting date: <span class="red">*</span>: </b>	
+                                                    <b style="width:130px">Starting date: <%=auction.getFormattedStartDate(1)%><span class="red">*</span>: </b>	
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
@@ -171,7 +171,7 @@
                                             </td>
                                             <td>
                                                 <div class="user_name_common">
-                                                    <b style="width:130px">Closing date  <span class="red">*</span>: </b>		
+                                                    <b style="width:130px">Closing date  <%=auction.getFormattedEndDate(1)%><span class="red">*</span>: </b>		
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
