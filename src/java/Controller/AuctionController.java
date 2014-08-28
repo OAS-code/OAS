@@ -463,6 +463,7 @@ public class AuctionController extends HttpServlet {
             String increaseByString = request.getParameter("increaseBy");
             String startDateString = request.getParameter("startDate");
             String endDateString = request.getParameter("endDate");
+            System.out.println(startDateString);
             String img_1 = request.getParameter("img_1");
             String img_2 = request.getParameter("img_2");
             String img_3 = request.getParameter("img_3");
@@ -542,8 +543,8 @@ public class AuctionController extends HttpServlet {
                 rd.forward(request, response);
                 return;
             }
-            DateTime startDate = other.getDateTimeFromString(startDateString).plusMinutes(1);
-            DateTime endDate = other.getDateTimeFromString(endDateString).plusMinutes(2);
+            DateTime startDate = other.getDateTimeFromString2(startDateString);
+            DateTime endDate = other.getDateTimeFromString2(endDateString);
 
             if (startDate.isBeforeNow()) {
                 rd = request.getRequestDispatcher(save_product + "&errorCode=8" + savedValues);

@@ -309,4 +309,12 @@ public class OtherDAO {
         DateTime dt = formatter.parseDateTime(dateString);
         return dt;
     }
+    public DateTime getDateTimeFromString2(String dateString) {
+        if (dateString.isEmpty()) {
+            return DateTime.now();
+        }
+        org.joda.time.format.DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd'T'HH:mm:ss");
+        DateTime dt = formatter.parseDateTime(dateString);
+        return dt;
+    }
 }
