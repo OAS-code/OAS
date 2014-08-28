@@ -41,7 +41,7 @@
             <div class="buton_green">		
                 <div class="message_common">
                     <div class="form_cont_top">
-                        <form method="post" class="admin_form" name="frmproduct" id="frmproduct" action="myproducts">
+                        <form method="post" class="admin_form" name="frmproduct" id="frmproduct" action="AuctionController">
                             <div class="form_cont_top2">
                                 <p style="font-weight:bold;">Keyword</p>
                                 <div class="boxcesss_top">
@@ -68,6 +68,7 @@
                                     <div class="save_left"></div>
                                     <div class="save_mid">
                                         <input type="submit" value="Search" name="search_product" title="Search">
+                                        <input type="hidden" id="service" name="service" value="search_product">
                                     </div>
                                     <div class="save_right"></div>
                                 </div>
