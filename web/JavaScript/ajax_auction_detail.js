@@ -226,7 +226,7 @@ function startBuying(auctionId) {
         return false;
     }
     document.getElementById("ajax_load_buy_now").innerHTML = "Processing.."
-    
+
     var xmlhttp;
     if (window.XMLHttpRequest)
     {// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -245,4 +245,33 @@ function startBuying(auctionId) {
     xmlhttp.open("GET", "BidController?service=buy_now&auctionId=" + auctionId + "&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
+}
+
+function cancelBid(auctionId) {
+    processingBuynow = true;
+    var r = confirm("You're about to withdraw/cancel your bid from this auction while being the highest bidder.\nBy doing this, you're facing a penalty of 30% of the bid.\n\nAre you sure you want to continue and take back 70% of your bid?");
+    if (r == true) {
+        document.getElementById("placebid_btn").innerHTML = "<p>CANCELLING..</p>";
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                document.getElementById("placebid_btn").innerHTML = xmlhttp.responseText;
+                processingBuynow = false;
+            }
+        };
+        xmlhttp.open("GET", "BidController?service=cancel_bid&auctionId=" + auctionId + "&random=" + Math.random(), true);
+        xmlhttp.send();
+        return false;
+    } else {
+        processingBuynow = false;
+        return false;
+    }
 }
