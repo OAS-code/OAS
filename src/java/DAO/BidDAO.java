@@ -243,4 +243,44 @@ public class BidDAO {
         }
         return auctions;
     }
+
+    public boolean cancelBid(Bid bid) {
+        try {
+            String sql = "";
+            PreparedStatement pre = null;
+
+            sql = "DELETE FROM bid WHERE bid_id = ? AND auction_id = ? AND bidder_id = ?";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bid.getBidId());
+            pre.setInt(2, bid.getAuctionId());
+            pre.setInt(3, bid.getBidderId());
+            pre.executeUpdate();
+
+            AuctionDAO auctionDao = new AuctionDAO();
+            Auction auction = auctionDao.getAuction(bid.getAuctionId());
+            String transLog = "Cancelled a bid of " + bid.getAmountString() + " on auction '" + auction.getTitle() + "' (ID #" + bid.getAuctionId() + ")";
+            Double refundAmount = bid.getAmount() * 0.7;
+            TransactionDAO transDao = new TransactionDAO();
+            if (!transDao.makeTransaction(bid.getBidderId(), transLog, refundAmount)) {
+                return false;
+            }
+            
+            transLog = "Compensation from a cancelled bid of " + bid.getAmountString() + " from "+bid.getBidderName()+" on auction '" + auction.getTitle()+ "' (ID #" + bid.getAuctionId() + ")";
+            refundAmount = bid.getAmount() * 0.3;
+            if (!transDao.makeTransaction(auction.getSellerId(), transLog, refundAmount)) {
+                return false;
+            }
+
+            sql = "UPDATE auction SET moderate_status = 2, buyer_confirm = '' WHERE auctionid = ? ";
+            pre = conn.prepareStatement(sql);
+            pre.setInt(1, bid.getAuctionId());
+            pre.executeUpdate();
+            
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BidDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Bid DAO, cancelBid failed.");
+            return false;
+        }
+    }
 }
