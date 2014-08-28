@@ -365,5 +365,9 @@ public class Auction {
         this.buyerConfirm = buyerConfirm;
     }
     
+    public String getTopBidderName(){
+        BidDAO bidDao = new BidDAO();
+        return bidDao.getTopBidderNameFromAuctionId(id);
+    }
     
 }

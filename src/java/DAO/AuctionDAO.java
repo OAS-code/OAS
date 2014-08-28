@@ -34,6 +34,10 @@ public class AuctionDAO {
     private Session session = null;
     Message message = null;
 
+    public static void main(String[] args) {
+        AuctionDAO dao = new AuctionDAO();
+    }
+
     public AuctionDAO() {
         if (this.conn == null) {
             try {
@@ -127,7 +131,8 @@ public class AuctionDAO {
     public ArrayList<Auction> list() {
         return list("", -1, -1);
     }
-    public ArrayList<Auction> searchProduct(String keyword, int status,int user_id) {
+
+    public ArrayList<Auction> searchProduct(String keyword, int status, int user_id) {
         String sql = "";
         ArrayList<Auction> auctions = new ArrayList<Auction>();
         try {
@@ -135,8 +140,8 @@ public class AuctionDAO {
             PreparedStatement pre2 = conn.prepareStatement(sql);
             pre2.setInt(1, user_id);
             pre2.setString(2, keyword);
-            pre2.setString(3, "%"+keyword+"%");
-            System.out.println(user_id+"vs"+status+"vs"+keyword);
+            pre2.setString(3, "%" + keyword + "%");
+            System.out.println(user_id + "vs" + status + "vs" + keyword);
             ResultSet rs2 = pre2.executeQuery();
             while (rs2.next()) {
                 int auctionId = rs2.getInt("auctionid");
@@ -151,6 +156,7 @@ public class AuctionDAO {
         }
         return auctions;
     }
+
     public ArrayList[] list(ArrayList<Category> categories, int top) {
         ArrayList[] auctionsArray = new ArrayList[categories.size()];
         for (int i = 0; i < categories.size(); i++) {
@@ -206,10 +212,6 @@ public class AuctionDAO {
             }
         }
         return auctionsArray;
-    }
-
-    public static void main(String[] args) {
-        AuctionDAO dao = new AuctionDAO();
     }
 
     public boolean add(Auction auction) {
@@ -404,10 +406,10 @@ public class AuctionDAO {
         try {
             System.out.println(keyword);
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, "%"+keyword+"%");
+            pre.setString(1, "%" + keyword + "%");
             pre.setInt(2, limit);
             ResultSet rs = pre.executeQuery();
-            
+
             while (rs.next()) {
                 int auctionId = rs.getInt("auctionid");
                 System.out.println(auctionId);
@@ -419,5 +421,9 @@ public class AuctionDAO {
             System.out.println("Auction DAO searchAuctionByTitle failed.");
         }
         return auctions;
+    }
+    
+    public String processAuctions(){
+        return "";
     }
 }

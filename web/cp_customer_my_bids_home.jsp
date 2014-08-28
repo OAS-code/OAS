@@ -41,9 +41,9 @@
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                                 <thead>
                                     <tr>
-                                        <th width="100" align="center"><b>Image</b></th>
-                                        <th width="100" align="center"><b>Title</b></th>
+                                        <th width="100" align="center"><b>Product</b></th>                                        
                                         <th width="100" align="center"><b>End Time</b></th>
+                                        <th width="100" align="center"><b>Top Bidder</b></th>
                                         <th width="100" align="center"><b>Status</b></th>
                                     </tr>
                                 </thead>
@@ -51,17 +51,18 @@
                                     <% for (int i=0;i<auction.size();i++) { %>
                                     <tr>
                                         <td width="100" align="center">
-
-                                            <a href="#" title="<%=auction.get(i).getTitle()%>">
+                                            <a href="AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>" title="">
                                                 <img src="<%=auction.get(i).getImgCover()%>" width="65" height="65" title="<%=auction.get(i).getTitle()%>">
+                                                <br>
+                                                <%=auction.get(i).getTitle()%>
                                             </a></td>
-                                        <td width="100" align="center">
-
-                                            <a title="<%=auction.get(i).getTitle()%>" href="#"> <%=auction.get(i).getTitle()%></a>
-
-                                        </td>
+                                        
                                         <td width="100" align="center">
                                             <h2 style="width:122px;"><%=auction.get(i).getFormattedEndDate()%></h2>
+                                        </td>
+                                        
+                                        <td width="100" align="center">
+                                            <%=auction.get(i).getTopBidderName()%>
                                         </td>
 
                                         <td width="100" align="center">
