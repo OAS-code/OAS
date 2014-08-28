@@ -99,9 +99,9 @@ function ajax_load_countdown(auctionId) {
                 startCountdown(data[1], "Auction Closed");
             } else if (data[3] == "Future") {
                 startCountdown(null, "Coming Soon..");
-            } else if (data[3] == "Closed") {
+            } else {
                 startCountdown(null, "Auction Closed");
-            }
+            } 
 
         }
     };

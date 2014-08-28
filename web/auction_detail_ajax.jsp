@@ -300,12 +300,14 @@
         } else if (errorCode==18) { 
             if (data1!=null){ %>
                Bought!
-        <% } else if (errorCode == 19) { %>
-        <p>FAILED!</p>
         <% } else { %>
                Failed to buy. 
             <% }
-        } else { %>
+        } else if (errorCode == 19) { %>
+        <p>FAILED!</p>
+        <% } else if (errorCode == 20) { %>
+        <p>BID CANCELED!</p>
+        <% } else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>
     </body>

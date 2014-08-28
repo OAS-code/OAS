@@ -371,9 +371,10 @@ public class AuctionDAO {
                 int auctionId = rs2.getInt("auctionid");
                 Auction auction = this.getAuction(auctionId);
                 DateTime today = new DateTime();
+                
+                BidDAO bidDao = new BidDAO();
+                ArrayList<Bid> bids = bidDao.getBidFromAuctionId(auctionId, 1);
                 if (auction.getStatus().equals("Closed")) {
-                    BidDAO bidDao = new BidDAO();
-                    ArrayList<Bid> bids = bidDao.getBidFromAuctionId(auctionId, 1);
                     if (bids.size() > 0) {
 
                         //if (auction.getCloseDate())
@@ -393,8 +394,15 @@ public class AuctionDAO {
                     long diffInMillis = today.getMillis() - closeDate.getMillis();
                     long requiredInterval = 86400000 * 3; //3 days
                     if (diffInMillis >= requiredInterval) {
+                        Bid bid = bids.get(0);
+                        TransactionDAO trans = new TransactionDAO();
+                        String transLog = "Sucessfully sold '"+auction.getTitle()+"' (auction ID #" + auction.getId() + ") to "+bid.getBidderName()+" for "+bid.getAmountString()+" (Fee: -$"+(bid.getAmount()*0.05)+").";
+                        Double amount = bid.getAmount() * 0.95;
+                        TransactionDAO transDao = new TransactionDAO();
+                        transDao.makeTransaction(auction.getSellerId(), transLog, amount);
                         String oldStatus = auction.getStatus();
                         auction.setModerateStatus(2);
+                        auction.setBuyerConfirm("");
                         if (this.update(auction)) {
                             result = result + "- Auction ID #" + auction.getId() + " ('" + auction.getTitle() + "') has been sucessfully processed! [Status changed: " + oldStatus + " -> " + auction.getStatus() + "]<br>";
                         } else {
