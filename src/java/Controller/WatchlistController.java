@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Controller;
 
+import DAO.AuctionDAO;
 import DAO.WatchlistDAO;
 import Entity.Auction;
 import Entity.Watchlist;
@@ -42,46 +42,52 @@ public class WatchlistController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String service = request.getParameter("service");
         RequestDispatcher rd;
+        WatchlistDAO wdao = new WatchlistDAO();
         if (service.equalsIgnoreCase("add_to_watchlist")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
             String roleString = (String) session.getAttribute("role");
-            if (roleString==null || !roleString.equals("0")){
+            if (roleString == null || !roleString.equals("0")) {
+                rd = request.getRequestDispatcher("ajax_watchlist.jsp?errorCode=3");
+                rd.forward(request, response);
                 return;
             }
             int userId = Integer.parseInt(userIdString);
             String auctionIdString = (String) request.getParameter("auctionId");
             int auctionId = Integer.parseInt(auctionIdString);
-            WatchlistDAO wdao = new WatchlistDAO();
             Watchlist wl = new Watchlist();
             wl.setAuctionId(auctionId);
             wl.setUserId(userId);
             rd = request.getRequestDispatcher("ajax_watchlist.jsp?errorCode=" + wdao.add(wl));
             rd.forward(request, response);
             return;
-        } /*else if (service.equalsIgnoreCase("viewwatchlist")) {
+        } else if (service.equalsIgnoreCase("viewwatchlist")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
             String errorCode = request.getParameter("errorCode");
-            ArrayList<Watchlist> array = (ArrayList<Watchlist>) wdao.list(Integer.parseInt(userIdString));
-            ArrayList<Auction> auction = new ArrayList<>();
-            for (int i = 0; i < array.size(); i++) {
-                int auctionid = array.get(i).getAuctionId();
-                auction.add(dao.getAuction(auctionid));
+            ArrayList<Watchlist> watchlists = (ArrayList<Watchlist>) wdao.list(Integer.parseInt(userIdString));
+            ArrayList<Auction> auctions = new ArrayList<>();
+            AuctionDAO auctionDAO = new AuctionDAO();
+            for (int i = 0; i < watchlists.size(); i++) {
+                int auctionid = watchlists.get(i).getAuctionId();
+                auctions.add(auctionDAO.getAuction(auctionid));
             }
-            request.setAttribute("arraylist", auction);
+            request.setAttribute("auctions", auctions);
             rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?current_page=my_watchlist&errorCode=" + errorCode);
             rd.forward(request, response);
+            return;
         } else if (service.equalsIgnoreCase("delwatchlist")) {
             String id = request.getParameter("auction_id");
             int auction_id = Integer.parseInt(id);
             int n = wdao.delete(auction_id);
             if (n > 0) {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
+                response.sendRedirect("WatchlistController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
             } else {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
+                response.sendRedirect("WatchlistController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
             }
-        }*/
+        } else {
+            response.sendRedirect("notification.jsp?errorCode=2");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

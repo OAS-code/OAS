@@ -22,14 +22,20 @@
         <% if (errorCode == 1) { %>
         <div class="sliders">
             <label style="display:block;color:#666;padding-top: 3px;;padding-left: 5px ">
-                <span>Added to watchlist</span>
+                <span>Added to <a href="WatchlistController?service=viewwatchlist">watchlist</a></span>
             </label>
         </div>
 
         <% } else if (errorCode == 2) { %>
         <div class="sliders">
             <label style="display:block;color:#666;padding-top: 3px;;padding-left: 2px ">
-                <span>Already in watchlist</span>
+                <span>Already in <a href="WatchlistController?service=viewwatchlist">watchlist</a></span>
+            </label>
+        </div>
+        <% } else if (errorCode == 3) { %>
+        <div class="sliders">
+            <label style="display:block;color:#666;padding-top: 3px;;padding-left: 2px ">
+                <span>Restricted</span>
             </label>
         </div>
         <% } else { %>

@@ -40,9 +40,9 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_watchlist")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=viewwatchlist" title="My watchlist">My watchlist</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="WatchlistController?service=viewwatchlist" title="My watchlist">My watchlist</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="AuctionController?service=viewwatchlist" title="My watchlist">My watchlist</a></li>
+                    <li class="" id="edit_profile_active"><a href="WatchlistController?service=viewwatchlist" title="My watchlist">My watchlist</a></li>
                         <% }
                             }
                             if (rank == 0) {

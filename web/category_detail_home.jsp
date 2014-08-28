@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
         <script language="JavaScript" src="JavaScript/countdown.js"></script>
+        <script language="JavaScript" src="JavaScript/ajax_watchlist.js"></script>
         <%
             ArrayList<Auction> auctionsOnGoing = (ArrayList<Auction>) request.getAttribute("auctionsOnGoing");
             ArrayList<Auction> auctionsFuture = (ArrayList<Auction>) request.getAttribute("auctionsFuture");
@@ -23,7 +24,7 @@
         %>
     </head>
     <body>  
-        <% if (auctionsOnGoing.size() >0) { %>
+        <% if (auctionsOnGoing.size() > 0) { %>
         <div class="today_head">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
                 <tr>
@@ -35,11 +36,11 @@
                     <td>
                         <div class="arrow_one"></div>
                     </td>
-                    
+
                 </tr>
             </table>
         </div>
-        
+
         <div class="feature_total">
             <%
                 for (int i = 0; i < auctionsOnGoing.size(); i++) {
@@ -75,17 +76,18 @@
                         <p class="countdown" style="display: block;">
 
                             <script>
-                                    startCountdown('<%=auctionsOnGoing.get(i).getFormattedEndDate(1)%>', <%=auctionsOnGoing.get(i).getId()%>, "countdown_auction_home");
+                                startCountdown('<%=auctionsOnGoing.get(i).getFormattedEndDate(1)%>', <%=auctionsOnGoing.get(i).getId()%>, "countdown_auction_home");
                             </script>
                         </p>
                     </div>
                     <div class="feature_bott">
-                        <div class="feature_bott_lft">
-                            <div class="sliders">    
-
-
+                        <div id="watchlist_area_<%=auctionsOnGoing.get(i).getId()%>" class="feature_bott_lft" >
+                            <div class="sliders">
+                                <label style="display:block;color:#666;padding-top: 3px;;padding-left: 10px ">
+                                    <span>Add to watchlist</span>
+                                </label>
                             </div>
-                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=auctionsOnGoing.get(i).getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="#" onClick="return addToWatchList(<%=auctionsOnGoing.get(i).getId()%>);"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                         </div>
                         <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                             <div class="bidme_link">
@@ -104,11 +106,11 @@
             <% } %>
         </div>
         <% } %>
-        
-        
-        
-        
-        <% if (auctionsFuture.size() >0) { %>
+
+
+
+
+        <% if (auctionsFuture.size() > 0) { %>
         <div class="today_head">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
                 <tr>
@@ -120,11 +122,11 @@
                     <td>
                         <div class="arrow_one"></div>
                     </td>
-                    
+
                 </tr>
             </table>
         </div>
-        
+
         <div class="feature_total">
             <%
                 for (int i = 0; i < auctionsFuture.size(); i++) {
@@ -160,17 +162,18 @@
                         <p class="countdown" style="display: block;">
 
                             <script>
-                                    startCountdown('<%=auctionsFuture.get(i).getFormattedStartDate(1)%>', <%=auctionsFuture.get(i).getId()%>, "countdown_auction_home");
+                                startCountdown('<%=auctionsFuture.get(i).getFormattedStartDate(1)%>', <%=auctionsFuture.get(i).getId()%>, "countdown_auction_home");
                             </script>
                         </p>
                     </div>
                     <div class="feature_bott">
-                        <div class="feature_bott_lft">
-                            <div class="sliders">    
-
-
+                        <div id="watchlist_area_<%=auctionsFuture.get(i).getId()%>" class="feature_bott_lft" >
+                            <div class="sliders">
+                                <label style="display:block;color:#666;padding-top: 3px;;padding-left: 10px ">
+                                    <span>Add to watchlist</span>
+                                </label>
                             </div>
-                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=auctionsFuture.get(i).getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="#" onClick="return addToWatchList(<%=auctionsFuture.get(i).getId()%>);"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                         </div>
                         <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                             <div class="bidme_link">
@@ -189,13 +192,13 @@
             <% } %>
         </div>
         <% } %>
-        
-        
-        
-        
-        
-        
-        <% if (auctionsClosed.size() >0) { %>
+
+
+
+
+
+
+        <% if (auctionsClosed.size() > 0) { %>
         <div class="today_head">
             <table width="100%" border="0" cellpadding="0" cellspacing="0" >
                 <tr>
@@ -207,11 +210,11 @@
                     <td>
                         <div class="arrow_one"></div>
                     </td>
-                    
+
                 </tr>
             </table>
         </div>
-        
+
         <div class="feature_total">
             <%
                 for (int i = 0; i < auctionsClosed.size(); i++) {
@@ -249,12 +252,13 @@
                         </p>
                     </div>
                     <div class="feature_bott">
-                        <div class="feature_bott_lft">
-                            <div class="sliders">    
-
-
+                        <div id="watchlist_area_<%=auctionsClosed.get(i).getId()%>" class="feature_bott_lft" >
+                            <div class="sliders">
+                                <label style="display:block;color:#666;padding-top: 3px;;padding-left: 10px ">
+                                    <span>Add to watchlist</span>
+                                </label>
                             </div>
-                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=auctionsClosed.get(i).getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                            <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="#" onClick="return addToWatchList(<%=auctionsClosed.get(i).getId()%>);"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                         </div>
                         <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                             <div class="bidme_link">
@@ -272,7 +276,7 @@
             </div>
             <% } %>
         </div>
-        <% } %>
-        
+        <% }%>
+
     </body>
 </html>
