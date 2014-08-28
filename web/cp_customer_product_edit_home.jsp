@@ -158,11 +158,11 @@
                                         <tr>
                                             <td >
                                                 <div class="user_name_common">
-                                                    <b style="width:130px">Starting date: <%=auction.getFormattedStartDate(1)%><span class="red">*</span>: </b>	
+                                                    <b style="width:130px">Starting date: <span class="red">*</span>: </b>	
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="text" id="startdate" name="startDate" value="<%=auction.getFormattedStartDate(1)%>">
+                                                        <input type="datetime-local" id="startdate" name="startDate" value="<%=auction.getFormattedStartDate()%>">
                                                     </div>
                                                     <div id="Startingdate" style="width:500px;padding-top:4px"><br>
 
@@ -171,11 +171,11 @@
                                             </td>
                                             <td>
                                                 <div class="user_name_common">
-                                                    <b style="width:130px">Closing date  <%=auction.getFormattedEndDate(1)%><span class="red">*</span>: </b>		
+                                                    <b style="width:130px">Closing date:<span class="red">*</span>: </b>		
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="text" id="enddate" name="endDate" value="<%=auction.getFormattedEndDate(1)%>">
+                                                        <input type="datetime-local" id="enddate" name="endDate" value="<%=auction.getFormattedEndDate()%>">
                                                     </div>
                                                     <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
@@ -355,13 +355,4 @@
         </div>       
     </body>
     <script type="text/javascript" src="JavaScript/jquery_1.js"></script>
-    <script type="text/javascript" src="JavaScript/jquery.datetimepicker.js"></script>
-    <script>
-                                                    $('#startdate').datetimepicker({
-                                                        inline: true
-                                                    });
-                                                    $('#enddate').datetimepicker({
-                                                        inline: true
-                                                    });
-    </script>
 </html>
