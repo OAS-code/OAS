@@ -127,61 +127,29 @@ public class AuctionDAO {
     public ArrayList<Auction> list() {
         return list("", -1, -1);
     }
-    public ArrayList<Auction> searchProduct(String keyword, int status, int categoryId,int user_id) {
-        String sql = "SELECT auctionid, category_id, c.name AS category_name, seller_id, username AS seller_name, title, a.description, UNIX_TIMESTAMP(start_date) AS start_date, UNIX_TIMESTAMP(end_date) AS end_date, starting_price, buy_now_price, increase_by, a.moderate_status, v_youtube, img_cover, img_1, img_2, img_3, img_4, img_5, views FROM auction a INNER JOIN user u ON a.seller_id = u.id INNER JOIN category c ON a.category_id = c.categoryid WHERE a.title LIKE '%" + keyword + "%'";
-        String sql2 = " AND a.category_id = " + categoryId;
-        ArrayList<Auction> arr = new ArrayList<Auction>();
+    public ArrayList<Auction> searchProduct(String keyword, int status,int user_id) {
+        String sql = "";
+        ArrayList<Auction> auctions = new ArrayList<Auction>();
         try {
-            state = (Statement) conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
-
-            if (categoryId != -1) {
-                sql = sql + sql2;
-            } else if (status == -1 && keyword.equals("")) {
-                sql = sql + " OR 1=1 ";
-            }
-            sql = sql + " ORDER BY a.title DESC";
-
-            pre = conn.prepareStatement(sql);
-            //System.out.println(sql);
-            //pre.setString(1, "%"+keyword+"%");
-
-            rs = pre.executeQuery(sql);
-            while (rs.next()) {
-                Auction auction = new Auction();
-                auction.setId(rs.getInt("auctionid"));
-                auction.setCategoryId(rs.getInt("category_id"));
-                auction.setCategoryName(rs.getString("category_name"));
-                auction.setSellerId(rs.getInt("seller_id"));
-                auction.setSellerName(rs.getString("seller_name"));
-                auction.setTitle(rs.getString("title"));
-                auction.setDescription(rs.getString("description"));
-                long startDateLong = rs.getLong("start_date") * 1000;
-                long endDateLong = rs.getLong("end_date") * 1000;
-                DateTime startDate = new DateTime(startDateLong);
-                DateTime endDate = new DateTime(endDateLong);
-                auction.setStartDate(startDate);
-                auction.setEndDate(endDate);
-                auction.setStartPrice(rs.getDouble("starting_price"));
-                auction.setBuynowPrice(rs.getDouble("buy_now_price"));
-                auction.setIncreaseBy(rs.getDouble("increase_by"));
-                auction.setModerateStatus(rs.getInt("moderate_status"));
-                auction.setvYoutube(rs.getString("v_youtube"));
-                auction.setImgCover(rs.getString("img_cover"));
-                auction.setImg1(rs.getString("img_1"));
-                auction.setImg2(rs.getString("img_2"));
-                auction.setImg3(rs.getString("img_3"));
-                auction.setImg4(rs.getString("img_4"));
-                auction.setImg5(rs.getString("img_5"));
-                auction.setViews(rs.getInt("views"));
+            sql = "SELECT auctionid FROM auction WHERE seller_id = ? AND (auctionid = ? OR title LIKE ?) ORDER BY title, UNIX_TIMESTAMP(end_date)-UNIX_TIMESTAMP(NOW()) ASC, views DESC";
+            PreparedStatement pre2 = conn.prepareStatement(sql);
+            pre2.setInt(1, user_id);
+            pre2.setString(2, keyword);
+            pre2.setString(3, "%"+keyword+"%");
+            System.out.println(user_id+"vs"+status+"vs"+keyword);
+            ResultSet rs2 = pre2.executeQuery();
+            while (rs2.next()) {
+                int auctionId = rs2.getInt("auctionid");
+                Auction auction = this.getAuction(auctionId);
                 if (status == -1 || auction.getStatusId() == status) {
-                    arr.add(auction);
+                    auctions.add(auction);
                 }
             }
         } catch (SQLException ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Auction DAO list failed.");
+            Logger.getLogger(AuctionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Auction DAO searchProduct failed.");
         }
-        return arr;
+        return auctions;
     }
     public ArrayList[] list(ArrayList<Category> categories, int top) {
         ArrayList[] auctionsArray = new ArrayList[categories.size()];

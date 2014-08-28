@@ -35,7 +35,7 @@
     <body>
         <div class="my_message_right" id="mybids_page">
             <div class="message_common_border">
-                <h1 title="MY PRODUCTS">My Products</h1>
+                <h1 title="My auctions">My auctions</h1>
                 <p>&nbsp;</p>
             </div>
             <div class="buton_green">		
@@ -45,7 +45,6 @@
                             <table border="0" cellspacing="10" cellpadding="10">
                                 <tr>
                                     <td width="200">
-
                                         <div class="user_name_common">
                                             <b>Status: </b>
                                         </div>
@@ -60,27 +59,7 @@
                                                         <option value="2" <%if (status == 2) { %> selected="selected" <% } %> >Closed/unprocessed auctions</option>
                                                         <option value="3" <%if (status == 3) { %> selected="selected" <% } %> >Banned auctions</option>
                                                         <option value="4" <%if (status == 4) { %> selected="selected" <% } %> >Processed auctions</option>
-                                                        <option value="5" <%if (status == 5) { %> selected="selected" <% } %> >Others</option>
-                                                    </select>
-                                                </h2>
-                                            </div>
-                                        </div>
-
-                                        <div class="user_name_common">
-                                            <b>Category: </b>
-                                        </div>
-
-                                        <div class="user_name_common" style="width:400px;">
-                                            <div class="text_feeld">
-                                                <h2>
-                                                    <select name="category" class=" text_bg select" id="category" style="">
-                                                        <option value="-1" <%if (category == -1) { %> selected="selected" <% } %>>Select category</option>
-                                                        <%
-                                                            ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
-                                                            for (int i = 0; i < categories.size(); i++) {
-                                                        %>                                
-                                                        <option value="<%=categories.get(i).getId()%>" <%if (category == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
-                                                        <%}%>
+                                                        <option value="5" <%if (status == 5) { %> selected="selected" <% }%> >Others</option>
                                                     </select>
                                                 </h2>
                                             </div>
@@ -102,14 +81,15 @@
                             </table>
                             <table  cellspacing="10" cellpadding="10">
                                 <tr>
-                                    
+
                                     <td>
                                         <div class="profil_butoon" style="width:auto;">
                                             <div class="res_left"></div>
                                             <div class="res_mid" style="width:auto;">
                                                 <a style="width:auto;">
                                                     <input type="submit" value="Search" name="search_product" title="Search">
-                                                    <input type="hidden" id="service" name="service" value="search_product"></a>
+                                                    <input type="hidden" id="service" name="service" value="search_product">
+                                                </a>
                                             </div>
                                             <div class="res_right"></div>
                                         </div>
@@ -119,41 +99,41 @@
                                         <div class="profil_butoon" style="width:auto;">
                                             <div class="res_left"></div>
                                             <div class="res_mid" style="width:auto;">
-                                                <a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_product';"></a>
-                                    
+                                                <a title="Create new auction"><input type="button" name="submit_user" value="Create new auction" onclick="location.href = 'AuctionController?service=add_product';"></a>
+
                                             </div>
                                             <div class="res_right"></div>
                                         </div>
                                     </td>
-                                    
+
                                 </tr>
                             </table>
-                            
+
                         </form>
                     </div>
 
                     <div class="forms_common">
                         <div class="title_cont_watchilist">
                             <%
-                                ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("auctions");
-                                if (auction == null) {
+                                ArrayList<Auction> auctions = (ArrayList<Auction>) request.getAttribute("auctions");
+                                if (auctions == null) {
                             %>
 
                             <%} else {
-                                for (int i = 0; i < auction.size(); i++) {
+                                for (int i = 0; i < auctions.size(); i++) {
                             %>
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                                 <thead>
-                                    <tr><th width="100" align="center">
-                                            <b>Image</b>
+                                    <tr><th width="180" align="center">
+                                            <b>Product</b>
                                         </th>
-                                        <th width="100" align="center">
-                                            <b>Title</b>
+                                        <th width="150" align="center">
+                                            <b>Current bid</b>
                                         </th>
                                         <th width="150" align="center">
                                             <b>Start date / Closed date</b>
                                         </th>
-                                        <th width="100" align="center" colspan="3">
+                                        <th width="70" align="center" colspan="3">
                                             <b>Actions</b>
                                         </th>
                                         <th width="100" align="center">
@@ -163,31 +143,30 @@
 
                                 <tbody><tr>
 
-                                        <td width="100" align="center">
+                                        <td align="center">
                                             <h3> 
-                                                <img src="<%=auction.get(i).getImgCover()%>" title="<%=auction.get(i).getTitle()%>" width="65" height="65">
-
+                                                <a href="">
+                                                    <img src="<%=auctions.get(i).getImgCover()%>" title="<%=auctions.get(i).getTitle()%>" width="65" height="65">
+                                                    <br>
+                                                    <%=auctions.get(i).getTitle()%>
+                                                </a>
                                             </h3>
                                         </td>
-
-
-                                        <td width="100" align="center">
-
-                                            <a href="AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>" title="<%=auction.get(i).getTitle()%>">
-                                                <%=auction.get(i).getTitle()%>
-                                            </a>
-
-                                        </td>		
-                                        <td width="150" align="center">	
-                                            <h2><%=auction.get(i).getFormattedStartDate()%></h2>
-                                            <h2><%=auction.get(i).getFormattedEndDate()%></h2>
+                                        
+                                        <td align="center">	
+                                            <h2><%=auctions.get(i).getCurrentBidString()%></h2>
+                                        </td>
+                                        
+                                        <td align="center">	
+                                            <h2><%=auctions.get(i).getFormattedStartDate()%></h2>
+                                            <h2><%=auctions.get(i).getFormattedEndDate()%></h2>
 
                                         </td>
 
-                                        <td width="20" align="center">&nbsp;
+                                        <td  align="center">&nbsp;
                                         </td>
-                                        <td width="20" align="center"> 
-                                            <a href="AuctionController?service=edit_myproduct&auctionid=<%=auction.get(i).getId()%>" title="Product Edit" class="editicon"></a>  
+                                        <td  align="center"> 
+                                            <a href="AuctionController?service=edit_myproduct&auctionid=<%=auctions.get(i).getId()%>" title="Product Edit" class="editicon"></a>  
                                             &nbsp;
                                         </td>
                                         <td width="20" align="center">
@@ -196,10 +175,8 @@
                                             </a> 
                                             &nbsp;
                                         </td>
-                                        <td width="100" align="center">
-                                            <a href="" title="">
-                                                <%=auction.get(i).getStatus()%>
-                                            </a>                               
+                                        <td  align="center">
+                                                <%=auctions.get(i).getStatus()%>     
                                         </td>
                                     </tr>
                                 </tbody></table>

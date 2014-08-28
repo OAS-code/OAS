@@ -215,32 +215,26 @@ public class AuctionController extends HttpServlet {
         } else if (service.equalsIgnoreCase("search_product")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
-            System.out.println(userIdString);
-            int userid = Integer.parseInt(userIdString);
-            if (userIdString == null || userIdString.isEmpty()) {
+            //System.out.println(userIdString);
+            if (userIdString == null) {
                 rd = request.getRequestDispatcher("notification.jsp");
                 rd.forward(request, response);
+                return;
             } else {
-                ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
-                request.setAttribute("categories", categories);
+                int userid = Integer.parseInt(userIdString);
                 String keyword = request.getParameter("keyword");
                 String statusString = request.getParameter("status");
                 int status = -1;
-                String categoryString = request.getParameter("category");
-                int category = -1;
                 if (keyword == null) {
                     keyword = "";
                 }
                 if (statusString != null) {
                     status = Integer.parseInt(statusString);
                 }
-                if (categoryString != null) {
-                    category = Integer.parseInt(categoryString);
-                }
-                //System.out.println(category);
-                ArrayList<Auction> auctions = dao.searchProduct(keyword, status, category,userid);
+                
+                ArrayList<Auction> auctions = dao.searchProduct(keyword, status ,userid);
                 request.setAttribute("auctions", auctions);
-                rd = request.getRequestDispatcher(product_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
+                rd = request.getRequestDispatcher(product_manager + "&keyword=" + keyword + "&status=" + status );
                 rd.forward(request, response);
                 return;
             }

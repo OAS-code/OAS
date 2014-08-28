@@ -47,9 +47,9 @@
                             }
                             if (rank == 0) {
                                 if ((current_page != null) && current_page.equalsIgnoreCase("my_product")) { %>
-                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=myproduct" title="My product">My product</a></li>
+                    <li class="act_class" id="dashboard_active"><a href="AuctionController?service=myproduct" title="My auctions">My auctions</a></li>
                         <% } else { %>
-                    <li class="" id="edit_profile_active"><a href="AuctionController?service=myproduct" title="My product">My product</a></li>
+                    <li class="" id="edit_profile_active"><a href="AuctionController?service=myproduct" title="My auctions">My auctions</a></li>
                         <% }
                             }
                             if (rank == 0) {
