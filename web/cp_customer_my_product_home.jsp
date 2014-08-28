@@ -53,13 +53,15 @@
                                             <div class="text_feeld">
                                                 <h2>
                                                     <select name="status" class=" text_bg select" id="auction_status">	
-                                                        <option value="-1" <%if (status == -1) { %> selected="selected" <% } %> >Select auction status</option>
-                                                        <option value="0" <%if (status == 0) { %> selected="selected" <% } %> >Future auctions</option>
-                                                        <option value="1" <%if (status == 1) { %> selected="selected" <% } %> >On-going auctions</option>
-                                                        <option value="2" <%if (status == 2) { %> selected="selected" <% } %> >Closed/unprocessed auctions</option>
-                                                        <option value="3" <%if (status == 3) { %> selected="selected" <% } %> >Banned auctions</option>
-                                                        <option value="4" <%if (status == 4) { %> selected="selected" <% } %> >Processed auctions</option>
-                                                        <option value="5" <%if (status == 5) { %> selected="selected" <% }%> >Others</option>
+                                                        <option value="-1" <%if (status == -1) { %> selected="selected" <% } %> >Any auction status</option>
+                                                        <option value="1" <%if (status == 1) { %> selected="selected" <% } %> >Future auctions</option>
+                                                        <option value="2" <%if (status == 2) { %> selected="selected" <% } %> >On-going auctions</option>
+                                                        <option value="3" <%if (status == 3) { %> selected="selected" <% } %> >Closed auctions</option>
+                                                        <option value="4" <%if (status == 4) { %> selected="selected" <% } %> >Banned auctions</option>
+                                                        <option value="5" <%if (status == 5) { %> selected="selected" <% } %> >Finished auctions</option>
+                                                        <option value="6" <%if (status == 6) { %> selected="selected" <% } %> >Processing auctions</option>
+                                                        <option value="7" <%if (status == 7) { %> selected="selected" <% } %> >On-hold auctions</option>
+                                                        <option value="0" <%if (status == 0) { %> selected="selected" <% }%> >Invalid auctions</option>
                                                     </select>
                                                 </h2>
                                             </div>
@@ -151,11 +153,11 @@
                                                 </a>
                                             </h3>
                                         </td>
-                                        
+
                                         <td align="center">	
                                             <h2><%=auctions.get(i).getCurrentBidString()%></h2>
                                         </td>
-                                        
+
                                         <td align="center">	
                                             <h2><%=auctions.get(i).getFormattedStartDate()%></h2>
                                             <h2><%=auctions.get(i).getFormattedEndDate()%></h2>
@@ -175,7 +177,7 @@
                                             &nbsp;
                                         </td>
                                         <td  align="center">
-                                                <%=auctions.get(i).getStatus()%>     
+                                            <%=auctions.get(i).getStatus()%>     
                                         </td>
                                     </tr>
                                 </tbody></table>

@@ -93,7 +93,7 @@
                             <td>${auction.categoryName}</td>
                             <td>${auction.sellerName}</td>
                             <td>${auction.getStatus()}</td>
-                            <td>$ --</td>
+                            <td>${auction.getCurrentBidString()}</td>
                             <td>No-one</td>
                         </tr>
                     </c:forEach>

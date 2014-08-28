@@ -21,13 +21,13 @@
             </div>
             <div class="message_common">
                 <div class="forms_common">
+                    <%
+                        ArrayList<Transaction> trans = (ArrayList<Transaction>) request.getAttribute("transaction");
+                        if (trans.size() <= 0) {
+                    %>
+                    No items
+                    <%} else { %>    
                     <div class="title_cont_watchilist">
-                        <%
-                            ArrayList<Transaction> trans = (ArrayList<Transaction>) request.getAttribute("transaction");
-                            if (trans.size()<=0) {
-                        %>
-                        <h4 class="">No items</h4>
-                        <%} else { %>    
                         <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                             <thead>
                                 <tr>
@@ -48,7 +48,7 @@
                             </thead>
 
                             <tbody> 
-                                <% for (int i=0;i<trans.size();i++ ) {
+                                <% for (int i = 0; i < trans.size(); i++) {
                                 %> 
                                 <tr>
                                     <td align="center">
@@ -69,11 +69,12 @@
                                 <% } %>
                             </tbody>
                         </table>
-                        <%
-                                
-                            }
-                        %>
                     </div>
+                    <%
+
+                        }
+                    %>
+
                 </div>
                 <div class="user" style="display:none;">344</div>
             </div>		

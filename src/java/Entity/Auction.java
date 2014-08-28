@@ -20,27 +20,28 @@ import org.joda.time.format.DateTimeFormatter;
  */
 public class Auction {
 
-    int id;
-    int categoryId;
-    String categoryName;
-    int sellerId;
-    String sellerName;
-    String title;
-    String description;
-    DateTime startDate;
-    DateTime endDate;
-    double startPrice;
-    double buynowPrice;
-    double increaseBy;
-    int moderateStatus;
-    String imgCover;
-    String vYoutube;
-    String img1;
-    String img2;
-    String img3;
-    String img4;
-    String img5;
+    private int id;
+    private int categoryId;
+    private String categoryName;
+    private int sellerId;
+    private String sellerName;
+    private String title;
+    private String description;
+    private DateTime startDate;
+    private DateTime endDate;
+    private double startPrice;
+    private double buynowPrice;
+    private double increaseBy;
+    private int moderateStatus;
+    private String imgCover;
+    private String vYoutube;
+    private String img1;
+    private String img2;
+    private String img3;
+    private String img4;
+    private String img5;
     int views;
+    private String buyerConfirm;
 
     public int getViews() {
         return views;
@@ -279,41 +280,47 @@ public class Auction {
 
     public int getStatusId() {
         if (startDate == null || endDate == null) {
-            return 6; //invalid
+            return 0; //invalid
         } else if (moderateStatus == 0) { // Active
             if (startDate.isAfterNow()) {
-                return 0; //Future auctions
+                return 1; //Future auctions
             } else if (startDate.isBeforeNow() && endDate.isAfterNow()) {
-                return 1; // On-going auctions.
+                return 2; // On-going auctions.
             } else if (endDate.isBeforeNow()) { // Closed auctions.
-                return 2;
+                return 3;
             }
-            return 5; // Invalid auctions.
+            return 0; // Invalid auctions.
         } else if (moderateStatus == 1) { // Banned auctions
-            return 3; // Banned acutions
+            return 4; // Banned acutions
         } else if (moderateStatus == 2) { // Processed auctions.
-            return 4; // Processed auctions.
-        } else if (moderateStatus == 3) { // Closed but unprocessed auctions.
-            return 5; // Closed but unprocessed auctions.
+            return 5; // Finished/Processed auctions.
+        } else if (moderateStatus == 3) { // Awaiting for buyer's confirmation
+            return 6; // Processing
+        } else if (moderateStatus == 3 && (buyerConfirm!=null && !buyerConfirm.equals(""))) { // Awaiting for buyer's confirmation
+            return 7; // On-hold
         } else {
-            return 6; // Invalid auctions.
+            return 0; // Invalid auctions.
         }
     }
 
     public String getStatus() {
         int statusId = this.getStatusId();
         if (statusId == 0) {
-            return "Future";
+            return "Invalid";
         } else if (statusId == 1) {
-            return "On-going";
+            return "Future";
         } else if (statusId == 2) {
-            return "Closed";
+            return "On-going";
         } else if (statusId == 3) {
-            return "Banned";
-        } else if (statusId == 4) {
-            return "Processed";
-        } else if (statusId == 5) {
             return "Closed";
+        } else if (statusId == 4) {
+            return "Banned";
+        } else if (statusId == 5) {
+            return "Finished";
+        } else if (statusId == 6) {
+            return "Processing";
+        } else if (statusId == 7) {
+            return "On-hold";
         } else {
             return "Invalid";
         }
@@ -343,4 +350,14 @@ public class Auction {
         FormatMoney fm = new FormatMoney();
         return fm.showPriceInUSD(this.getBidToBeat(), 1);
     }
+
+    public String getBuyerConfirm() {
+        return buyerConfirm;
+    }
+
+    public void setBuyerConfirm(String buyerConfirm) {
+        this.buyerConfirm = buyerConfirm;
+    }
+    
+    
 }
