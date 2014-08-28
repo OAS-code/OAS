@@ -76,7 +76,7 @@
                             <div class="common_bounce">
                                 <div class="common_bounce_text">
                                     <h2 title="My Dashboard">My Dashboard</h2>                                   
-                                    <p>You currently have<span class="red_col"> <font class="">$</font><%=balance%></span> in your account.</p>            
+                                    <p>You currently have<span class="red_col"> <font class=""></font><%=balance%></span> in your account.</p>            
                                 </div>
                             </div>
                             <%                                    }
