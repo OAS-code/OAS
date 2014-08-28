@@ -7,12 +7,12 @@ package Controller;
 
 import DAO.AuctionDAO;
 import DAO.BidDAO;
+import DAO.TransactionDAO;
 import DAO.UserDAO;
 import Entity.Auction;
 import Entity.Bid;
 import Entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -96,7 +96,11 @@ public class BidController extends HttpServlet {
 
                         UserDAO userDao = new UserDAO();
                         User user = userDao.getUser(Integer.parseInt(userId));
-                        if (user.getBalance() < userBidValue) {
+                        if (bids.size() > 0 && bids.get(0).getBidderId() == Integer.parseInt(userId)) {
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=6");
+                            rd.forward(request, response);
+                            return;
+                        } else if (user.getBalance() < userBidValue) {
                             rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=8");
                             rd.forward(request, response);
                             return;
@@ -105,15 +109,9 @@ public class BidController extends HttpServlet {
                             rd.forward(request, response);
                             return;
                         } else {
-                            if (bids.size() > 0 && bids.get(0).getBidderId() == Integer.parseInt(userId)) {
-                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=6");
-                                rd.forward(request, response);
-                                return;
-                            } else {
-                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&nextBidValue=" + nextBidValue);
-                                rd.forward(request, response);
-                                return;
-                            }
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=0&auctionId=" + auctionId + "&userBidValue=" + userBidValue + "&nextBidValue=" + nextBidValue);
+                            rd.forward(request, response);
+                            return;
                         }
                     } else {
                         rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=14");
@@ -204,6 +202,55 @@ public class BidController extends HttpServlet {
                     }
                 }
             }
+        } else if (service.equalsIgnoreCase("cancel_bid")) {
+            String auctionIdString = request.getParameter("auctionId");
+            int auctionId = Integer.parseInt(auctionIdString);
+            HttpSession session = request.getSession(true);
+            String roleString = (String) session.getAttribute("role");
+            String userIdString = (String) session.getAttribute("userid");
+            int userId = Integer.parseInt(userIdString);
+            if (roleString == null) {
+                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                rd.forward(request, response);
+                return;
+            } else {
+                if (Integer.parseInt(roleString) != 0) {
+                    rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                    rd.forward(request, response);
+                    return;
+                } else {
+                    AuctionDAO auctionDAO = new AuctionDAO();
+                    Auction auction = auctionDAO.getAuction(auctionId);
+                    if (auction.getSellerId() == userId) {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                        rd.forward(request, response);
+                        return;
+                    } else if (auction.getStatus().equals("On-going")) {
+                        BidDAO bidDao = new BidDAO();
+                        ArrayList<Bid> bids = bidDao.getBidFromAuctionId(auctionId, 1);
+                        if (bids.size() < 1 && bids.get(0).getBidderId() != userId) {
+                            rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                            rd.forward(request, response);
+                            return;
+                        } else {
+                            Bid bid = bids.get(0);
+                            if (bidDao.cancelBid(bid)) {
+                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=20");
+                                rd.forward(request, response);
+                                return;
+                            } else {
+                                rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                                rd.forward(request, response);
+                                return;
+                            }
+                        }
+                    } else {
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=19");
+                        rd.forward(request, response);
+                        return;
+                    }
+                }
+            }
         } else if (service.equalsIgnoreCase("buy_now")) {
             String auctionId = request.getParameter("auctionId");
             HttpSession session = request.getSession(true);
@@ -256,11 +303,11 @@ public class BidController extends HttpServlet {
                     }
                 }
             }
-        }else if(service.equalsIgnoreCase("mybids")){
+        } else if (service.equalsIgnoreCase("mybids")) {
             HttpSession session = request.getSession(true);
             String userIdString = (String) session.getAttribute("userid");
             int user_id = Integer.parseInt(userIdString);
-            
+
             BidDAO dao = new BidDAO();
             ArrayList<Auction> auctions = dao.getBiddedAuctionsFromUserId(user_id);
             request.setAttribute("auctions", auctions);
@@ -269,7 +316,7 @@ public class BidController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
