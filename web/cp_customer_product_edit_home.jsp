@@ -4,6 +4,8 @@
     Author     : ducfpt
 --%>
 
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.joda.time.DateTime"%>
 <%@page import="DAO.CategoryDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
@@ -171,11 +173,16 @@
                                             </td>
                                             <td>
                                                 <div class="user_name_common">
-                                                    <b style="width:130px">Closing date:<span class="red">*</span>: </b>		
+                                                    <b style="width:130px">Closing date:<%=auction.getEndDate()%><span class="red">*</span>: </b>		
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
+                                                    <%
+                                                        DateTime date = auction.getEndDate();
+                                                        SimpleDateFormat dt = new SimpleDateFormat("yyyyy-MM-ddTHH:mm:ss"); 
+                                                        String date1 = dt.format(date);
+                                                    %>
                                                     <div class="text_feeld">
-                                                        <input type="datetime-local" id="enddate" name="endDate" value="">
+                                                        <input type="datetime-local" id="enddate" name="endDate" value="<%%>">
                                                     </div>
                                                     <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
