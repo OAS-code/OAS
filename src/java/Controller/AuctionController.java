@@ -9,18 +9,15 @@ import DAO.AuctionDAO;
 import DAO.CategoryDAO;
 import DAO.OtherDAO;
 import DAO.UserDAO;
-import DAO.WatchListDAO;
+import DAO.WatchlistDAO;
 import Entity.Auction;
 import Entity.Category;
 import Entity.User;
-import Entity.WatchList;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -52,7 +49,6 @@ public class AuctionController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         AuctionDAO dao = new AuctionDAO();
         CategoryDAO cdao = new CategoryDAO();
-        WatchListDAO wdao = new WatchListDAO();
         String service = request.getParameter("service");
         final String auction_manager = "cp_auction_manager.jsp?current_page=auction_manager";
         final String bidding_detail = "cp_bidding_detail.jsp";
@@ -618,51 +614,6 @@ public class AuctionController extends HttpServlet {
             request.setAttribute("auction", auction);
             rd = request.getRequestDispatcher(product_edit);
             rd.forward(request, response);
-        } else if (service.equalsIgnoreCase("addtowatchlist")) {
-            HttpSession session = request.getSession(true);
-            String userIdString = (String) session.getAttribute("userid");
-            String auctionIdString = (String) request.getParameter("auctionId");
-            int auctionId = Integer.parseInt(auctionIdString);
-            int userId = Integer.parseInt(userIdString);
-            if (userIdString == null || userIdString == "" || userIdString.isEmpty()) {
-                response.sendRedirect("AuctionController?service=index&errorCode=0");
-            } else {
-                boolean existed = wdao.getAuctionId(userId, auctionId);
-                if (existed) {
-                    response.sendRedirect("AuctionController?service=index&errorCode=1");
-                } else {
-                    WatchList watchlist = new WatchList(userId, auctionId);
-                    int n = wdao.add(watchlist);
-                    if (n > 0) {
-                        response.sendRedirect("AuctionController?service=index&errorCode=2");
-                    } else {
-                        response.sendRedirect("AuctionController?service=index&errorCode=3");
-                    }
-                }
-            }
-
-        } else if (service.equalsIgnoreCase("viewwatchlist")) {
-            HttpSession session = request.getSession(true);
-            String userIdString = (String) session.getAttribute("userid");
-            String errorCode = request.getParameter("errorCode");
-            ArrayList<WatchList> array = (ArrayList<WatchList>) wdao.list(Integer.parseInt(userIdString));
-            ArrayList<Auction> auction = new ArrayList<>();
-            for (int i = 0; i < array.size(); i++) {
-                int auctionid = array.get(i).getAuction_id();
-                auction.add(dao.getAuction(auctionid));
-            }
-            request.setAttribute("arraylist", auction);
-            rd = request.getRequestDispatcher("cp_customer_my_watchlist.jsp?current_page=my_watchlist&errorCode=" + errorCode);
-            rd.forward(request, response);
-        } else if (service.equalsIgnoreCase("delwatchlist")) {
-            String id = request.getParameter("auction_id");
-            int auction_id = Integer.parseInt(id);
-            int n = wdao.delete(auction_id);
-            if (n > 0) {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
-            } else {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
-            }
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }

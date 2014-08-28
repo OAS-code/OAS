@@ -19,6 +19,7 @@
             ArrayList<Auction> auctions = (ArrayList<Auction>) request.getAttribute("auctions");
         %>
         <script language="JavaScript" src="JavaScript/countdown.js"></script>
+        <script language="JavaScript" src="JavaScript/ajax_watchlist.js"></script>
     </head>
     <body>  
         <!--
@@ -92,12 +93,13 @@
                             </p>
                         </div>
                         <div class="feature_bott">
-                            <div class="feature_bott_lft">
-                                <div class="sliders">    
-
-
+                            <div id="watchlist_area_<%=subAuctions.get(i).getId()%>" class="feature_bott_lft" >
+                                <div class="sliders">
+                                    <label style="display:block;color:#666;padding-top: 3px;;padding-left: 10px ">
+                                            <span>Add to watchlist</span>
+                                    </label>
                                 </div>
-                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=subAuctions.get(i).getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
+                                <a title="+ Add to Watchlist" rel="502" class="addwatchlist" href="#" onClick="return addToWatchList(<%=subAuctions.get(i).getId()%>);"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist"></a>
                             </div>
                             <div class="feature_bott_rgt" style="margin:0 10px 0 0;">
                                 <div class="bidme_link">

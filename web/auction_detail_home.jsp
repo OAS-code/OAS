@@ -9,6 +9,7 @@
         <script type="text/javascript" src="JavaScript/slides.min.jquery.js"></script>
         <script type="text/javascript" src="JavaScript/ajax_auction_detail.js"></script>
         <script language="JavaScript" src="JavaScript/countdown_details.js"></script>
+        <script type="text/javascript" src="JavaScript/ajax_watchlist.js"></script>
         <%                    Auction auction = (Auction) request.getAttribute("auction");
         %>
     </head>
@@ -114,27 +115,20 @@
                                 </div>
                                 <div class="productDetail" style="display:none;">279</div>  
 
-                                <div class="detail_feature_bott_lft" style="padding-top: 2px">
+                                <div id="watchlist_area_<%=auction.getId()%>" class="detail_feature_bott_lft" style="padding-top: 2px">
                                     <div class="sliders">
-                                        <!--<span class="penny_white"></span>-->
-
+                                        <label style="display:block;color:#666;padding-top: 3px;;padding-left: 10px ">
+                                            <span>Add to watchlist</span>
+                                        </label>
                                     </div>
-                                    <a title="+ Add to Watchlist" rel="279" class="addwatchlist" href="AuctionController?service=addtowatchlist&auctionId=<%=auction.getId()%>"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist" /></a>
+                                    <a title="+ Add to Watchlist" rel="279" class="addwatchlist" href="#" onClick="return addToWatchList(<%=auction.getId()%>);"><img src="images/plus_bg.png" width="24" height="25" alt="+ Add to Watchlist" /></a>
                                 </div>
-                                <!--
-                                                        <div class="detail_left_social_link">
-                                                            <div class="social_sec">
-                                                                <p>Share :</p>
-                                                                <g:plusone size="medium" annotation="none"></g:plusone>
-                                
-                                                            </div>
-                                                        </div>
-                                -->
+
                             </div>
                             <div class="detail_page_top_mid" id="ajax_load_detail_page_top_mid">
                                 <img src="images/ajax-loader.gif" align="center"></img>
                             </div>
-                                            
+
                             <div class="detail_page_top_right">
 
                                 <div class="hb_bg_mid">

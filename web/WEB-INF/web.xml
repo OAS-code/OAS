@@ -20,6 +20,10 @@
         <servlet-name>TransactionController</servlet-name>
         <servlet-class>Controller.TransactionController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>WatchlistController</servlet-name>
+        <servlet-class>Controller.WatchlistController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserController</servlet-name>
         <url-pattern>/UserController</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>TransactionController</servlet-name>
         <url-pattern>/TransactionController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WatchlistController</servlet-name>
+        <url-pattern>/WatchlistController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
