@@ -21,12 +21,12 @@
         <div class="header2">
             <%if (errorCode.equals("0")) {%>
             <ul id="message" class="error_msg">
-                <li><p></p>Delete fail! Can not delete this watchlist.</li>
+                <li><p></p>Could not delete this item from watchlist.</li>
             </ul>
             <br>
             <%} else if (errorCode.equals("1")) {%>
             <ul id="message" class="success_msg">
-                <li><p></p>Delete a watchlist success.</li>
+                <li><p></p>Deleted item from watchlist successfully!</li>
             </ul>
             <br>
             <%} else {%>
