@@ -170,6 +170,9 @@ public class Auction {
         if (type == 1) {
             format = "MM/dd/yyyy HH:mm:ss";
         }
+        if(type==2){
+            format =  "yyyy-MM-ddTHH:mm:ss";
+        }
         DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
         return this.endDate.toString(fmt);
     }
@@ -181,6 +184,9 @@ public class Auction {
         String format = "d MMMM, yyyy HH:mm:ss";
         if (type == 1) {
             format = "MM/dd/yyyy HH:mm:ss";
+        }
+        if(type==2){
+            format =  "yyyy-MM-ddTHH:mm:ss";
         }
         DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
         return this.startDate.toString(fmt);

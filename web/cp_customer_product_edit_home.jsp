@@ -162,7 +162,7 @@
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="datetime-local" id="startdate" name="startDate" value="<%=auction.getFormattedStartDate()%>">
+                                                        <input type="datetime-local" id="startdate" name="startDate" value="">
                                                     </div>
                                                     <div id="Startingdate" style="width:500px;padding-top:4px"><br>
 
@@ -175,7 +175,7 @@
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="datetime-local" id="enddate" name="endDate" value="<%=auction.getFormattedEndDate()%>">
+                                                        <input type="datetime-local" id="enddate" name="endDate" value="">
                                                     </div>
                                                     <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
