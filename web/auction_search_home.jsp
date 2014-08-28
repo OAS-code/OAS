@@ -52,7 +52,6 @@
                     <td>
                         <div class="arrow_one"></div>
                     </td>
-
                 </tr>
             </table>
         </div>
