@@ -129,7 +129,7 @@ public class WatchlistDAO {
     }
 
     public ArrayList<Watchlist> list(int userid) {
-        String sql = "SELECT * FROM watchlist WHERE user_id = ?";
+        String sql = "SELECT * FROM watchlist WHERE user_id = ? ORDER BY date DESC";
 
         ArrayList<Watchlist> arr = new ArrayList<Watchlist>();
         try {

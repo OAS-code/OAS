@@ -81,9 +81,9 @@ public class WatchlistController extends HttpServlet {
             int auction_id = Integer.parseInt(id);
             int n = wdao.delete(auction_id);
             if (n > 0) {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
+                response.sendRedirect("WatchlistController?service=viewwatchlist&errorCode=1&current_page=my_watchlist");
             } else {
-                response.sendRedirect("AuctionController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
+                response.sendRedirect("WatchlistController?service=viewwatchlist&errorCode=0&current_page=my_watchlist");
             }
         } else {
             response.sendRedirect("notification.jsp?errorCode=2");

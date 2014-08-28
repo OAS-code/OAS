@@ -4,7 +4,6 @@
     Author     : ducfpt
 --%>
 
-<%@page import="Entity.WatchList"%>
 <%@page import="Entity.Auction"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -73,7 +72,7 @@
                                     <td width="100" align="center">
                                         <%=auctions.get(i).getFormattedEndDate()%>		</td>
                                     <td width="100" align="center">
-                                        <a href="AuctionController?service=delwatchlist&auction_id=<%=auctions.get(i).getId()%>" title="Delete" onclick="return confirm('Are you sure want to delete?')">
+                                        <a href="WatchlistController?service=delwatchlist&auction_id=<%=auctions.get(i).getId()%>" title="Delete" onclick="return confirm('Are you sure want to delete this auction from your watchlist?')">
                                             <img src="images/delete.png" alt="Delete">
                                         </a>
                                     </td>

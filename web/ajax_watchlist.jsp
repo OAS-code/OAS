@@ -35,7 +35,7 @@
         <% } else if (errorCode == 3) { %>
         <div class="sliders">
             <label style="display:block;color:#666;padding-top: 3px;;padding-left: 2px ">
-                <span>Please login first</span>
+                <span>Restricted</span>
             </label>
         </div>
         <% } else { %>
