@@ -41,55 +41,105 @@
             <div class="buton_green">		
                 <div class="message_common">
                     <div class="form_cont_top">
-                        <form method="post" class="admin_form" name="frmproduct" id="frmproduct" action="AuctionController">
-                            <div class="form_cont_top2">
-                                <p style="font-weight:bold;">Keyword</p>
-                                <div class="boxcesss_top">
-                                    <input type="text" name="keyword_search" id="keyword_search" maxlength="256" value="<%=keyword%>">
-                                </div>
-                                <label> <span class="search_info_label" style="color:#1E90FF;">Search by products name</span></label>
-                            </div>
-                            <div class="form_cont_top2">
-                                <p style="font-weight:bold;">Category</p>
-                                <div class="boxcesss_top3">
-                                    <select name="category_search" id="category_search">
-                                        <option value="-1" <%if (category == -1) { %> selected="selected" <% } %>>Select category</option>
-                                        <%
-                                            ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
-                                            for (int i = 0; i < categories.size(); i++) {
-                                        %> 
-                                        <option value="<%=categories.get(i).getId()%>" <%if (category == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
-                                        <%}%>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="search_one_or">
-                                <div class="grand_total_btn_cp">
-                                    <div class="save_left"></div>
-                                    <div class="save_mid">
-                                        <input type="submit" value="Search" name="search_product" title="Search">
-                                        <input type="hidden" id="service" name="service" value="search_product">
-                                    </div>
-                                    <div class="save_right"></div>
-                                </div>
-                                <div class="profil_butoon">
-                                    <div class="res_left"></div>
-                                    <div class="res_mid"><a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_product';"></a>
-                                    </div>
-                                    <div class="res_right"></div>
-                                </div>	
-                            </div>
+                        <form method="post" class="admin_form" name="frmproduct" id="frmproduct" action="AuctionController">                
+                            <table border="0" cellspacing="10" cellpadding="10">
+                                <tr>
+                                    <td width="200">
+
+                                        <div class="user_name_common">
+                                            <b>Status: </b>
+                                        </div>
+
+                                        <div class="user_name_common" style="width:400px;">
+                                            <div class="text_feeld">
+                                                <h2>
+                                                    <select name="status" class=" text_bg select" id="auction_status">	
+                                                        <option value="-1" <%if (status == -1) { %> selected="selected" <% } %> >Select auction status</option>
+                                                        <option value="0" <%if (status == 0) { %> selected="selected" <% } %> >Future auctions</option>
+                                                        <option value="1" <%if (status == 1) { %> selected="selected" <% } %> >On-going auctions</option>
+                                                        <option value="2" <%if (status == 2) { %> selected="selected" <% } %> >Closed/unprocessed auctions</option>
+                                                        <option value="3" <%if (status == 3) { %> selected="selected" <% } %> >Banned auctions</option>
+                                                        <option value="4" <%if (status == 4) { %> selected="selected" <% } %> >Processed auctions</option>
+                                                        <option value="5" <%if (status == 5) { %> selected="selected" <% } %> >Others</option>
+                                                    </select>
+                                                </h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="user_name_common">
+                                            <b>Category: </b>
+                                        </div>
+
+                                        <div class="user_name_common" style="width:400px;">
+                                            <div class="text_feeld">
+                                                <h2>
+                                                    <select name="category" class=" text_bg select" id="category" style="">
+                                                        <option value="-1" <%if (category == -1) { %> selected="selected" <% } %>>Select category</option>
+                                                        <%
+                                                            ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                                                            for (int i = 0; i < categories.size(); i++) {
+                                                        %>                                
+                                                        <option value="<%=categories.get(i).getId()%>" <%if (category == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
+                                                        <%}%>
+                                                    </select>
+                                                </h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="user_name_common">
+                                            <b>Keyword: </b>
+                                        </div>
+
+                                        <div class="user_name_common" style="width:400px;">
+                                            <div class="text_feeld" style="width:330px;">
+                                                <h2><input type="text" name="keyword" maxlength="100" id="keyword" class="textbox" value="<%=keyword%>"></h2>
+                                            </div>	
+                                        </div>
+                                    </td>
+                                </tr>
+
+
+                            </table>
+                            <table  cellspacing="10" cellpadding="10">
+                                <tr>
+                                    
+                                    <td>
+                                        <div class="profil_butoon" style="width:auto;">
+                                            <div class="res_left"></div>
+                                            <div class="res_mid" style="width:auto;">
+                                                <a style="width:auto;">
+                                                    <input type="submit" value="Search" name="search_product" title="Search">
+                                                    <input type="hidden" id="service" name="service" value="search_product"></a>
+                                            </div>
+                                            <div class="res_right"></div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div class="profil_butoon" style="width:auto;">
+                                            <div class="res_left"></div>
+                                            <div class="res_mid" style="width:auto;">
+                                                <a title="Add product"><input type="button" name="submit_user" value="Add product" onclick="location.href = 'AuctionController?service=add_product';"></a>
+                                    
+                                            </div>
+                                            <div class="res_right"></div>
+                                        </div>
+                                    </td>
+                                    
+                                </tr>
+                            </table>
+                            
                         </form>
                     </div>
                     <div class="forms_common">
                         <div class="title_cont_watchilist">
                             <%
-                                ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("auction");
+                                ArrayList<Auction> auction = (ArrayList<Auction>) request.getAttribute("auctions");
                                 if (auction == null) {
                             %>
 
                             <%} else {
-                                for (int i=0;i<auction.size();i++) {
+                                for (int i = 0; i < auction.size(); i++) {
                             %>
                             <table width="100%" border="0" align="left" cellpadding="0" cellspacing="0" class="table-top">
                                 <thead>

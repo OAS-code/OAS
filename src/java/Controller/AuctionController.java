@@ -61,6 +61,7 @@ public class AuctionController extends HttpServlet {
         final String index = "index.jsp?errorCode=";
         final String myproduct = "cp_customer_my_product.jsp?current_page=my_product";
         final String add_product = "cp_customer_product_add.jsp?current_page=my_product";
+        final String product_manager = "cp_customer_my_product.jsp?current_page=my_product";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
 
@@ -97,7 +98,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("index.jsp?errorCode=" + errorCode);
             rd.forward(request, response);
             return;
-        }  else if (service.equalsIgnoreCase("add_auction")) {
+        } else if (service.equalsIgnoreCase("add_auction")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_auction);
@@ -184,6 +185,38 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(auction_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
             rd.forward(request, response);
             return;
+        } else if (service.equalsIgnoreCase("search_product")) {
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            System.out.println(userIdString);
+            int userid = Integer.parseInt(userIdString);
+            if (userIdString == null || userIdString.isEmpty()) {
+                rd = request.getRequestDispatcher("notification.jsp");
+                rd.forward(request, response);
+            } else {
+                ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
+                request.setAttribute("categories", categories);
+                String keyword = request.getParameter("keyword");
+                String statusString = request.getParameter("status");
+                int status = -1;
+                String categoryString = request.getParameter("category");
+                int category = -1;
+                if (keyword == null) {
+                    keyword = "";
+                }
+                if (statusString != null) {
+                    status = Integer.parseInt(statusString);
+                }
+                if (categoryString != null) {
+                    category = Integer.parseInt(categoryString);
+                }
+                //System.out.println(category);
+                ArrayList<Auction> auctions = dao.searchProduct(keyword, status, category,userid);
+                request.setAttribute("auctions", auctions);
+                rd = request.getRequestDispatcher(product_manager + "&keyword=" + keyword + "&status=" + status + "&category=" + category);
+                rd.forward(request, response);
+                return;
+            }
         } else if (service.equalsIgnoreCase("load_auctions_in_category")) {
             ArrayList<Category> categoryMenu = cdao.getTop(1000);
             request.setAttribute("categoryMenu", categoryMenu);
@@ -194,11 +227,11 @@ public class AuctionController extends HttpServlet {
             ArrayList<Auction> auctionsOnGoing = new ArrayList<>();
             ArrayList<Auction> auctionsFuture = new ArrayList<>();
             ArrayList<Auction> auctionsClosed = new ArrayList<>();
-            for (int i=0; i<auctions.size(); i++){
+            for (int i = 0; i < auctions.size(); i++) {
                 Auction auction = auctions.get(i);
-                if (auction.getStatus().equals("On-going")){
+                if (auction.getStatus().equals("On-going")) {
                     auctionsOnGoing.add(auction);
-                } else if (auction.getStatus().equals("Future")){
+                } else if (auction.getStatus().equals("Future")) {
                     auctionsFuture.add(auction);
                 } else {
                     auctionsClosed.add(auction);
@@ -214,16 +247,16 @@ public class AuctionController extends HttpServlet {
             String keyword = request.getParameter("keyword");
             ArrayList<Category> categoryMenu = cdao.getTop(1000);
             request.setAttribute("categoryMenu", categoryMenu);
-            
+
             ArrayList<Auction> auctions = dao.searchAuctionByTitle(keyword, 100);
             ArrayList<Auction> auctionsOnGoing = new ArrayList<>();
             ArrayList<Auction> auctionsFuture = new ArrayList<>();
             ArrayList<Auction> auctionsClosed = new ArrayList<>();
-            for (int i=0; i<auctions.size(); i++){
+            for (int i = 0; i < auctions.size(); i++) {
                 Auction auction = auctions.get(i);
-                if (auction.getStatus().equals("On-going")){
+                if (auction.getStatus().equals("On-going")) {
                     auctionsOnGoing.add(auction);
-                } else if (auction.getStatus().equals("Future")){
+                } else if (auction.getStatus().equals("Future")) {
                     auctionsFuture.add(auction);
                 } else {
                     auctionsClosed.add(auction);
@@ -235,7 +268,7 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher("auction_search.jsp" + "?keyword=" + keyword);
             rd.forward(request, response);
             return;
-        }else if (service.equalsIgnoreCase("add_new_auction")) {
+        } else if (service.equalsIgnoreCase("add_new_auction")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             String title = request.getParameter("title");
@@ -578,7 +611,7 @@ public class AuctionController extends HttpServlet {
             String roleString = (String) session.getAttribute("role");
             String userId = (String) session.getAttribute("userid");
             if (roleString == null || !roleString.equals("0")) {
-                
+
                 rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
                 rd.forward(request, response);
                 return;
@@ -592,7 +625,7 @@ public class AuctionController extends HttpServlet {
                     rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17");
                     rd.forward(request, response);
                     return;
-                }else {
+                } else {
                     UserDAO userDao = new UserDAO();
                     User user = userDao.getUser(Integer.parseInt(userId));
                     if (user.getBalance() < auction.getBuynowPrice()) {
@@ -601,7 +634,7 @@ public class AuctionController extends HttpServlet {
                         rd.forward(request, response);
                         return;
                     } else {
-                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17&data1="+auction.getBuynowPriceString());
+                        rd = request.getRequestDispatcher(auction_detail_loading + "?errorCode=17&data1=" + auction.getBuynowPriceString());
                         rd.forward(request, response);
                         return;
                     }
