@@ -12,7 +12,12 @@
         <title>Manage action</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        <%            String errorCode = request.getParameter("errorCode");
+        <%            
+                String errorCode = request.getParameter("errorCode");
+                String auctionProcessingResult = (String) request.getAttribute("result");
+                if (auctionProcessingResult==null || auctionProcessingResult.isEmpty()){
+                    auctionProcessingResult = "System is up to date. All auctions are already processed. Nothing to do..";
+                }
         %>
     </head>
     <body>
@@ -33,6 +38,11 @@
             <% }else if (errorCode.equals("3")) { %>
             <ul id="message" class="error_msg">
                 <li><p>Interal Error! Could not update auction status.</p></li>
+            </ul>   
+
+            <% }else if (errorCode.equals("4")) { %>
+            <ul id="message" class="success_msg">
+                <li><p><%=auctionProcessingResult%></p></li>
             </ul>   
 
             <% } %>
