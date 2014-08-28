@@ -131,6 +131,7 @@
                             
                         </form>
                     </div>
+
                     <div class="forms_common">
                         <div class="title_cont_watchilist">
                             <%
@@ -172,7 +173,7 @@
 
                                         <td width="100" align="center">
 
-                                            <a href="" title="<%=auction.get(i).getTitle()%>">
+                                            <a href="AuctionController?service=view&auctionId=<%=auction.get(i).getId()%>" title="<%=auction.get(i).getTitle()%>">
                                                 <%=auction.get(i).getTitle()%>
                                             </a>
 
@@ -190,7 +191,7 @@
                                             &nbsp;
                                         </td>
                                         <td width="20" align="center">
-                                            <a href="" title="Product Delete" onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" >
+                                            <a href="AuctionController" title="Product Delete" onClick="return confirm('Are you sure you want to delete this product?\nThis action can not be undone!')" >
                                                 <img src="images/delete.png" border="0">
                                             </a> 
                                             &nbsp;

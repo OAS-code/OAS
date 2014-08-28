@@ -35,10 +35,12 @@
                 <p>&nbsp;</p>
             </div>
             <form method="post" name="addAuctionForm" action="AuctionController" onsubmit=" return validateAuction();">
-
+                <%                    Auction auction = (Auction) request.getAttribute("auction");
+                %>
                 <div class="message_common">
 
                     <div class="login_middle_common_profil">
+                         <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getId()%>">
                         <table border="0" cellspacing="15" cellpadding="15">
                             <tr>
                                 <td width="669">
@@ -55,7 +57,7 @@
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
                                                         <h2>
-                                                            <input type="text" name="title" id="title" class="textbox" maxlength="100" value="">
+                                                            <input type="text" name="title" id="title" class="textbox" maxlength="100" value="<%=auction.getTitle()%>">
                                                         </h2>
                                                     </div>
                                                     <div id="errorTitle" style="width:500px;padding-top:4px"><br>
@@ -72,13 +74,14 @@
                                             </td>
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
-                                                    <div class="text_feeld">
-                                                        <select name="categoryId" id="categoryId">
-
-                                                            <option value=""></option>                                
-
-                                                        </select>
-                                                    </div>
+                                                    <select name="categoryId" id="categoryId">
+                                                        <%
+                                                            ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute("categories");
+                                                            for (int i = 0; i < categories.size(); i++) {
+                                                        %>                                
+                                                        <option value="<%=categories.get(i).getId()%>" <% if (auction.getCategoryId() == categories.get(i).getId()) { %> selected="selected" <% }%> ><%=categories.get(i).getName()%></option>                                
+                                                        <%}%>
+                                                    </select>
                                                 </div>
                                             </td>
                                         </tr>
@@ -91,7 +94,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="description" id="description" class="textbox" value=""></h2>
+                                                        <h2><input type="text" name="description" id="description" class="textbox" value="<%=auction.getDescription()%>"></h2>
                                                     </div>
                                                     <div id="errorDescription" style="width:500px;padding-top:4px"><br>
 
@@ -108,7 +111,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2>$ <input type="number" name="startingPrice" id="startingprice" value=""></h2>
+                                                        <h2>$ <input type="number" name="startingPrice" id="startingprice" value="<%=auction.getStartPrice()%>"></h2>
                                                     </div>
                                                     <div id="errorStartingprice" style="width:500px;padding-top:4px"><br>
 
@@ -125,7 +128,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value=""></h2>
+                                                        <h2>$ <input type="number" name="buynowPrice" id="buynowprice" value="<%=auction.getBuynowPrice()%>"></h2>
                                                     </div>
                                                     <div id="errorBuynowprice" style="width:500px;padding-top:4px"><br>
 
@@ -142,7 +145,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2>$ <input type="number" name="increaseBy" id="incrementprice" value=""></h2>
+                                                        <h2>$ <input type="number" name="increaseBy" id="incrementprice" value="<%=auction.getIncreaseBy()%>"></h2>
                                                     </div>
                                                     <div id="errorIncrementprice" style="width:500px;padding-top:4px"><br>
 
@@ -159,7 +162,7 @@
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="text" id="startdate" name="startDate" value="">
+                                                        <input type="text" id="startdate" name="startDate" value="<%=auction.getFormattedStartDate(1)%>">
                                                     </div>
                                                     <div id="Startingdate" style="width:500px;padding-top:4px"><br>
 
@@ -172,7 +175,7 @@
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="text" id="enddate" name="endDate" value="">
+                                                        <input type="text" id="enddate" name="endDate" value="<%=auction.getFormattedEndDate(1)%>">
                                                     </div>
                                                     <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
@@ -191,7 +194,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value=""></h2>
+                                                        <h2><input type="text" name="img_cover" id="img_cover" class="textbox" value="<%=auction.getImgCover()%>"></h2>
                                                     </div>
                                                     <div id="errorCoverimage" style="width:500px;padding-top:4px"><br>
 
@@ -208,7 +211,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_1" id="img_1" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="img_1" id="img_1" class="textbox" value="<%=auction.getImg1()%>" ></h2>
                                                     </div>
                                                     <div id="errorImage1" style="width:500px;padding-top:4px"><br>
 
@@ -225,7 +228,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_2" id="img_2" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="img_2" id="img_2" class="textbox" value="<%=auction.getImg2()%>" ></h2>
                                                     </div>
                                                     <div id="errorImage2" style="width:500px;padding-top:4px"><br>
 
@@ -242,7 +245,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_3" id="img_3" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="img_3" id="img_3" class="textbox" value="<%=auction.getImg3()%>" ></h2>
                                                     </div>
                                                     <div id="errorImage3" style="width:500px;padding-top:4px"><br>
 
@@ -259,7 +262,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_4" id="img_4" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="img_4" id="img_4" class="textbox" value="<%=auction.getImg4()%>" ></h2>
                                                     </div>
                                                     <div id="errorImage4" style="width:500px;padding-top:4px"><br>
 
@@ -276,7 +279,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="img_5" id="img_5" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="img_5" id="img_5" class="textbox" value="<%=auction.getImg5()%>" ></h2>
                                                     </div>
                                                     <div id="errorImage5" style="width:500px;padding-top:4px"><br>
 
@@ -293,7 +296,7 @@
                                             <td>
                                                 <div class="user_name_common" style="width:400px;">
                                                     <div class="text_feeld">
-                                                        <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="" ></h2>
+                                                        <h2><input type="text" name="v_youtube" id="v_youtube" class="textbox" value="<%=auction.getvYoutubeFull()%>" ></h2>
                                                     </div>
                                                     <div id="errorVideo" style="width:500px;padding-top:4px"><br>
 
