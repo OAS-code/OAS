@@ -23,7 +23,7 @@ function editProduct(auctionid) {
         }
     };
 
-    xmlhttp.open("GET", "AuctionController?service=edit_myproduct_ajax&auctionid="+auctionid+"&random=" + Math.random(), true);
+    xmlhttp.open("GET", "AuctionController?service=save_product&auctionid="+auctionid+"&random=" + Math.random(), true);
     xmlhttp.send();
     return false;
 }

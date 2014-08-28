@@ -12,13 +12,13 @@
         <title>My auctions</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />  
+
     </head>
     <body>
         <%@ include file="perm_customer.jsp" %>
         <jsp:include page="top.jsp" />
-        <%            
-            String errorCode = request.getParameter("errorCode");
-            if(errorCode==null){
+        <%            String errorCode = request.getParameter("errorCode");
+            if (errorCode == null) {
                 errorCode = "";
             }
         %>
@@ -33,7 +33,12 @@
                 <li><p></p>Auction saved successfully!</li>
             </ul>
             <br>
-            <%} else {%>
+            <%}else if (errorCode.equals("21")) {%>
+            <ul id="message" class="error_msg">
+                <li><p></p>You can not edit or delete this auction!</li>
+            </ul>
+            <br>
+            <%}else {%>
 
             <%}%>
             <jsp:include page="cp_cols.jsp" />

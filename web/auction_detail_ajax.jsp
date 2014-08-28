@@ -307,7 +307,11 @@
         <p>FAILED!</p>
         <% } else if (errorCode == 20) { %>
         <p>BID CANCELED!</p>
-        <% } else { %>
+        <% } else if (errorCode == 21) { %>
+            <ul id="message" class="success_msg">
+                <li><p></p>You can not edit or delete this auction!</li>
+            </ul>
+        <% }else { %>
         <p>INTERNAL ERROR!</p>
         <% } %>
     </body>
