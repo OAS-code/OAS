@@ -156,7 +156,8 @@ public class User {
         return balance;
     }
     public String getFormattedBalance() {
-        return Double.toString(balance);
+        FormatMoney fm = new FormatMoney();
+        return fm.showPriceInUSD(balance,1);
     }
     public void setBalance(double balance) {
         this.balance = balance;

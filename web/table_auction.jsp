@@ -61,7 +61,6 @@
 
 
         </script>
-        
     </head>
     <body>
         <%
@@ -94,7 +93,7 @@
                             <td>${auction.sellerName}</td>
                             <td>${auction.getStatus()}</td>
                             <td>${auction.getCurrentBidString()}</td>
-                            <td>No-one</td>
+                            <td>${auction.getTopBidderName()}</td>
                         </tr>
                     </c:forEach>
                 </tbody>
@@ -110,6 +109,7 @@
                 </tfoot>
             </table>
         </form> 
-        <% }%>
+        <% }
+         %>
     </body>
 </html>

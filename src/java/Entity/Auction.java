@@ -29,6 +29,7 @@ public class Auction {
     private String description;
     private DateTime startDate;
     private DateTime endDate;
+    private DateTime closeDate;
     private double startPrice;
     private double buynowPrice;
     private double increaseBy;
@@ -43,6 +44,16 @@ public class Auction {
     int views;
     private String buyerConfirm;
 
+    public DateTime getCloseDate() {
+        return closeDate;
+    }
+
+    public void setCloseDate(DateTime closeDate) {
+        this.closeDate = closeDate;
+    }
+
+    
+    
     public int getViews() {
         return views;
     }
@@ -301,9 +312,11 @@ public class Auction {
         } else if (moderateStatus == 2) { // Processed auctions.
             return 5; // Finished/Processed auctions.
         } else if (moderateStatus == 3) { // Awaiting for buyer's confirmation
-            return 6; // Processing
-        } else if (moderateStatus == 3 && (buyerConfirm!=null && !buyerConfirm.equals(""))) { // Awaiting for buyer's confirmation
-            return 7; // On-hold
+            if (buyerConfirm==null || buyerConfirm.equals("") || buyerConfirm.isEmpty()){
+                return 6; // Pending approval
+            } else {
+                return 7; // On-hold
+            }
         } else {
             return 0; // Invalid auctions.
         }
@@ -324,7 +337,7 @@ public class Auction {
         } else if (statusId == 5) {
             return "Finished";
         } else if (statusId == 6) {
-            return "Processing";
+            return "Pending approval";
         } else if (statusId == 7) {
             return "On-hold";
         } else {

@@ -9,7 +9,6 @@ import DAO.AuctionDAO;
 import DAO.CategoryDAO;
 import DAO.OtherDAO;
 import DAO.UserDAO;
-import DAO.WatchlistDAO;
 import Entity.Auction;
 import Entity.Category;
 import Entity.User;
@@ -661,7 +660,16 @@ public class AuctionController extends HttpServlet {
                     }
                 }
             }
-        }else {
+        } else if (service.equals("start_processing_auction")) {
+            String result = dao.processAuctions();
+            System.out.println(result);
+            request.setAttribute("result", result);
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
+            request.setAttribute("categories", categories);
+            rd = request.getRequestDispatcher(auction_manager+"&errorCode=4");
+            rd.forward(request, response);
+            return;
+        } else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }
     }

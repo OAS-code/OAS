@@ -31,6 +31,7 @@
                     ArrayList<Auction> subAuctions = auctionsArray[j];
                     if (subAuctions.size()>0) {
                         String categoryName = subAuctions.get(0).getCategoryName();
+                        int categoryId = subAuctions.get(0).getCategoryId();
             %>
 
             <div class="today_head">
@@ -46,7 +47,7 @@
                         </td>
                         <td>
                             <div class="today_head_rgt">
-                                <p><a href="" title="View All">View All</a></p>
+                                <p><a href="AuctionController?service=load_auctions_in_category&categoryId=<%=categoryId%>" title="View All">View All</a></p>
                             </div>
                         </td>
                     </tr>

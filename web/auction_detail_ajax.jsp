@@ -134,7 +134,7 @@
                 <div class="hb_place_bid_button_left">
                 </div>
                 <div class="hb_place_bid_button_mid" id="placebid_btn">
-                    <p>ALREADY BID!</p>
+                    <p><a href="#" onClick="cancelBid('<%=auctionIdString%>')" title="BID ME" class="fl popup" id="dialog_link" data-rel="box">CANCEL BID</a></p>
                 </div>
                 <div class="hb_place_bid_button_right">
                 </div>
@@ -300,6 +300,8 @@
         } else if (errorCode==18) { 
             if (data1!=null){ %>
                Bought!
+        <% } else if (errorCode == 19) { %>
+        <p>FAILED!</p>
         <% } else { %>
                Failed to buy. 
             <% }
