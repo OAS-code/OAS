@@ -62,6 +62,7 @@ public class AuctionController extends HttpServlet {
         final String add_product = "cp_customer_product_add.jsp?current_page=my_product";
         final String product_manager = "cp_customer_my_product.jsp?current_page=my_product";
         final String view_detail_product = "cp_customer_product_edit.jsp?current_page=my_product";
+        final String save_product = "cp_customer_product_edit_home.jsp?current_page=my_product";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
         final String auction_detail_loading = "auction_detail_ajax.jsp";
@@ -451,7 +452,158 @@ public class AuctionController extends HttpServlet {
             rd = request.getRequestDispatcher(myproduct);
             rd.forward(request, response);
             return;
-        } else if (service.equalsIgnoreCase("add_product")) {
+        } else if(service.equalsIgnoreCase("save_myproduct")){
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
+            request.setAttribute("categories", categories);
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String categoryIdString = request.getParameter("categoryId");
+            String startingPriceString = request.getParameter("startingPrice");
+            String buynowPriceString = request.getParameter("buynowPrice");
+            String increaseByString = request.getParameter("increaseBy");
+            String startDateString = request.getParameter("startDate");
+            String endDateString = request.getParameter("endDate");
+            System.out.println(startDateString);
+            String img_1 = request.getParameter("img_1");
+            String img_2 = request.getParameter("img_2");
+            String img_3 = request.getParameter("img_3");
+            String img_4 = request.getParameter("img_4");
+            String img_5 = request.getParameter("img_5");
+            String v_youtube = request.getParameter("v_youtube");
+            String img_cover = request.getParameter("img_cover");
+            if (img_1 == null) {
+                img_1 = "";
+            }
+            if (img_2 == null) {
+                img_2 = "";
+            }
+            if (img_3 == null) {
+                img_3 = "";
+            }
+            if (img_4 == null) {
+                img_4 = "";
+            }
+            if (img_5 == null) {
+                img_5 = "";
+            }
+            if (v_youtube == null) {
+                v_youtube = "";
+            }
+            String savedValues = "&title=" + title
+                    + "&description=" + description
+                    + "&categoryId=" + categoryIdString
+                    + "&startingPrice=" + startingPriceString
+                    + "&buynowPrice=" + buynowPriceString
+                    + "&increaseBy=" + increaseByString
+                    + "&startDate=" + startDateString
+                    + "&endDate=" + endDateString
+                    + "&img_cover=" + img_cover
+                    + "&v_youtube=" + v_youtube
+                    + "&img_1=" + img_1
+                    + "&img_2=" + img_2
+                    + "&img_3=" + img_3
+                    + "&img_4=" + img_4
+                    + "&img_5=" + img_5;
+            if (title == null || title.isEmpty() || title.length() < 3) {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=1" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+
+            if (description == null) {
+                description = "";
+            }
+
+            int categoryId = 0;
+            if (categoryIdString == null) {
+                rd = request.getRequestDispatcher(save_product+ "&errorCode=2" + savedValues);
+                rd.forward(request, response);
+                return;
+            } else {
+                categoryId = Integer.parseInt(categoryIdString);
+            }
+            HttpSession session = request.getSession(true);
+            String userIdString = (String) session.getAttribute("userid");
+            int seller_id = Integer.parseInt(userIdString);
+
+            OtherDAO other = new OtherDAO();
+
+            double startPrice = other.getValidPrice(startingPriceString);
+            double buynowPrice = other.getValidPrice(buynowPriceString);
+
+            if (startPrice == -1 || buynowPrice == -1 || startPrice >= buynowPrice) {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=3" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+
+            double increaseBy = other.getValidPrice(increaseByString);
+            if (increaseBy == -1) {
+                rd = request.getRequestDispatcher(save_product+ "&errorCode=4" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+            DateTime startDate = other.getDateTimeFromString2(startDateString);
+            DateTime endDate = other.getDateTimeFromString2(endDateString);
+
+            if (startDate.isBeforeNow()) {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=8" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+            if (endDate.isBefore(startDate)) {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=7" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+            Duration duration = new Duration(startDate, endDate);
+            if (duration.getStandardMinutes() < 60) {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=9" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+            if (img_cover == null || img_cover.isEmpty()) {
+                rd = request.getRequestDispatcher(save_product+ "&errorCode=5" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+
+            if (v_youtube.length() > 0) {
+                if (other.getValidYoutubeUrl(v_youtube).isEmpty()) {
+                    rd = request.getRequestDispatcher(save_product+"&errorCode=6 " + savedValues);
+                    rd.forward(request, response);
+                    return;
+                }
+            }
+
+            Auction auction = new Auction();
+            auction.setCategoryId(categoryId);
+            auction.setSellerId(seller_id);
+            auction.setTitle(title);
+            auction.setDescription(description);
+            auction.setStartPrice(startPrice);
+            auction.setBuynowPrice(buynowPrice);
+            auction.setIncreaseBy(increaseBy);
+            auction.setImgCover(img_cover);
+            auction.setImg1(img_1);
+            auction.setImg2(img_2);
+            auction.setImg3(img_3);
+            auction.setImg4(img_4);
+            auction.setImg5(img_5);
+            auction.setvYoutube(v_youtube);
+            auction.setStartDate(startDate);
+            auction.setEndDate(endDate);
+
+            if (dao.update(auction)) {
+                rd = request.getRequestDispatcher(myproduct + "&errorCode=1");
+                rd.forward(request, response);
+                return;
+            } else {
+                rd = request.getRequestDispatcher(save_product + "&errorCode=0" + savedValues);
+                rd.forward(request, response);
+                return;
+            }
+        }else if (service.equalsIgnoreCase("add_product")) {
             ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
             request.setAttribute("categories", categories);
             rd = request.getRequestDispatcher(add_product);

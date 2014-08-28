@@ -4,6 +4,9 @@
     Author     : ducfpt
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.joda.time.DateTime"%>
 <%@page import="DAO.CategoryDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Entity.Auction"%>
@@ -35,12 +38,19 @@
                 <p>&nbsp;</p>
             </div>
             <form method="post" name="addAuctionForm" action="AuctionController" onsubmit=" return validateAuction();">
-                <%                    Auction auction = (Auction) request.getAttribute("auction");
+                <%                    
+                    Auction auction = (Auction) request.getAttribute("auction");
+                    DateTime eDate = auction.getEndDate();
+                    DateTime sDate = auction.getStartDate();
+                    String endDate="";
+                    String startingDate="";
+                    endDate = eDate.toString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
+                    startingDate = sDate.toString("yyyy'-'MM'-'dd'T'HH':'mm':'ss");
                 %>
                 <div class="message_common">
 
                     <div class="login_middle_common_profil">
-                         <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getId()%>">
+                        <input type="hidden" id="auctionid" name="auctionid" value="<%=auction.getId()%>">
                         <table border="0" cellspacing="15" cellpadding="15">
                             <tr>
                                 <td width="669">
@@ -49,7 +59,7 @@
                                             <td>
                                                 <div class="user_name_common">
                                                     <b style="width:130px">
-                                                        Title <span class="red">*</span>: 
+                                                        Title <span class="red">*</span>:
                                                     </b>                                        		
                                                 </div>
                                             </td>
@@ -162,7 +172,7 @@
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
                                                     <div class="text_feeld">
-                                                        <input type="datetime-local" id="startdate" name="startDate" value="">
+                                                        <input type="datetime-local" id="startdate" name="startDate" value="<%=startingDate%>">
                                                     </div>
                                                     <div id="Startingdate" style="width:500px;padding-top:4px"><br>
 
@@ -174,8 +184,9 @@
                                                     <b style="width:130px">Closing date:<span class="red">*</span>: </b>		
                                                 </div>
                                                 <div class="user_name_common" style="width:340px;">
+
                                                     <div class="text_feeld">
-                                                        <input type="datetime-local" id="enddate" name="endDate" value="">
+                                                        <input type="datetime-local" id="enddate" name="endDate" value="<%=endDate%>">
                                                     </div>
                                                     <div id="Closingdate" style="width:500px;padding-top:4px"><br>
 
