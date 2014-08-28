@@ -62,9 +62,9 @@ public class AuctionController extends HttpServlet {
         final String myproduct = "cp_customer_my_product.jsp?current_page=my_product";
         final String add_product = "cp_customer_product_add.jsp?current_page=my_product";
         final String product_manager = "cp_customer_my_product.jsp?current_page=my_product";
+        final String view_detail_product = "cp_customer_product_edit.jsp?current_page=my_product";
         ResultSet rs, rss, rst;
         RequestDispatcher rd;
-
         final String auction_detail_loading = "auction_detail_ajax.jsp";
 
         if (service.equalsIgnoreCase("auction_manager")) {
@@ -131,7 +131,34 @@ public class AuctionController extends HttpServlet {
             rd.forward(request, response);
             return;
 
-        } else if (service.equals("view")) {
+        } else if(service.equalsIgnoreCase("edit_myproduct")){
+            HttpSession session = request.getSession(true);
+            String roleString = (String) session.getAttribute("role");
+            if (roleString == null) {
+                rd = request.getRequestDispatcher("notification.jsp?errorCode=4");
+                rd.forward(request, response);
+                return;
+            } else {
+                if (Integer.parseInt(roleString) != 0) {
+                    rd = request.getRequestDispatcher("notification.jsp?errorCode=4");
+                    rd.forward(request, response);
+                    return;
+                }
+            }
+
+            String auctionIdString = request.getParameter("auctionid");
+            int auctionId = Integer.parseInt(auctionIdString);
+
+            Auction auction = dao.getAuction(auctionId);
+            request.setAttribute("auction", auction);
+
+            ArrayList<Category> categories = (ArrayList<Category>) cdao.list();
+            request.setAttribute("categories", categories);
+            rd = request.getRequestDispatcher(view_detail_product);
+            rd.forward(request, response);
+            return;
+
+        }else if (service.equals("view")) {
             String auctionIdString = request.getParameter("auctionId");
             int auctionId = Integer.parseInt(auctionIdString);
             Auction auction = dao.getAuction(auctionId);
@@ -634,14 +661,7 @@ public class AuctionController extends HttpServlet {
                     }
                 }
             }
-        } else if (service.equalsIgnoreCase("edit_myproduct")) {
-            String auctionid = request.getParameter("auctionid");
-            int auction_id = Integer.parseInt(auctionid);
-            Auction auction = dao.getAuction(auction_id);
-            request.setAttribute("auction", auction);
-            rd = request.getRequestDispatcher(product_edit);
-            rd.forward(request, response);
-        } else {
+        }else {
             response.sendRedirect("notification.jsp?errorCode=2");
         }
     }
