@@ -21,7 +21,6 @@ import javax.mail.Message;
 import javax.mail.Session;
 import javax.naming.NamingException;
 import org.joda.time.DateTime;
-import org.joda.time.Duration;
 
 /**
  *
