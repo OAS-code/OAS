@@ -28,6 +28,11 @@
     <body>
         <%@ include file="top.jsp" %> 
         <div class="header2">
+            <div id="top_message">
+                <!--<ul id="message" class="success_msg">
+                    <li>Add to watchlist fail.</li>
+                </ul>-->
+            </div>
             <%@ include file="category_detail_home.jsp" %>
         </div>
         <jsp:include page="footer.jsp" />
