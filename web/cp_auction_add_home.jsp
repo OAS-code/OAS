@@ -96,7 +96,7 @@
                 <h1 title="User Manager">Create new auction</h1>
                 <p>&nbsp;</p>
             </div>
-            <form method="post" action="AuctionController" name="addAuctionForm" onsubmit=" return validateAuction();">
+            <form method="post" action="AuctionController" name="addAuctionForm" <!--onsubmit=" return validateAuction();"-->>
 
                 <div class="message_common">
 
