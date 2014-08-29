@@ -18,7 +18,7 @@
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />      
         <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css"/>
-        <script src="JavaScript/validate_auction_add.js"></script>
+        <!--<script src="JavaScript/validate_auction_add.js"></script>-->
         <style type="text/css">
             .custom-date-style {
                 background-color: red !important;

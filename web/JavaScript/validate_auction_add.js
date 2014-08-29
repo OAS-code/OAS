@@ -45,7 +45,6 @@ function validateAuction() {
         return false;
     }
     return true;
-
 }
 
 function checkTitle() {

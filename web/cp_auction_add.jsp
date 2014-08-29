@@ -12,7 +12,6 @@
         <title>Create new auction</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
-        <script src="JavaScript/validate_auction_add.js"></script>
         <%
             String errorCode = request.getParameter("errorCode");
         %>
