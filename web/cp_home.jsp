@@ -17,7 +17,7 @@
         %>
     </head>
     <body>
-        <%@ include file="perm_customer.jsp" %>        
+             
         <div class="my_message_right">
             <div class="message_common_border">
                 <h1 title="mydashboard">Dashboard</h1>

@@ -12,6 +12,7 @@
         <title>Create new auction</title>
         <link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection" />
         <link rel="shortcut icon" href="images/fav-10.gif" type="image/x-icon" />
+        
         <%
             String errorCode = request.getParameter("errorCode");
         %>
