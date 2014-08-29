@@ -436,7 +436,7 @@ public class UserController extends HttpServlet {
             user.setFullname(fullname);
             user.setPhonenumber(phonenumber);
             String madePassword = user.makePassword();
-
+            System.out.println(madePassword);
             int n = dao.addUser(user);
             if (n > 0) {
                 //Start sending email to user.
